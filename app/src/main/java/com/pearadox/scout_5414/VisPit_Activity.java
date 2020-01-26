@@ -68,7 +68,7 @@ public class VisPit_Activity extends AppCompatActivity {
     public int speed = 0;                       // Speed (Ft. per Sec)
     public String motor;                        // Type of Motor
     public String lang;                         // Programming  Language
-    public String ssMode;                       // Sandstorm Operatong Mode
+    public String ssMode;                       // Autonomous Operatong Mode
     /* */
     /* */
     public String comments = "";                // Comment(s)

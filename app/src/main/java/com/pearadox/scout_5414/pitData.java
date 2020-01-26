@@ -28,7 +28,7 @@ public class pitData implements Serializable {
     public int pit_speed = 0;                       // Speed (Ft. per Sec)
     public String pit_motor;                        // Type of Motor
     public String pit_lang;                         // Programming  Language
-    public String pit_ssMode;                       // Sandstorm Operatong Mode
+    public String pit_ssMode;                       // Autonomous Operatong Mode
 
     /* */
     public String pit_comment;                      // Comment(s)

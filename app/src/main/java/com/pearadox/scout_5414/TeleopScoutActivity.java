@@ -197,7 +197,7 @@ public class TeleopScoutActivity extends Activity {
         pfDevice_DBReference      = pfDatabase.getReference("devices");     // List of Devices
 
         if (Pearadox.Match_Data.isSand_mode()) {
-            Toast toast = Toast.makeText(getBaseContext(), "\n\n*** No Sandstorm was set - Watch for any scoring in TeleOps ***\n\n", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getBaseContext(), "\n\n*** No Autonomous was set - Watch for any scoring in TeleOps ***\n\n", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
             final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION,  100);
@@ -205,7 +205,7 @@ public class TeleopScoutActivity extends Activity {
             radio_Zero.setChecked(true);        // didn't move - so NOT on
             end_HAB_Level = 0;
         }
-        carry_over_chks();              // Carry-over check boxes from SandStorm
+        carry_over_chks();              // Carry-over check boxes from Autonomous
 
 
 // *****************************************************************************************
@@ -894,7 +894,7 @@ public class TeleopScoutActivity extends Activity {
 
     /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
     /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-    // Carry-over check boxes from SandStorm to Tele
+    // Carry-over check boxes from Autonomous to Tele
     private void carry_over_chks() {
         Log.w(TAG, "$$$ carry_over_chks $$$");
         // Left Rocket

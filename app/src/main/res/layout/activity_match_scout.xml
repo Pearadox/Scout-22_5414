@@ -206,17 +206,17 @@
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-            <TextView
-                android:id="@+id/lbl_Auto"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView_MS"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="20dp"
-                android:text="Sandstorm period"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="@color/red"
-                tools:textAlignment="center" />
+        <TextView
+            android:id="@+id/lbl_Auto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView_MS"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="18dp"
+            android:text="Autonomous period"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="@color/red"
+            tools:textAlignment="center" />
 
             <TextView
                 android:id="@+id/lbl_PreMatch"
@@ -316,32 +316,26 @@
             android:text="ARENA" />
 
         <CheckBox
-            android:id="@+id/checkbox_noSS"
+            android:id="@+id/checkbox_noAUTO"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignTop="@+id/button_GoToArenaLayoutActivity"
-            android:text="No SS activity?" />
+            android:layout_alignParentStart="true"
+            android:text="No Auto activity?" />
+
+
+        // ==============================================================================
+        // ==============================================================================
+
         <CheckBox
-            android:id="@+id/checkbox_leftHAB"
+            android:id="@+id/checkbox_leftSectLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/button_GoToArenaLayoutActivity"
             android:layout_alignEnd="@+id/txt_Dev"
-            android:text="Leave HAB?" />
-
-        <CheckBox
-            android:id="@+id/checkbox_leftHAB2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/button_GoToArenaLayoutActivity"
-            android:layout_alignEnd="@+id/scrollv_comm"
-            android:layout_marginEnd="1dp"
-            android:text="Left from HAB2" />
-
-
-        // ==============================================================================
-        // ==============================================================================
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="-32dp"
+            android:text="Left Sect.Line?" />
 
         <LinearLayout
             android:id="@+id/lin_AllShips"
@@ -350,7 +344,7 @@
             android:layout_below="@+id/button_GoToArenaLayoutActivity"
             android:layout_marginTop="12sp"
             android:orientation="horizontal"
-            tools:layout_below="@+id/checkbox_noSS">
+            tools:layout_below="@+id/checkbox_noAUTO">
 
             // Near Rocket Ship
 

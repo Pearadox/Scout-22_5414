@@ -44,7 +44,7 @@ public class MatchScoutActivity extends AppCompatActivity {
                         EditText editTxt_Team, editTxt_Match;
     /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_startHatch, radio_startCargo, radio_Pick;
                         Spinner spinner_startPos;
-    /* After Start */   CheckBox checkbox_leftHAB, checkbox_noSS, checkbox_leftHAB2;
+    /* After Start */   CheckBox checkbox_leftSectLine, checkbox_noAUTO;
     /* L Rocket */      CheckBox chk_LeftRocket_LPan1,chk_LeftRocket_LPan2,chk_LeftRocket_LPan3, chk_LeftRocket_LCarg1,chk_LeftRocket_LCarg2,chk_LeftRocket_LCarg3;
                         CheckBox chk_LeftRocket_RPan1,chk_LeftRocket_RPan2,chk_LeftRocket_RPan3, chk_LeftRocket_RCarg1,chk_LeftRocket_RCarg2,chk_LeftRocket_RCarg3;
     /* CargoShip */     CheckBox chk_CargoLPan1,chk_CargoLPan2,chk_CargoLPan3, chk_CargoLCarg1,chk_CargoLCarg2,chk_CargoLCarg3;
@@ -300,9 +300,8 @@ public class MatchScoutActivity extends AppCompatActivity {
             imgScoutLogo.setImageDrawable(getResources().getDrawable(R.drawable.blue_scout));
         }
 
-        checkbox_noSS           = (CheckBox) findViewById(R.id.checkbox_noSS);
-        checkbox_leftHAB        = (CheckBox) findViewById(R.id.checkbox_leftHAB);
-        checkbox_leftHAB2       = (CheckBox) findViewById(R.id.checkbox_leftHAB2);
+        checkbox_noAUTO         = (CheckBox) findViewById(R.id.checkbox_noAUTO);
+        checkbox_leftSectLine   = (CheckBox) findViewById(R.id.checkbox_leftSectLine);
         editText_autoComment    = (EditText) findViewById(R.id.editText_autoComment);
         btn_DropPlus            = (Button) findViewById(R.id.btn_DropPlus);
         btn_DropMinus           = (Button) findViewById(R.id.btn_DropMinus);
@@ -872,62 +871,38 @@ public class MatchScoutActivity extends AppCompatActivity {
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-        checkbox_noSS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkbox_noAUTO.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
              @Override
              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-             Log.w(TAG, "checkbox_noSS Listener");
+             Log.w(TAG, "checkbox_noAUTO Listener");
                  if (buttonView.isChecked()) {
                      //checked
-                     Log.w(TAG, "No SS is checked.");
+                     Log.w(TAG, "No Auto is checked.");
                      auto = true;
                     // ToDo - turn ON/OFF correct widgets
-                     checkbox_leftHAB.setChecked(false);
-                     checkbox_leftHAB.setEnabled(false);
-                     checkbox_leftHAB2.setChecked(false);
-                     checkbox_leftHAB2.setEnabled(false);
-                     editText_autoComment.setText("No Sandstorm activity - didn't move");
-                     autoComment = "No Sandstorm activity - didn't move";
-//                     chk_cubeSwitch.setEnabled(false);
-//                     chk_attemptSwitch.setEnabled(false);
-//                     chk_XoverSwitch.setEnabled(false);
-//                     chk_WrongSwitch.setEnabled(false);       Remove when new ones added
-//                     chk_ExtraSwitch.setEnabled(false);
-//                     chk_cubeScale.setEnabled(false);
-//                     chk_attemptScale.setEnabled(false);
-//                     chk_XoverScale.setEnabled(false);
-//                     chk_WrongScale.setEnabled(false);
-//                     chk_ExtraScale.setEnabled(false);
-
+                     checkbox_leftSectLine.setChecked(false);
+                     checkbox_leftSectLine.setEnabled(false);
+                     editText_autoComment.setText("No Autonomous activity - didn't move");
+                     autoComment = "No Autonomous activity - didn't move";
 
                  } else {
                      //not checked
                      Log.w(TAG, "No SS is unchecked.");
                      auto = false;
 
-                     checkbox_leftHAB.setEnabled(true);
-                     checkbox_leftHAB2.setEnabled(true);
+                     checkbox_leftSectLine.setEnabled(true);
                      editText_autoComment.setText(" ");
                      autoComment = " ";
 
-//                     chk_cubeSwitch.setEnabled(true);
-//                     chk_attemptSwitch.setEnabled(true);
-//                     chk_XoverSwitch.setEnabled(true);
-//                     chk_WrongSwitch.setEnabled(true);
-//                     chk_ExtraSwitch.setEnabled(true);        Remove when new ones added
-//                     chk_cubeScale.setEnabled(true);
-//                     chk_attemptScale.setEnabled(true);
-//                     chk_XoverScale.setEnabled(true);
-//                     chk_WrongScale.setEnabled(true);
-//                     chk_ExtraScale.setEnabled(true);
                  }
              }
          }
         );
 
-        checkbox_leftHAB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkbox_leftSectLine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "checkbox_leftHAB Listener");
+                Log.w(TAG, "checkbox_leftSectLine Listener");
                 if (buttonView.isChecked()) {
                     leftHAB = true;
                 } else {
@@ -937,19 +912,6 @@ public class MatchScoutActivity extends AppCompatActivity {
         }
         );
 
-        checkbox_leftHAB2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                                        @Override
-                                                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            Log.w(TAG, "checkbox_leftHAB2 Listener");
-            if (buttonView.isChecked()) {
-                leftHAB2 = true;
-                checkbox_leftHAB.setChecked(true);         // Force the other one
-            } else {
-                leftHAB2 = false;
-            }
-        }
-    }
-    );
 
         button_GoToTeleopActivity.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
@@ -1410,18 +1372,19 @@ public class MatchScoutActivity extends AppCompatActivity {
                                    View view, int pos, long id) {
             startPos = parent.getItemAtPosition(pos).toString();
             Log.d(TAG, ">>>>>  '" + startPos + "'");
+            checkbox_noAUTO = (CheckBox) findViewById(R.id.checkbox_noAUTO);
             final Spinner spinner_startPos = (Spinner) findViewById(R.id.spinner_startPos);
-            if (spinner_startPos.getSelectedItemPosition() == 3) {  //  No Show?
+            if (spinner_startPos.getSelectedItemPosition() == 6) {  //  No Show?
                 Log.e(TAG, "### Team/robot is a No Show ###" );
                 editText_autoComment.setText(R.string.NoShowMsg);
-                checkbox_noSS.setChecked(true);
+                checkbox_noAUTO.setChecked(true);
                 // ????? - Do we want to turn off all other widgets?
             }
             if (spinner_startPos.getSelectedItemPosition() == 1 || spinner_startPos.getSelectedItemPosition() == 2 ) {
-                checkbox_noSS.setChecked(false);                            // un-check if old value was NoShow
+                checkbox_noAUTO.setChecked(false);                            // un-check if old value was NoShow
             }
             if (spinner_startPos.getSelectedItemPosition() == 0) {          // reset to start
-                checkbox_noSS.setChecked(false);                            // un-check if old value was NoShow
+                checkbox_noAUTO.setChecked(false);                            // un-check if old value was NoShow
             }
         }
         public void onNothingSelected(AdapterView<?> parent) {

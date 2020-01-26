@@ -125,7 +125,7 @@ public class PitScoutActivity extends AppCompatActivity {
     public int speed = 0;                       // Speed (Ft. per Sec)
     public String motor;                        // Type of Motor
     public String lang;                         // Programming  Language
-    public String ssMode;                       // Sandstorm Operatong Mode
+    public String ssMode;                       // Autonomous Operatong Mode
     /* */
     public String comments;                     // Comment(s)
     public String scout = " ";                  // Student who collected the data
@@ -250,7 +250,7 @@ pitData Pit_Data = new pitData();
         spinner_Lang.setSelection(0, false);
         spinner_Lang.setOnItemSelectedListener(new progLangOnClickListener());
         spinner_ssMode = (Spinner) findViewById(R.id.spinner_ssMode);
-        String[] operMode = getResources().getStringArray(R.array.ss_Mode_array);
+        String[] operMode = getResources().getStringArray(R.array.auto_Mode_array);
         adapter_ssMode = new ArrayAdapter<String>(this, R.layout.dev_list_layout, operMode);
         adapter_ssMode.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_ssMode.setAdapter(adapter_ssMode);

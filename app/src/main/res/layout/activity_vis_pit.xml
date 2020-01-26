@@ -348,10 +348,10 @@ android:orientation="horizontal">
     android:id="@+id/cube_mech">
 
     <TextView
-    android:id="@+id/lbl_Sandstorm"
+    android:id="@+id/lbl_Autonomous"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Sandstorm"
+    android:text="Autonomous"
     android:textColor="@color/brightblue"
     android:textSize="15sp"
     android:textStyle="bold" />
