@@ -6,7 +6,7 @@ public class pitData implements Serializable {
     private static final long serialVersionUID = -54145414541400L;
     // ============= Pit Scout Data ================
     public String pit_team = " ";                   // Team #
-    public int pit_tall = 0;                        // Height (inches)
+    public int pit_weight = 0;                      // Height (inches)
     public int pit_totWheels = 0;                   // Total # of wheels
     public int pit_numTrac = 0;                     // Num. of Traction wheels
     public int pit_numOmni = 0;                     // Num. of Omni wheels
@@ -14,21 +14,32 @@ public class pitData implements Serializable {
     public int pit_numPneumatic = 0;                // Num. of Pneumatic wheels
     public boolean pit_vision = false;              // presence of Vision Camera
     public boolean pit_pneumatics = false;          // presence of Pneumatics
-    public boolean pit_cargoManip = false;          // presence of a way to pick up cargo from floor
     public boolean pit_climb = false;               // presence of a Climbing mechanism
-    public boolean pit_floorPanel = false;          // can get Hatch Panel from floor
-    public boolean pit_floorCargo = false;          // can get Cargo from floor
+    public boolean pit_spin = false;                // Ability to Spin # turns on Control Panel
+    public boolean pit_color = false;               // Ability to Stop Wheel on color
+    public boolean pit_PowerCellManip = false;      // presence of a way to pick up PowerCell from floor
+    public boolean pit_undTrench = false;           // Ability to Drive under Control Panel (in Trench)
     public boolean pit_canLift = false;             // Ability to lift other robots
     public int pit_numLifted = 0;                   // Num. of robots can lift (1-2)
     public boolean pit_liftRamp = false;            // lift type Ramp
     public boolean pit_liftHook = false;            // lift type Hook
-    public boolean pit_leaveHAB2 = false;           // Can leave from HAB level 2
-    public boolean pit_endHAB2 = false;             // Can climb to HAB level 2
-    public boolean pit_endHAB3 = false;             // Can climb to HAB level 3
-    public int pit_speed = 0;                       // Speed (Ft. per Sec)
     public String pit_motor;                        // Type of Motor
     public String pit_lang;                         // Programming  Language
-    public String pit_ssMode;                       // Autonomous Operatong Mode
+    public String pit_autoMode;                     // Autonomous Operatong Mode
+    //                                              // Grid
+    public boolean pit_climbL1 = false;             //   L1--M1--R1
+    public boolean pit_climbL2 = false;             //   |    |   |
+    public boolean pit_climbL3 = false;             //   |    |   |
+    public boolean pit_climbM1 = false;             //   L2--M2--R2
+    public boolean pit_climbM2 = false;             //   |    |   |
+    public boolean pit_climbM3 = false;             //   |    |   |
+    public boolean pit_climbR1 = false;             //   L3--M3--R3
+    public boolean pit_climbR2 = false;             //
+    public boolean pit_climbR3 = false;             //
+    public boolean pit_deump = false;               // Can dump cells to partner
+    public boolean pit_shootBot = false;            // Can Shoot into Bottom Port
+    public boolean pit_shootOut = false;            // Can Shoot into Outer Port
+    public boolean pit_shootInn = false;            // Can Shoot into Inner Port
 
     /* */
     public String pit_comment;                      // Comment(s)
@@ -40,10 +51,9 @@ public class pitData implements Serializable {
     // ===========================================================================
     //  Constructor
 
-
-    public pitData(String pit_team, int pit_tall, int pit_totWheels, int pit_numTrac, int pit_numOmni, int pit_numMecanum, int pit_numPneumatic, boolean pit_vision, boolean pit_pneumatics, boolean pit_cargoManip, boolean pit_climb, boolean pit_floorPanel, boolean pit_floorCargo, boolean pit_canLift, int pit_numLifted, boolean pit_liftRamp, boolean pit_liftHook, boolean pit_leaveHAB2, boolean pit_endHAB2, boolean pit_endHAB3, int pit_speed, String pit_motor, String pit_lang, String pit_ssMode, String pit_comment, String pit_scout, String pit_dateTime, String pit_photoURL) {
+    public pitData(String pit_team, int pit_weight, int pit_totWheels, int pit_numTrac, int pit_numOmni, int pit_numMecanum, int pit_numPneumatic, boolean pit_vision, boolean pit_pneumatics, boolean pit_climb, boolean pit_spin, boolean pit_color, boolean pit_PowerCellManip, boolean pit_undTrench, boolean pit_canLift, int pit_numLifted, boolean pit_liftRamp, boolean pit_liftHook, String pit_motor, String pit_lang, String pit_autoMode, String pit_comment, String pit_scout, String pit_dateTime, String pit_photoURL) {
         this.pit_team = pit_team;
-        this.pit_tall = pit_tall;
+        this.pit_weight = pit_weight;
         this.pit_totWheels = pit_totWheels;
         this.pit_numTrac = pit_numTrac;
         this.pit_numOmni = pit_numOmni;
@@ -51,21 +61,18 @@ public class pitData implements Serializable {
         this.pit_numPneumatic = pit_numPneumatic;
         this.pit_vision = pit_vision;
         this.pit_pneumatics = pit_pneumatics;
-        this.pit_cargoManip = pit_cargoManip;
         this.pit_climb = pit_climb;
-        this.pit_floorPanel = pit_floorPanel;
-        this.pit_floorCargo = pit_floorCargo;
+        this.pit_spin = pit_spin;
+        this.pit_color = pit_color;
+        this.pit_PowerCellManip = pit_PowerCellManip;
+        this.pit_undTrench = pit_undTrench;
         this.pit_canLift = pit_canLift;
         this.pit_numLifted = pit_numLifted;
         this.pit_liftRamp = pit_liftRamp;
         this.pit_liftHook = pit_liftHook;
-        this.pit_leaveHAB2 = pit_leaveHAB2;
-        this.pit_endHAB2 = pit_endHAB2;
-        this.pit_endHAB3 = pit_endHAB3;
-        this.pit_speed = pit_speed;
         this.pit_motor = pit_motor;
         this.pit_lang = pit_lang;
-        this.pit_ssMode = pit_ssMode;
+        this.pit_autoMode = pit_autoMode;
         this.pit_comment = pit_comment;
         this.pit_scout = pit_scout;
         this.pit_dateTime = pit_dateTime;
@@ -93,12 +100,12 @@ public pitData() {
         this.pit_team = pit_team;
     }
 
-    public int getPit_tall() {
-        return pit_tall;
+    public int getPit_weight() {
+        return pit_weight;
     }
 
-    public void setPit_tall(int pit_tall) {
-        this.pit_tall = pit_tall;
+    public void setPit_weight(int pit_weight) {
+        this.pit_weight = pit_weight;
     }
 
     public int getPit_totWheels() {
@@ -157,14 +164,6 @@ public pitData() {
         this.pit_pneumatics = pit_pneumatics;
     }
 
-    public boolean isPit_cargoManip() {
-        return pit_cargoManip;
-    }
-
-    public void setPit_cargoManip(boolean pit_cargoManip) {
-        this.pit_cargoManip = pit_cargoManip;
-    }
-
     public boolean isPit_climb() {
         return pit_climb;
     }
@@ -173,20 +172,36 @@ public pitData() {
         this.pit_climb = pit_climb;
     }
 
-    public boolean isPit_floorPanel() {
-        return pit_floorPanel;
+    public boolean isPit_spin() {
+        return pit_spin;
     }
 
-    public void setPit_floorPanel(boolean pit_floorPanel) {
-        this.pit_floorPanel = pit_floorPanel;
+    public void setPit_spin(boolean pit_spin) {
+        this.pit_spin = pit_spin;
     }
 
-    public boolean isPit_floorCargo() {
-        return pit_floorCargo;
+    public boolean isPit_color() {
+        return pit_color;
     }
 
-    public void setPit_floorCargo(boolean pit_floorCargo) {
-        this.pit_floorCargo = pit_floorCargo;
+    public void setPit_color(boolean pit_color) {
+        this.pit_color = pit_color;
+    }
+
+    public boolean isPit_PowerCellManip() {
+        return pit_PowerCellManip;
+    }
+
+    public void setPit_PowerCellManip(boolean pit_PowerCellManip) {
+        this.pit_PowerCellManip = pit_PowerCellManip;
+    }
+
+    public boolean isPit_undTrench() {
+        return pit_undTrench;
+    }
+
+    public void setPit_undTrench(boolean pit_undTrench) {
+        this.pit_undTrench = pit_undTrench;
     }
 
     public boolean isPit_canLift() {
@@ -221,38 +236,6 @@ public pitData() {
         this.pit_liftHook = pit_liftHook;
     }
 
-    public boolean isPit_leaveHAB2() {
-        return pit_leaveHAB2;
-    }
-
-    public void setPit_leaveHAB2(boolean pit_leaveHAB2) {
-        this.pit_leaveHAB2 = pit_leaveHAB2;
-    }
-
-    public boolean isPit_endHAB2() {
-        return pit_endHAB2;
-    }
-
-    public void setPit_endHAB2(boolean pit_endHAB2) {
-        this.pit_endHAB2 = pit_endHAB2;
-    }
-
-    public boolean isPit_endHAB3() {
-        return pit_endHAB3;
-    }
-
-    public void setPit_endHAB3(boolean pit_endHAB3) {
-        this.pit_endHAB3 = pit_endHAB3;
-    }
-
-    public int getPit_speed() {
-        return pit_speed;
-    }
-
-    public void setPit_speed(int pit_speed) {
-        this.pit_speed = pit_speed;
-    }
-
     public String getPit_motor() {
         return pit_motor;
     }
@@ -269,12 +252,12 @@ public pitData() {
         this.pit_lang = pit_lang;
     }
 
-    public String getPit_ssMode() {
-        return pit_ssMode;
+    public String getPit_autoMode() {
+        return pit_autoMode;
     }
 
-    public void setPit_ssMode(String pit_ssMode) {
-        this.pit_ssMode = pit_ssMode;
+    public void setPit_autoMode(String pit_autoMode) {
+        this.pit_autoMode = pit_autoMode;
     }
 
     public String getPit_comment() {

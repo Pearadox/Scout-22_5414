@@ -37,27 +37,27 @@ public class VisMatch_Activity extends AppCompatActivity {
     String underScore = new String(new char[60]).replace("\0", "_");  // string of 'x' underscores
     String matches = "";  String match_id = "";
     TextView txt_team, txt_teamName, txt_NumMatches, txt_Matches;
-    TextView txt_Ss_LeftHab1, txt_Ss_LeftHab2, txt_noSand, txt_Ss_cargoScored, txt_Ss_hatchScored, txt_Ss_droppedHatch;
-    TextView txt_Tele_cargoScored, txt_Tele_hatchScored, txt_Tele_droppedHatch;
+    TextView txt_Ss_LeftHab1, txt_Ss_LeftHab2, txt_noSand, txt_Ss_PowerCellScored, txt_Ss_hatchScored, txt_Ss_droppedHatch;
+    TextView txt_Tele_PowerCellScored, txt_Tele_hatchScored, txt_Tele_droppedHatch;
     TextView txt_HabLvl, txt_Lift1NUM, txt_Lift2NUM, txt_WasLiftedNUM;
     TextView txt_2ndCargFloor, txt_2ndCargPlaSta, txt_2ndCargCorral, txt_2ndPanFloor, txt_2ndPanPlaSta , txt_3rdCargFloor, txt_3rdCargPlasta, txt_3rdCargCorral, txt_3rdPanFloor, txt_3rdPanPlaSta;;
     TextView txt_TeleCargFloor, txt_TeleCargPlaSta, txt_TeleCargCorral, txt_TelePanFloor, txt_TelePanPlaSta; 
-    // ToDo - TextViews for Cargo/Panels 2nd & 3rd
+    // ToDo - TextViews for PowerCell/Panels 2nd & 3rd
     /* Comment Boxes */     TextView txt_AutoComments, txt_TeleComments, txt_FinalComments;
     TextView txt_Lvl1, txt_Lvl2, txt_NoShow;
     TextView txt_Pos1, txt_Pos2, txt_Pos3;
     public static String[] numMatch = new String[]             // Num. of Matches to process
             {"ALL","Last","Last 2","Last 3","Last 4","Last 5"};
     BarChart mBarChart;
-    int BarCargo = 0;  int BarPanels = 0;  int LastCargo = 0;  int LastPanels = 0;
+    int BarPowerCell = 0;  int BarPanels = 0;  int LastPowerCell = 0;  int LastPanels = 0;
     //----------------------------------
     int numLeftHAB = 0; int numLeftHAB2 = 0; int noSand = 0;
     int auto_B1 = 0; int auto_B2 = 0; int auto_B3 = 0;
     // NOTE: _ALL_ external mentions of Playere Sta. (PS) were changed to Loading Sta. (LS) so as to NOT be confused with Player Control Sta. (Driver)
     int auto_Ps1 = 0; int auto_Ps2 = 0; int auto_Ps3 = 0;
-    int sand_CargoFloor2= 0; int sand_CargoPlasta2= 0; int sand_CargoCorral2 = 0; int sand_PanFloor2 = 0; int sand_PanPlasta2 = 0;
-    int sand_CargoFloor3 = 0; int sand_CargoPlasta3 = 0; int sand_CargoCorral3 = 0; int sand_PanFloor3 = 0; int sand_PanPlasta3 = 0;
-    int tele_CargoFloor = 0; int tele_CargoPlasta = 0; int tele_CargoCorral = 0; int tele_PanFloor = 0; int tele_PanPlasta = 0;
+    int sand_PowerCellFloor2= 0; int sand_PowerCellPlasta2= 0; int sand_PowerCellCorral2 = 0; int sand_PanFloor2 = 0; int sand_PanPlasta2 = 0;
+    int sand_PowerCellFloor3 = 0; int sand_PowerCellPlasta3 = 0; int sand_PowerCellCorral3 = 0; int sand_PanFloor3 = 0; int sand_PanPlasta3 = 0;
+    int tele_PowerCellFloor = 0; int tele_PowerCellPlasta = 0; int tele_PowerCellCorral = 0; int tele_PanFloor = 0; int tele_PanPlasta = 0;
     int climbH0= 0; int climbH1 = 0; int climbH2 = 0; int climbH3 = 0; int lift1Num = 0; int liftedNum = 0;
     int cargL1 = 0; int cargL2 = 0; int cargL3 =0; int TcargL1 = 0; int TcargL2 = 0; int TcargL3 = 0; int TpanL1 = 0; int TpanL2 = 0; int TpanL3 = 0;
     int numMatches = 0; int panL1 = 0; int panL2 = 0; int panL3 = 0; int dropped=0; int Tdropped = 0;
@@ -103,10 +103,10 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_Ss_LeftHab2 = (TextView) findViewById(R.id.txt_Ss_LeftHab2);
         txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
         txt_noSand = (TextView) findViewById(R.id.txt_noSand);
-        txt_Ss_cargoScored = (TextView) findViewById(R.id.txt_Ss_cargoScored);
+        txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
         txt_Ss_hatchScored  = (TextView) findViewById(R.id.txt_Ss_hatchScored);
         txt_Ss_droppedHatch = (TextView) findViewById(R.id.txt_Ss_droppedHatch);
-// ToDo -  findViews Cargo/Panels 2nd & 3rd
+// ToDo -  findViews PowerCell/Panels 2nd & 3rd
         txt_2ndCargFloor = (TextView) findViewById(R.id.txt_2ndCargFloor);
         txt_2ndCargPlaSta = (TextView) findViewById(R.id.txt_2ndCargPlaSta);
         txt_2ndCargCorral = (TextView) findViewById(R.id.txt_2ndCargCorral);
@@ -133,7 +133,7 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_AutoComments.setTextSize(12);       // normal
         txt_AutoComments.setMovementMethod(new ScrollingMovementMethod());
         /*  Tele  */
-        txt_Tele_cargoScored = (TextView) findViewById(R.id.txt_Tele_cargoScored);
+        txt_Tele_PowerCellScored = (TextView) findViewById(R.id.txt_Tele_PowerCellScored);
         txt_Tele_hatchScored = (TextView) findViewById(R.id.txt_Tele_hatchScored);
         txt_Lift1NUM = (TextView) findViewById(R.id.txt_Lift1NUM);
         txt_Lift2NUM = (TextView) findViewById(R.id.txt_Lift2NUM);
@@ -168,7 +168,7 @@ public class VisMatch_Activity extends AppCompatActivity {
     }
 // ================================================================
     private void getMatch_Data() {
-        BarCargo = 0; BarPanels = 0; LastCargo = 0;  LastPanels = 0;
+        BarPowerCell = 0; BarPanels = 0; LastPowerCell = 0;  LastPanels = 0;
         for (int i = start; i < numObjects; i++) {
 //            Log.w(TAG, "In for loop!   " + i);
             match_inst = Pearadox.Matches_Data.get(i);      // Get instance of Match Data
@@ -223,7 +223,7 @@ public class VisMatch_Activity extends AppCompatActivity {
 
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
             dropped = dropped + match_inst.getSand_num_Dropped();
-             // =================== Cargo ============
+             // =================== PowerCell ============
             if (match_inst.isSand_LeftRocket_LCarg1()) {
                 cargL1++;
             }
@@ -260,28 +260,28 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isSand_RghtRocket_RCarg3()) {
                 cargL3++;
             }
-            if (match_inst.isSand_CargoLCarg1()) {              // Cargo Ship
+            if (match_inst.isSand_PowerCellLCarg1()) {              // PowerCell Ship
                 cargL1++;
             }
-            if (match_inst.isSand_CargoLCarg2()) {
+            if (match_inst.isSand_PowerCellLCarg2()) {
                 cargL1++;
             }
-            if (match_inst.isSand_CargoLCarg3()) {
+            if (match_inst.isSand_PowerCellLCarg3()) {
                 cargL1++;
             }
-            if (match_inst.isSand_CargoRCarg1()) {
+            if (match_inst.isSand_PowerCellRCarg1()) {
                 cargL1++;
             }
-            if (match_inst.isSand_CargoRCarg2()) {
+            if (match_inst.isSand_PowerCellRCarg2()) {
                 cargL1++;
             }
-            if (match_inst.isSand_CargoRCarg3()) {
+            if (match_inst.isSand_PowerCellRCarg3()) {
                 cargL1++;
             }
-            if (match_inst.isSand_CargoEndLCargo()) {      // End
+            if (match_inst.isSand_PowerCellEndLPowerCell()) {      // End
                 cargL1++;
             }
-            if (match_inst.isSand_CargoEndRCargo()) {      // End
+            if (match_inst.isSand_PowerCellEndRPowerCell()) {      // End
                 cargL1++;
             }
             // =================== Panels ============
@@ -321,28 +321,28 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isSand_RghtRocket_RPan3()) {
                 panL3++;
             }
-            if (match_inst.isSand_CargoLPan1()) {              // Cargo Ship
+            if (match_inst.isSand_PowerCellLPan1()) {              // PowerCell Ship
                 panL1++;
             }
-            if (match_inst.isSand_CargoLPan2()) {
+            if (match_inst.isSand_PowerCellLPan2()) {
                 panL1++;
             }
-            if (match_inst.isSand_CargoLPan3()) {
+            if (match_inst.isSand_PowerCellLPan3()) {
                 panL1++;
             }
-            if (match_inst.isSand_CargoRPan1()) {
+            if (match_inst.isSand_PowerCellRPan1()) {
                 panL1++;
             }
-            if (match_inst.isSand_CargoRPan2()) {
+            if (match_inst.isSand_PowerCellRPan2()) {
                 panL1++;
             }
-            if (match_inst.isSand_CargoRPan3()) {
+            if (match_inst.isSand_PowerCellRPan3()) {
                 panL1++;
             }
-            if (match_inst.isSand_CargoEndLPanel()) {
+            if (match_inst.isSand_PowerCellEndLPanel()) {
                 panL1++;
             }
-            if (match_inst.isSand_CargoEndRPanel()) {
+            if (match_inst.isSand_PowerCellEndRPanel()) {
                 panL1++;
             }
             if (match_inst.isSand_PU2ndPanel()) {
@@ -353,15 +353,15 @@ public class VisMatch_Activity extends AppCompatActivity {
                     sand_PanFloor2++;
                 }
             }
-            if (match_inst.isSand_PU2ndCargo()) {
+            if (match_inst.isSand_PU2ndPowerCell()) {
                 if (match_inst.isSand_PU2ndFloor()) {
-                    sand_CargoFloor2++;
+                    sand_PowerCellFloor2++;
                 }
                 if (match_inst.isSand_PU2ndPlSta()) {
-                    sand_CargoPlasta2++;
+                    sand_PowerCellPlasta2++;
                 }
                 if (match_inst.isSand_PU2ndCorral()) {
-                    sand_CargoCorral2++;
+                    sand_PowerCellCorral2++;
                 }
             }
             if (match_inst.isSand_PU3rdPanel()) {
@@ -372,22 +372,22 @@ public class VisMatch_Activity extends AppCompatActivity {
                     sand_PanFloor3++;
                 }
             }
-            if (match_inst.isSand_PU3rdCargo()) {
+            if (match_inst.isSand_PU3rdPowerCell()) {
                 if (match_inst.isSand_PU3rdFloor()) {
-                    sand_CargoFloor3++;
+                    sand_PowerCellFloor3++;
                 }
                 if (match_inst.isSand_PU3rdPlSta()) {
-                    sand_CargoPlasta3++;
+                    sand_PowerCellPlasta3++;
                 }
                 if (match_inst.isSand_PU3rdCorral()) {
-                    sand_CargoCorral3++;
+                    sand_PowerCellCorral3++;
                 }
             }
 
             // *************************************************
             // ******************** TeleOps ********************
             // *************************************************
-            // =================== Cargo ============
+            // =================== PowerCell ============
             if (match_inst.isTele_LeftRocket_LCarg1()) {
                 TcargL1++;
             }
@@ -424,28 +424,28 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isTele_RghtRocket_RCarg3()) {
                 TcargL3++;
             }
-            if (match_inst.isTele_CargoLCarg1()) {              // Cargo Ship
+            if (match_inst.isTele_PowerCellLCarg1()) {              // PowerCell Ship
                 TcargL1++;
             }
-            if (match_inst.isTele_CargoLCarg2()) {
+            if (match_inst.isTele_PowerCellLCarg2()) {
                 TcargL1++;
             }
-            if (match_inst.isTele_CargoLCarg3()) {
+            if (match_inst.isTele_PowerCellLCarg3()) {
                 TcargL1++;
             }
-            if (match_inst.isTele_CargoRCarg1()) {
+            if (match_inst.isTele_PowerCellRCarg1()) {
                 TcargL1++;
             }
-            if (match_inst.isTele_CargoRCarg2()) {
+            if (match_inst.isTele_PowerCellRCarg2()) {
                 TcargL1++;
             }
-            if (match_inst.isTele_CargoRCarg3()) {
+            if (match_inst.isTele_PowerCellRCarg3()) {
                 TcargL1++;
             }
-            if (match_inst.isTele_CargoEndLCargo()) {      // End
+            if (match_inst.isTele_PowerCellEndLPowerCell()) {      // End
                 TcargL1++;
             }
-            if (match_inst.isTele_CargoEndRCargo()) {      // End
+            if (match_inst.isTele_PowerCellEndRPowerCell()) {      // End
                 TcargL1++;
             }
             // =================== Panels ============
@@ -485,39 +485,39 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isTele_RghtRocket_RPan3()) {
                 TpanL3++;
             }
-            if (match_inst.isTele_CargoLPan1()) {              // Cargo Ship
+            if (match_inst.isTele_PowerCellLPan1()) {              // PowerCell Ship
                 TpanL1++;
             }
-            if (match_inst.isTele_CargoLPan2()) {
+            if (match_inst.isTele_PowerCellLPan2()) {
                 TpanL1++;
             }
-            if (match_inst.isTele_CargoLPan3()) {
+            if (match_inst.isTele_PowerCellLPan3()) {
                 TpanL1++;
             }
-            if (match_inst.isTele_CargoRPan1()) {
+            if (match_inst.isTele_PowerCellRPan1()) {
                 TpanL1++;
             }
-            if (match_inst.isTele_CargoRPan2()) {
+            if (match_inst.isTele_PowerCellRPan2()) {
                 TpanL1++;
             }
-            if (match_inst.isTele_CargoRPan3()) {
+            if (match_inst.isTele_PowerCellRPan3()) {
                 TpanL1++;
             }
-            if (match_inst.isTele_CargoEndLPanel()) {      // End
+            if (match_inst.isTele_PowerCellEndLPanel()) {      // End
                 TpanL1++;
             }
-            if (match_inst.isTele_CargoEndRPanel()) {      // End
+            if (match_inst.isTele_PowerCellEndRPanel()) {      // End
                 TpanL1++;
             }
 
-            if (match_inst.isTele_cargo_Corral()) {
-                tele_CargoCorral++;
+            if (match_inst.isTele_PowerCell_Corral()) {
+                tele_PowerCellCorral++;
             }
-            if (match_inst.isTele_cargo_floor()) {
-                tele_CargoFloor++;
+            if (match_inst.isTele_PowerCell_floor()) {
+                tele_PowerCellFloor++;
             }
-            if (match_inst.isTele_cargo_playSta()) {
-                tele_CargoPlasta++;
+            if (match_inst.isTele_PowerCell_playSta()) {
+                tele_PowerCellPlasta++;
             }
             if (match_inst.isTele_Panel_floor()) {
                 tele_PanFloor++;
@@ -561,15 +561,15 @@ public class VisMatch_Activity extends AppCompatActivity {
             }
 
             // ToDo - figure out why bar chart is accumulating??????
-            BarCargo = (cargL1 + cargL2 + cargL3 + TcargL1 + TcargL2 + TcargL3) - LastCargo;
+            BarPowerCell = (cargL1 + cargL2 + cargL3 + TcargL1 + TcargL2 + TcargL3) - LastPowerCell;
             BarPanels = (panL1 + panL2 + panL3 + TpanL1 + TpanL2 + TpanL3) - LastPanels;
-            mBarChart.addBar(new BarModel(BarCargo, 0xffff0000));       // Cargo
-//            Log.w(TAG, i + " @@@@@@@@ Cargo=" + BarCargo + "   Panels=" + BarPanels + "  " + match_id);
-//            Log.e(TAG, "    CL1=" + cargL1 + " CL2=" + cargL2 + " CL3=" + cargL3 + "    TcL1=" + TcargL1 + " TcL2=" + TcargL2 + " TcL3=" + TcargL3 + "  Last=" + LastCargo);
+            mBarChart.addBar(new BarModel(BarPowerCell, 0xffff0000));       // PowerCell
+//            Log.w(TAG, i + " @@@@@@@@ PowerCell=" + BarPowerCell + "   Panels=" + BarPanels + "  " + match_id);
+//            Log.e(TAG, "    CL1=" + cargL1 + " CL2=" + cargL2 + " CL3=" + cargL3 + "    TcL1=" + TcargL1 + " TcL2=" + TcargL2 + " TcL3=" + TcargL3 + "  Last=" + LastPowerCell);
 //            Log.e(TAG, "    PL1=" + panL1 + " PL2=" + panL2 + " PL3=" + panL3 + "    TpL1=" + TpanL1 + " TpL2=" + TpanL2 + " TpL3=" + TpanL3 + "  Last=" + LastPanels +"\n");
 
             mBarChart.addBar(new BarModel( BarPanels,  0xff08457e));       // Panels
-            LastCargo = LastCargo + BarCargo;
+            LastPowerCell = LastPowerCell + BarPowerCell;
             LastPanels = LastPanels + BarPanels;
             if (match_inst.getTele_comment().length() > 1) {
                 tele_Comments = tele_Comments + match_inst.getMatch() + "-" + match_inst.getTele_comment() + "\n" + underScore  + "\n" ;
@@ -611,10 +611,10 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_Ss_LeftHab2 = (TextView) findViewById(R.id.txt_Ss_LeftHab2);
         txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
         txt_noSand = (TextView) findViewById(R.id.txt_noSand);
-        txt_Ss_cargoScored = (TextView) findViewById(R.id.txt_Ss_cargoScored);
+        txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
         txt_Ss_hatchScored  = (TextView) findViewById(R.id.txt_Ss_hatchScored);
         txt_Ss_droppedHatch = (TextView) findViewById(R.id.txt_Ss_droppedHatch);
-        txt_Tele_cargoScored = (TextView) findViewById(R.id.txt_Tele_cargoScored);
+        txt_Tele_PowerCellScored = (TextView) findViewById(R.id.txt_Tele_PowerCellScored);
         txt_Tele_hatchScored = (TextView) findViewById(R.id.txt_Tele_hatchScored);
         txt_Tele_droppedHatch = (TextView) findViewById(R.id.txt_Tele_droppedHatch);
         txt_2ndCargFloor = (TextView) findViewById(R.id.txt_2ndCargFloor);
@@ -645,29 +645,29 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_noSand.setText(String.valueOf(noSand));
 //        Log.w(TAG, "Ratio of Placed to Attempted Gears in Auto = " + auto_SwCubesPlaced + "/" + auto_SwCubesAttempted);
         String carScored = "¹" + String.valueOf(cargL1) + " ²" + String.valueOf(cargL2) + " ³" + String.valueOf(cargL3);
-        txt_Ss_cargoScored.setText(carScored);
+        txt_Ss_PowerCellScored.setText(carScored);
         String hatScored = "¹" + String.valueOf(panL1) + " ²" + String.valueOf(panL2) + " ³" + String.valueOf(panL3);
         txt_Ss_hatchScored.setText(String.valueOf(hatScored));
         txt_Ss_droppedHatch.setText(String.valueOf(dropped));
-        String teleCargo = "¹" + String.valueOf(TcargL1) + " ²" + String.valueOf(TcargL2) + " ³" + String.valueOf(TcargL3);
-        txt_Tele_cargoScored.setText(teleCargo);
+        String telePowerCell = "¹" + String.valueOf(TcargL1) + " ²" + String.valueOf(TcargL2) + " ³" + String.valueOf(TcargL3);
+        txt_Tele_PowerCellScored.setText(telePowerCell);
         String teleHatchPanel = "¹" + String.valueOf(TpanL1) + " ²" + String.valueOf(TpanL2) + " ³" + String.valueOf(TpanL3);
         txt_Tele_hatchScored.setText(teleHatchPanel);
         txt_Tele_droppedHatch.setText(String.valueOf(Tdropped));
         String HabEnd = "⁰"+ String.valueOf(climbH0) + " ¹" + String.valueOf(climbH1) + " ²" + String.valueOf(climbH2) + " ³" + String.valueOf(climbH3);
-        txt_2ndCargFloor.setText(String.valueOf(sand_CargoFloor2));
-        txt_2ndCargPlaSta.setText(String.valueOf(sand_CargoPlasta2));
-        txt_2ndCargCorral.setText(String.valueOf(sand_CargoCorral2));
+        txt_2ndCargFloor.setText(String.valueOf(sand_PowerCellFloor2));
+        txt_2ndCargPlaSta.setText(String.valueOf(sand_PowerCellPlasta2));
+        txt_2ndCargCorral.setText(String.valueOf(sand_PowerCellCorral2));
         txt_2ndPanPlaSta.setText(String.valueOf(sand_PanPlasta2));
         txt_2ndPanFloor.setText(String.valueOf(sand_PanFloor2));
-        txt_3rdCargFloor.setText(String.valueOf(sand_CargoFloor3));
-        txt_3rdCargPlasta.setText(String.valueOf(sand_CargoPlasta3));
-        txt_3rdCargCorral.setText(String.valueOf(sand_CargoCorral3));
+        txt_3rdCargFloor.setText(String.valueOf(sand_PowerCellFloor3));
+        txt_3rdCargPlasta.setText(String.valueOf(sand_PowerCellPlasta3));
+        txt_3rdCargCorral.setText(String.valueOf(sand_PowerCellCorral3));
         txt_3rdPanPlaSta.setText(String.valueOf(sand_PanPlasta3));
         txt_3rdPanFloor.setText(String.valueOf(sand_PanFloor3));
-        txt_TeleCargFloor.setText(String.valueOf(tele_CargoFloor));
-        txt_TeleCargPlaSta.setText(String.valueOf(tele_CargoPlasta));
-        txt_TeleCargCorral.setText(String.valueOf(tele_CargoCorral));
+        txt_TeleCargFloor.setText(String.valueOf(tele_PowerCellFloor));
+        txt_TeleCargPlaSta.setText(String.valueOf(tele_PowerCellPlasta));
+        txt_TeleCargCorral.setText(String.valueOf(tele_PowerCellCorral));
         txt_TelePanFloor.setText(String.valueOf(tele_PanFloor));
         txt_TelePanPlaSta.setText(String.valueOf(tele_PanPlasta));
         txt_HabLvl.setText(HabEnd);
@@ -714,9 +714,9 @@ public class VisMatch_Activity extends AppCompatActivity {
         auto_Ps3 = 0;
         cargL1 = 0; cargL2 = 0; cargL3 = 0; TcargL1 = 0; TcargL2 = 0; TcargL3 = 0;
         panL1 = 0; panL2 = 0; panL3 = 0; TpanL1 = 0; TpanL2 = 0; TpanL3 = 0;
-        sand_CargoFloor2= 0; sand_CargoPlasta2= 0; sand_CargoCorral2 = 0; sand_PanFloor2 = 0; sand_PanPlasta2 = 0;
-        sand_CargoFloor3 = 0; sand_CargoPlasta3 = 0; sand_CargoCorral3 = 0; sand_PanFloor3 = 0; sand_PanPlasta3 = 0;
-        tele_CargoFloor = 0; tele_CargoPlasta = 0; tele_CargoCorral = 0; tele_PanFloor = 0; tele_PanPlasta = 0;
+        sand_PowerCellFloor2= 0; sand_PowerCellPlasta2= 0; sand_PowerCellCorral2 = 0; sand_PanFloor2 = 0; sand_PanPlasta2 = 0;
+        sand_PowerCellFloor3 = 0; sand_PowerCellPlasta3 = 0; sand_PowerCellCorral3 = 0; sand_PanFloor3 = 0; sand_PanPlasta3 = 0;
+        tele_PowerCellFloor = 0; tele_PowerCellPlasta = 0; tele_PowerCellCorral = 0; tele_PanFloor = 0; tele_PanPlasta = 0;
         numTeleClimbSuccess = 0;
         lift1Num = 0;
         liftedNum = 0;
@@ -736,7 +736,7 @@ public class VisMatch_Activity extends AppCompatActivity {
         final_DefLast30 = 0;
         final_DefBlock = 0;
         final_NumPen = 0;
-        BarCargo = 0; BarPanels = 0; LastCargo = 0;  LastPanels = 0;
+        BarPowerCell = 0; BarPanels = 0; LastPowerCell = 0;  LastPanels = 0;
         mBarChart.clearChart();
     }
 

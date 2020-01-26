@@ -242,11 +242,11 @@
             android:text="Team#" />
 
         <RadioButton
-            android:id="@+id/radio_Cargo"
+            android:id="@+id/radio_PowerCell"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
-            android:text="Cargo" />
+            android:text="PowerCell" />
 
         <RadioButton
             android:id="@+id/radio_Panels"

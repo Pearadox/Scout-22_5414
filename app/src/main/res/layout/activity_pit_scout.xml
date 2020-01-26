@@ -159,19 +159,19 @@
             android:layout_height="20dp"
             android:layout_below="@+id/lbl_Divider"
             android:layout_alignStart="@+id/lbl_Divider"
-            android:layout_marginStart="5dp"
             android:text="Robot Weight (lbs)"
             android:textColor="@color/grey"
             android:textSize="16sp"
             android:textStyle="bold">
 
         </TextView>
+
         <EditText
-            android:id="@+id/txtEd_Height"
-            android:layout_width="35dp"
+            android:id="@+id/txtEd_Weight"
+            android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_alignStart="@+id/lin_Wheels"
             android:layout_below="@+id/lbl_Divider"
+            android:layout_alignStart="@+id/lin_Wheels"
             android:ems="12"
             android:inputType="number"
             android:textColor="@color/limegreen"
@@ -288,7 +288,7 @@
 
     <CheckBox
         android:id="@+id/chkBox_Pneumatics"
-        android:layout_width="140sp"
+        android:layout_width="125sp"
         android:layout_height="wrap_content"
         android:text="Pneumatics" />
 
@@ -296,7 +296,7 @@
             android:id="@+id/chkBox_Vision"
             android:layout_width="140sp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="0dp"
             android:text="Vision Camera" />
 
@@ -304,9 +304,18 @@
             android:id="@+id/chkBox_Climb"
             android:layout_width="120sp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:text="Can Climb" />
-</LinearLayout>
+
+        <CheckBox
+            android:id="@+id/chkBox_Trench"
+            android:layout_width="120sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Under CP?" />
+
+    </LinearLayout>
+
     // ======================================================
     <LinearLayout
         android:id="@+id/lin_PickUp"
@@ -320,18 +329,18 @@
             android:id="@+id/chkBox_OffFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/magenta"
             android:buttonTint="@color/magenta"
-            android:text="Can get Cargo from Floor" />
+            android:text="PowerCell from Floor"
+            android:textColor="@color/magenta" />
 
-        <CheckBox
-            android:id="@+id/chkBox_PanelFloor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textColor="@color/magenta"
-            android:buttonTint="@color/magenta"
-            android:text="Can get Panel from Floor" />
+<!--        <CheckBox-->
+<!--            android:id="@+id/chkBox_PanelFloor"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:textColor="@color/magenta"-->
+<!--            android:buttonTint="@color/magenta"-->
+<!--            android:text="Can get Panel from Floor" />-->
 
     </LinearLayout>
 
@@ -402,27 +411,27 @@
             android:layout_marginStart="10dp"
             android:textColor="@color/cyan" />
 
-        <TextView
-            android:id="@+id/lbl_Speed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/lbl_Divider"
-            android:layout_below="@+id/lbl_Divider"
-            android:text="Speed (ft/sec.)"
-            android:textColor="@color/cyan"
-            android:textStyle="bold"
-            android:textSize="16sp"></TextView>
+<!--        <TextView-->
+<!--            android:id="@+id/lbl_Speed"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignStart="@+id/lbl_Divider"-->
+<!--            android:layout_below="@+id/lbl_Divider"-->
+<!--            android:text="Speed (ft/sec.)"-->
+<!--            android:textColor="@color/cyan"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="16sp"></TextView>-->
 
-        <EditText
-            android:id="@+id/txtEd_Speed"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:ems="12"
-            android:inputType="number"
-            android:textColor="@color/cyan"
-            android:visibility="visible"
-            tools:focusable="false" />
+<!--        <EditText-->
+<!--            android:id="@+id/txtEd_Speed"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:ems="12"-->
+<!--            android:inputType="number"-->
+<!--            android:textColor="@color/cyan"-->
+<!--            android:visibility="visible"-->
+<!--            tools:focusable="false" />-->
 
         <TextView
             android:id="@+id/lbl_ProgLang"
@@ -499,7 +508,7 @@
     </LinearLayout>
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     <LinearLayout
-        android:id="@+id/Auto_ssMode"
+        android:id="@+id/Auto_Mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Auto_Data"
@@ -509,13 +518,13 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginStart="4dp"
-            android:text="SS Oper. Mode"
+            android:text="Auto Oper. Mode"
             android:textColor="@color/orange"
             android:textSize="16sp"
             android:textStyle="bold"></TextView>
 
         <Spinner
-            android:id="@+id/spinner_ssMode"
+            android:id="@+id/spinner_autoMode"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
@@ -550,7 +559,7 @@
         android:id="@+id/scrollv_comm"
         android:layout_width="500sp"
         android:layout_height="70sp"
-        android:layout_below="@+id/Auto_ssMode"
+        android:layout_below="@+id/Auto_Mode"
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/linearLayout"
         android:isScrollContainer="false">

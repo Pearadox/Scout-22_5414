@@ -42,19 +42,19 @@ public class MatchScoutActivity extends AppCompatActivity {
     boolean onStart = false;
     /* Header Sect. */  TextView txt_EventName, txt_dev, txt_stud, txt_Match, txt_MyTeam, txt_TeamName, txt_NextMatch;
                         EditText editTxt_Team, editTxt_Match;
-    /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_startHatch, radio_startCargo, radio_Pick;
+    /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_startHatch, radio_startPowerCell, radio_Pick;
                         Spinner spinner_startPos;
     /* After Start */   CheckBox checkbox_leftSectLine, checkbox_noAUTO;
     /* L Rocket */      CheckBox chk_LeftRocket_LPan1,chk_LeftRocket_LPan2,chk_LeftRocket_LPan3, chk_LeftRocket_LCarg1,chk_LeftRocket_LCarg2,chk_LeftRocket_LCarg3;
                         CheckBox chk_LeftRocket_RPan1,chk_LeftRocket_RPan2,chk_LeftRocket_RPan3, chk_LeftRocket_RCarg1,chk_LeftRocket_RCarg2,chk_LeftRocket_RCarg3;
-    /* CargoShip */     CheckBox chk_CargoLPan1,chk_CargoLPan2,chk_CargoLPan3, chk_CargoLCarg1,chk_CargoLCarg2,chk_CargoLCarg3;
-                        CheckBox chk_CargoRPan1,chk_CargoRPan2,chk_CargoRPan3, chk_CargoRCarg1,chk_CargoRCarg2,chk_CargoRCarg3;
-                        CheckBox chk_CargoEndLPanel,chk_CargoEndRPanel,chk_CargoEndLCargo,chk_CargoEndRCargo;
+    /* PowerCellShip */     CheckBox chk_PowerCellLPan1,chk_PowerCellLPan2,chk_PowerCellLPan3, chk_PowerCellLCarg1,chk_PowerCellLCarg2,chk_PowerCellLCarg3;
+                        CheckBox chk_PowerCellRPan1,chk_PowerCellRPan2,chk_PowerCellRPan3, chk_PowerCellRCarg1,chk_PowerCellRCarg2,chk_PowerCellRCarg3;
+                        CheckBox chk_PowerCellEndLPanel,chk_PowerCellEndRPanel,chk_PowerCellEndLPowerCell,chk_PowerCellEndRPowerCell;
     /* R Rocket */      CheckBox chk_RghtRocket_LPan1,chk_RghtRocket_LPan2,chk_RghtRocket_LPan3, chk_RghtRocket_LCarg1,chk_RghtRocket_LCarg2,chk_RghtRocket_LCarg3;
                         CheckBox chk_RghtRocket_RPan1,chk_RghtRocket_RPan2,chk_RghtRocket_RPan3, chk_RghtRocket_RCarg1,chk_RghtRocket_RCarg2,chk_RghtRocket_RCarg3;
-    /* 2nd & 3rd */     RadioGroup radgrp_secondPiece; RadioButton radio_none2, radio_hatch2, radio_cargo2, radio_2nd;
+    /* 2nd & 3rd */     RadioGroup radgrp_secondPiece; RadioButton radio_none2, radio_hatch2, radio_PowerCell2, radio_2nd;
                         RadioGroup radgrp_secondPieceLocation; RadioButton radio_playerStation2, radio_corral2, radio_floor2, radio_2ndLoc;
-                        RadioGroup radgrp_thirdPiece; RadioButton radio_none3, radio_hatch3, radio_cargo3, radio_3rd;
+                        RadioGroup radgrp_thirdPiece; RadioButton radio_none3, radio_hatch3, radio_PowerCell3, radio_3rd;
                         RadioGroup radgrp_thirdPieceLocation; RadioButton radio_playerStation3, radio_corral3, radio_floor3, radio_3rdLoc;
     /* Last Sect. */    EditText editText_autoComment;
                         Button btn_DropPlus, btn_DropMinus;  TextView  txt_Num_Dropped;
@@ -79,7 +79,7 @@ public class MatchScoutActivity extends AppCompatActivity {
     public String matchID             = "T00";  // Type + #
     public String tn                  = "";     // Team #
     public boolean carry_none         = false;  // Do they carry nothing?
-    public boolean carry_cargo        = false;  // Do they carry cargo
+    public boolean carry_PowerCell        = false;  // Do they carry PowerCell
     public boolean carry_panel        = false;  // Do they carry panel
     public String  startPos           = " ";    // Start Position
     // ---- AFTER Start ----
@@ -93,29 +93,29 @@ public class MatchScoutActivity extends AppCompatActivity {
     public boolean LeftRocket_RPan1   = false;  // L-Rocket R-Panel#1
     public boolean LeftRocket_RPan2   = false;  // L-Rocket R-Panel#2
     public boolean LeftRocket_RPan3   = false;  // L-Rocket R-Panel#3
-    public boolean LeftRocket_LCarg1  = false; // L-Rocket L-Cargo#1
-    public boolean LeftRocket_LCarg2  = false; // L-Rocket L-Cargo#2
-    public boolean LeftRocket_LCarg3  = false; // L-Rocket L-Cargo#3
-    public boolean LeftRocket_RCarg1  = false; // L-Rocket R-Cargo#1
-    public boolean LeftRocket_RCarg2  = false; // L-Rocket R-Cargo#2
-    public boolean LeftRocket_RCarg3  = false; // L-Rocket R-Cargo#3
+    public boolean LeftRocket_LCarg1  = false; // L-Rocket L-PowerCell#1
+    public boolean LeftRocket_LCarg2  = false; // L-Rocket L-PowerCell#2
+    public boolean LeftRocket_LCarg3  = false; // L-Rocket L-PowerCell#3
+    public boolean LeftRocket_RCarg1  = false; // L-Rocket R-PowerCell#1
+    public boolean LeftRocket_RCarg2  = false; // L-Rocket R-PowerCell#2
+    public boolean LeftRocket_RCarg3  = false; // L-Rocket R-PowerCell#3
 
-    public boolean CargoLPan1         = false; // Cargo L-Panel#1
-    public boolean CargoLPan2         = false; // Cargo L-Panel#2
-    public boolean CargoLPan3         = false; // Cargo L-Panel#3
-    public boolean CargoRPan1         = false; // Cargo R-Panel#1
-    public boolean CargoRPan2         = false; // Cargo R-Panel#2
-    public boolean CargoRPan3         = false; // Cargo R-Panel#3
-    public boolean CargoLCarg1        = false; // Cargo L-Cargo#1
-    public boolean CargoLCarg2        = false; // Cargo L-Cargo#2
-    public boolean CargoLCarg3        = false; // Cargo L-Cargo#3
-    public boolean CargoRCarg1        = false; // Cargo R-Cargo#1
-    public boolean CargoRCarg2        = false; // Cargo R-Cargo#2
-    public boolean CargoRCarg3        = false; // Cargo R-Cargo#3
-    public boolean CargoEndLPanel     = false; // Cargo End L-Panel#1
-    public boolean CargoEndLCargo     = false; // Cargo End L-Cargo#1
-    public boolean CargoEndRPanel     = false; // Cargo End R-Panel#1
-    public boolean CargoEndRCargo     = false; // Cargo End R-Cargo#1
+    public boolean PowerCellLPan1         = false; // PowerCell L-Panel#1
+    public boolean PowerCellLPan2         = false; // PowerCell L-Panel#2
+    public boolean PowerCellLPan3         = false; // PowerCell L-Panel#3
+    public boolean PowerCellRPan1         = false; // PowerCell R-Panel#1
+    public boolean PowerCellRPan2         = false; // PowerCell R-Panel#2
+    public boolean PowerCellRPan3         = false; // PowerCell R-Panel#3
+    public boolean PowerCellLCarg1        = false; // PowerCell L-PowerCell#1
+    public boolean PowerCellLCarg2        = false; // PowerCell L-PowerCell#2
+    public boolean PowerCellLCarg3        = false; // PowerCell L-PowerCell#3
+    public boolean PowerCellRCarg1        = false; // PowerCell R-PowerCell#1
+    public boolean PowerCellRCarg2        = false; // PowerCell R-PowerCell#2
+    public boolean PowerCellRCarg3        = false; // PowerCell R-PowerCell#3
+    public boolean PowerCellEndLPanel     = false; // PowerCell End L-Panel#1
+    public boolean PowerCellEndLPowerCell     = false; // PowerCell End L-PowerCell#1
+    public boolean PowerCellEndRPanel     = false; // PowerCell End R-Panel#1
+    public boolean PowerCellEndRPowerCell     = false; // PowerCell End R-PowerCell#1
 
     public boolean RghtRocket_LPan1   = false;  // R-Rocket L-Panel#1
     public boolean RghtRocket_LPan2   = false;  // R-Rocket L-Panel#2
@@ -123,20 +123,20 @@ public class MatchScoutActivity extends AppCompatActivity {
     public boolean RghtRocket_RPan1   = false;  // R-Rocket R-Panel#1
     public boolean RghtRocket_RPan2   = false;  // R-Rocket R-Panel#2
     public boolean RghtRocket_RPan3   = false;  // R-Rocket R-Panel#3
-    public boolean RghtRocket_LCarg1  = false;  // R-Rocket L-Cargo#1
-    public boolean RghtRocket_LCarg2  = false;  // R-Rocket L-Cargo#2
-    public boolean RghtRocket_LCarg3  = false;  // R-Rocket L-Cargo#3
-    public boolean RghtRocket_RCarg1  = false;  // R-Rocket R-Cargo#1
-    public boolean RghtRocket_RCarg2  = false;  // R-Rocket R-Cargo#2
-    public boolean RghtRocket_RCarg3  = false;  // R-Rocket R-Cargo#3
+    public boolean RghtRocket_LCarg1  = false;  // R-Rocket L-PowerCell#1
+    public boolean RghtRocket_LCarg2  = false;  // R-Rocket L-PowerCell#2
+    public boolean RghtRocket_LCarg3  = false;  // R-Rocket L-PowerCell#3
+    public boolean RghtRocket_RCarg1  = false;  // R-Rocket R-PowerCell#1
+    public boolean RghtRocket_RCarg2  = false;  // R-Rocket R-PowerCell#2
+    public boolean RghtRocket_RCarg3  = false;  // R-Rocket R-PowerCell#3
 
     public boolean PU2ndPanel         = false;  // Second game piece - Panel
-    public boolean PU2ndCargo         = false;  // Second game piece - Cargo
+    public boolean PU2ndPowerCell         = false;  // Second game piece - PowerCell
     public boolean PU2ndPlSta         = false;  // 2nd from Player Station
     public boolean PU2ndCorral        = false;  // 2nd from Corral
     public boolean PU2ndFloor         = false;  // 2nd from Floor
     public boolean PU3rdPanel         = false;  // Second game piece - Panel
-    public boolean PU3rdCargo         = false;  // Second game piece - Cargo
+    public boolean PU3rdPowerCell         = false;  // Second game piece - PowerCell
     public boolean PU3rdPlSta         = false;  // 3rd from Player Station
     public boolean PU3rdCorral        = false;  // 3rd from Corral
     public boolean PU3rdFloor         = false;  // 3rd from Floor
@@ -329,23 +329,23 @@ public class MatchScoutActivity extends AppCompatActivity {
         chk_LeftRocket_RCarg1 = (CheckBox) findViewById(R.id.chk_LeftRocket_RCarg1);
         chk_LeftRocket_RCarg2 = (CheckBox) findViewById(R.id.chk_LeftRocket_RCarg2);
         chk_LeftRocket_RCarg3 = (CheckBox) findViewById(R.id.chk_LeftRocket_RCarg3);
-        // Cargo Ship
-        chk_CargoLPan1 = (CheckBox) findViewById(R.id.chk_CargoLPan1);
-        chk_CargoLPan2 = (CheckBox) findViewById(R.id.chk_CargoLPan2);
-        chk_CargoLPan3 = (CheckBox) findViewById(R.id.chk_CargoLPan3);
-        chk_CargoRPan1 = (CheckBox) findViewById(R.id.chk_CargoRPan1);
-        chk_CargoRPan2 = (CheckBox) findViewById(R.id.chk_CargoRPan2);
-        chk_CargoRPan3 = (CheckBox) findViewById(R.id.chk_CargoRPan3);
-        chk_CargoLCarg1 = (CheckBox) findViewById(R.id.chk_CargoLCarg1);
-        chk_CargoLCarg2 = (CheckBox) findViewById(R.id.chk_CargoLCarg2);
-        chk_CargoLCarg3 = (CheckBox) findViewById(R.id.chk_CargoLCarg3);
-        chk_CargoRCarg1 = (CheckBox) findViewById(R.id.chk_CargoRCarg1);
-        chk_CargoRCarg2 = (CheckBox) findViewById(R.id.chk_CargoRCarg2);
-        chk_CargoRCarg3 = (CheckBox) findViewById(R.id.chk_CargoRCarg3);
-        chk_CargoEndLPanel = (CheckBox) findViewById(R.id.chk_CargoEndLPanel);
-        chk_CargoEndRPanel = (CheckBox) findViewById(R.id.chk_CargoEndRPanel);
-        chk_CargoEndLCargo = (CheckBox) findViewById(R.id.chk_CargoEndLCargo);
-        chk_CargoEndRCargo = (CheckBox) findViewById(R.id.chk_CargoEndRCargo);
+        // PowerCell Ship
+        chk_PowerCellLPan1 = (CheckBox) findViewById(R.id.chk_PowerCellLPan1);
+        chk_PowerCellLPan2 = (CheckBox) findViewById(R.id.chk_PowerCellLPan2);
+        chk_PowerCellLPan3 = (CheckBox) findViewById(R.id.chk_PowerCellLPan3);
+        chk_PowerCellRPan1 = (CheckBox) findViewById(R.id.chk_PowerCellRPan1);
+        chk_PowerCellRPan2 = (CheckBox) findViewById(R.id.chk_PowerCellRPan2);
+        chk_PowerCellRPan3 = (CheckBox) findViewById(R.id.chk_PowerCellRPan3);
+        chk_PowerCellLCarg1 = (CheckBox) findViewById(R.id.chk_PowerCellLCarg1);
+        chk_PowerCellLCarg2 = (CheckBox) findViewById(R.id.chk_PowerCellLCarg2);
+        chk_PowerCellLCarg3 = (CheckBox) findViewById(R.id.chk_PowerCellLCarg3);
+        chk_PowerCellRCarg1 = (CheckBox) findViewById(R.id.chk_PowerCellRCarg1);
+        chk_PowerCellRCarg2 = (CheckBox) findViewById(R.id.chk_PowerCellRCarg2);
+        chk_PowerCellRCarg3 = (CheckBox) findViewById(R.id.chk_PowerCellRCarg3);
+        chk_PowerCellEndLPanel = (CheckBox) findViewById(R.id.chk_PowerCellEndLPanel);
+        chk_PowerCellEndRPanel = (CheckBox) findViewById(R.id.chk_PowerCellEndRPanel);
+        chk_PowerCellEndLPowerCell = (CheckBox) findViewById(R.id.chk_PowerCellEndLPowerCell);
+        chk_PowerCellEndRPowerCell = (CheckBox) findViewById(R.id.chk_PowerCellEndRPowerCell);
         // Right Rocket
         chk_RghtRocket_LPan1 = (CheckBox) findViewById(R.id.chk_RghtRocket_LPan1);
         chk_RghtRocket_LPan2 = (CheckBox) findViewById(R.id.chk_RghtRocket_LPan2);
@@ -668,200 +668,200 @@ public class MatchScoutActivity extends AppCompatActivity {
             }
         });
 
-        // Cargo Ship
+        // PowerCell Ship
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoLPan1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellLPan1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoLPan1.isChecked()) {     //checked
-                    CargoLPan1 = true;
+                if (chk_PowerCellLPan1.isChecked()) {     //checked
+                    PowerCellLPan1 = true;
                 }
                 else {          //not checked
-                    CargoLPan1 = false;
+                    PowerCellLPan1 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoLPan2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellLPan2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoLPan2.isChecked()) {     //checked
-                    CargoLPan2 = true;
+                if (chk_PowerCellLPan2.isChecked()) {     //checked
+                    PowerCellLPan2 = true;
                 }
                 else {          //not checked
-                    CargoLPan2 = false;
+                    PowerCellLPan2 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoLPan3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellLPan3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoLPan3.isChecked()) {     //checked
-                    CargoLPan3 = true;
+                if (chk_PowerCellLPan3.isChecked()) {     //checked
+                    PowerCellLPan3 = true;
                 }
                 else {          //not checked
-                    CargoLPan3 = false;
+                    PowerCellLPan3 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoRPan1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellRPan1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoRPan1.isChecked()) {     //checked
-                    CargoRPan1 = true;
+                if (chk_PowerCellRPan1.isChecked()) {     //checked
+                    PowerCellRPan1 = true;
                 }
                 else {          //not checked
-                    CargoRPan1 = false;
+                    PowerCellRPan1 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoRPan2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellRPan2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoRPan2.isChecked()) {     //checked
-                    CargoRPan2 = true;
+                if (chk_PowerCellRPan2.isChecked()) {     //checked
+                    PowerCellRPan2 = true;
                 }
                 else {          //not checked
-                    CargoRPan2 = false;
+                    PowerCellRPan2 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoRPan3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellRPan3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoRPan3.isChecked()) {     //checked
-                    CargoRPan3 = true;
+                if (chk_PowerCellRPan3.isChecked()) {     //checked
+                    PowerCellRPan3 = true;
                 }
                 else {          //not checked
-                    CargoRPan3 = false;
+                    PowerCellRPan3 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoLCarg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellLCarg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoLCarg1.isChecked()) {     //checked
-                    CargoLCarg1 = true;
+                if (chk_PowerCellLCarg1.isChecked()) {     //checked
+                    PowerCellLCarg1 = true;
                 }
                 else {          //not checked
-                    CargoLCarg1 = false;
+                    PowerCellLCarg1 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoLCarg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellLCarg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoLCarg2.isChecked()) {     //checked
-                    CargoLCarg2 = true;
+                if (chk_PowerCellLCarg2.isChecked()) {     //checked
+                    PowerCellLCarg2 = true;
                 }
                 else {          //not checked
-                    CargoLCarg2 = false;
+                    PowerCellLCarg2 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoLCarg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellLCarg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoLCarg3.isChecked()) {     //checked
-                    CargoLCarg3 = true;
+                if (chk_PowerCellLCarg3.isChecked()) {     //checked
+                    PowerCellLCarg3 = true;
                 }
                 else {          //not checked
-                    CargoLCarg3 = false;
+                    PowerCellLCarg3 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoRCarg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellRCarg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoRCarg1.isChecked()) {     //checked
-                    CargoRCarg1 = true;
+                if (chk_PowerCellRCarg1.isChecked()) {     //checked
+                    PowerCellRCarg1 = true;
                 }
                 else {          //not checked
-                    CargoRCarg1 = false;
+                    PowerCellRCarg1 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoRCarg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellRCarg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoRCarg2.isChecked()) {     //checked
-                    CargoRCarg2 = true;
+                if (chk_PowerCellRCarg2.isChecked()) {     //checked
+                    PowerCellRCarg2 = true;
                 }
                 else {          //not checked
-                    CargoRCarg2 = false;
+                    PowerCellRCarg2 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoRCarg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellRCarg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoRCarg3.isChecked()) {     //checked
-                    CargoRCarg3 = true;
+                if (chk_PowerCellRCarg3.isChecked()) {     //checked
+                    PowerCellRCarg3 = true;
                 }
                 else {          //not checked
-                    CargoRCarg3 = false;
+                    PowerCellRCarg3 = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoEndLPanel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellEndLPanel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoEndLPanel.isChecked()) {     //checked
-                    CargoEndLPanel = true;
-//                    chk_CargoEndLCargo.setChecked(true);    // Score the already set Cargo Ball
+                if (chk_PowerCellEndLPanel.isChecked()) {     //checked
+                    PowerCellEndLPanel = true;
+//                    chk_PowerCellEndLPowerCell.setChecked(true);    // Score the already set PowerCell Ball
                 }
                 else {          //not checked
-                    CargoEndLPanel = false;
-//                    chk_CargoEndLCargo.setChecked(false);
+                    PowerCellEndLPanel = false;
+//                    chk_PowerCellEndLPowerCell.setChecked(false);
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoEndRPanel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellEndRPanel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoEndRPanel.isChecked()) {     //checked
-                    CargoEndRPanel = true;
-//                    chk_CargoEndRCargo.setChecked(true);    // Score the already set Cargo Ball
+                if (chk_PowerCellEndRPanel.isChecked()) {     //checked
+                    PowerCellEndRPanel = true;
+//                    chk_PowerCellEndRPowerCell.setChecked(true);    // Score the already set PowerCell Ball
                 }
                 else {          //not checked
-                    CargoEndRPanel = false;
-//                    chk_CargoEndRCargo.setChecked(false);
+                    PowerCellEndRPanel = false;
+//                    chk_PowerCellEndRPowerCell.setChecked(false);
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoEndLCargo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellEndLPowerCell.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoEndLCargo.isChecked()) {     //checked
-                    CargoEndLCargo = true;
+                if (chk_PowerCellEndLPowerCell.isChecked()) {     //checked
+                    PowerCellEndLPowerCell = true;
                 }
                 else {          //not checked
-                    CargoEndLCargo = false;
+                    PowerCellEndLPowerCell = false;
                 }
             }
         });
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_CargoEndRCargo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellEndRPowerCell.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_CargoEndRCargo.isChecked()) {     //checked
-                    CargoEndRCargo = true;
+                if (chk_PowerCellEndRPowerCell.isChecked()) {     //checked
+                    PowerCellEndRPowerCell = true;
                 }
                 else {          //not checked
-                    CargoEndRCargo = false;
+                    PowerCellEndRPowerCell = false;
                 }
             }
         });
@@ -922,11 +922,11 @@ public class MatchScoutActivity extends AppCompatActivity {
             } else {        // It's OK - Match has started
 
                     if ((auto==false) &&
-                            ((carry_none==false) && (carry_cargo==false) && (carry_panel==false)) ||
+                            ((carry_none==false) && (carry_PowerCell==false) && (carry_panel==false)) ||
                             (PU2ndPanel) && ((!PU2ndPlSta)&&(!PU2ndFloor)) ||
                             (PU3rdPanel) && ((!PU3rdPlSta)&&(!PU3rdFloor)) ||
-                            (PU2ndCargo) && ((!PU2ndPlSta)&&(!PU2ndFloor)&&(!PU2ndCorral)) ||
-                            (PU3rdCargo) && ((!PU3rdPlSta)&&(!PU3rdFloor)&&(!PU3rdCorral)) ||
+                            (PU2ndPowerCell) && ((!PU2ndPlSta)&&(!PU2ndFloor)&&(!PU2ndCorral)) ||
+                            (PU3rdPowerCell) && ((!PU3rdPlSta)&&(!PU3rdFloor)&&(!PU3rdCorral)) ||
                             (spinner_startPos.getSelectedItemPosition() == 0) ) {  //Required fields
                         // ToDo - check to see if ALL required fields entered (Start-pos, stop, gear, ....)
 
@@ -1001,16 +1001,16 @@ public class MatchScoutActivity extends AppCompatActivity {
             Log.w(TAG, "None");
             carry_none = true;
             carry_panel = false;
-            carry_cargo = false;
+            carry_PowerCell = false;
         }
         if (value.equals("Panel")) {        // Panel
             Log.w(TAG, "Panel");
             carry_panel = true;
-            carry_cargo = false;
+            carry_PowerCell = false;
         }
-        if (value.equals("Cargo")) {        // Panel
-            Log.w(TAG, "Cargo");
-            carry_cargo = true;
+        if (value.equals("PowerCell")) {        // Panel
+            Log.w(TAG, "PowerCell");
+            carry_PowerCell = true;
             carry_panel = false;
         }
     }
@@ -1031,7 +1031,7 @@ public class MatchScoutActivity extends AppCompatActivity {
         if (value.equals("None")) {        // None
             Log.w(TAG, "2nd None");
             PU2ndPanel = false;
-            PU2ndCargo = false;
+            PU2ndPowerCell = false;
             radio_playerStation2.setEnabled(false);
             radio_floor2.setEnabled(false);
             radio_corral2.setEnabled(false);
@@ -1044,14 +1044,14 @@ public class MatchScoutActivity extends AppCompatActivity {
         if (value.equals("Panel")) {        // Panel
             Log.w(TAG, "2nd Panel");
             PU2ndPanel = true;
-            PU2ndCargo = false;
+            PU2ndPowerCell = false;
             radio_playerStation2.setEnabled(true);
             radio_floor2.setEnabled(true);
             radio_corral2.setVisibility(View.INVISIBLE);
         }
-        if (value.equals("Cargo")) {        // Panel
-            Log.w(TAG, "2nd Cargo");
-            PU2ndCargo = true;
+        if (value.equals("PowerCell")) {        // Panel
+            Log.w(TAG, "2nd PowerCell");
+            PU2ndPowerCell = true;
             PU2ndPanel = false;
             for(int i = 0; i < radgrp_secondPieceLocation.getChildCount(); i++){        // turn them all ON
                 ((RadioButton)radgrp_secondPieceLocation.getChildAt(i)).setEnabled(true);
@@ -1075,7 +1075,7 @@ public class MatchScoutActivity extends AppCompatActivity {
         if (value.equals("None")) {        // None
             Log.w(TAG, "2nd None");
             PU3rdPanel = false;
-            PU3rdCargo = false;
+            PU3rdPowerCell = false;
             radio_playerStation3.setEnabled(false);
             radio_floor3.setEnabled(false);
             radio_corral3.setEnabled(false);
@@ -1088,14 +1088,14 @@ public class MatchScoutActivity extends AppCompatActivity {
         if (value.equals("Panel")) {        // Panel
             Log.w(TAG, "3rd Panel");
             PU3rdPanel = true;
-            PU3rdCargo = false;
+            PU3rdPowerCell = false;
             radio_playerStation3.setEnabled(true);
             radio_floor3.setEnabled(true);
             radio_corral3.setVisibility(View.INVISIBLE);
         }
-        if (value.equals("Cargo")) {        // Panel
-            Log.w(TAG, "3rd Cargo");
-            PU3rdCargo = true;
+        if (value.equals("PowerCell")) {        // Panel
+            Log.w(TAG, "3rd PowerCell");
+            PU3rdPowerCell = true;
             PU3rdPanel = false;
             for(int i = 0; i < radgrp_thirdPieceLocation.getChildCount(); i++){        // turn them all ON
                 ((RadioButton)radgrp_thirdPieceLocation.getChildAt(i)).setEnabled(true);
@@ -1174,7 +1174,7 @@ public class MatchScoutActivity extends AppCompatActivity {
 //        Pearadox.Match_Data.setPre_PlayerSta(p);      // Set at start-up
         Pearadox.Match_Data.setPre_startPos(startPos);
         Pearadox.Match_Data.setSand_mode(auto);
-        Pearadox.Match_Data.setPre_cargo(carry_cargo);
+        Pearadox.Match_Data.setPre_PowerCell(carry_PowerCell);
         Pearadox.Match_Data.setPre_panel(carry_panel);
 
         Pearadox.Match_Data.setSand_leftHAB(leftHAB);
@@ -1192,22 +1192,22 @@ public class MatchScoutActivity extends AppCompatActivity {
         Pearadox.Match_Data.setSand_LeftRocket_RCarg2(LeftRocket_RCarg2);
         Pearadox.Match_Data.setSand_LeftRocket_RCarg3(LeftRocket_RCarg3);
 
-        Pearadox.Match_Data.setSand_CargoLPan1(CargoLPan1);
-        Pearadox.Match_Data.setSand_CargoLPan2(CargoLPan2);
-        Pearadox.Match_Data.setSand_CargoLPan3(CargoLPan3);
-        Pearadox.Match_Data.setSand_CargoRPan1(CargoRPan1);
-        Pearadox.Match_Data.setSand_CargoRPan2(CargoRPan2);
-        Pearadox.Match_Data.setSand_CargoRPan3(CargoRPan3);
-        Pearadox.Match_Data.setSand_CargoLCarg1(CargoLCarg1);
-        Pearadox.Match_Data.setSand_CargoLCarg2(CargoLCarg2);
-        Pearadox.Match_Data.setSand_CargoLCarg3(CargoLCarg3);
-        Pearadox.Match_Data.setSand_CargoRCarg1(CargoRCarg1);
-        Pearadox.Match_Data.setSand_CargoRCarg2(CargoRCarg2);
-        Pearadox.Match_Data.setSand_CargoRCarg3(CargoRCarg3);
-        Pearadox.Match_Data.setSand_CargoEndLPanel(CargoEndLPanel);
-        Pearadox.Match_Data.setSand_CargoEndRPanel(CargoEndRPanel);
-        Pearadox.Match_Data.setSand_CargoEndLCargo(CargoEndLCargo);
-        Pearadox.Match_Data.setSand_CargoEndRCargo(CargoEndRCargo);
+        Pearadox.Match_Data.setSand_PowerCellLPan1(PowerCellLPan1);
+        Pearadox.Match_Data.setSand_PowerCellLPan2(PowerCellLPan2);
+        Pearadox.Match_Data.setSand_PowerCellLPan3(PowerCellLPan3);
+        Pearadox.Match_Data.setSand_PowerCellRPan1(PowerCellRPan1);
+        Pearadox.Match_Data.setSand_PowerCellRPan2(PowerCellRPan2);
+        Pearadox.Match_Data.setSand_PowerCellRPan3(PowerCellRPan3);
+        Pearadox.Match_Data.setSand_PowerCellLCarg1(PowerCellLCarg1);
+        Pearadox.Match_Data.setSand_PowerCellLCarg2(PowerCellLCarg2);
+        Pearadox.Match_Data.setSand_PowerCellLCarg3(PowerCellLCarg3);
+        Pearadox.Match_Data.setSand_PowerCellRCarg1(PowerCellRCarg1);
+        Pearadox.Match_Data.setSand_PowerCellRCarg2(PowerCellRCarg2);
+        Pearadox.Match_Data.setSand_PowerCellRCarg3(PowerCellRCarg3);
+        Pearadox.Match_Data.setSand_PowerCellEndLPanel(PowerCellEndLPanel);
+        Pearadox.Match_Data.setSand_PowerCellEndRPanel(PowerCellEndRPanel);
+        Pearadox.Match_Data.setSand_PowerCellEndLPowerCell(PowerCellEndLPowerCell);
+        Pearadox.Match_Data.setSand_PowerCellEndRPowerCell(PowerCellEndRPowerCell);
 
         Pearadox.Match_Data.setSand_RghtRocket_LPan1(RghtRocket_LPan1);
         Pearadox.Match_Data.setSand_RghtRocket_LPan2(RghtRocket_LPan2);
@@ -1221,20 +1221,20 @@ public class MatchScoutActivity extends AppCompatActivity {
         Pearadox.Match_Data.setSand_RghtRocket_RCarg1(RghtRocket_RCarg1);
         Pearadox.Match_Data.setSand_RghtRocket_RCarg2(RghtRocket_RCarg2);
         Pearadox.Match_Data.setSand_RghtRocket_RCarg3(RghtRocket_RCarg3);
-        Pearadox.Match_Data.setSand_CargoEndLPanel(CargoEndLPanel);
-        Pearadox.Match_Data.setSand_CargoEndRPanel(CargoEndRPanel);
-        Pearadox.Match_Data.setSand_CargoEndLCargo(CargoEndLCargo);
-        Pearadox.Match_Data.setSand_CargoEndRCargo(CargoEndRCargo);
+        Pearadox.Match_Data.setSand_PowerCellEndLPanel(PowerCellEndLPanel);
+        Pearadox.Match_Data.setSand_PowerCellEndRPanel(PowerCellEndRPanel);
+        Pearadox.Match_Data.setSand_PowerCellEndLPowerCell(PowerCellEndLPowerCell);
+        Pearadox.Match_Data.setSand_PowerCellEndRPowerCell(PowerCellEndRPowerCell);
         
         // ToDo - set all variables to object
         Pearadox.Match_Data.setSand_PU2ndPanel(PU2ndPanel);
-        Pearadox.Match_Data.setSand_PU2ndCargo(PU2ndCargo);
+        Pearadox.Match_Data.setSand_PU2ndPowerCell(PU2ndPowerCell);
         Pearadox.Match_Data.setSand_PU2ndFloor(PU2ndFloor);
         Pearadox.Match_Data.setSand_PU2ndCorral(PU2ndCorral);
         Pearadox.Match_Data.setSand_PU2ndPlSta(PU2ndPlSta);
 
         Pearadox.Match_Data.setSand_PU3rdPanel(PU3rdPanel);
-        Pearadox.Match_Data.setSand_PU3rdCargo(PU3rdCargo);
+        Pearadox.Match_Data.setSand_PU3rdPowerCell(PU3rdPowerCell);
         Pearadox.Match_Data.setSand_PU3rdFloor(PU3rdFloor);
         Pearadox.Match_Data.setSand_PU3rdCorral(PU3rdCorral);
         Pearadox.Match_Data.setSand_PU3rdPlSta(PU3rdPlSta);

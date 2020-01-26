@@ -68,15 +68,15 @@ public class PitScoutActivity extends AppCompatActivity {
 
     String TAG = "PitScout_Activity";      // This CLASS name
     TextView txt_EventName, txt_dev, txt_stud, txt_TeamName, txt_NumWheels;
-    EditText editTxt_Team, txtEd_Height, editText_Comments, txtEd_Speed;
+    EditText editTxt_Team, txtEd_Weight, editText_Comments;
     ImageView imgScoutLogo, img_Photo;
     Spinner spinner_Team, spinner_Traction, spinner_Omni, spinner_Mecanum, spinner_Pneumatic;
-    Spinner spinner_numRobots, spinner_Motor, spinner_Lang, spinner_ssMode;
+    Spinner spinner_numRobots, spinner_Motor, spinner_Lang, spinner_autoMode;
     ArrayAdapter<String> adapter;
     ArrayAdapter<String> adapter_Trac, adapter_Omni, adapter_Mac, adapter_Pneu ;
-    ArrayAdapter<String> adapter_driveMotor, adapter_progLang,adapter_ssMode;
+    ArrayAdapter<String> adapter_driveMotor, adapter_progLang,adapter_autoMode;
     CheckBox chkBox_Ramp, chkBox_CanLift, chkBox_Hook, chkBox_Vision, chkBox_Pneumatics, chkBox_Climb, chkBox_Belt, chkBox_Box, chkBox_Other;
-    CheckBox chkBox_OffFloor, chkBox_PanelFloor, chkBox_Hab2, chkBox_HABLvl_2, chkBox_HABLvl_3;
+    CheckBox chkBox_OffFloor;
 
     Button btn_Save;
     Uri currentImageUri;
@@ -101,31 +101,41 @@ public class PitScoutActivity extends AppCompatActivity {
     Boolean imageOnFB = false;      // Does image already exist in Firebase
     boolean dataSaved = false;      // Make sure they save before exiting
     public Boolean Wt_entered = false;      // Weight entered
-
     // ===================  Data Elements for Pit Scout object ===================
-    public String teamSelected = " ";               // Team #
-    public int tall = 0;                        // Weight (lbs)
+    public String teamSelected = " ";           // Team #
+    public int weight = 0;                      // Height (inches)
     public int totalWheels = 0;                 // Total # of wheels
     public int numTraction = 0;                 // Num. of Traction wheels
-    public int numOmnis = 0;                    // Num. of Omni wheels
+    public int numOmni = 0;                     // Num. of Omni wheels
     public int numMecanums = 0;                 // Num. of Mecanum wheels
     public int numPneumatic = 0;                // Num. of Pneumatic wheels
     public boolean vision = false;              // presence of Vision Camera
     public boolean pneumatics = false;          // presence of Pneumatics
-    public boolean cargoManip = false;          // presence of a way to pick up cargo from floor
     public boolean climb = false;               // presence of a Climbing mechanism
-    public boolean floorPanel = false;          // can get Hatch Panel from floor
+    public boolean spin = false;                // Ability to Spin # turns on Control Panel
+    public boolean pcolor = false;               // Ability to Stop Wheel on color
+    public boolean PowerCellManip = false;      // presence of a way to pick up PowerCell from floor
+    public boolean undTrench = false;           // Ability to Drive under Control Panel (in Trench)
     public boolean canLift = false;             // Ability to lift other robots
     public int numLifted = 0;                   // Num. of robots can lift (1-2)
     public boolean liftRamp = false;            // lift type Ramp
     public boolean liftHook = false;            // lift type Hook
-    public boolean leaveHAB2 = false;           // Can leave from HAB level 2
-    public boolean endHAB2 = false;             // Can climb to HAB level 2
-    public boolean endHAB3 = false;             // Can climb to HAB level 3
-    public int speed = 0;                       // Speed (Ft. per Sec)
     public String motor;                        // Type of Motor
     public String lang;                         // Programming  Language
-    public String ssMode;                       // Autonomous Operatong Mode
+    public String autoMode;                     // Autonomous Operatong Mode
+    public boolean climbL1 = false;             //   L1--M1--R1
+    public boolean climbL2 = false;             //   |    |   |
+    public boolean climbL3 = false;             //   |    |   |
+    public boolean climbM1 = false;             //   L2--M2--R2
+    public boolean climbM2 = false;             //   |    |   |
+    public boolean climbM3 = false;             //   |    |   |
+    public boolean climbR1 = false;             //   L3--M3--R3
+    public boolean climbR2 = false;             //
+    public boolean climbR3 = false;             //
+    public boolean deump = false;               // Can dump cells to partner
+    public boolean shootBot = false;            // Can Shoot into Bottom Port
+    public boolean shootOut = false;            // Can Shoot into Outer Port
+    public boolean shootInn = false;            // Can Shoot into Inner Port
     /* */
     public String comments;                     // Comment(s)
     public String scout = " ";                  // Student who collected the data
@@ -162,12 +172,12 @@ pitData Pit_Data = new pitData();
         txt_dev.setText(param1);
         txt_stud.setText(param2);
         txt_TeamName.setText(" ");
-        txtEd_Height = (EditText) findViewById(R.id.txtEd_Height);
+        txtEd_Weight = (EditText) findViewById(R.id.txtEd_Weight);
         Spinner spinner_Team = (Spinner) findViewById(R.id.spinner_Team);
         editTxt_Team = (EditText) findViewById(R.id.editTxt_Team);
         if (Pearadox.is_Network && Pearadox.numTeams > 0) {      // is Internet available & Teams present?
             loadTeams();
-            txtEd_Height.setEnabled(false);
+            txtEd_Weight.setEnabled(false);
             spinner_Team.setVisibility(View.VISIBLE);
             spinner_Team.setFocusable(true);
             spinner_Team.requestFocus();
@@ -249,13 +259,13 @@ pitData Pit_Data = new pitData();
         spinner_Lang.setAdapter(adapter_progLang);
         spinner_Lang.setSelection(0, false);
         spinner_Lang.setOnItemSelectedListener(new progLangOnClickListener());
-        spinner_ssMode = (Spinner) findViewById(R.id.spinner_ssMode);
+        spinner_autoMode = (Spinner) findViewById(R.id.spinner_autoMode);
         String[] operMode = getResources().getStringArray(R.array.auto_Mode_array);
-        adapter_ssMode = new ArrayAdapter<String>(this, R.layout.dev_list_layout, operMode);
-        adapter_ssMode.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_ssMode.setAdapter(adapter_ssMode);
-        spinner_ssMode.setSelection(0, false);
-        spinner_ssMode.setOnItemSelectedListener(new ssModeOnClickListener());
+        adapter_autoMode = new ArrayAdapter<String>(this, R.layout.dev_list_layout, operMode);
+        adapter_autoMode.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_autoMode.setAdapter(adapter_autoMode);
+        spinner_autoMode.setSelection(0, false);
+        spinner_autoMode.setOnItemSelectedListener(new autoModeOnClickListener());
         chkBox_Ramp = (CheckBox) findViewById(R.id.chkBox_Ramp);
         chkBox_Hook = (CheckBox) findViewById(R.id.chkBox_Hook);
         chkBox_Ramp.setVisibility(View.GONE);
@@ -265,16 +275,8 @@ pitData Pit_Data = new pitData();
         chkBox_CanLift = (CheckBox) findViewById(R.id.chkBox_CanLift);
         chkBox_OffFloor = (CheckBox) findViewById(R.id.chkBox_OffFloor);
         chkBox_Climb = (CheckBox) findViewById(R.id.chkBox_Climb);
-//        chkBox_Belt = (CheckBox) findViewById(R.id.chkBox_Belt);
-//        chkBox_Box = (CheckBox) findViewById(R.id.chkBox_Box);
-//        chkBox_Other = (CheckBox) findViewById(R.id.chkBox_Other);
-        chkBox_PanelFloor = (CheckBox) findViewById(R.id.chkBox_PanelFloor);
-        chkBox_Hab2 = (CheckBox) findViewById(R.id.chkBox_Hab2);
-        chkBox_HABLvl_2 = (CheckBox) findViewById(R.id.chkBox_HABLvl_2);
-        chkBox_HABLvl_3 = (CheckBox) findViewById(R.id.chkBox_HABLvl_3);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
         editText_Comments.setClickable(true);
-        txtEd_Speed = (EditText) findViewById(R.id.txtEd_Speed);
 
 
 //        final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 200);
@@ -364,69 +366,17 @@ pitData Pit_Data = new pitData();
                             Log.w(TAG, "chkBox_OffFloor Listener");
                             if (buttonView.isChecked()) {
                                 Log.w(TAG,"Off-floor is checked.");
-                                cargoManip = true;
+                                PowerCellManip = true;
                             } else {
                                 Log.w(TAG,"Off-floor is unchecked.");
-                                cargoManip = false;
+                                PowerCellManip = false;
                 }
             }
         });
 
-        chkBox_PanelFloor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chkBox_PanelFloor Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"floorPanel is checked.");
-                    floorPanel = true;
-                } else {
-                    Log.w(TAG,"floorPanel is unchecked.");
-                    floorPanel = false;
-                }
-            }
-        });
 
-        chkBox_Hab2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chkBox_Hab2 Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"leave_Hab2 is checked.");
-                    leaveHAB2 = true;
-                } else {
-                    Log.w(TAG,"leave_Hab2 is unchecked.");
-                    leaveHAB2 = false;
-                }
-            }
-        });
 
-        chkBox_HABLvl_2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chkBox_HABLvl_2 Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"end_HABLvl_2 is checked.");
-                    endHAB2 = true;
-                } else {
-                    Log.w(TAG,"end_HABLvl_2 is unchecked.");
-                    endHAB2 = false;
-                }
-            }
-        });
 
-        chkBox_HABLvl_3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chkBox_HABLvl_3 Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"end_Hab3 is checked.");
-                    endHAB3 = true;
-                } else {
-                    Log.w(TAG,"end_Hab3 is unchecked.");
-                    endHAB3 = false;
-                }
-            }
-        });
 
         chkBox_Climb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -463,16 +413,16 @@ pitData Pit_Data = new pitData();
             }
         });
 
-        txtEd_Height.setOnKeyListener(new View.OnKeyListener() {
+        txtEd_Weight.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.w(TAG, "******  txtEd_Height listener  ******  " + keyCode + "  " + event.getAction());
+                Log.w(TAG, "******  txtEd_Weight listener  ******  " + keyCode + "  " + event.getAction());
 
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    Log.w(TAG, " txtEd_Weight = "  + txtEd_Height.getText());
+                    Log.w(TAG, " txtEd_Weight = "  + txtEd_Weight.getText());
 
-                    if (txtEd_Height.getText().length() > 0) {
-                        tall = Integer.valueOf(String.valueOf(txtEd_Height.getText()));     //REALLY Weight  GLF 3/2019
+                    if (txtEd_Weight.getText().length() > 0) {
+                        weight = Integer.valueOf(String.valueOf(txtEd_Weight.getText()));
                         Wt_entered = true;
                         Log.w(TAG, "### Used the right key!!  ### " + Wt_entered);
                         return true;
@@ -488,10 +438,10 @@ pitData Pit_Data = new pitData();
             }
         });
 
-        txtEd_Height.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        txtEd_Weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                Log.w(TAG, "@@@ Height - Lost Focus Listener @@@  '" + txtEd_Height.getText() +"' " + tall +"  " + Wt_entered);
+                Log.w(TAG, "@@@ Weight - Lost Focus Listener @@@  '" + txtEd_Weight.getText() +"' " + weight +"  " + Wt_entered);
                 if (!hasFocus) {
                     // code to execute when EditText loses focus
                     if (!Wt_entered) {
@@ -504,34 +454,13 @@ pitData Pit_Data = new pitData();
         });
 
 
-        txtEd_Speed.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.w(TAG, "******  txtEd_Speed listener  ******  " + keyCode + "  " + event.getAction());
-
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    Log.w(TAG, "Speed = " + txtEd_Speed.getText());
-                    if (txtEd_Speed.getText().length() > 0) {
-                        speed = Integer.valueOf(String.valueOf(txtEd_Speed.getText()));
-                        return true;
-                    } else {
-                        final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                        tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
-                        Toast toast = Toast.makeText(getBaseContext(), " \n*****  Enter a valid Speed  *****\n ", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                        toast.show();
-                    }
-                }
-                return false;
-            }
-        });
 
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
         btn_Save = (Button) findViewById(R.id.btn_Save);
         btn_Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.w(TAG, "Save Button Listener");
-                if ((txtEd_Height.length() > 0 && totalWheels >= 4) && (spinner_ssMode.getSelectedItemPosition() > 0) && (spinner_Lang.getSelectedItemPosition() > 0)) {        // required
+                if ((txtEd_Weight.length() > 0 && totalWheels >= 4) && (spinner_autoMode.getSelectedItemPosition() > 0) && (spinner_Lang.getSelectedItemPosition() > 0)) {        // required
 
                     Spinner spinner_Team = (Spinner) findViewById(R.id.spinner_Team);
                     storePitData();           // Put all the Pit data collected in Pit object
@@ -544,7 +473,7 @@ pitData Pit_Data = new pitData();
                 } else {
                     final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
                     tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
-                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (Weight & Wheels) before saving ***", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (Weight, Wheels & Auto Mode) before saving ***", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     toast.show();
                 }
@@ -696,7 +625,7 @@ pitData Pit_Data = new pitData();
             txt_TeamName = (TextView) findViewById(R.id.txt_TeamName);
             findTeam(teamSelected);
             txt_TeamName.setText(team_inst.getTeam_name());
-            txtEd_Height.setEnabled(true);
+            txtEd_Weight.setEnabled(true);
 
             chkForPhoto(teamSelected);              // see if photo already exists (SD card or Firebase)
 
@@ -816,8 +745,8 @@ pitData Pit_Data = new pitData();
                         // Now load the screen & variables
                         teamSelected = Pit_Load.getPit_team();
                         //  Height _NOT_ coming back?  Scouters _MUST_ use > keyboard key and NOT Exit
-                        txtEd_Height.setText(String.valueOf(Pit_Load.getPit_tall()));
-                        tall = Integer.valueOf(String.valueOf(txtEd_Height.getText()));     // REALLY Weight  GLF 3/2019
+                        txtEd_Weight.setText(String.valueOf(Pit_Load.getPit_weight()));
+                        weight = Integer.valueOf(String.valueOf(txtEd_Weight.getText()));
                         txt_NumWheels.setText(String.valueOf(Pit_Load.getPit_totWheels()));
                         totalWheels = Pit_Load.getPit_totWheels();
                         spinner_Traction.setSelection((Pit_Load.getPit_numTrac()));
@@ -829,14 +758,9 @@ pitData Pit_Data = new pitData();
                         chkBox_Climb.setChecked(Pit_Load.isPit_climb());
                         chkBox_Vision.setChecked(Pit_Load.isPit_vision());
                         chkBox_Pneumatics.setChecked(Pit_Load.isPit_pneumatics());
-                        chkBox_OffFloor.setChecked(Pit_Load.isPit_cargoManip());
-                        chkBox_PanelFloor.setChecked(Pit_Load.isPit_floorPanel());
-                        chkBox_Hab2.setChecked(Pit_Load.isPit_leaveHAB2());
-                        chkBox_HABLvl_2.setChecked(Pit_Load.isPit_endHAB2());
-                        chkBox_HABLvl_3.setChecked(Pit_Load.isPit_endHAB3());
+                        chkBox_OffFloor.setChecked(Pit_Load.isPit_PowerCellManip());
 
-                        chkBox_OffFloor.setChecked(Pit_Load.isPit_floorCargo());
-                        chkBox_PanelFloor.setChecked(Pit_Load.isPit_floorPanel());
+                        chkBox_OffFloor.setChecked(Pit_Load.isPit_PowerCellManip());
 
                         chkBox_CanLift.setChecked(Pit_Load.isPit_canLift());
                         if (Pit_Load.isPit_canLift()) {
@@ -874,37 +798,38 @@ pitData Pit_Data = new pitData();
                             case ("JAVA"):
                                 spinner_Lang.setSelection(1);
                                 break;
-                            case ("C++"):
+                            case ("Kotlin"):
                                 spinner_Lang.setSelection(2);
                                 break;
-                            case ("LabView"):
+                            case ("C++"):
                                 spinner_Lang.setSelection(3);
+                                break;
+                            case ("LabView"):
+                                spinner_Lang.setSelection(4);
                                 break;
                             default:
                                 Log.w(TAG, "►►►►►  E R R O R  ◄◄◄◄◄");
                                 break;
                         }
-                        String mode = Pit_Load.getPit_ssMode();
+                        String mode = Pit_Load.getPit_autoMode();
                         Log.w(TAG, "Mode = '" + mode + "'");
                         switch (mode) {
                             case ("Program Only"):
-                                spinner_ssMode.setSelection(1);
+                                spinner_autoMode.setSelection(1);
                                 break;
                             case ("Vision Only"):
-                                spinner_ssMode.setSelection(2);
+                                spinner_autoMode.setSelection(2);
                                 break;
                             case ("Hybrid (P+V)"):
-                                spinner_ssMode.setSelection(3);
+                                spinner_autoMode.setSelection(3);
                                 break;
                             default:
                                 Log.w(TAG, "►►►►►  E R R O R  ◄◄◄◄◄");
                                 break;
                         }
 
-                        //  Speed _NOT_ coming back?   Scouters _MUST_ use > keyboard key and NOT Exit
-                        txtEd_Speed.setText(String.valueOf(Pit_Load.getPit_speed()));
                         // Finally ...
-                        scout = scout + " & " + Pit_Load.getPit_scout();    // Append new scout name
+                        scout = scout + " & " + Pit_Load.getPit_scout();    // Append scout name
                         editText_Comments.setText(Pit_Load.getPit_comment());
                         photoURL = Pit_Load.pit_photoURL;
                     }
@@ -977,11 +902,11 @@ pitData Pit_Data = new pitData();
             // Do nothing.
         }
     }
-    private class ssModeOnClickListener implements OnItemSelectedListener {
+    private class autoModeOnClickListener implements OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> parent,
                                    View view, int pos, long id) {
-            ssMode = parent.getItemAtPosition(pos).toString();
-            Log.d(TAG, ">>>>> Oper.Mode  '" + ssMode + "' " + pos);
+            autoMode = parent.getItemAtPosition(pos).toString();
+            Log.d(TAG, ">>>>> Oper.Mode  '" + autoMode + "' " + pos);
         }
         public void onNothingSelected(AdapterView<?> parent) {
             // Do nothing.
@@ -1017,8 +942,8 @@ pitData Pit_Data = new pitData();
                                    View view, int pos, long id) {
             String num = " ";
             num = parent.getItemAtPosition(pos).toString();
-            numOmnis = Integer.parseInt(num);
-            Log.w(TAG, ">>>>> Omni '" + numOmnis + "'");
+            numOmni = Integer.parseInt(num);
+            Log.w(TAG, ">>>>> Omni '" + numOmni + "'");
             updateNumWhls();
         }
         public void onNothingSelected(AdapterView<?> parent) {
@@ -1053,8 +978,8 @@ pitData Pit_Data = new pitData();
     }
 
     private void updateNumWhls() {
-        Log.w(TAG, "######  updateNumWhls ###### T-O-M = " + numTraction + numOmnis + numMecanums);
-        int x = numTraction + numOmnis + numMecanums + numPneumatic;
+        Log.w(TAG, "######  updateNumWhls ###### T-O-M = " + numTraction + numOmni + numMecanums);
+        int x = numTraction + numOmni + numMecanums + numPneumatic;
         txt_NumWheels.setText(String.valueOf(x));      // Total # of wheels
         totalWheels = x;
         if (x < 4){
@@ -1066,7 +991,15 @@ pitData Pit_Data = new pitData();
                                    View view, int pos, long id) {
             String num = " ";
             num = parent.getItemAtPosition(pos).toString();
-            numLifted = Integer.parseInt(num);
+            if (pos > 0) {
+                numLifted = Integer.parseInt(num);
+            } else {
+                Toast toast = Toast.makeText(getBaseContext(), "Must specify # robots lifted!", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                tg.startTone(ToneGenerator.TONE_PROP_BEEP);
+            }
             Log.w(TAG, ">>>>> NumRobots '" + numLifted + "'");
         }
         public void onNothingSelected(AdapterView<?> parent) {
@@ -1114,14 +1047,13 @@ pitData Pit_Data = new pitData();
         Log.w(TAG, ">>>>  storePitData  <<<< " + teamSelected );
 
         Pit_Data.setPit_team(teamSelected);
-        Pit_Data.setPit_tall(tall);     // REALLY Weight  GLF 3/2019
+        Pit_Data.setPit_weight(weight);
         Pit_Data.setPit_totWheels(totalWheels);
         Pit_Data.setPit_numTrac(numTraction);
-        Pit_Data.setPit_numOmni(numOmnis);
+        Pit_Data.setPit_numOmni(numOmni);
         Pit_Data.setPit_numMecanum(numMecanums);
         Pit_Data.setPit_numPneumatic(numPneumatic);
-        Pit_Data.setPit_cargoManip(cargoManip);
-        Pit_Data.setPit_floorPanel(floorPanel);
+        Pit_Data.setPit_PowerCellManip(PowerCellManip);
         Pit_Data.setPit_vision(vision);
         Pit_Data.setPit_pneumatics(pneumatics);
         Pit_Data.setPit_climb(climb);
@@ -1129,13 +1061,9 @@ pitData Pit_Data = new pitData();
         Pit_Data.setPit_numLifted (numLifted );
         Pit_Data.setPit_liftRamp(liftRamp);
         Pit_Data.setPit_liftHook(liftHook);
-        Pit_Data.setPit_leaveHAB2(leaveHAB2);
-        Pit_Data.setPit_endHAB2(endHAB2);
-        Pit_Data.setPit_endHAB3(endHAB3);
         Pit_Data.setPit_motor(motor);
-        Pit_Data.setPit_speed(speed);
         Pit_Data.setPit_lang(lang);
-        Pit_Data.setPit_ssMode(ssMode);
+        Pit_Data.setPit_autoMode(autoMode);
          /* */
         Pit_Data.setPit_comment(comments);
         Pit_Data.setPit_dateTime(timeStamp);

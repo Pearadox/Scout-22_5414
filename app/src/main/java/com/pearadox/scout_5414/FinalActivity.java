@@ -43,7 +43,7 @@ public class FinalActivity extends Activity {
     String TAG = "FinalActivity";      // This CLASS name
     TextView txt_dev, txt_stud, txt_match, txt_MyTeam, txt_robotnum;
     EditText editText_Comments;
-    CheckBox chk_lostPart, chk_lostComm, chk_block, chkBox_final_int_Rocket, chk_defense30,chk_cargoDefense;
+    CheckBox chk_lostPart, chk_lostComm, chk_block, chkBox_final_int_Rocket, chk_defense30,chk_PowerCellDefense;
     Button button_Saved;
     RadioGroup radioGroup_defense;
     RadioButton rdBtn_def_good, radioButton_def_bad;
@@ -64,7 +64,7 @@ public class FinalActivity extends Activity {
     public boolean final_def_Block = false;                     // Did they use Blocking Defense?
     public boolean final_def_RocketInt;                         // Did they block the Rocket
     public String final_studID = "";                            // set in Auto
-    public boolean final_cargoDefense = false;                  // pickup cargo when on defense
+    public boolean final_PowerCellDefense = false;                  // pickup PowerCell when on defense
     public boolean final_endDefense = false;                    // last 30 seconds defense
 
 
@@ -105,7 +105,7 @@ public class FinalActivity extends Activity {
         chk_lostComm = (CheckBox) findViewById(R.id.chk_lostComm);
         chk_block = (CheckBox) findViewById(R.id.chk_block);
         chkBox_final_int_Rocket = (CheckBox) findViewById(R.id.chkBox_final_int_Rocket);
-        chk_cargoDefense = (CheckBox) findViewById(R.id.chk_cargoDefense);
+        chk_PowerCellDefense = (CheckBox) findViewById(R.id.chk_PowerCellDefense);
         chk_defense30 = (CheckBox) findViewById(R.id.chk_defense30);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
         editText_Comments.setClickable(true);
@@ -200,20 +200,20 @@ public class FinalActivity extends Activity {
             }
         }
         );
-        chk_cargoDefense.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_PowerCellDefense.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
              @Override
              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                 Log.i(TAG, "chk_cargoDefense Listener");
+                 Log.i(TAG, "chk_PowerCellDefense Listener");
                  if (buttonView.isChecked()) {
                      //checked
-                     Log.i(TAG, "CargoDef is checked.");
-                     final_cargoDefense = true;
+                     Log.i(TAG, "PowerCellDef is checked.");
+                     final_PowerCellDefense = true;
 
                  } else {
                      //not checked
-                     Log.i(TAG, "CargoDef is unchecked.");
-                     final_cargoDefense = false;
+                     Log.i(TAG, "PowerCellDef is unchecked.");
+                     final_PowerCellDefense = false;
 
                  }
              }
@@ -258,7 +258,7 @@ public class FinalActivity extends Activity {
         Log.w(TAG, timeStamp + " is the current date and time.");
         Pearadox.Match_Data.setFinal_lostParts(lost_Parts);
         Pearadox.Match_Data.setFinal_lostComms(lost_Comms);
-        Pearadox.Match_Data.setFinal_puCargoDef(final_cargoDefense);
+        Pearadox.Match_Data.setFinal_puPowerCellDef(final_PowerCellDefense);
         Pearadox.Match_Data.setFinal_defLast30(final_endDefense);
         Pearadox.Match_Data.setFinal_defense_good(final_defense_good);
         Pearadox.Match_Data.setFinal_def_Block(final_def_Block);

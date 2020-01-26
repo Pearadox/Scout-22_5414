@@ -253,7 +253,7 @@
             android:id="@+id/chkBox_OffFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Can get cargo off floor"
+            android:text="Can get PowerCell off floor"
             android:clickable= "false"
             android:textColor="@color/grey"
             android:orientation="horizontal">

@@ -6,9 +6,9 @@ import android.util.Log;
 
 public class DraftSettingsActivity extends AppCompatActivity {
     String TAG = "DraftSettingsActivity";        // This CLASS name
-    public static final String  CARGO_PREF_LEVEL1 =  "prefCargo_L1";
-    public static final String  CARGO_PREF_LEVEL2 =  "prefCargo_L2";
-    public static final String  CARGO_PREF_LEVEL3 =  "prefCargo_L3";
+    public static final String  PowerCell_PREF_LEVEL1 =  "prefPowerCell_L1";
+    public static final String  PowerCell_PREF_LEVEL2 =  "prefPowerCell_L2";
+    public static final String  PowerCell_PREF_LEVEL3 =  "prefPowerCell_L3";
 
     public static final String  PANELS_PREF_LEVEL1 = "prefPanel_L1";
     public static final String  PANELS_PREF_LEVEL2 = "prefPanel_L2";
@@ -24,7 +24,7 @@ public class DraftSettingsActivity extends AppCompatActivity {
     public static final String  CLIMB_PREF_HAB3 =   "prefClimb_HAB3";
 
     public static final String  WEIGHT_PREF_CLIMB =       "prefWeight_climb";
-    public static final String  WEIGHT_PREF_CUBESSWITCH = "prefWeight_cargo";
+    public static final String  WEIGHT_PREF_CUBESSWITCH = "prefWeight_PowerCell";
     public static final String  WEIGHT_PREF_CUBESSCALE =  "prefWeight_panels";
 
     public static final String  ALLIANCE_PICKS_NUM =   "prefAlliance_num";

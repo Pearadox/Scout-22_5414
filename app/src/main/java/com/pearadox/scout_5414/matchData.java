@@ -8,7 +8,7 @@ public class matchData implements Serializable {
     private String match;                   // Match ID (e.g., Qualifying) and '00' - match #)
     private String team_num;                // Team Number (e.g., '5414')
                                             // *** Pre-Game **
-    private boolean pre_cargo;              // Do they carry cargo
+    private boolean pre_PowerCell;              // Do they carry PowerCell
     private boolean pre_panel;              // Do they carry a panel
     private String  pre_startPos;           // Start Position
     private int     pre_PlayerSta;          // Player Station (1-3)
@@ -18,12 +18,12 @@ public class matchData implements Serializable {
     private boolean sand_leftHAB;           // Did they leave HAB
     private boolean sand_leftHAB2;          // Did they start from Hab level 2
     private boolean sand_PU2ndPanel;        // Second game piece - Panel
-    private boolean sand_PU2ndCargo;        // Second game piece - Cargo
+    private boolean sand_PU2ndPowerCell;        // Second game piece - PowerCell
     private boolean sand_PU2ndPlSta;        // 2nd from Player Station
     private boolean sand_PU2ndCorral;       // 2nd from Corral
     private boolean sand_PU2ndFloor;        // 2nd from Floor
     private boolean sand_PU3rdPanel;        // Second game piece - Panel
-    private boolean sand_PU3rdCargo;        // Second game piece - Cargo
+    private boolean sand_PU3rdPowerCell;        // Second game piece - PowerCell
     private boolean sand_PU3rdPlSta;        // 3rd from Player Station
     private boolean sand_PU3rdCorral;       // 3rd from Corral
     private boolean sand_PU3rdFloor;        // 3rd from Floor
@@ -36,29 +36,29 @@ public class matchData implements Serializable {
     private boolean sand_LeftRocket_RPan1;  // L-Rocket R-Panel#1
     private boolean sand_LeftRocket_RPan2;  // L-Rocket R-Panel#2
     private boolean sand_LeftRocket_RPan3;  // L-Rocket R-Panel#3
-    private boolean sand_LeftRocket_LCarg1; // L-Rocket L-Cargo#1
-    private boolean sand_LeftRocket_LCarg2; // L-Rocket L-Cargo#2
-    private boolean sand_LeftRocket_LCarg3; // L-Rocket L-Cargo#3
-    private boolean sand_LeftRocket_RCarg1; // L-Rocket R-Cargo#1
-    private boolean sand_LeftRocket_RCarg2; // L-Rocket R-Cargo#2
-    private boolean sand_LeftRocket_RCarg3; // L-Rocket R-Cargo#3
+    private boolean sand_LeftRocket_LCarg1; // L-Rocket L-PowerCell#1
+    private boolean sand_LeftRocket_LCarg2; // L-Rocket L-PowerCell#2
+    private boolean sand_LeftRocket_LCarg3; // L-Rocket L-PowerCell#3
+    private boolean sand_LeftRocket_RCarg1; // L-Rocket R-PowerCell#1
+    private boolean sand_LeftRocket_RCarg2; // L-Rocket R-PowerCell#2
+    private boolean sand_LeftRocket_RCarg3; // L-Rocket R-PowerCell#3
 
-    private boolean sand_CargoLPan1;        // Cargo L-Panel#1
-    private boolean sand_CargoLPan2;        // Cargo L-Panel#2
-    private boolean sand_CargoLPan3;        // Cargo L-Panel#3
-    private boolean sand_CargoRPan1;        // Cargo R-Panel#1
-    private boolean sand_CargoRPan2;        // Cargo R-Panel#2
-    private boolean sand_CargoRPan3;        // Cargo R-Panel#3
-    private boolean sand_CargoLCarg1;       // Cargo L-Cargo#1
-    private boolean sand_CargoLCarg2;       // Cargo L-Cargo#2
-    private boolean sand_CargoLCarg3;       // Cargo L-Cargo#3
-    private boolean sand_CargoRCarg1;       // Cargo R-Cargo#1
-    private boolean sand_CargoRCarg2;       // Cargo R-Cargo#2
-    private boolean sand_CargoRCarg3;       // Cargo R-Cargo#3
-    private boolean sand_CargoEndLPanel;    // Cargo End L-Panel#1
-    private boolean sand_CargoEndLCargo;    // Cargo End L-Cargo#1
-    private boolean sand_CargoEndRPanel;    // Cargo End R-Panel#1
-    private boolean sand_CargoEndRCargo;    // Cargo End R-Cargo#1
+    private boolean sand_PowerCellLPan1;        // PowerCell L-Panel#1
+    private boolean sand_PowerCellLPan2;        // PowerCell L-Panel#2
+    private boolean sand_PowerCellLPan3;        // PowerCell L-Panel#3
+    private boolean sand_PowerCellRPan1;        // PowerCell R-Panel#1
+    private boolean sand_PowerCellRPan2;        // PowerCell R-Panel#2
+    private boolean sand_PowerCellRPan3;        // PowerCell R-Panel#3
+    private boolean sand_PowerCellLCarg1;       // PowerCell L-PowerCell#1
+    private boolean sand_PowerCellLCarg2;       // PowerCell L-PowerCell#2
+    private boolean sand_PowerCellLCarg3;       // PowerCell L-PowerCell#3
+    private boolean sand_PowerCellRCarg1;       // PowerCell R-PowerCell#1
+    private boolean sand_PowerCellRCarg2;       // PowerCell R-PowerCell#2
+    private boolean sand_PowerCellRCarg3;       // PowerCell R-PowerCell#3
+    private boolean sand_PowerCellEndLPanel;    // PowerCell End L-Panel#1
+    private boolean sand_PowerCellEndLPowerCell;    // PowerCell End L-PowerCell#1
+    private boolean sand_PowerCellEndRPanel;    // PowerCell End R-Panel#1
+    private boolean sand_PowerCellEndRPowerCell;    // PowerCell End R-PowerCell#1
 
     private boolean sand_RghtRocket_LPan1;  // R-Rocket L-Panel#1
     private boolean sand_RghtRocket_LPan2;  // R-Rocket L-Panel#2
@@ -66,12 +66,12 @@ public class matchData implements Serializable {
     private boolean sand_RghtRocket_RPan1;  // R-Rocket R-Panel#1
     private boolean sand_RghtRocket_RPan2;  // R-Rocket R-Panel#2
     private boolean sand_RghtRocket_RPan3;  // R-Rocket R-Panel#3
-    private boolean sand_RghtRocket_LCarg1; // R-Rocket L-Cargo#1
-    private boolean sand_RghtRocket_LCarg2; // R-Rocket L-Cargo#2
-    private boolean sand_RghtRocket_LCarg3; // R-Rocket L-Cargo#3
-    private boolean sand_RghtRocket_RCarg1; // R-Rocket R-Cargo#1
-    private boolean sand_RghtRocket_RCarg2; // R-Rocket R-Cargo#2
-    private boolean sand_RghtRocket_RCarg3; // R-Rocket R-Cargo#3
+    private boolean sand_RghtRocket_LCarg1; // R-Rocket L-PowerCell#1
+    private boolean sand_RghtRocket_LCarg2; // R-Rocket L-PowerCell#2
+    private boolean sand_RghtRocket_LCarg3; // R-Rocket L-PowerCell#3
+    private boolean sand_RghtRocket_RCarg1; // R-Rocket R-PowerCell#1
+    private boolean sand_RghtRocket_RCarg2; // R-Rocket R-PowerCell#2
+    private boolean sand_RghtRocket_RCarg3; // R-Rocket R-PowerCell#3
 
     // ============== TELE =================
     private boolean tele_LeftRocket_LPan1;  // L-Rocket L-Panel#1
@@ -80,29 +80,29 @@ public class matchData implements Serializable {
     private boolean tele_LeftRocket_RPan1;  // L-Rocket R-Panel#1
     private boolean tele_LeftRocket_RPan2;  // L-Rocket R-Panel#2
     private boolean tele_LeftRocket_RPan3;  // L-Rocket R-Panel#3
-    private boolean tele_LeftRocket_LCarg1; // L-Rocket L-Cargo#1
-    private boolean tele_LeftRocket_LCarg2; // L-Rocket L-Cargo#2
-    private boolean tele_LeftRocket_LCarg3; // L-Rocket L-Cargo#3
-    private boolean tele_LeftRocket_RCarg1; // L-Rocket R-Cargo#1
-    private boolean tele_LeftRocket_RCarg2; // L-Rocket R-Cargo#2
-    private boolean tele_LeftRocket_RCarg3; // L-Rocket R-Cargo#3
+    private boolean tele_LeftRocket_LCarg1; // L-Rocket L-PowerCell#1
+    private boolean tele_LeftRocket_LCarg2; // L-Rocket L-PowerCell#2
+    private boolean tele_LeftRocket_LCarg3; // L-Rocket L-PowerCell#3
+    private boolean tele_LeftRocket_RCarg1; // L-Rocket R-PowerCell#1
+    private boolean tele_LeftRocket_RCarg2; // L-Rocket R-PowerCell#2
+    private boolean tele_LeftRocket_RCarg3; // L-Rocket R-PowerCell#3
 
-    private boolean tele_CargoLPan1;        // Cargo L-Panel#1
-    private boolean tele_CargoLPan2;        // Cargo L-Panel#2
-    private boolean tele_CargoLPan3;        // Cargo L-Panel#3
-    private boolean tele_CargoRPan1;        // Cargo R-Panel#1
-    private boolean tele_CargoRPan2;        // Cargo R-Panel#2
-    private boolean tele_CargoRPan3;        // Cargo R-Panel#3
-    private boolean tele_CargoLCarg1;       // Cargo L-Cargo#1
-    private boolean tele_CargoLCarg2;       // Cargo L-Cargo#2
-    private boolean tele_CargoLCarg3;       // Cargo L-Cargo#3
-    private boolean tele_CargoRCarg1;       // Cargo R-Cargo#1
-    private boolean tele_CargoRCarg2;       // Cargo R-Cargo#2
-    private boolean tele_CargoRCarg3;       // Cargo R-Cargo#3
-    private boolean tele_CargoEndLPanel;    // Cargo End L-Panel#1
-    private boolean tele_CargoEndLCargo;    // Cargo End L-Cargo#1
-    private boolean tele_CargoEndRPanel;    // Cargo End R-Panel#1
-    private boolean tele_CargoEndRCargo;    // Cargo End R-Cargo#1
+    private boolean tele_PowerCellLPan1;        // PowerCell L-Panel#1
+    private boolean tele_PowerCellLPan2;        // PowerCell L-Panel#2
+    private boolean tele_PowerCellLPan3;        // PowerCell L-Panel#3
+    private boolean tele_PowerCellRPan1;        // PowerCell R-Panel#1
+    private boolean tele_PowerCellRPan2;        // PowerCell R-Panel#2
+    private boolean tele_PowerCellRPan3;        // PowerCell R-Panel#3
+    private boolean tele_PowerCellLCarg1;       // PowerCell L-PowerCell#1
+    private boolean tele_PowerCellLCarg2;       // PowerCell L-PowerCell#2
+    private boolean tele_PowerCellLCarg3;       // PowerCell L-PowerCell#3
+    private boolean tele_PowerCellRCarg1;       // PowerCell R-PowerCell#1
+    private boolean tele_PowerCellRCarg2;       // PowerCell R-PowerCell#2
+    private boolean tele_PowerCellRCarg3;       // PowerCell R-PowerCell#3
+    private boolean tele_PowerCellEndLPanel;    // PowerCell End L-Panel#1
+    private boolean tele_PowerCellEndLPowerCell;    // PowerCell End L-PowerCell#1
+    private boolean tele_PowerCellEndRPanel;    // PowerCell End R-Panel#1
+    private boolean tele_PowerCellEndRPowerCell;    // PowerCell End R-PowerCell#1
 
     private boolean tele_RghtRocket_LPan1;  // R-Rocket L-Panel#1
     private boolean tele_RghtRocket_LPan2;  // R-Rocket L-Panel#2
@@ -110,16 +110,16 @@ public class matchData implements Serializable {
     private boolean tele_RghtRocket_RPan1;  // R-Rocket R-Panel#1
     private boolean tele_RghtRocket_RPan2;  // R-Rocket R-Panel#2
     private boolean tele_RghtRocket_RPan3;  // R-Rocket R-Panel#3
-    private boolean tele_RghtRocket_LCarg1; // R-Rocket L-Cargo#1
-    private boolean tele_RghtRocket_LCarg2; // R-Rocket L-Cargo#2
-    private boolean tele_RghtRocket_LCarg3; // R-Rocket L-Cargo#3
-    private boolean tele_RghtRocket_RCarg1; // R-Rocket R-Cargo#1
-    private boolean tele_RghtRocket_RCarg2; // R-Rocket R-Cargo#2
-    private boolean tele_RghtRocket_RCarg3; // R-Rocket R-Cargo#3
+    private boolean tele_RghtRocket_LCarg1; // R-Rocket L-PowerCell#1
+    private boolean tele_RghtRocket_LCarg2; // R-Rocket L-PowerCell#2
+    private boolean tele_RghtRocket_LCarg3; // R-Rocket L-PowerCell#3
+    private boolean tele_RghtRocket_RCarg1; // R-Rocket R-PowerCell#1
+    private boolean tele_RghtRocket_RCarg2; // R-Rocket R-PowerCell#2
+    private boolean tele_RghtRocket_RCarg3; // R-Rocket R-PowerCell#3
 
-    private boolean tele_cargo_floor;       // Did they pick up cargo from floor
-    private boolean tele_cargo_playSta;     // Did they pick up cargo from Player Station
-    private boolean tele_cargo_Corral;      // Did they pick up cargo from Corral
+    private boolean tele_PowerCell_floor;       // Did they pick up PowerCell from floor
+    private boolean tele_PowerCell_playSta;     // Did they pick up PowerCell from Player Station
+    private boolean tele_PowerCell_Corral;      // Did they pick up PowerCell from Corral
     private boolean tele_Panel_floor;       // Did they pick up Panel(s) from floor
     private boolean tele_Panel_playSta;     // Did they pick up Panel(s) from Player Station
     private boolean tele_got_lift;          // Did they get lifted to higher HAB Level
@@ -133,7 +133,7 @@ public class matchData implements Serializable {
     // ============= Final  ================
     private boolean final_lostParts;         // Did they lose parts
     private boolean final_lostComms;         // Did they lose communication
-    private boolean final_puCargoDef;        // Did they P/U Cargo on Defense
+    private boolean final_puPowerCellDef;        // Did they P/U PowerCell on Defense
     private boolean final_defLast30;         // Did they play Defense in Last 30 seconds?
     private boolean final_defense_good;      // Was their overall Defense Good (bad=false)
     private boolean final_def_Block;         // Did they use Blocking Defense
@@ -148,10 +148,10 @@ public class matchData implements Serializable {
 //  Constructor
 
 
-    public matchData(String match, String team_num, boolean pre_cargo, boolean pre_panel, String pre_startPos, int pre_PlayerSta, boolean sand_mode, boolean sand_leftHAB, boolean sand_leftHAB2, boolean sand_PU2ndPanel, boolean sand_PU2ndCargo, boolean sand_PU2ndPlSta, boolean sand_PU2ndCorral, boolean sand_PU2ndFloor, boolean sand_PU3rdPanel, boolean sand_PU3rdCargo, boolean sand_PU3rdPlSta, boolean sand_PU3rdCorral, boolean sand_PU3rdFloor, int sand_num_Dropped, String sand_comment, boolean sand_LeftRocket_LPan1, boolean sand_LeftRocket_LPan2, boolean sand_LeftRocket_LPan3, boolean sand_LeftRocket_RPan1, boolean sand_LeftRocket_RPan2, boolean sand_LeftRocket_RPan3, boolean sand_LeftRocket_LCarg1, boolean sand_LeftRocket_LCarg2, boolean sand_LeftRocket_LCarg3, boolean sand_LeftRocket_RCarg1, boolean sand_LeftRocket_RCarg2, boolean sand_LeftRocket_RCarg3, boolean sand_CargoLPan1, boolean sand_CargoLPan2, boolean sand_CargoLPan3, boolean sand_CargoRPan1, boolean sand_CargoRPan2, boolean sand_CargoRPan3, boolean sand_CargoLCarg1, boolean sand_CargoLCarg2, boolean sand_CargoLCarg3, boolean sand_CargoRCarg1, boolean sand_CargoRCarg2, boolean sand_CargoRCarg3, boolean sand_CargoEndLPanel, boolean sand_CargoEndLCargo, boolean sand_CargoEndRPanel, boolean sand_CargoEndRCargo, boolean sand_RghtRocket_LPan1, boolean sand_RghtRocket_LPan2, boolean sand_RghtRocket_LPan3, boolean sand_RghtRocket_RPan1, boolean sand_RghtRocket_RPan2, boolean sand_RghtRocket_RPan3, boolean sand_RghtRocket_LCarg1, boolean sand_RghtRocket_LCarg2, boolean sand_RghtRocket_LCarg3, boolean sand_RghtRocket_RCarg1, boolean sand_RghtRocket_RCarg2, boolean sand_RghtRocket_RCarg3, boolean tele_LeftRocket_LPan1, boolean tele_LeftRocket_LPan2, boolean tele_LeftRocket_LPan3, boolean tele_LeftRocket_RPan1, boolean tele_LeftRocket_RPan2, boolean tele_LeftRocket_RPan3, boolean tele_LeftRocket_LCarg1, boolean tele_LeftRocket_LCarg2, boolean tele_LeftRocket_LCarg3, boolean tele_LeftRocket_RCarg1, boolean tele_LeftRocket_RCarg2, boolean tele_LeftRocket_RCarg3, boolean tele_CargoLPan1, boolean tele_CargoLPan2, boolean tele_CargoLPan3, boolean tele_CargoRPan1, boolean tele_CargoRPan2, boolean tele_CargoRPan3, boolean tele_CargoLCarg1, boolean tele_CargoLCarg2, boolean tele_CargoLCarg3, boolean tele_CargoRCarg1, boolean tele_CargoRCarg2, boolean tele_CargoRCarg3, boolean tele_CargoEndLPanel, boolean tele_CargoEndLCargo, boolean tele_CargoEndRPanel, boolean tele_CargoEndRCargo, boolean tele_RghtRocket_LPan1, boolean tele_RghtRocket_LPan2, boolean tele_RghtRocket_LPan3, boolean tele_RghtRocket_RPan1, boolean tele_RghtRocket_RPan2, boolean tele_RghtRocket_RPan3, boolean tele_RghtRocket_LCarg1, boolean tele_RghtRocket_LCarg2, boolean tele_RghtRocket_LCarg3, boolean tele_RghtRocket_RCarg1, boolean tele_RghtRocket_RCarg2, boolean tele_RghtRocket_RCarg3, boolean tele_cargo_floor, boolean tele_cargo_playSta, boolean tele_cargo_Corral, boolean tele_Panel_floor, boolean tele_Panel_playSta, boolean tele_got_lift, boolean tele_lifted, int tele_liftedNum, int tele_level_num, int tele_num_Penalties, int tele_num_Dropped, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_puCargoDef, boolean final_defLast30, boolean final_defense_good, boolean final_def_Block, boolean final_def_RocketInt, String final_comment, String final_studID, String final_dateTime) {
+    public matchData(String match, String team_num, boolean pre_PowerCell, boolean pre_panel, String pre_startPos, int pre_PlayerSta, boolean sand_mode, boolean sand_leftHAB, boolean sand_leftHAB2, boolean sand_PU2ndPanel, boolean sand_PU2ndPowerCell, boolean sand_PU2ndPlSta, boolean sand_PU2ndCorral, boolean sand_PU2ndFloor, boolean sand_PU3rdPanel, boolean sand_PU3rdPowerCell, boolean sand_PU3rdPlSta, boolean sand_PU3rdCorral, boolean sand_PU3rdFloor, int sand_num_Dropped, String sand_comment, boolean sand_LeftRocket_LPan1, boolean sand_LeftRocket_LPan2, boolean sand_LeftRocket_LPan3, boolean sand_LeftRocket_RPan1, boolean sand_LeftRocket_RPan2, boolean sand_LeftRocket_RPan3, boolean sand_LeftRocket_LCarg1, boolean sand_LeftRocket_LCarg2, boolean sand_LeftRocket_LCarg3, boolean sand_LeftRocket_RCarg1, boolean sand_LeftRocket_RCarg2, boolean sand_LeftRocket_RCarg3, boolean sand_PowerCellLPan1, boolean sand_PowerCellLPan2, boolean sand_PowerCellLPan3, boolean sand_PowerCellRPan1, boolean sand_PowerCellRPan2, boolean sand_PowerCellRPan3, boolean sand_PowerCellLCarg1, boolean sand_PowerCellLCarg2, boolean sand_PowerCellLCarg3, boolean sand_PowerCellRCarg1, boolean sand_PowerCellRCarg2, boolean sand_PowerCellRCarg3, boolean sand_PowerCellEndLPanel, boolean sand_PowerCellEndLPowerCell, boolean sand_PowerCellEndRPanel, boolean sand_PowerCellEndRPowerCell, boolean sand_RghtRocket_LPan1, boolean sand_RghtRocket_LPan2, boolean sand_RghtRocket_LPan3, boolean sand_RghtRocket_RPan1, boolean sand_RghtRocket_RPan2, boolean sand_RghtRocket_RPan3, boolean sand_RghtRocket_LCarg1, boolean sand_RghtRocket_LCarg2, boolean sand_RghtRocket_LCarg3, boolean sand_RghtRocket_RCarg1, boolean sand_RghtRocket_RCarg2, boolean sand_RghtRocket_RCarg3, boolean tele_LeftRocket_LPan1, boolean tele_LeftRocket_LPan2, boolean tele_LeftRocket_LPan3, boolean tele_LeftRocket_RPan1, boolean tele_LeftRocket_RPan2, boolean tele_LeftRocket_RPan3, boolean tele_LeftRocket_LCarg1, boolean tele_LeftRocket_LCarg2, boolean tele_LeftRocket_LCarg3, boolean tele_LeftRocket_RCarg1, boolean tele_LeftRocket_RCarg2, boolean tele_LeftRocket_RCarg3, boolean tele_PowerCellLPan1, boolean tele_PowerCellLPan2, boolean tele_PowerCellLPan3, boolean tele_PowerCellRPan1, boolean tele_PowerCellRPan2, boolean tele_PowerCellRPan3, boolean tele_PowerCellLCarg1, boolean tele_PowerCellLCarg2, boolean tele_PowerCellLCarg3, boolean tele_PowerCellRCarg1, boolean tele_PowerCellRCarg2, boolean tele_PowerCellRCarg3, boolean tele_PowerCellEndLPanel, boolean tele_PowerCellEndLPowerCell, boolean tele_PowerCellEndRPanel, boolean tele_PowerCellEndRPowerCell, boolean tele_RghtRocket_LPan1, boolean tele_RghtRocket_LPan2, boolean tele_RghtRocket_LPan3, boolean tele_RghtRocket_RPan1, boolean tele_RghtRocket_RPan2, boolean tele_RghtRocket_RPan3, boolean tele_RghtRocket_LCarg1, boolean tele_RghtRocket_LCarg2, boolean tele_RghtRocket_LCarg3, boolean tele_RghtRocket_RCarg1, boolean tele_RghtRocket_RCarg2, boolean tele_RghtRocket_RCarg3, boolean tele_PowerCell_floor, boolean tele_PowerCell_playSta, boolean tele_PowerCell_Corral, boolean tele_Panel_floor, boolean tele_Panel_playSta, boolean tele_got_lift, boolean tele_lifted, int tele_liftedNum, int tele_level_num, int tele_num_Penalties, int tele_num_Dropped, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_puPowerCellDef, boolean final_defLast30, boolean final_defense_good, boolean final_def_Block, boolean final_def_RocketInt, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
-        this.pre_cargo = pre_cargo;
+        this.pre_PowerCell = pre_PowerCell;
         this.pre_panel = pre_panel;
         this.pre_startPos = pre_startPos;
         this.pre_PlayerSta = pre_PlayerSta;
@@ -159,12 +159,12 @@ public class matchData implements Serializable {
         this.sand_leftHAB = sand_leftHAB;
         this.sand_leftHAB2 = sand_leftHAB2;
         this.sand_PU2ndPanel = sand_PU2ndPanel;
-        this.sand_PU2ndCargo = sand_PU2ndCargo;
+        this.sand_PU2ndPowerCell = sand_PU2ndPowerCell;
         this.sand_PU2ndPlSta = sand_PU2ndPlSta;
         this.sand_PU2ndCorral = sand_PU2ndCorral;
         this.sand_PU2ndFloor = sand_PU2ndFloor;
         this.sand_PU3rdPanel = sand_PU3rdPanel;
-        this.sand_PU3rdCargo = sand_PU3rdCargo;
+        this.sand_PU3rdPowerCell = sand_PU3rdPowerCell;
         this.sand_PU3rdPlSta = sand_PU3rdPlSta;
         this.sand_PU3rdCorral = sand_PU3rdCorral;
         this.sand_PU3rdFloor = sand_PU3rdFloor;
@@ -182,22 +182,22 @@ public class matchData implements Serializable {
         this.sand_LeftRocket_RCarg1 = sand_LeftRocket_RCarg1;
         this.sand_LeftRocket_RCarg2 = sand_LeftRocket_RCarg2;
         this.sand_LeftRocket_RCarg3 = sand_LeftRocket_RCarg3;
-        this.sand_CargoLPan1 = sand_CargoLPan1;
-        this.sand_CargoLPan2 = sand_CargoLPan2;
-        this.sand_CargoLPan3 = sand_CargoLPan3;
-        this.sand_CargoRPan1 = sand_CargoRPan1;
-        this.sand_CargoRPan2 = sand_CargoRPan2;
-        this.sand_CargoRPan3 = sand_CargoRPan3;
-        this.sand_CargoLCarg1 = sand_CargoLCarg1;
-        this.sand_CargoLCarg2 = sand_CargoLCarg2;
-        this.sand_CargoLCarg3 = sand_CargoLCarg3;
-        this.sand_CargoRCarg1 = sand_CargoRCarg1;
-        this.sand_CargoRCarg2 = sand_CargoRCarg2;
-        this.sand_CargoRCarg3 = sand_CargoRCarg3;
-        this.sand_CargoEndLPanel = sand_CargoEndLPanel;
-        this.sand_CargoEndLCargo = sand_CargoEndLCargo;
-        this.sand_CargoEndRPanel = sand_CargoEndRPanel;
-        this.sand_CargoEndRCargo = sand_CargoEndRCargo;
+        this.sand_PowerCellLPan1 = sand_PowerCellLPan1;
+        this.sand_PowerCellLPan2 = sand_PowerCellLPan2;
+        this.sand_PowerCellLPan3 = sand_PowerCellLPan3;
+        this.sand_PowerCellRPan1 = sand_PowerCellRPan1;
+        this.sand_PowerCellRPan2 = sand_PowerCellRPan2;
+        this.sand_PowerCellRPan3 = sand_PowerCellRPan3;
+        this.sand_PowerCellLCarg1 = sand_PowerCellLCarg1;
+        this.sand_PowerCellLCarg2 = sand_PowerCellLCarg2;
+        this.sand_PowerCellLCarg3 = sand_PowerCellLCarg3;
+        this.sand_PowerCellRCarg1 = sand_PowerCellRCarg1;
+        this.sand_PowerCellRCarg2 = sand_PowerCellRCarg2;
+        this.sand_PowerCellRCarg3 = sand_PowerCellRCarg3;
+        this.sand_PowerCellEndLPanel = sand_PowerCellEndLPanel;
+        this.sand_PowerCellEndLPowerCell = sand_PowerCellEndLPowerCell;
+        this.sand_PowerCellEndRPanel = sand_PowerCellEndRPanel;
+        this.sand_PowerCellEndRPowerCell = sand_PowerCellEndRPowerCell;
         this.sand_RghtRocket_LPan1 = sand_RghtRocket_LPan1;
         this.sand_RghtRocket_LPan2 = sand_RghtRocket_LPan2;
         this.sand_RghtRocket_LPan3 = sand_RghtRocket_LPan3;
@@ -222,22 +222,22 @@ public class matchData implements Serializable {
         this.tele_LeftRocket_RCarg1 = tele_LeftRocket_RCarg1;
         this.tele_LeftRocket_RCarg2 = tele_LeftRocket_RCarg2;
         this.tele_LeftRocket_RCarg3 = tele_LeftRocket_RCarg3;
-        this.tele_CargoLPan1 = tele_CargoLPan1;
-        this.tele_CargoLPan2 = tele_CargoLPan2;
-        this.tele_CargoLPan3 = tele_CargoLPan3;
-        this.tele_CargoRPan1 = tele_CargoRPan1;
-        this.tele_CargoRPan2 = tele_CargoRPan2;
-        this.tele_CargoRPan3 = tele_CargoRPan3;
-        this.tele_CargoLCarg1 = tele_CargoLCarg1;
-        this.tele_CargoLCarg2 = tele_CargoLCarg2;
-        this.tele_CargoLCarg3 = tele_CargoLCarg3;
-        this.tele_CargoRCarg1 = tele_CargoRCarg1;
-        this.tele_CargoRCarg2 = tele_CargoRCarg2;
-        this.tele_CargoRCarg3 = tele_CargoRCarg3;
-        this.tele_CargoEndLPanel = tele_CargoEndLPanel;
-        this.tele_CargoEndLCargo = tele_CargoEndLCargo;
-        this.tele_CargoEndRPanel = tele_CargoEndRPanel;
-        this.tele_CargoEndRCargo = tele_CargoEndRCargo;
+        this.tele_PowerCellLPan1 = tele_PowerCellLPan1;
+        this.tele_PowerCellLPan2 = tele_PowerCellLPan2;
+        this.tele_PowerCellLPan3 = tele_PowerCellLPan3;
+        this.tele_PowerCellRPan1 = tele_PowerCellRPan1;
+        this.tele_PowerCellRPan2 = tele_PowerCellRPan2;
+        this.tele_PowerCellRPan3 = tele_PowerCellRPan3;
+        this.tele_PowerCellLCarg1 = tele_PowerCellLCarg1;
+        this.tele_PowerCellLCarg2 = tele_PowerCellLCarg2;
+        this.tele_PowerCellLCarg3 = tele_PowerCellLCarg3;
+        this.tele_PowerCellRCarg1 = tele_PowerCellRCarg1;
+        this.tele_PowerCellRCarg2 = tele_PowerCellRCarg2;
+        this.tele_PowerCellRCarg3 = tele_PowerCellRCarg3;
+        this.tele_PowerCellEndLPanel = tele_PowerCellEndLPanel;
+        this.tele_PowerCellEndLPowerCell = tele_PowerCellEndLPowerCell;
+        this.tele_PowerCellEndRPanel = tele_PowerCellEndRPanel;
+        this.tele_PowerCellEndRPowerCell = tele_PowerCellEndRPowerCell;
         this.tele_RghtRocket_LPan1 = tele_RghtRocket_LPan1;
         this.tele_RghtRocket_LPan2 = tele_RghtRocket_LPan2;
         this.tele_RghtRocket_LPan3 = tele_RghtRocket_LPan3;
@@ -250,9 +250,9 @@ public class matchData implements Serializable {
         this.tele_RghtRocket_RCarg1 = tele_RghtRocket_RCarg1;
         this.tele_RghtRocket_RCarg2 = tele_RghtRocket_RCarg2;
         this.tele_RghtRocket_RCarg3 = tele_RghtRocket_RCarg3;
-        this.tele_cargo_floor = tele_cargo_floor;
-        this.tele_cargo_playSta = tele_cargo_playSta;
-        this.tele_cargo_Corral = tele_cargo_Corral;
+        this.tele_PowerCell_floor = tele_PowerCell_floor;
+        this.tele_PowerCell_playSta = tele_PowerCell_playSta;
+        this.tele_PowerCell_Corral = tele_PowerCell_Corral;
         this.tele_Panel_floor = tele_Panel_floor;
         this.tele_Panel_playSta = tele_Panel_playSta;
         this.tele_got_lift = tele_got_lift;
@@ -264,7 +264,7 @@ public class matchData implements Serializable {
         this.tele_comment = tele_comment;
         this.final_lostParts = final_lostParts;
         this.final_lostComms = final_lostComms;
-        this.final_puCargoDef = final_puCargoDef;
+        this.final_puPowerCellDef = final_puPowerCellDef;
         this.final_defLast30 = final_defLast30;
         this.final_defense_good = final_defense_good;
         this.final_def_Block = final_def_Block;
@@ -306,12 +306,12 @@ public matchData() {
         this.team_num = team_num;
     }
 
-    public boolean isPre_cargo() {
-        return pre_cargo;
+    public boolean isPre_PowerCell() {
+        return pre_PowerCell;
     }
 
-    public void setPre_cargo(boolean pre_cargo) {
-        this.pre_cargo = pre_cargo;
+    public void setPre_PowerCell(boolean pre_PowerCell) {
+        this.pre_PowerCell = pre_PowerCell;
     }
 
     public boolean isPre_panel() {
@@ -370,12 +370,12 @@ public matchData() {
         this.sand_PU2ndPanel = sand_PU2ndPanel;
     }
 
-    public boolean isSand_PU2ndCargo() {
-        return sand_PU2ndCargo;
+    public boolean isSand_PU2ndPowerCell() {
+        return sand_PU2ndPowerCell;
     }
 
-    public void setSand_PU2ndCargo(boolean sand_PU2ndCargo) {
-        this.sand_PU2ndCargo = sand_PU2ndCargo;
+    public void setSand_PU2ndPowerCell(boolean sand_PU2ndPowerCell) {
+        this.sand_PU2ndPowerCell = sand_PU2ndPowerCell;
     }
 
     public boolean isSand_PU2ndPlSta() {
@@ -410,12 +410,12 @@ public matchData() {
         this.sand_PU3rdPanel = sand_PU3rdPanel;
     }
 
-    public boolean isSand_PU3rdCargo() {
-        return sand_PU3rdCargo;
+    public boolean isSand_PU3rdPowerCell() {
+        return sand_PU3rdPowerCell;
     }
 
-    public void setSand_PU3rdCargo(boolean sand_PU3rdCargo) {
-        this.sand_PU3rdCargo = sand_PU3rdCargo;
+    public void setSand_PU3rdPowerCell(boolean sand_PU3rdPowerCell) {
+        this.sand_PU3rdPowerCell = sand_PU3rdPowerCell;
     }
 
     public boolean isSand_PU3rdPlSta() {
@@ -554,132 +554,132 @@ public matchData() {
         this.sand_LeftRocket_RCarg3 = sand_LeftRocket_RCarg3;
     }
 
-    public boolean isSand_CargoLPan1() {
-        return sand_CargoLPan1;
+    public boolean isSand_PowerCellLPan1() {
+        return sand_PowerCellLPan1;
     }
 
-    public void setSand_CargoLPan1(boolean sand_CargoLPan1) {
-        this.sand_CargoLPan1 = sand_CargoLPan1;
+    public void setSand_PowerCellLPan1(boolean sand_PowerCellLPan1) {
+        this.sand_PowerCellLPan1 = sand_PowerCellLPan1;
     }
 
-    public boolean isSand_CargoLPan2() {
-        return sand_CargoLPan2;
+    public boolean isSand_PowerCellLPan2() {
+        return sand_PowerCellLPan2;
     }
 
-    public void setSand_CargoLPan2(boolean sand_CargoLPan2) {
-        this.sand_CargoLPan2 = sand_CargoLPan2;
+    public void setSand_PowerCellLPan2(boolean sand_PowerCellLPan2) {
+        this.sand_PowerCellLPan2 = sand_PowerCellLPan2;
     }
 
-    public boolean isSand_CargoLPan3() {
-        return sand_CargoLPan3;
+    public boolean isSand_PowerCellLPan3() {
+        return sand_PowerCellLPan3;
     }
 
-    public void setSand_CargoLPan3(boolean sand_CargoLPan3) {
-        this.sand_CargoLPan3 = sand_CargoLPan3;
+    public void setSand_PowerCellLPan3(boolean sand_PowerCellLPan3) {
+        this.sand_PowerCellLPan3 = sand_PowerCellLPan3;
     }
 
-    public boolean isSand_CargoRPan1() {
-        return sand_CargoRPan1;
+    public boolean isSand_PowerCellRPan1() {
+        return sand_PowerCellRPan1;
     }
 
-    public void setSand_CargoRPan1(boolean sand_CargoRPan1) {
-        this.sand_CargoRPan1 = sand_CargoRPan1;
+    public void setSand_PowerCellRPan1(boolean sand_PowerCellRPan1) {
+        this.sand_PowerCellRPan1 = sand_PowerCellRPan1;
     }
 
-    public boolean isSand_CargoRPan2() {
-        return sand_CargoRPan2;
+    public boolean isSand_PowerCellRPan2() {
+        return sand_PowerCellRPan2;
     }
 
-    public void setSand_CargoRPan2(boolean sand_CargoRPan2) {
-        this.sand_CargoRPan2 = sand_CargoRPan2;
+    public void setSand_PowerCellRPan2(boolean sand_PowerCellRPan2) {
+        this.sand_PowerCellRPan2 = sand_PowerCellRPan2;
     }
 
-    public boolean isSand_CargoRPan3() {
-        return sand_CargoRPan3;
+    public boolean isSand_PowerCellRPan3() {
+        return sand_PowerCellRPan3;
     }
 
-    public void setSand_CargoRPan3(boolean sand_CargoRPan3) {
-        this.sand_CargoRPan3 = sand_CargoRPan3;
+    public void setSand_PowerCellRPan3(boolean sand_PowerCellRPan3) {
+        this.sand_PowerCellRPan3 = sand_PowerCellRPan3;
     }
 
-    public boolean isSand_CargoLCarg1() {
-        return sand_CargoLCarg1;
+    public boolean isSand_PowerCellLCarg1() {
+        return sand_PowerCellLCarg1;
     }
 
-    public void setSand_CargoLCarg1(boolean sand_CargoLCarg1) {
-        this.sand_CargoLCarg1 = sand_CargoLCarg1;
+    public void setSand_PowerCellLCarg1(boolean sand_PowerCellLCarg1) {
+        this.sand_PowerCellLCarg1 = sand_PowerCellLCarg1;
     }
 
-    public boolean isSand_CargoLCarg2() {
-        return sand_CargoLCarg2;
+    public boolean isSand_PowerCellLCarg2() {
+        return sand_PowerCellLCarg2;
     }
 
-    public void setSand_CargoLCarg2(boolean sand_CargoLCarg2) {
-        this.sand_CargoLCarg2 = sand_CargoLCarg2;
+    public void setSand_PowerCellLCarg2(boolean sand_PowerCellLCarg2) {
+        this.sand_PowerCellLCarg2 = sand_PowerCellLCarg2;
     }
 
-    public boolean isSand_CargoLCarg3() {
-        return sand_CargoLCarg3;
+    public boolean isSand_PowerCellLCarg3() {
+        return sand_PowerCellLCarg3;
     }
 
-    public void setSand_CargoLCarg3(boolean sand_CargoLCarg3) {
-        this.sand_CargoLCarg3 = sand_CargoLCarg3;
+    public void setSand_PowerCellLCarg3(boolean sand_PowerCellLCarg3) {
+        this.sand_PowerCellLCarg3 = sand_PowerCellLCarg3;
     }
 
-    public boolean isSand_CargoRCarg1() {
-        return sand_CargoRCarg1;
+    public boolean isSand_PowerCellRCarg1() {
+        return sand_PowerCellRCarg1;
     }
 
-    public void setSand_CargoRCarg1(boolean sand_CargoRCarg1) {
-        this.sand_CargoRCarg1 = sand_CargoRCarg1;
+    public void setSand_PowerCellRCarg1(boolean sand_PowerCellRCarg1) {
+        this.sand_PowerCellRCarg1 = sand_PowerCellRCarg1;
     }
 
-    public boolean isSand_CargoRCarg2() {
-        return sand_CargoRCarg2;
+    public boolean isSand_PowerCellRCarg2() {
+        return sand_PowerCellRCarg2;
     }
 
-    public void setSand_CargoRCarg2(boolean sand_CargoRCarg2) {
-        this.sand_CargoRCarg2 = sand_CargoRCarg2;
+    public void setSand_PowerCellRCarg2(boolean sand_PowerCellRCarg2) {
+        this.sand_PowerCellRCarg2 = sand_PowerCellRCarg2;
     }
 
-    public boolean isSand_CargoRCarg3() {
-        return sand_CargoRCarg3;
+    public boolean isSand_PowerCellRCarg3() {
+        return sand_PowerCellRCarg3;
     }
 
-    public void setSand_CargoRCarg3(boolean sand_CargoRCarg3) {
-        this.sand_CargoRCarg3 = sand_CargoRCarg3;
+    public void setSand_PowerCellRCarg3(boolean sand_PowerCellRCarg3) {
+        this.sand_PowerCellRCarg3 = sand_PowerCellRCarg3;
     }
 
-    public boolean isSand_CargoEndLPanel() {
-        return sand_CargoEndLPanel;
+    public boolean isSand_PowerCellEndLPanel() {
+        return sand_PowerCellEndLPanel;
     }
 
-    public void setSand_CargoEndLPanel(boolean sand_CargoEndLPanel) {
-        this.sand_CargoEndLPanel = sand_CargoEndLPanel;
+    public void setSand_PowerCellEndLPanel(boolean sand_PowerCellEndLPanel) {
+        this.sand_PowerCellEndLPanel = sand_PowerCellEndLPanel;
     }
 
-    public boolean isSand_CargoEndLCargo() {
-        return sand_CargoEndLCargo;
+    public boolean isSand_PowerCellEndLPowerCell() {
+        return sand_PowerCellEndLPowerCell;
     }
 
-    public void setSand_CargoEndLCargo(boolean sand_CargoEndLCargo) {
-        this.sand_CargoEndLCargo = sand_CargoEndLCargo;
+    public void setSand_PowerCellEndLPowerCell(boolean sand_PowerCellEndLPowerCell) {
+        this.sand_PowerCellEndLPowerCell = sand_PowerCellEndLPowerCell;
     }
 
-    public boolean isSand_CargoEndRPanel() {
-        return sand_CargoEndRPanel;
+    public boolean isSand_PowerCellEndRPanel() {
+        return sand_PowerCellEndRPanel;
     }
 
-    public void setSand_CargoEndRPanel(boolean sand_CargoEndRPanel) {
-        this.sand_CargoEndRPanel = sand_CargoEndRPanel;
+    public void setSand_PowerCellEndRPanel(boolean sand_PowerCellEndRPanel) {
+        this.sand_PowerCellEndRPanel = sand_PowerCellEndRPanel;
     }
 
-    public boolean isSand_CargoEndRCargo() {
-        return sand_CargoEndRCargo;
+    public boolean isSand_PowerCellEndRPowerCell() {
+        return sand_PowerCellEndRPowerCell;
     }
 
-    public void setSand_CargoEndRCargo(boolean sand_CargoEndRCargo) {
-        this.sand_CargoEndRCargo = sand_CargoEndRCargo;
+    public void setSand_PowerCellEndRPowerCell(boolean sand_PowerCellEndRPowerCell) {
+        this.sand_PowerCellEndRPowerCell = sand_PowerCellEndRPowerCell;
     }
 
     public boolean isSand_RghtRocket_LPan1() {
@@ -874,132 +874,132 @@ public matchData() {
         this.tele_LeftRocket_RCarg3 = tele_LeftRocket_RCarg3;
     }
 
-    public boolean isTele_CargoLPan1() {
-        return tele_CargoLPan1;
+    public boolean isTele_PowerCellLPan1() {
+        return tele_PowerCellLPan1;
     }
 
-    public void setTele_CargoLPan1(boolean tele_CargoLPan1) {
-        this.tele_CargoLPan1 = tele_CargoLPan1;
+    public void setTele_PowerCellLPan1(boolean tele_PowerCellLPan1) {
+        this.tele_PowerCellLPan1 = tele_PowerCellLPan1;
     }
 
-    public boolean isTele_CargoLPan2() {
-        return tele_CargoLPan2;
+    public boolean isTele_PowerCellLPan2() {
+        return tele_PowerCellLPan2;
     }
 
-    public void setTele_CargoLPan2(boolean tele_CargoLPan2) {
-        this.tele_CargoLPan2 = tele_CargoLPan2;
+    public void setTele_PowerCellLPan2(boolean tele_PowerCellLPan2) {
+        this.tele_PowerCellLPan2 = tele_PowerCellLPan2;
     }
 
-    public boolean isTele_CargoLPan3() {
-        return tele_CargoLPan3;
+    public boolean isTele_PowerCellLPan3() {
+        return tele_PowerCellLPan3;
     }
 
-    public void setTele_CargoLPan3(boolean tele_CargoLPan3) {
-        this.tele_CargoLPan3 = tele_CargoLPan3;
+    public void setTele_PowerCellLPan3(boolean tele_PowerCellLPan3) {
+        this.tele_PowerCellLPan3 = tele_PowerCellLPan3;
     }
 
-    public boolean isTele_CargoRPan1() {
-        return tele_CargoRPan1;
+    public boolean isTele_PowerCellRPan1() {
+        return tele_PowerCellRPan1;
     }
 
-    public void setTele_CargoRPan1(boolean tele_CargoRPan1) {
-        this.tele_CargoRPan1 = tele_CargoRPan1;
+    public void setTele_PowerCellRPan1(boolean tele_PowerCellRPan1) {
+        this.tele_PowerCellRPan1 = tele_PowerCellRPan1;
     }
 
-    public boolean isTele_CargoRPan2() {
-        return tele_CargoRPan2;
+    public boolean isTele_PowerCellRPan2() {
+        return tele_PowerCellRPan2;
     }
 
-    public void setTele_CargoRPan2(boolean tele_CargoRPan2) {
-        this.tele_CargoRPan2 = tele_CargoRPan2;
+    public void setTele_PowerCellRPan2(boolean tele_PowerCellRPan2) {
+        this.tele_PowerCellRPan2 = tele_PowerCellRPan2;
     }
 
-    public boolean isTele_CargoRPan3() {
-        return tele_CargoRPan3;
+    public boolean isTele_PowerCellRPan3() {
+        return tele_PowerCellRPan3;
     }
 
-    public void setTele_CargoRPan3(boolean tele_CargoRPan3) {
-        this.tele_CargoRPan3 = tele_CargoRPan3;
+    public void setTele_PowerCellRPan3(boolean tele_PowerCellRPan3) {
+        this.tele_PowerCellRPan3 = tele_PowerCellRPan3;
     }
 
-    public boolean isTele_CargoLCarg1() {
-        return tele_CargoLCarg1;
+    public boolean isTele_PowerCellLCarg1() {
+        return tele_PowerCellLCarg1;
     }
 
-    public void setTele_CargoLCarg1(boolean tele_CargoLCarg1) {
-        this.tele_CargoLCarg1 = tele_CargoLCarg1;
+    public void setTele_PowerCellLCarg1(boolean tele_PowerCellLCarg1) {
+        this.tele_PowerCellLCarg1 = tele_PowerCellLCarg1;
     }
 
-    public boolean isTele_CargoLCarg2() {
-        return tele_CargoLCarg2;
+    public boolean isTele_PowerCellLCarg2() {
+        return tele_PowerCellLCarg2;
     }
 
-    public void setTele_CargoLCarg2(boolean tele_CargoLCarg2) {
-        this.tele_CargoLCarg2 = tele_CargoLCarg2;
+    public void setTele_PowerCellLCarg2(boolean tele_PowerCellLCarg2) {
+        this.tele_PowerCellLCarg2 = tele_PowerCellLCarg2;
     }
 
-    public boolean isTele_CargoLCarg3() {
-        return tele_CargoLCarg3;
+    public boolean isTele_PowerCellLCarg3() {
+        return tele_PowerCellLCarg3;
     }
 
-    public void setTele_CargoLCarg3(boolean tele_CargoLCarg3) {
-        this.tele_CargoLCarg3 = tele_CargoLCarg3;
+    public void setTele_PowerCellLCarg3(boolean tele_PowerCellLCarg3) {
+        this.tele_PowerCellLCarg3 = tele_PowerCellLCarg3;
     }
 
-    public boolean isTele_CargoRCarg1() {
-        return tele_CargoRCarg1;
+    public boolean isTele_PowerCellRCarg1() {
+        return tele_PowerCellRCarg1;
     }
 
-    public void setTele_CargoRCarg1(boolean tele_CargoRCarg1) {
-        this.tele_CargoRCarg1 = tele_CargoRCarg1;
+    public void setTele_PowerCellRCarg1(boolean tele_PowerCellRCarg1) {
+        this.tele_PowerCellRCarg1 = tele_PowerCellRCarg1;
     }
 
-    public boolean isTele_CargoRCarg2() {
-        return tele_CargoRCarg2;
+    public boolean isTele_PowerCellRCarg2() {
+        return tele_PowerCellRCarg2;
     }
 
-    public void setTele_CargoRCarg2(boolean tele_CargoRCarg2) {
-        this.tele_CargoRCarg2 = tele_CargoRCarg2;
+    public void setTele_PowerCellRCarg2(boolean tele_PowerCellRCarg2) {
+        this.tele_PowerCellRCarg2 = tele_PowerCellRCarg2;
     }
 
-    public boolean isTele_CargoRCarg3() {
-        return tele_CargoRCarg3;
+    public boolean isTele_PowerCellRCarg3() {
+        return tele_PowerCellRCarg3;
     }
 
-    public void setTele_CargoRCarg3(boolean tele_CargoRCarg3) {
-        this.tele_CargoRCarg3 = tele_CargoRCarg3;
+    public void setTele_PowerCellRCarg3(boolean tele_PowerCellRCarg3) {
+        this.tele_PowerCellRCarg3 = tele_PowerCellRCarg3;
     }
 
-    public boolean isTele_CargoEndLPanel() {
-        return tele_CargoEndLPanel;
+    public boolean isTele_PowerCellEndLPanel() {
+        return tele_PowerCellEndLPanel;
     }
 
-    public void setTele_CargoEndLPanel(boolean tele_CargoEndLPanel) {
-        this.tele_CargoEndLPanel = tele_CargoEndLPanel;
+    public void setTele_PowerCellEndLPanel(boolean tele_PowerCellEndLPanel) {
+        this.tele_PowerCellEndLPanel = tele_PowerCellEndLPanel;
     }
 
-    public boolean isTele_CargoEndLCargo() {
-        return tele_CargoEndLCargo;
+    public boolean isTele_PowerCellEndLPowerCell() {
+        return tele_PowerCellEndLPowerCell;
     }
 
-    public void setTele_CargoEndLCargo(boolean tele_CargoEndLCargo) {
-        this.tele_CargoEndLCargo = tele_CargoEndLCargo;
+    public void setTele_PowerCellEndLPowerCell(boolean tele_PowerCellEndLPowerCell) {
+        this.tele_PowerCellEndLPowerCell = tele_PowerCellEndLPowerCell;
     }
 
-    public boolean isTele_CargoEndRPanel() {
-        return tele_CargoEndRPanel;
+    public boolean isTele_PowerCellEndRPanel() {
+        return tele_PowerCellEndRPanel;
     }
 
-    public void setTele_CargoEndRPanel(boolean tele_CargoEndRPanel) {
-        this.tele_CargoEndRPanel = tele_CargoEndRPanel;
+    public void setTele_PowerCellEndRPanel(boolean tele_PowerCellEndRPanel) {
+        this.tele_PowerCellEndRPanel = tele_PowerCellEndRPanel;
     }
 
-    public boolean isTele_CargoEndRCargo() {
-        return tele_CargoEndRCargo;
+    public boolean isTele_PowerCellEndRPowerCell() {
+        return tele_PowerCellEndRPowerCell;
     }
 
-    public void setTele_CargoEndRCargo(boolean tele_CargoEndRCargo) {
-        this.tele_CargoEndRCargo = tele_CargoEndRCargo;
+    public void setTele_PowerCellEndRPowerCell(boolean tele_PowerCellEndRPowerCell) {
+        this.tele_PowerCellEndRPowerCell = tele_PowerCellEndRPowerCell;
     }
 
     public boolean isTele_RghtRocket_LPan1() {
@@ -1098,28 +1098,28 @@ public matchData() {
         this.tele_RghtRocket_RCarg3 = tele_RghtRocket_RCarg3;
     }
 
-    public boolean isTele_cargo_floor() {
-        return tele_cargo_floor;
+    public boolean isTele_PowerCell_floor() {
+        return tele_PowerCell_floor;
     }
 
-    public void setTele_cargo_floor(boolean tele_cargo_floor) {
-        this.tele_cargo_floor = tele_cargo_floor;
+    public void setTele_PowerCell_floor(boolean tele_PowerCell_floor) {
+        this.tele_PowerCell_floor = tele_PowerCell_floor;
     }
 
-    public boolean isTele_cargo_playSta() {
-        return tele_cargo_playSta;
+    public boolean isTele_PowerCell_playSta() {
+        return tele_PowerCell_playSta;
     }
 
-    public void setTele_cargo_playSta(boolean tele_cargo_playSta) {
-        this.tele_cargo_playSta = tele_cargo_playSta;
+    public void setTele_PowerCell_playSta(boolean tele_PowerCell_playSta) {
+        this.tele_PowerCell_playSta = tele_PowerCell_playSta;
     }
 
-    public boolean isTele_cargo_Corral() {
-        return tele_cargo_Corral;
+    public boolean isTele_PowerCell_Corral() {
+        return tele_PowerCell_Corral;
     }
 
-    public void setTele_cargo_Corral(boolean tele_cargo_Corral) {
-        this.tele_cargo_Corral = tele_cargo_Corral;
+    public void setTele_PowerCell_Corral(boolean tele_PowerCell_Corral) {
+        this.tele_PowerCell_Corral = tele_PowerCell_Corral;
     }
 
     public boolean isTele_Panel_floor() {
@@ -1210,12 +1210,12 @@ public matchData() {
         this.final_lostComms = final_lostComms;
     }
 
-    public boolean isFinal_puCargoDef() {
-        return final_puCargoDef;
+    public boolean isFinal_puPowerCellDef() {
+        return final_puPowerCellDef;
     }
 
-    public void setFinal_puCargoDef(boolean final_puCargoDef) {
-        this.final_puCargoDef = final_puCargoDef;
+    public void setFinal_puPowerCellDef(boolean final_puPowerCellDef) {
+        this.final_puPowerCellDef = final_puPowerCellDef;
     }
 
     public boolean isFinal_defLast30() {

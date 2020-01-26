@@ -2,27 +2,27 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <!--<android.support.v7.preference.SwitchPreferenceCompat />-->
 
-    <PreferenceCategory android:title="Cargo">
+    <PreferenceCategory android:title="PowerCell">
         <EditTextPreference
-            android:id="@+id/txt_cargoL1"
+            android:id="@+id/txt_PowerCellL1"
             android:inputType="numberDecimal"
             android:defaultValue="1.0"
-            android:key="prefCargo_L1"
-            android:summary="Multiplier for Cargo scored at Level 1"
+            android:key="prefPowerCell_L1"
+            android:summary="Multiplier for PowerCell scored at Level 1"
             android:title="Level 1" />
         <EditTextPreference
-            android:id="@+id/txt_cargoL2"
+            android:id="@+id/txt_PowerCellL2"
             android:inputType="numberDecimal"
             android:defaultValue="2.0"
-            android:key="prefCargo_L2"
-            android:summary="Multiplier for Cargo scored at Level 2"
+            android:key="prefPowerCell_L2"
+            android:summary="Multiplier for PowerCell scored at Level 2"
             android:title="Level 2" />
         <EditTextPreference
-            android:id="@+id/txt_cargoL3"
+            android:id="@+id/txt_PowerCellL3"
             android:inputType="numberDecimal"
             android:defaultValue="3.0"
-            android:key="prefCargo_L3"
-            android:summary="Multiplier for Cargo scored at Level 3"
+            android:key="prefPowerCell_L3"
+            android:summary="Multiplier for PowerCell scored at Level 3"
             android:title="Level 3" />
 
     </PreferenceCategory>
@@ -126,12 +126,12 @@
             android:summary="Multiplier for Climbing"
             android:title="Climb Weight" />
         <EditTextPreference
-            android:id="@+id/txt_CargoWt"
+            android:id="@+id/txt_PowerCellWt"
             android:inputType="number"
             android:defaultValue="1.0"
-            android:key="prefWeight_cargo"
-            android:summary="Multiplier for Cargo Scored"
-            android:title="Cargo Weight" />
+            android:key="prefWeight_PowerCell"
+            android:summary="Multiplier for PowerCell Scored"
+            android:title="PowerCell Weight" />
         <EditTextPreference
             android:id="@+id/txt_PanelWt"
             android:inputType="number"

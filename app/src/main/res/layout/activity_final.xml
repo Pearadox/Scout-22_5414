@@ -38,13 +38,13 @@
         android:layout_toEndOf="@+id/chk_lostPart" />
 
     <CheckBox
-        android:id="@+id/chk_cargoDefense"
+        android:id="@+id/chk_PowerCellDefense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/chk_lostPart"
         android:layout_marginStart="16dp"
         android:layout_marginTop="1dp"
-        android:text="P/U Cargo on Defense" />
+        android:text="P/U PowerCell on Defense" />
 
     <CheckBox
         android:id="@+id/chk_defense30"

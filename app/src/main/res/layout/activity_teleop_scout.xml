@@ -190,9 +190,9 @@
         </RelativeLayout>
         <!--</LinearLayout>-->
         // ==============================================================================
-        // Cargo Ship
+        // PowerCell Ship
         <!--<LinearLayout-->
-        <!--android:id="@+id/lin_CargoShip"-->
+        <!--android:id="@+id/lin_PowerCellShip"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="185dp"-->
         <!--android:layout_below="@+id/lin_LeftRocketShip"-->
@@ -200,21 +200,21 @@
         <!--android:orientation="horizontal">-->
 
         <RelativeLayout
-            android:id="@+id/rel_CargoShip"
+            android:id="@+id/rel_PowerCellShip"
             android:layout_width="250dp"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView_Switch"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:contentDescription="Cargo Ship"
-                android:src="@drawable/cargo_ship" />
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView_Switch"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="200dp"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:layout_alignParentTop="true"-->
+<!--                android:contentDescription="PowerCell Ship"-->
+<!--                android:src="@drawable/PowerCell_ship" />-->
 
             <CheckBox
-                android:id="@+id/chk_CargoRCarg1"
+                android:id="@+id/chk_PowerCellRCarg1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -223,7 +223,7 @@
                 android:buttonTint="@color/yellow" />
 
             <CheckBox
-                android:id="@+id/chk_CargoRPan1"
+                android:id="@+id/chk_PowerCellRPan1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -232,7 +232,7 @@
                 android:buttonTint="@color/brightblue" />
 
             <CheckBox
-                android:id="@+id/chk_CargoRCarg2"
+                android:id="@+id/chk_PowerCellRCarg2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -241,7 +241,7 @@
                 android:buttonTint="@color/yellow" />
 
             <CheckBox
-                android:id="@+id/chk_CargoRPan2"
+                android:id="@+id/chk_PowerCellRPan2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -250,7 +250,7 @@
                 android:buttonTint="@color/brightblue" />
 
             <CheckBox
-                android:id="@+id/chk_CargoRCarg3"
+                android:id="@+id/chk_PowerCellRCarg3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -259,7 +259,7 @@
                 android:buttonTint="@color/yellow" />
 
             <CheckBox
-                android:id="@+id/chk_CargoRPan3"
+                android:id="@+id/chk_PowerCellRPan3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -269,7 +269,7 @@
 
             // --------------- LEFT ----------------------------------
             <CheckBox
-                android:id="@+id/chk_CargoLPan1"
+                android:id="@+id/chk_PowerCellLPan1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -278,7 +278,7 @@
                 android:buttonTint="@color/brightblue" />
 
             <CheckBox
-                android:id="@+id/chk_CargoLCarg1"
+                android:id="@+id/chk_PowerCellLCarg1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -286,7 +286,7 @@
                 android:layout_marginTop="78dp"
                 android:buttonTint="@color/yellow" />
             <CheckBox
-                android:id="@+id/chk_CargoLPan2"
+                android:id="@+id/chk_PowerCellLPan2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -294,7 +294,7 @@
                 android:layout_marginTop="45dp"
                 android:buttonTint="@color/brightblue" />
             <CheckBox
-                android:id="@+id/chk_CargoLCarg2"
+                android:id="@+id/chk_PowerCellLCarg2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -302,7 +302,7 @@
                 android:layout_marginTop="45dp"
                 android:buttonTint="@color/yellow" />
             <CheckBox
-                android:id="@+id/chk_CargoLPan3"
+                android:id="@+id/chk_PowerCellLPan3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -310,7 +310,7 @@
                 android:layout_marginTop="12dp"
                 android:buttonTint="@color/brightblue" />
             <CheckBox
-                android:id="@+id/chk_CargoLCarg3"
+                android:id="@+id/chk_PowerCellLCarg3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -319,7 +319,7 @@
                 android:buttonTint="@color/yellow" />
             // ----------------- END ----------------------------
             <CheckBox
-                android:id="@+id/chk_CargoEndLPanel"
+                android:id="@+id/chk_PowerCellEndLPanel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -328,7 +328,7 @@
                 android:buttonTint="@color/brightblue" />
 
             <CheckBox
-                android:id="@+id/chk_CargoEndLCargo"
+                android:id="@+id/chk_PowerCellEndLPowerCell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -336,7 +336,7 @@
                 android:layout_marginTop="130dp"
                 android:buttonTint="@color/yellow" />
             <CheckBox
-                android:id="@+id/chk_CargoEndRPanel"
+                android:id="@+id/chk_PowerCellEndRPanel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -344,7 +344,7 @@
                 android:layout_marginTop="170dp"
                 android:buttonTint="@color/brightblue" />
             <CheckBox
-                android:id="@+id/chk_CargoEndRCargo"
+                android:id="@+id/chk_PowerCellEndRPowerCell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -361,7 +361,7 @@
         <!--android:id="@+id/lin_LeftRocketShip"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="185dp"-->
-        <!--android:layout_below="@+id/lin_CargoShip"-->
+        <!--android:layout_below="@+id/lin_PowerCellShip"-->
         <!--android:layout_marginTop="12sp"-->
         <!--android:orientation="horizontal">-->
         <RelativeLayout
@@ -523,14 +523,14 @@
             android:buttonTint="@color/brightblue"
             android:text="= Panel " />
         <CheckBox
-            android:id="@+id/chk_LegendCargo"
+            android:id="@+id/chk_LegendPowerCell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:clickable="false"
             android:layout_marginStart="10dp"
             android:buttonTint="@color/yellow"
-            android:text=" = Cargo" />
+            android:text=" = PowerCell" />
 
     </LinearLayout>
 // ======= End of Legend
@@ -591,17 +591,17 @@
 
     // ==============================================================================
     <LinearLayout
-        android:id="@+id/lin_Cargo"
+        android:id="@+id/lin_PowerCell"
         android:layout_width="match_parent"
         android:layout_height="60sp"
         android:layout_below="@+id/lbl_From"
         android:orientation="horizontal">
         <ImageView
-            android:id="@+id/imageView_Cargo"
+            android:id="@+id/imageView_PowerCell"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="Cargo Ball"
-            android:src="@drawable/cargo_ball" />
+            android:contentDescription="PowerCell Ball"
+            android:src="@drawable/pwrcell_ball" />
 
         <CheckBox
             android:id="@+id/chkBox_Corral"
@@ -611,14 +611,14 @@
             android:text="Corral" />
 
         <CheckBox
-            android:id="@+id/chkBox_CargoPlayerSta"
+            android:id="@+id/chkBox_PowerCellPlayerSta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Player Station" />
 
         <CheckBox
-            android:id="@+id/chkBox_PU_Cargo_floor"
+            android:id="@+id/chkBox_PU_PowerCell_floor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -631,7 +631,7 @@
         android:id="@+id/lin_Pieces"
         android:layout_width="match_parent"
         android:layout_height="60sp"
-        android:layout_below="@+id/lin_Cargo"
+        android:layout_below="@+id/lin_PowerCell"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/imageView_Hatch"

@@ -1032,7 +1032,7 @@ public class Visualizer_Activity extends AppCompatActivity {
                         leaveHAB2++;
                     }
                     dropped = dropped + match_inst.getSand_num_Dropped();
-                    // =================== Cargo ============
+                    // =================== PowerCell ============
                     if (match_inst.isSand_LeftRocket_LCarg1()) {
                         cgNum++;
                     }
@@ -1069,28 +1069,28 @@ public class Visualizer_Activity extends AppCompatActivity {
                     if (match_inst.isSand_RghtRocket_RCarg3()) {
                         cgGt1++;
                     }
-                    if (match_inst.isSand_CargoLCarg1()) {              // Cargo Ship
+                    if (match_inst.isSand_PowerCellLCarg1()) {              // PowerCell Ship
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoLCarg2()) {
+                    if (match_inst.isSand_PowerCellLCarg2()) {
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoLCarg3()) {
+                    if (match_inst.isSand_PowerCellLCarg3()) {
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoRCarg1()) {
+                    if (match_inst.isSand_PowerCellRCarg1()) {
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoRCarg2()) {
+                    if (match_inst.isSand_PowerCellRCarg2()) {
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoRCarg3()) {
+                    if (match_inst.isSand_PowerCellRCarg3()) {
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoEndLCargo()) {      // End
+                    if (match_inst.isSand_PowerCellEndLPowerCell()) {      // End
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoEndRCargo()) {      // End
+                    if (match_inst.isSand_PowerCellEndRPowerCell()) {      // End
                         cgNum++;
                     }
                     // =================== Panels ============
@@ -1130,28 +1130,28 @@ public class Visualizer_Activity extends AppCompatActivity {
                     if (match_inst.isSand_RghtRocket_RPan3()) {
                         pnGt1++;
                     }
-                    if (match_inst.isSand_CargoLPan1()) {              // Cargo Ship
+                    if (match_inst.isSand_PowerCellLPan1()) {              // PowerCell Ship
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoLPan2()) {
+                    if (match_inst.isSand_PowerCellLPan2()) {
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoLPan3()) {
+                    if (match_inst.isSand_PowerCellLPan3()) {
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoRPan1()) {
+                    if (match_inst.isSand_PowerCellRPan1()) {
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoRPan2()) {
+                    if (match_inst.isSand_PowerCellRPan2()) {
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoRPan3()) {
+                    if (match_inst.isSand_PowerCellRPan3()) {
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoEndLPanel()) {      // End
+                    if (match_inst.isSand_PowerCellEndLPanel()) {      // End
                         cgNum++;
                     }
-                    if (match_inst.isSand_CargoEndRPanel()) {      // End
+                    if (match_inst.isSand_PowerCellEndRPanel()) {      // End
                         cgNum++;
                     }
 
@@ -1159,7 +1159,7 @@ public class Visualizer_Activity extends AppCompatActivity {
                 // ******************** TeleOps ********************
                 // *************************************************
                     dropped = dropped + match_inst.getTele_num_Dropped();
-                    // =================== Cargo ============
+                    // =================== PowerCell ============
                     if (match_inst.isTele_LeftRocket_LCarg1()) {
                         TcgNum++;
                     }
@@ -1196,28 +1196,28 @@ public class Visualizer_Activity extends AppCompatActivity {
                     if (match_inst.isTele_RghtRocket_RCarg3()) {
                         TcgGt1++;
                     }
-                    if (match_inst.isTele_CargoLCarg1()) {              // Cargo Ship
+                    if (match_inst.isTele_PowerCellLCarg1()) {              // PowerCell Ship
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoLCarg2()) {
+                    if (match_inst.isTele_PowerCellLCarg2()) {
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoLCarg3()) {
+                    if (match_inst.isTele_PowerCellLCarg3()) {
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoRCarg1()) {
+                    if (match_inst.isTele_PowerCellRCarg1()) {
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoRCarg2()) {
+                    if (match_inst.isTele_PowerCellRCarg2()) {
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoRCarg3()) {
+                    if (match_inst.isTele_PowerCellRCarg3()) {
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoEndLCargo()) {      // End
+                    if (match_inst.isTele_PowerCellEndLPowerCell()) {      // End
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoEndRCargo()) {      // End
+                    if (match_inst.isTele_PowerCellEndRPowerCell()) {      // End
                         TcgNum++;
                     }
                     // =================== Panels ============
@@ -1257,28 +1257,28 @@ public class Visualizer_Activity extends AppCompatActivity {
                     if (match_inst.isTele_RghtRocket_RPan3()) {
                         TpnGt1++;
                     }
-                    if (match_inst.isTele_CargoLPan1()) {              // Cargo Ship
+                    if (match_inst.isTele_PowerCellLPan1()) {              // PowerCell Ship
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoLPan2()) {
+                    if (match_inst.isTele_PowerCellLPan2()) {
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoLPan3()) {
+                    if (match_inst.isTele_PowerCellLPan3()) {
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoRPan1()) {
+                    if (match_inst.isTele_PowerCellRPan1()) {
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoRPan2()) {
+                    if (match_inst.isTele_PowerCellRPan2()) {
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoRPan3()) {
+                    if (match_inst.isTele_PowerCellRPan3()) {
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoEndLPanel()) {      // End
+                    if (match_inst.isTele_PowerCellEndLPanel()) {      // End
                         TcgNum++;
                     }
-                    if (match_inst.isTele_CargoEndRPanel()) {      // End
+                    if (match_inst.isTele_PowerCellEndRPanel()) {      // End
                         TcgNum++;
                     }
 
