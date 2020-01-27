@@ -15,8 +15,8 @@ public class matchData implements Serializable {
 
                                             // ---- AFTER Start ----
     private boolean sand_mode;              // Do they have Autonomous mode?
-    private boolean sand_leftHAB;           // Did they leave HAB
-    private boolean sand_leftHAB2;          // Did they start from Hab level 2
+    private boolean sand_leftSectorLine;           // Did they leave HAB
+    private boolean sand_leftSectorLine2;          // Did they start from Hab level 2
     private boolean sand_PU2ndPanel;        // Second game piece - Panel
     private boolean sand_PU2ndPowerCell;        // Second game piece - PowerCell
     private boolean sand_PU2ndPlSta;        // 2nd from Player Station
@@ -147,7 +147,7 @@ public class matchData implements Serializable {
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //  Constructor
 
-    public matchData(String match, String team_num, boolean pre_PowerCell, boolean pre_panel, String pre_startPos, int pre_PlayerSta, boolean sand_mode, boolean sand_leftHAB, boolean sand_leftHAB2, boolean sand_PU2ndPanel, boolean sand_PU2ndPowerCell, boolean sand_PU2ndPlSta, boolean sand_PU2ndCorral, boolean sand_PU2ndFloor, boolean sand_PU3rdPanel, boolean sand_PU3rdPowerCell, boolean sand_PU3rdPlSta, boolean sand_PU3rdCorral, boolean sand_PU3rdFloor, int sand_num_Dropped, String sand_comment, boolean sand_LeftRocket_LPan1, boolean sand_LeftRocket_LPan2, boolean sand_LeftRocket_LPan3, boolean sand_LeftRocket_RPan1, boolean sand_LeftRocket_RPan2, boolean sand_LeftRocket_RPan3, boolean sand_LeftRocket_LCarg1, boolean sand_LeftRocket_LCarg2, boolean sand_LeftRocket_LCarg3, boolean sand_LeftRocket_RCarg1, boolean sand_LeftRocket_RCarg2, boolean sand_LeftRocket_RCarg3, boolean sand_PowerCellLPan1, boolean sand_PowerCellLPan2, boolean sand_PowerCellLPan3, boolean sand_PowerCellRPan1, boolean sand_PowerCellRPan2, boolean sand_PowerCellRPan3, boolean sand_PowerCellLCarg1, boolean sand_PowerCellLCarg2, boolean sand_PowerCellLCarg3, boolean sand_PowerCellRCarg1, boolean sand_PowerCellRCarg2, boolean sand_PowerCellRCarg3, boolean sand_PowerCellEndLPanel, boolean sand_PowerCellEndLPowerCell, boolean sand_PowerCellEndRPanel, boolean sand_PowerCellEndRPowerCell, boolean sand_RghtRocket_LPan1, boolean sand_RghtRocket_LPan2, boolean sand_RghtRocket_LPan3, boolean sand_RghtRocket_RPan1, boolean sand_RghtRocket_RPan2, boolean sand_RghtRocket_RPan3, boolean sand_RghtRocket_LCarg1, boolean sand_RghtRocket_LCarg2, boolean sand_RghtRocket_LCarg3, boolean sand_RghtRocket_RCarg1, boolean sand_RghtRocket_RCarg2, boolean sand_RghtRocket_RCarg3, boolean tele_LeftRocket_LPan1, boolean tele_LeftRocket_LPan2, boolean tele_LeftRocket_LPan3, boolean tele_LeftRocket_RPan1, boolean tele_LeftRocket_RPan2, boolean tele_LeftRocket_RPan3, boolean tele_LeftRocket_LCarg1, boolean tele_LeftRocket_LCarg2, boolean tele_LeftRocket_LCarg3, boolean tele_LeftRocket_RCarg1, boolean tele_LeftRocket_RCarg2, boolean tele_LeftRocket_RCarg3, boolean tele_PowerCellLPan1, boolean tele_PowerCellLPan2, boolean tele_PowerCellLPan3, boolean tele_PowerCellRPan1, boolean tele_PowerCellRPan2, boolean tele_PowerCellRPan3, boolean tele_PowerCellLCarg1, boolean tele_PowerCellLCarg2, boolean tele_PowerCellLCarg3, boolean tele_PowerCellRCarg1, boolean tele_PowerCellRCarg2, boolean tele_PowerCellRCarg3, boolean tele_PowerCellEndLPanel, boolean tele_PowerCellEndLPowerCell, boolean tele_PowerCellEndRPanel, boolean tele_PowerCellEndRPowerCell, boolean tele_RghtRocket_LPan1, boolean tele_RghtRocket_LPan2, boolean tele_RghtRocket_LPan3, boolean tele_RghtRocket_RPan1, boolean tele_RghtRocket_RPan2, boolean tele_RghtRocket_RPan3, boolean tele_RghtRocket_LCarg1, boolean tele_RghtRocket_LCarg2, boolean tele_RghtRocket_LCarg3, boolean tele_RghtRocket_RCarg1, boolean tele_RghtRocket_RCarg2, boolean tele_RghtRocket_RCarg3, boolean tele_PowerCell_floor, boolean tele_PowerCell_playSta, boolean tele_PowerCell_Corral, boolean tele_Panel_floor, boolean tele_Panel_playSta, boolean tele_got_lift, boolean tele_lifted, int tele_liftedNum, int tele_level_num, int tele_num_Penalties, int tele_num_Dropped, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_puPowerCellDef, boolean final_defLast30, boolean final_defense_good, boolean final_def_Block, boolean final_def_RocketInt, String final_comment, String final_studID, String final_dateTime) {
+    public matchData(String match, String team_num, boolean pre_PowerCell, boolean pre_panel, String pre_startPos, int pre_PlayerSta, boolean sand_mode, boolean sand_leftSectorLine, boolean sand_leftSectorLine2, boolean sand_PU2ndPanel, boolean sand_PU2ndPowerCell, boolean sand_PU2ndPlSta, boolean sand_PU2ndCorral, boolean sand_PU2ndFloor, boolean sand_PU3rdPanel, boolean sand_PU3rdPowerCell, boolean sand_PU3rdPlSta, boolean sand_PU3rdCorral, boolean sand_PU3rdFloor, int sand_num_Dropped, String sand_comment, boolean sand_LeftRocket_LPan1, boolean sand_LeftRocket_LPan2, boolean sand_LeftRocket_LPan3, boolean sand_LeftRocket_RPan1, boolean sand_LeftRocket_RPan2, boolean sand_LeftRocket_RPan3, boolean sand_LeftRocket_LCarg1, boolean sand_LeftRocket_LCarg2, boolean sand_LeftRocket_LCarg3, boolean sand_LeftRocket_RCarg1, boolean sand_LeftRocket_RCarg2, boolean sand_LeftRocket_RCarg3, boolean sand_PowerCellLPan1, boolean sand_PowerCellLPan2, boolean sand_PowerCellLPan3, boolean sand_PowerCellRPan1, boolean sand_PowerCellRPan2, boolean sand_PowerCellRPan3, boolean sand_PowerCellLCarg1, boolean sand_PowerCellLCarg2, boolean sand_PowerCellLCarg3, boolean sand_PowerCellRCarg1, boolean sand_PowerCellRCarg2, boolean sand_PowerCellRCarg3, boolean sand_PowerCellEndLPanel, boolean sand_PowerCellEndLPowerCell, boolean sand_PowerCellEndRPanel, boolean sand_PowerCellEndRPowerCell, boolean sand_RghtRocket_LPan1, boolean sand_RghtRocket_LPan2, boolean sand_RghtRocket_LPan3, boolean sand_RghtRocket_RPan1, boolean sand_RghtRocket_RPan2, boolean sand_RghtRocket_RPan3, boolean sand_RghtRocket_LCarg1, boolean sand_RghtRocket_LCarg2, boolean sand_RghtRocket_LCarg3, boolean sand_RghtRocket_RCarg1, boolean sand_RghtRocket_RCarg2, boolean sand_RghtRocket_RCarg3, boolean tele_LeftRocket_LPan1, boolean tele_LeftRocket_LPan2, boolean tele_LeftRocket_LPan3, boolean tele_LeftRocket_RPan1, boolean tele_LeftRocket_RPan2, boolean tele_LeftRocket_RPan3, boolean tele_LeftRocket_LCarg1, boolean tele_LeftRocket_LCarg2, boolean tele_LeftRocket_LCarg3, boolean tele_LeftRocket_RCarg1, boolean tele_LeftRocket_RCarg2, boolean tele_LeftRocket_RCarg3, boolean tele_PowerCellLPan1, boolean tele_PowerCellLPan2, boolean tele_PowerCellLPan3, boolean tele_PowerCellRPan1, boolean tele_PowerCellRPan2, boolean tele_PowerCellRPan3, boolean tele_PowerCellLCarg1, boolean tele_PowerCellLCarg2, boolean tele_PowerCellLCarg3, boolean tele_PowerCellRCarg1, boolean tele_PowerCellRCarg2, boolean tele_PowerCellRCarg3, boolean tele_PowerCellEndLPanel, boolean tele_PowerCellEndLPowerCell, boolean tele_PowerCellEndRPanel, boolean tele_PowerCellEndRPowerCell, boolean tele_RghtRocket_LPan1, boolean tele_RghtRocket_LPan2, boolean tele_RghtRocket_LPan3, boolean tele_RghtRocket_RPan1, boolean tele_RghtRocket_RPan2, boolean tele_RghtRocket_RPan3, boolean tele_RghtRocket_LCarg1, boolean tele_RghtRocket_LCarg2, boolean tele_RghtRocket_LCarg3, boolean tele_RghtRocket_RCarg1, boolean tele_RghtRocket_RCarg2, boolean tele_RghtRocket_RCarg3, boolean tele_PowerCell_floor, boolean tele_PowerCell_playSta, boolean tele_PowerCell_Corral, boolean tele_Panel_floor, boolean tele_Panel_playSta, boolean tele_got_lift, boolean tele_lifted, int tele_liftedNum, int tele_level_num, int tele_num_Penalties, int tele_num_Dropped, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_puPowerCellDef, boolean final_defLast30, boolean final_defense_good, boolean final_def_Block, boolean final_def_RocketInt, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
         this.pre_PowerCell = pre_PowerCell;
@@ -155,8 +155,8 @@ public class matchData implements Serializable {
         this.pre_startPos = pre_startPos;
         this.pre_PlayerSta = pre_PlayerSta;
         this.sand_mode = sand_mode;
-        this.sand_leftHAB = sand_leftHAB;
-        this.sand_leftHAB2 = sand_leftHAB2;
+        this.sand_leftSectorLine = sand_leftSectorLine;
+        this.sand_leftSectorLine2 = sand_leftSectorLine2;
         this.sand_PU2ndPanel = sand_PU2ndPanel;
         this.sand_PU2ndPowerCell = sand_PU2ndPowerCell;
         this.sand_PU2ndPlSta = sand_PU2ndPlSta;
@@ -345,20 +345,20 @@ public matchData() {
         this.sand_mode = sand_mode;
     }
 
-    public boolean isSand_leftHAB() {
-        return sand_leftHAB;
+    public boolean isSand_leftSectorLine() {
+        return sand_leftSectorLine;
     }
 
-    public void setSand_leftHAB(boolean sand_leftHAB) {
-        this.sand_leftHAB = sand_leftHAB;
+    public void setSand_leftSectorLine(boolean sand_leftSectorLine) {
+        this.sand_leftSectorLine = sand_leftSectorLine;
     }
 
-    public boolean isSand_leftHAB2() {
-        return sand_leftHAB2;
+    public boolean isSand_leftSectorLine2() {
+        return sand_leftSectorLine2;
     }
 
-    public void setSand_leftHAB2(boolean sand_leftHAB2) {
-        this.sand_leftHAB2 = sand_leftHAB2;
+    public void setSand_leftSectorLine2(boolean sand_leftSectorLine2) {
+        this.sand_leftSectorLine2 = sand_leftSectorLine2;
     }
 
     public boolean isSand_PU2ndPanel() {

@@ -1024,10 +1024,10 @@ public class Visualizer_Activity extends AppCompatActivity {
                 if (mdt.matches(team)) {        // is this match data for the team we are working on?
                 Log.w(TAG, "GMFT TEAM  " + mdt);
                     numMDs++;       // increment # of MDs
-                    if (match_inst.isSand_leftHAB()) {      // Left HAB (crossed baseline)
+                    if (match_inst.isSand_leftSectorLine()) {      // Left HAB (crossed baseline)
                         base++;
                     }
-                    if (match_inst.isSand_leftHAB2()) {     // Leave from HAB 2
+                    if (match_inst.isSand_leftSectorLine2()) {     // Leave from HAB 2
                         leaveHAB2++;
                     }
                     dropped = dropped + match_inst.getSand_num_Dropped();

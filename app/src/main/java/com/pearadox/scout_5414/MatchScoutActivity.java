@@ -42,9 +42,9 @@ public class MatchScoutActivity extends AppCompatActivity {
     boolean onStart = false;
     /* Header Sect. */  TextView txt_EventName, txt_dev, txt_stud, txt_Match, txt_MyTeam, txt_TeamName, txt_NextMatch;
                         EditText editTxt_Team, editTxt_Match;
-    /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_startHatch, radio_startPowerCell, radio_Pick;
+    /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_start1, radio_start2, radio_Pick;
                         Spinner spinner_startPos;
-    /* After Start */   CheckBox checkbox_leftSectLine, checkbox_noAUTO;
+    /* After Start */   CheckBox checkbox_leftSectLine, checkbox_noAUTO, checkbox_Dump;
     /* L Rocket */      CheckBox chk_LeftRocket_LPan1,chk_LeftRocket_LPan2,chk_LeftRocket_LPan3, chk_LeftRocket_LCarg1,chk_LeftRocket_LCarg2,chk_LeftRocket_LCarg3;
                         CheckBox chk_LeftRocket_RPan1,chk_LeftRocket_RPan2,chk_LeftRocket_RPan3, chk_LeftRocket_RCarg1,chk_LeftRocket_RCarg2,chk_LeftRocket_RCarg3;
     /* PowerCellShip */     CheckBox chk_PowerCellLPan1,chk_PowerCellLPan2,chk_PowerCellLPan3, chk_PowerCellLCarg1,chk_PowerCellLCarg2,chk_PowerCellLCarg3;
@@ -76,71 +76,16 @@ public class MatchScoutActivity extends AppCompatActivity {
 
     // ===================  Autonomous Elements for Match Scout Data object ===================
     // Declare & initialize
-    public String matchID             = "T00";  // Type + #
-    public String tn                  = "";     // Team #
-    public boolean carry_none         = false;  // Do they carry nothing?
-    public boolean carry_PowerCell        = false;  // Do they carry PowerCell
-    public boolean carry_panel        = false;  // Do they carry panel
+    public String matchID               = "T00";    // Type + #
+    public String tn                    = "";       // Team #
+    public int cells_carried            = -1;        // #cells carried
+    public boolean carry_PowerCell    = false;  // Do they carry PowerCell
     public String  startPos           = " ";    // Start Position
     // ---- AFTER Start ----
-    public boolean auto               = false;  // Do they have Autonomous mode?
-    public boolean leftHAB            = false;  // Did they leave HAB
-    public boolean leftHAB2           = false;  // Did they start from Hab level 2
+    public boolean noAuto               = false;  // Do they have Autonomous mode?
+    public boolean leftSectorLine            = false;  // Did they leave HAB
+    public boolean leftSectorLine2           = false;  // Did they start from Hab level 2
 
-    public boolean LeftRocket_LPan1   = false;  // L-Rocket L-Panel#1
-    public boolean LeftRocket_LPan2   = false;  // L-Rocket L-Panel#2
-    public boolean LeftRocket_LPan3   = false;  // L-Rocket L-Panel#3
-    public boolean LeftRocket_RPan1   = false;  // L-Rocket R-Panel#1
-    public boolean LeftRocket_RPan2   = false;  // L-Rocket R-Panel#2
-    public boolean LeftRocket_RPan3   = false;  // L-Rocket R-Panel#3
-    public boolean LeftRocket_LCarg1  = false; // L-Rocket L-PowerCell#1
-    public boolean LeftRocket_LCarg2  = false; // L-Rocket L-PowerCell#2
-    public boolean LeftRocket_LCarg3  = false; // L-Rocket L-PowerCell#3
-    public boolean LeftRocket_RCarg1  = false; // L-Rocket R-PowerCell#1
-    public boolean LeftRocket_RCarg2  = false; // L-Rocket R-PowerCell#2
-    public boolean LeftRocket_RCarg3  = false; // L-Rocket R-PowerCell#3
-
-    public boolean PowerCellLPan1         = false; // PowerCell L-Panel#1
-    public boolean PowerCellLPan2         = false; // PowerCell L-Panel#2
-    public boolean PowerCellLPan3         = false; // PowerCell L-Panel#3
-    public boolean PowerCellRPan1         = false; // PowerCell R-Panel#1
-    public boolean PowerCellRPan2         = false; // PowerCell R-Panel#2
-    public boolean PowerCellRPan3         = false; // PowerCell R-Panel#3
-    public boolean PowerCellLCarg1        = false; // PowerCell L-PowerCell#1
-    public boolean PowerCellLCarg2        = false; // PowerCell L-PowerCell#2
-    public boolean PowerCellLCarg3        = false; // PowerCell L-PowerCell#3
-    public boolean PowerCellRCarg1        = false; // PowerCell R-PowerCell#1
-    public boolean PowerCellRCarg2        = false; // PowerCell R-PowerCell#2
-    public boolean PowerCellRCarg3        = false; // PowerCell R-PowerCell#3
-    public boolean PowerCellEndLPanel     = false; // PowerCell End L-Panel#1
-    public boolean PowerCellEndLPowerCell     = false; // PowerCell End L-PowerCell#1
-    public boolean PowerCellEndRPanel     = false; // PowerCell End R-Panel#1
-    public boolean PowerCellEndRPowerCell     = false; // PowerCell End R-PowerCell#1
-
-    public boolean RghtRocket_LPan1   = false;  // R-Rocket L-Panel#1
-    public boolean RghtRocket_LPan2   = false;  // R-Rocket L-Panel#2
-    public boolean RghtRocket_LPan3   = false;  // R-Rocket L-Panel#3
-    public boolean RghtRocket_RPan1   = false;  // R-Rocket R-Panel#1
-    public boolean RghtRocket_RPan2   = false;  // R-Rocket R-Panel#2
-    public boolean RghtRocket_RPan3   = false;  // R-Rocket R-Panel#3
-    public boolean RghtRocket_LCarg1  = false;  // R-Rocket L-PowerCell#1
-    public boolean RghtRocket_LCarg2  = false;  // R-Rocket L-PowerCell#2
-    public boolean RghtRocket_LCarg3  = false;  // R-Rocket L-PowerCell#3
-    public boolean RghtRocket_RCarg1  = false;  // R-Rocket R-PowerCell#1
-    public boolean RghtRocket_RCarg2  = false;  // R-Rocket R-PowerCell#2
-    public boolean RghtRocket_RCarg3  = false;  // R-Rocket R-PowerCell#3
-
-    public boolean PU2ndPanel         = false;  // Second game piece - Panel
-    public boolean PU2ndPowerCell         = false;  // Second game piece - PowerCell
-    public boolean PU2ndPlSta         = false;  // 2nd from Player Station
-    public boolean PU2ndCorral        = false;  // 2nd from Corral
-    public boolean PU2ndFloor         = false;  // 2nd from Floor
-    public boolean PU3rdPanel         = false;  // Second game piece - Panel
-    public boolean PU3rdPowerCell         = false;  // Second game piece - PowerCell
-    public boolean PU3rdPlSta         = false;  // 3rd from Player Station
-    public boolean PU3rdCorral        = false;  // 3rd from Corral
-    public boolean PU3rdFloor         = false;  // 3rd from Floor
-    public int num_Dropped            = 0;      // How many Panels dropped?
 
     /* */
     public String autoComment = " ";        // Comment
@@ -302,6 +247,7 @@ public class MatchScoutActivity extends AppCompatActivity {
 
         checkbox_noAUTO         = (CheckBox) findViewById(R.id.checkbox_noAUTO);
         checkbox_leftSectLine   = (CheckBox) findViewById(R.id.checkbox_leftSectLine);
+        checkbox_Dump         = (CheckBox) findViewById(R.id.checkbox_Dump);
         editText_autoComment    = (EditText) findViewById(R.id.editText_autoComment);
         btn_DropPlus            = (Button) findViewById(R.id.btn_DropPlus);
         btn_DropMinus           = (Button) findViewById(R.id.btn_DropMinus);
@@ -316,560 +262,12 @@ public class MatchScoutActivity extends AppCompatActivity {
         spinner_startPos.setSelection(0, false);
         spinner_startPos.setOnItemSelectedListener(new startPosOnClickListener());
 
-        // Left Rocket
-        chk_LeftRocket_LPan1 = (CheckBox) findViewById(R.id.chk_LeftRocket_LPan1);
-        chk_LeftRocket_LPan2 = (CheckBox) findViewById(R.id.chk_LeftRocket_LPan2);
-        chk_LeftRocket_LPan3 = (CheckBox) findViewById(R.id.chk_LeftRocket_LPan3);
-        chk_LeftRocket_RPan1 = (CheckBox) findViewById(R.id.chk_LeftRocket_RPan1);
-        chk_LeftRocket_RPan2 = (CheckBox) findViewById(R.id.chk_LeftRocket_RPan2);
-        chk_LeftRocket_RPan3 = (CheckBox) findViewById(R.id.chk_LeftRocket_RPan3);
-        chk_LeftRocket_LCarg1 = (CheckBox) findViewById(R.id.chk_LeftRocket_LCarg1);
-        chk_LeftRocket_LCarg2 = (CheckBox) findViewById(R.id.chk_LeftRocket_LCarg2);
-        chk_LeftRocket_LCarg3 = (CheckBox) findViewById(R.id.chk_LeftRocket_LCarg3);
-        chk_LeftRocket_RCarg1 = (CheckBox) findViewById(R.id.chk_LeftRocket_RCarg1);
-        chk_LeftRocket_RCarg2 = (CheckBox) findViewById(R.id.chk_LeftRocket_RCarg2);
-        chk_LeftRocket_RCarg3 = (CheckBox) findViewById(R.id.chk_LeftRocket_RCarg3);
-        // PowerCell Ship
-        chk_PowerCellLPan1 = (CheckBox) findViewById(R.id.chk_PowerCellLPan1);
-        chk_PowerCellLPan2 = (CheckBox) findViewById(R.id.chk_PowerCellLPan2);
-        chk_PowerCellLPan3 = (CheckBox) findViewById(R.id.chk_PowerCellLPan3);
-        chk_PowerCellRPan1 = (CheckBox) findViewById(R.id.chk_PowerCellRPan1);
-        chk_PowerCellRPan2 = (CheckBox) findViewById(R.id.chk_PowerCellRPan2);
-        chk_PowerCellRPan3 = (CheckBox) findViewById(R.id.chk_PowerCellRPan3);
-        chk_PowerCellLCarg1 = (CheckBox) findViewById(R.id.chk_PowerCellLCarg1);
-        chk_PowerCellLCarg2 = (CheckBox) findViewById(R.id.chk_PowerCellLCarg2);
-        chk_PowerCellLCarg3 = (CheckBox) findViewById(R.id.chk_PowerCellLCarg3);
-        chk_PowerCellRCarg1 = (CheckBox) findViewById(R.id.chk_PowerCellRCarg1);
-        chk_PowerCellRCarg2 = (CheckBox) findViewById(R.id.chk_PowerCellRCarg2);
-        chk_PowerCellRCarg3 = (CheckBox) findViewById(R.id.chk_PowerCellRCarg3);
-        chk_PowerCellEndLPanel = (CheckBox) findViewById(R.id.chk_PowerCellEndLPanel);
-        chk_PowerCellEndRPanel = (CheckBox) findViewById(R.id.chk_PowerCellEndRPanel);
-        chk_PowerCellEndLPowerCell = (CheckBox) findViewById(R.id.chk_PowerCellEndLPowerCell);
-        chk_PowerCellEndRPowerCell = (CheckBox) findViewById(R.id.chk_PowerCellEndRPowerCell);
-        // Right Rocket
-        chk_RghtRocket_LPan1 = (CheckBox) findViewById(R.id.chk_RghtRocket_LPan1);
-        chk_RghtRocket_LPan2 = (CheckBox) findViewById(R.id.chk_RghtRocket_LPan2);
-        chk_RghtRocket_LPan3 = (CheckBox) findViewById(R.id.chk_RghtRocket_LPan3);
-        chk_RghtRocket_RPan1 = (CheckBox) findViewById(R.id.chk_RghtRocket_RPan1);
-        chk_RghtRocket_RPan2 = (CheckBox) findViewById(R.id.chk_RghtRocket_RPan2);
-        chk_RghtRocket_RPan3 = (CheckBox) findViewById(R.id.chk_RghtRocket_RPan3);
-        chk_RghtRocket_LCarg1 = (CheckBox) findViewById(R.id.chk_RghtRocket_LCarg1);
-        chk_RghtRocket_LCarg2 = (CheckBox) findViewById(R.id.chk_RghtRocket_LCarg2);
-        chk_RghtRocket_LCarg3 = (CheckBox) findViewById(R.id.chk_RghtRocket_LCarg3);
-        chk_RghtRocket_RCarg1 = (CheckBox) findViewById(R.id.chk_RghtRocket_RCarg1);
-        chk_RghtRocket_RCarg2 = (CheckBox) findViewById(R.id.chk_RghtRocket_RCarg2);
-        chk_RghtRocket_RCarg3 = (CheckBox) findViewById(R.id.chk_RghtRocket_RCarg3);
-        final RadioGroup radgrp_secondPieceLocation = (RadioGroup)findViewById(R.id.radgrp_secondPieceLocation);
-        final RadioGroup radgrp_thirdPieceLocation  = (RadioGroup)findViewById(R.id.radgrp_thirdPieceLocation);
 
-        // ToDo - all references to new Widgets
-//        radgrp_secondPieceLocation.setEnabled(false);
-        for(int i = 0; i < radgrp_secondPieceLocation.getChildCount(); i++){        // Can't pick until piece selected
-            ((RadioButton)radgrp_secondPieceLocation.getChildAt(i)).setEnabled(false);
-        }
-//        radgrp_thirdPieceLocation.setEnabled(false);
-        for(int i = 0; i < radgrp_thirdPieceLocation.getChildCount(); i++){        // Can't pick until piece selected
-            ((RadioButton)radgrp_thirdPieceLocation.getChildAt(i)).setEnabled(false);
-        }
 
 // Start Listeners
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑  Process _ALL_ the CheckBoxes  ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
         // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_LPan1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_LPan1.isChecked()) {     //checked
-                    LeftRocket_LPan1 = true;
-                }
-                else {          //not checked
-                    LeftRocket_LPan1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_LPan2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_LPan2.isChecked()) {     //checked
-                    LeftRocket_LPan2 = true;
-                }
-                else {          //not checked
-                    LeftRocket_LPan2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_LPan3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_LPan3.isChecked()) {     //checked
-                    LeftRocket_LPan3 = true;
-                }
-                else {          //not checked
-                    LeftRocket_LPan3 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_RPan1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_RPan1.isChecked()) {     //checked
-                    LeftRocket_RPan1 = true;
-                }
-                else {          //not checked
-                    LeftRocket_RPan1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_RPan2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_RPan2.isChecked()) {     //checked
-                    LeftRocket_RPan2 = true;
-                }
-                else {          //not checked
-                    LeftRocket_RPan2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_RPan3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_RPan3.isChecked()) {     //checked
-                    LeftRocket_RPan3 = true;
-                }
-                else {          //not checked
-                    LeftRocket_RPan3 = false;
-                }
-            }
-        });
-
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_LCarg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_LCarg1.isChecked()) {     //checked
-                    LeftRocket_LCarg1 = true;
-                }
-                else {          //not checked
-                    LeftRocket_LCarg1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_LCarg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_LCarg2.isChecked()) {     //checked
-                    LeftRocket_LCarg2 = true;
-                }
-                else {          //not checked
-                    LeftRocket_LCarg2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_LCarg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_LCarg3.isChecked()) {     //checked
-                    LeftRocket_LCarg3 = true;
-                }
-                else {          //not checked
-                    LeftRocket_LCarg3 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_RCarg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_RCarg1.isChecked()) {     //checked
-                    LeftRocket_RCarg1 = true;
-                }
-                else {          //not checked
-                    LeftRocket_RCarg1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_RCarg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_RCarg2.isChecked()) {     //checked
-                    LeftRocket_RCarg2 = true;
-                }
-                else {          //not checked
-                    LeftRocket_RCarg2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_LeftRocket_RCarg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_LeftRocket_RCarg3.isChecked()) {     //checked
-                    LeftRocket_RCarg3 = true;
-                }
-                else {          //not checked
-                    LeftRocket_RCarg3 = false;
-                }
-            }
-        });
-
-        // RIGHT Rocket
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_LPan1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_LPan1.isChecked()) {     //checked
-                    RghtRocket_LPan1 = true;
-                }
-                else {          //not checked
-                    RghtRocket_LPan1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_LPan2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_LPan2.isChecked()) {     //checked
-                    RghtRocket_LPan2 = true;
-                }
-                else {          //not checked
-                    RghtRocket_LPan2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_LPan3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_LPan3.isChecked()) {     //checked
-                    RghtRocket_LPan3 = true;
-                }
-                else {          //not checked
-                    RghtRocket_LPan3 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_RPan1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_RPan1.isChecked()) {     //checked
-                    RghtRocket_RPan1 = true;
-                }
-                else {          //not checked
-                    RghtRocket_RPan1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_RPan2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_RPan2.isChecked()) {     //checked
-                    RghtRocket_RPan2 = true;
-                }
-                else {          //not checked
-                    RghtRocket_RPan2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_RPan3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_RPan3.isChecked()) {     //checked
-                    RghtRocket_RPan3 = true;
-                }
-                else {          //not checked
-                    RghtRocket_RPan3 = false;
-                }
-            }
-        });
-
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_LCarg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_LCarg1.isChecked()) {     //checked
-                    RghtRocket_LCarg1 = true;
-                }
-                else {          //not checked
-                    RghtRocket_LCarg1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_LCarg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_LCarg2.isChecked()) {     //checked
-                    RghtRocket_LCarg2 = true;
-                }
-                else {          //not checked
-                    RghtRocket_LCarg2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_LCarg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_LCarg3.isChecked()) {     //checked
-                    RghtRocket_LCarg3 = true;
-                }
-                else {          //not checked
-                    RghtRocket_LCarg3 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_RCarg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_RCarg1.isChecked()) {     //checked
-                    RghtRocket_RCarg1 = true;
-                }
-                else {          //not checked
-                    RghtRocket_RCarg1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_RCarg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_RCarg2.isChecked()) {     //checked
-                    RghtRocket_RCarg2 = true;
-                }
-                else {          //not checked
-                    RghtRocket_RCarg2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_RghtRocket_RCarg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_RghtRocket_RCarg3.isChecked()) {     //checked
-                    RghtRocket_RCarg3 = true;
-                }
-                else {          //not checked
-                    RghtRocket_RCarg3 = false;
-                }
-            }
-        });
-
-        // PowerCell Ship
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellLPan1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellLPan1.isChecked()) {     //checked
-                    PowerCellLPan1 = true;
-                }
-                else {          //not checked
-                    PowerCellLPan1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellLPan2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellLPan2.isChecked()) {     //checked
-                    PowerCellLPan2 = true;
-                }
-                else {          //not checked
-                    PowerCellLPan2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellLPan3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellLPan3.isChecked()) {     //checked
-                    PowerCellLPan3 = true;
-                }
-                else {          //not checked
-                    PowerCellLPan3 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellRPan1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellRPan1.isChecked()) {     //checked
-                    PowerCellRPan1 = true;
-                }
-                else {          //not checked
-                    PowerCellRPan1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellRPan2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellRPan2.isChecked()) {     //checked
-                    PowerCellRPan2 = true;
-                }
-                else {          //not checked
-                    PowerCellRPan2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellRPan3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellRPan3.isChecked()) {     //checked
-                    PowerCellRPan3 = true;
-                }
-                else {          //not checked
-                    PowerCellRPan3 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellLCarg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellLCarg1.isChecked()) {     //checked
-                    PowerCellLCarg1 = true;
-                }
-                else {          //not checked
-                    PowerCellLCarg1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellLCarg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellLCarg2.isChecked()) {     //checked
-                    PowerCellLCarg2 = true;
-                }
-                else {          //not checked
-                    PowerCellLCarg2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellLCarg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellLCarg3.isChecked()) {     //checked
-                    PowerCellLCarg3 = true;
-                }
-                else {          //not checked
-                    PowerCellLCarg3 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellRCarg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellRCarg1.isChecked()) {     //checked
-                    PowerCellRCarg1 = true;
-                }
-                else {          //not checked
-                    PowerCellRCarg1 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellRCarg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellRCarg2.isChecked()) {     //checked
-                    PowerCellRCarg2 = true;
-                }
-                else {          //not checked
-                    PowerCellRCarg2 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellRCarg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellRCarg3.isChecked()) {     //checked
-                    PowerCellRCarg3 = true;
-                }
-                else {          //not checked
-                    PowerCellRCarg3 = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellEndLPanel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellEndLPanel.isChecked()) {     //checked
-                    PowerCellEndLPanel = true;
-//                    chk_PowerCellEndLPowerCell.setChecked(true);    // Score the already set PowerCell Ball
-                }
-                else {          //not checked
-                    PowerCellEndLPanel = false;
-//                    chk_PowerCellEndLPowerCell.setChecked(false);
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellEndRPanel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellEndRPanel.isChecked()) {     //checked
-                    PowerCellEndRPanel = true;
-//                    chk_PowerCellEndRPowerCell.setChecked(true);    // Score the already set PowerCell Ball
-                }
-                else {          //not checked
-                    PowerCellEndRPanel = false;
-//                    chk_PowerCellEndRPowerCell.setChecked(false);
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellEndLPowerCell.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellEndLPowerCell.isChecked()) {     //checked
-                    PowerCellEndLPowerCell = true;
-                }
-                else {          //not checked
-                    PowerCellEndLPowerCell = false;
-                }
-            }
-        });
-        // ☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑☑
-        chk_PowerCellEndRPowerCell.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (chk_PowerCellEndRPowerCell.isChecked()) {     //checked
-                    PowerCellEndRPowerCell = true;
-                }
-                else {          //not checked
-                    PowerCellEndRPowerCell = false;
-                }
-            }
-        });
-
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
         checkbox_noAUTO.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
              @Override
@@ -878,19 +276,22 @@ public class MatchScoutActivity extends AppCompatActivity {
                  if (buttonView.isChecked()) {
                      //checked
                      Log.w(TAG, "No Auto is checked.");
-                     auto = true;
+                     noAuto = true;
                     // ToDo - turn ON/OFF correct widgets
                      checkbox_leftSectLine.setChecked(false);
                      checkbox_leftSectLine.setEnabled(false);
+                     checkbox_Dump.setChecked(false);
+                     checkbox_Dump.setEnabled(false);
                      editText_autoComment.setText("No Autonomous activity - didn't move");
                      autoComment = "No Autonomous activity - didn't move";
 
                  } else {
                      //not checked
                      Log.w(TAG, "No SS is unchecked.");
-                     auto = false;
+                     noAuto = false;
 
                      checkbox_leftSectLine.setEnabled(true);
+                     checkbox_Dump.setEnabled(true);
                      editText_autoComment.setText(" ");
                      autoComment = " ";
 
@@ -904,16 +305,16 @@ public class MatchScoutActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.w(TAG, "checkbox_leftSectLine Listener");
 
-// ToDo change HAB
             if (buttonView.isChecked()) {
-                    leftHAB = true;
+                    leftSectorLine = true;
                 } else {
-                    leftHAB = false;
+                    leftSectorLine = false;
                 }
             }
         }
         );
 
+        // Todo - ChkBox listner for DUMP
 
         button_GoToTeleopActivity.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
@@ -923,23 +324,23 @@ public class MatchScoutActivity extends AppCompatActivity {
 
             } else {        // It's OK - Match has started
 
-                    if ((auto==false) &&
-                            ((carry_none==false) && (carry_PowerCell==false) && (carry_panel==false)) ||
-                            (PU2ndPanel) && ((!PU2ndPlSta)&&(!PU2ndFloor)) ||
-                            (PU3rdPanel) && ((!PU3rdPlSta)&&(!PU3rdFloor)) ||
-                            (PU2ndPowerCell) && ((!PU2ndPlSta)&&(!PU2ndFloor)&&(!PU2ndCorral)) ||
-                            (PU3rdPowerCell) && ((!PU3rdPlSta)&&(!PU3rdFloor)&&(!PU3rdCorral)) ||
+                    if ((noAuto==false) &&
+                            ((cells_carried >= 0) ) ||
+//                            (PU2ndPanel) && ((!PU2ndPlSta)&&(!PU2ndFloor)) ||
+//                            (PU3rdPanel) && ((!PU3rdPlSta)&&(!PU3rdFloor)) ||
+//                            (PU2ndPowerCell) && ((!PU2ndPlSta)&&(!PU2ndFloor)&&(!PU2ndCorral)) ||
+//                            (PU3rdPowerCell) && ((!PU3rdPlSta)&&(!PU3rdFloor)&&(!PU3rdCorral)) ||
                             (spinner_startPos.getSelectedItemPosition() == 0) ) {  //Required fields
-                        // ToDo - check to see if ALL required fields entered (Start-pos, stop, gear, ....)
+                        // ToDo - check to see if ALL required fields entered (Start-pos, cells, ....)
 
-                        Toast.makeText(getBaseContext(), "\t*** Select _ALL_ required fields!  ***\n Starting Position, Gamepiece, 2nd & 3rd Location ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(), "\t*** Select _ALL_ required fields!  ***\n Starting Position, # Cells ", Toast.LENGTH_LONG).show();
                         if (spinner_startPos.getSelectedItemPosition() == 0) {
                             spinner_startPos.performClick();
                         }
                     } else {
 
                         if (tn != null) {
-                            updateDev("Tele");      // Update 'Phase' for stoplight indicator in ScoutM aster
+                            updateDev("Tele");      // Update 'Phase' for stoplight indicator in ScoutMaster
                             storeAutoData();        // Put all the Autonomous data collected in Match object
 
                             Intent smast_intent = new Intent(MatchScoutActivity.this, TeleopScoutActivity.class);
@@ -969,22 +370,22 @@ public class MatchScoutActivity extends AppCompatActivity {
 
         // *******************************************************************
 
-        btn_DropPlus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                num_Dropped++;
-                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
-                txt_Num_Dropped.setText(Integer.toString(num_Dropped));
-            }
-        });
-        btn_DropMinus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (num_Dropped >= 1) {     // Don't go below zero
-                    num_Dropped--;
-                }
-                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
-                txt_Num_Dropped.setText(Integer.toString(num_Dropped));
-            }
-        });
+//        btn_DropPlus.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                num_Dropped++;
+//                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
+//                txt_Num_Dropped.setText(Integer.toString(num_Dropped));
+//            }
+//        });
+//        btn_DropMinus.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                if (num_Dropped >= 1) {     // Don't go below zero
+//                    num_Dropped--;
+//                }
+//                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
+//                txt_Num_Dropped.setText(Integer.toString(num_Dropped));
+//            }
+//        });
 
 
         // === End of OnCreate ===
@@ -1001,170 +402,23 @@ public class MatchScoutActivity extends AppCompatActivity {
         String value = radio_Pick.getText().toString();
         if (value.equals("None")) {        // None
             Log.w(TAG, "None");
-            carry_none = true;
-            carry_panel = false;
-            carry_PowerCell = false;
+            cells_carried = 0;
         }
-        if (value.equals("Panel")) {        // Panel
-            Log.w(TAG, "Panel");
-            carry_panel = true;
-            carry_PowerCell = false;
+        if (value.equals("1")) {        // 1
+            Log.w(TAG, "One");
+            cells_carried = 1;
         }
-        if (value.equals("PowerCell")) {        // Panel
-            Log.w(TAG, "PowerCell");
-            carry_PowerCell = true;
-            carry_panel = false;
+        if (value.equals("2")) {        // 2
+            Log.w(TAG, "Two");
+            cells_carried = 2;
         }
-    }
-
-
-    /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-    public void RadioClick_2nd(View view) {
-        Log.w(TAG, "@@ RadioClick_2nd @@");
-        radgrp_secondPiece = (RadioGroup) findViewById(R.id.radgrp_secondPiece);
-        int selectedId = radgrp_secondPiece.getCheckedRadioButtonId();
-//        Log.w(TAG, "*** Selected=" + selectedId);
-        radio_2nd = (RadioButton) findViewById(selectedId);
-        String value = radio_2nd.getText().toString();
-        final RadioGroup radgrp_secondPieceLocation = (RadioGroup)findViewById(R.id.radgrp_secondPieceLocation);
-        radio_playerStation2 = (RadioButton) findViewById(R.id.radio_playerStation2);
-        radio_floor2 = (RadioButton) findViewById(R.id.radio_floor2);
-        radio_corral2 = (RadioButton) findViewById(R.id.radio_corral2);
-        if (value.equals("None")) {        // None
-            Log.w(TAG, "2nd None");
-            PU2ndPanel = false;
-            PU2ndPowerCell = false;
-            radio_playerStation2.setEnabled(false);
-            radio_floor2.setEnabled(false);
-            radio_corral2.setEnabled(false);
-            radio_corral2.setVisibility(View.VISIBLE);
-            for(int i = 0; i < radgrp_secondPieceLocation.getChildCount(); i++){        // turn them all OFF
-                ((RadioButton)radgrp_secondPieceLocation.getChildAt(i)).setChecked(false);
-                ((RadioButton)radgrp_secondPieceLocation.getChildAt(i)).setEnabled(false);
-            }
-        }
-        if (value.equals("Panel")) {        // Panel
-            Log.w(TAG, "2nd Panel");
-            PU2ndPanel = true;
-            PU2ndPowerCell = false;
-            radio_playerStation2.setEnabled(true);
-            radio_floor2.setEnabled(true);
-            radio_corral2.setVisibility(View.INVISIBLE);
-        }
-        if (value.equals("PowerCell")) {        // Panel
-            Log.w(TAG, "2nd PowerCell");
-            PU2ndPowerCell = true;
-            PU2ndPanel = false;
-            for(int i = 0; i < radgrp_secondPieceLocation.getChildCount(); i++){        // turn them all ON
-                ((RadioButton)radgrp_secondPieceLocation.getChildAt(i)).setEnabled(true);
-            }
-            radio_corral2.setVisibility(View.VISIBLE);
+        if (value.equals("3")) {        // 2
+            Log.w(TAG, "Three");
+            cells_carried = 3;
         }
     }
 
 
-    /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-    public void RadioClick_3rd(View view) {
-        Log.w(TAG, "@@ RadioClick_3rd @@");
-        radgrp_thirdPiece = (RadioGroup) findViewById(R.id.radgrp_thirdPiece);
-        int selectedId = radgrp_thirdPiece.getCheckedRadioButtonId();
-        radio_3rd = (RadioButton) findViewById(selectedId);
-        String value = radio_3rd.getText().toString();
-        final RadioGroup radgrp_thirdPieceLocation = (RadioGroup)findViewById(R.id.radgrp_thirdPieceLocation);
-        radio_playerStation3 = (RadioButton) findViewById(R.id.radio_playerStation3);
-        radio_floor3 = (RadioButton) findViewById(R.id.radio_floor3);
-        radio_corral3 = (RadioButton) findViewById(R.id.radio_corral3);
-        if (value.equals("None")) {        // None
-            Log.w(TAG, "2nd None");
-            PU3rdPanel = false;
-            PU3rdPowerCell = false;
-            radio_playerStation3.setEnabled(false);
-            radio_floor3.setEnabled(false);
-            radio_corral3.setEnabled(false);
-            radio_corral3.setVisibility(View.VISIBLE);
-            for(int i = 0; i < radgrp_thirdPieceLocation.getChildCount(); i++){        // turn them all OFF
-                ((RadioButton)radgrp_thirdPieceLocation.getChildAt(i)).setChecked(false);
-                ((RadioButton)radgrp_thirdPieceLocation.getChildAt(i)).setEnabled(false);
-            }
-        }
-        if (value.equals("Panel")) {        // Panel
-            Log.w(TAG, "3rd Panel");
-            PU3rdPanel = true;
-            PU3rdPowerCell = false;
-            radio_playerStation3.setEnabled(true);
-            radio_floor3.setEnabled(true);
-            radio_corral3.setVisibility(View.INVISIBLE);
-        }
-        if (value.equals("PowerCell")) {        // Panel
-            Log.w(TAG, "3rd PowerCell");
-            PU3rdPowerCell = true;
-            PU3rdPanel = false;
-            for(int i = 0; i < radgrp_thirdPieceLocation.getChildCount(); i++){        // turn them all ON
-                ((RadioButton)radgrp_thirdPieceLocation.getChildAt(i)).setEnabled(true);
-            }
-            radio_corral3.setVisibility(View.VISIBLE);
-        }
-    }
-
-    /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-    public void RadioClick_2ndLoc(View view) {
-        Log.w(TAG, "@@ RadioClick_2ndLoc @@");
-        radgrp_secondPieceLocation = (RadioGroup) findViewById(R.id.radgrp_secondPieceLocation);
-        int selectedId = radgrp_secondPieceLocation.getCheckedRadioButtonId();
-        radio_2ndLoc = (RadioButton) findViewById(selectedId);
-        String value = radio_2ndLoc.getText().toString();
-        radio_playerStation2 = (RadioButton) findViewById(R.id.radio_playerStation2);
-        radio_floor2 = (RadioButton) findViewById(R.id.radio_floor2);
-        radio_corral2 = (RadioButton) findViewById(R.id.radio_corral2);
-        if (value.equals("Loading Sta.")) {        // Loading Sta
-            Log.w(TAG, "2nd Loading Sta.");
-            PU2ndPlSta = true;
-            PU2ndCorral = false;
-            PU2ndFloor = false;
-        }
-        if (value.equals("Corral")) {        // Loading Sta
-            Log.w(TAG, "2nd Corral");
-            PU2ndCorral = true;
-            PU2ndPlSta = false;
-            PU2ndFloor = false;
-        }
-        if (value.equals("Floor")) {        // Loading Sta
-            Log.w(TAG, "2nd Floor");
-            PU2ndFloor = true;
-            PU2ndCorral = false;
-            PU2ndPlSta = false;
-        }
-    }
-
-    /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-    public void RadioClick_3rdLoc(View view) {
-        Log.w(TAG, "@@ RadioClick_3rdLoc @@");
-        radgrp_thirdPieceLocation = (RadioGroup) findViewById(R.id.radgrp_thirdPieceLocation);
-        int selectedId = radgrp_thirdPieceLocation.getCheckedRadioButtonId();
-        radio_3rdLoc = (RadioButton) findViewById(selectedId);
-        String value = radio_3rdLoc.getText().toString();
-        radio_playerStation3 = (RadioButton) findViewById(R.id.radio_playerStation3);
-        radio_floor3 = (RadioButton) findViewById(R.id.radio_floor3);
-        radio_corral3 = (RadioButton) findViewById(R.id.radio_corral3);
-        if (value.equals("Loading Sta.")) {        // Loading Sta
-            Log.w(TAG, "3rd Loading Sta.");
-            PU3rdPlSta = true;
-            PU3rdCorral = false;
-            PU3rdFloor = false;
-        }
-        if (value.equals("Corral")) {        // Loading Sta
-            Log.w(TAG, "3rd Corral");
-            PU3rdCorral = true;
-            PU3rdPlSta = false;
-            PU3rdFloor = false;
-        }
-        if (value.equals("Floor")) {        // Loading Sta
-            Log.w(TAG, "3rd Floor");
-            PU3rdFloor = true;
-            PU3rdCorral = false;
-            PU3rdPlSta = false;
-        }
-    }
 
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1172,76 +426,15 @@ public class MatchScoutActivity extends AppCompatActivity {
         Log.i(TAG, ">>>>  storeAutoData  <<<< " + studID);
         Pearadox.Match_Data.setMatch(matchID);
         Pearadox.Match_Data.setTeam_num(tn);
-
 //        Pearadox.Match_Data.setPre_PlayerSta(p);      // Set at start-up
+
         Pearadox.Match_Data.setPre_startPos(startPos);
-        Pearadox.Match_Data.setSand_mode(auto);
-        Pearadox.Match_Data.setPre_PowerCell(carry_PowerCell);
-        Pearadox.Match_Data.setPre_panel(carry_panel);
+        Pearadox.Match_Data.setSand_mode(noAuto);
+//        Pearadox.Match_Data.?????(cells_carried);
+        Pearadox.Match_Data.setSand_leftSectorLine(leftSectorLine);
 
-        Pearadox.Match_Data.setSand_leftHAB(leftHAB);
-        Pearadox.Match_Data.setSand_leftHAB2(leftHAB2);
-        Pearadox.Match_Data.setSand_LeftRocket_LPan1(LeftRocket_LPan1);
-        Pearadox.Match_Data.setSand_LeftRocket_LPan2(LeftRocket_LPan2);
-        Pearadox.Match_Data.setSand_LeftRocket_LPan3(LeftRocket_LPan3);
-        Pearadox.Match_Data.setSand_LeftRocket_RPan1(LeftRocket_RPan1);
-        Pearadox.Match_Data.setSand_LeftRocket_RPan2(LeftRocket_RPan2);
-        Pearadox.Match_Data.setSand_LeftRocket_RPan3(LeftRocket_RPan3);
-        Pearadox.Match_Data.setSand_LeftRocket_LCarg1(LeftRocket_LCarg1);
-        Pearadox.Match_Data.setSand_LeftRocket_LCarg2(LeftRocket_LCarg2);
-        Pearadox.Match_Data.setSand_LeftRocket_LCarg3(LeftRocket_LCarg3);
-        Pearadox.Match_Data.setSand_LeftRocket_RCarg1(LeftRocket_RCarg1);
-        Pearadox.Match_Data.setSand_LeftRocket_RCarg2(LeftRocket_RCarg2);
-        Pearadox.Match_Data.setSand_LeftRocket_RCarg3(LeftRocket_RCarg3);
-
-        Pearadox.Match_Data.setSand_PowerCellLPan1(PowerCellLPan1);
-        Pearadox.Match_Data.setSand_PowerCellLPan2(PowerCellLPan2);
-        Pearadox.Match_Data.setSand_PowerCellLPan3(PowerCellLPan3);
-        Pearadox.Match_Data.setSand_PowerCellRPan1(PowerCellRPan1);
-        Pearadox.Match_Data.setSand_PowerCellRPan2(PowerCellRPan2);
-        Pearadox.Match_Data.setSand_PowerCellRPan3(PowerCellRPan3);
-        Pearadox.Match_Data.setSand_PowerCellLCarg1(PowerCellLCarg1);
-        Pearadox.Match_Data.setSand_PowerCellLCarg2(PowerCellLCarg2);
-        Pearadox.Match_Data.setSand_PowerCellLCarg3(PowerCellLCarg3);
-        Pearadox.Match_Data.setSand_PowerCellRCarg1(PowerCellRCarg1);
-        Pearadox.Match_Data.setSand_PowerCellRCarg2(PowerCellRCarg2);
-        Pearadox.Match_Data.setSand_PowerCellRCarg3(PowerCellRCarg3);
-        Pearadox.Match_Data.setSand_PowerCellEndLPanel(PowerCellEndLPanel);
-        Pearadox.Match_Data.setSand_PowerCellEndRPanel(PowerCellEndRPanel);
-        Pearadox.Match_Data.setSand_PowerCellEndLPowerCell(PowerCellEndLPowerCell);
-        Pearadox.Match_Data.setSand_PowerCellEndRPowerCell(PowerCellEndRPowerCell);
-
-        Pearadox.Match_Data.setSand_RghtRocket_LPan1(RghtRocket_LPan1);
-        Pearadox.Match_Data.setSand_RghtRocket_LPan2(RghtRocket_LPan2);
-        Pearadox.Match_Data.setSand_RghtRocket_LPan3(RghtRocket_LPan3);
-        Pearadox.Match_Data.setSand_RghtRocket_RPan1(RghtRocket_RPan1);
-        Pearadox.Match_Data.setSand_RghtRocket_RPan2(RghtRocket_RPan2);
-        Pearadox.Match_Data.setSand_RghtRocket_RPan3(RghtRocket_RPan3);
-        Pearadox.Match_Data.setSand_RghtRocket_LCarg1(RghtRocket_LCarg1);
-        Pearadox.Match_Data.setSand_RghtRocket_LCarg2(RghtRocket_LCarg2);
-        Pearadox.Match_Data.setSand_RghtRocket_LCarg3(RghtRocket_LCarg3);
-        Pearadox.Match_Data.setSand_RghtRocket_RCarg1(RghtRocket_RCarg1);
-        Pearadox.Match_Data.setSand_RghtRocket_RCarg2(RghtRocket_RCarg2);
-        Pearadox.Match_Data.setSand_RghtRocket_RCarg3(RghtRocket_RCarg3);
-        Pearadox.Match_Data.setSand_PowerCellEndLPanel(PowerCellEndLPanel);
-        Pearadox.Match_Data.setSand_PowerCellEndRPanel(PowerCellEndRPanel);
-        Pearadox.Match_Data.setSand_PowerCellEndLPowerCell(PowerCellEndLPowerCell);
-        Pearadox.Match_Data.setSand_PowerCellEndRPowerCell(PowerCellEndRPowerCell);
-        
-        // ToDo - set all variables to object
-        Pearadox.Match_Data.setSand_PU2ndPanel(PU2ndPanel);
-        Pearadox.Match_Data.setSand_PU2ndPowerCell(PU2ndPowerCell);
-        Pearadox.Match_Data.setSand_PU2ndFloor(PU2ndFloor);
-        Pearadox.Match_Data.setSand_PU2ndCorral(PU2ndCorral);
-        Pearadox.Match_Data.setSand_PU2ndPlSta(PU2ndPlSta);
-
-        Pearadox.Match_Data.setSand_PU3rdPanel(PU3rdPanel);
-        Pearadox.Match_Data.setSand_PU3rdPowerCell(PU3rdPowerCell);
-        Pearadox.Match_Data.setSand_PU3rdFloor(PU3rdFloor);
-        Pearadox.Match_Data.setSand_PU3rdCorral(PU3rdCorral);
-        Pearadox.Match_Data.setSand_PU3rdPlSta(PU3rdPlSta);
-
-        Pearadox.Match_Data.setSand_num_Dropped(num_Dropped);
+        // ToDo - set all 'After Start' variables to object
+//        Pearadox.Match_Data.setSand_PU2ndPanel(PU2ndPanel);
 
         // --------------
         Pearadox.Match_Data.setSand_comment(autoComment);
@@ -1249,6 +442,8 @@ public class MatchScoutActivity extends AppCompatActivity {
         Log.w(TAG, "*******  All done with AUTO setters!!");
     }
 
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     private void getMatch() {
@@ -1422,21 +617,6 @@ public class MatchScoutActivity extends AppCompatActivity {
                 })
                 .show();
     }
-
-
-//    private TextWatcher tw = new TextWatcher() {
-//        public void afterTextChanged(Editable s){
-//
-//        }
-//        public void  beforeTextChanged(CharSequence s, int start, int count, int after){
-//            // you can check for enter key here
-//        }
-//        public void  onTextChanged (CharSequence s, int start, int before,int count) {
-//        }
-//    };
-//
-//    EditText et = (EditText) findViewById(R.id.editText_Fuel);
-//    et.addTextChangedListener(tw)
 
 
 

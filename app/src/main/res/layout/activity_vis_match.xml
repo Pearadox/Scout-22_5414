@@ -83,26 +83,26 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/lbl_LeftHab1"
+            android:id="@+id/lbl_leftSectorLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/lbl_Autonomous"
-            android:text="Left Hab"
+            android:text="Left Sector Line"
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/txt_Ss_LeftHab1"
+            android:id="@+id/txt_auto_leftSectorLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/lbl_LeftHab1"
-            android:layout_toEndOf="@+id/lbl_LeftHab1"
+            android:layout_alignBaseline="@+id/lbl_leftSectorLine"
+            android:layout_toEndOf="@+id/lbl_leftSectorLine"
             android:layout_marginStart="5dp"
             android:textColor="@color/red"
             tools:text="00" />
 
         <TextView
-            android:id="@+id/lbl_LeftHab2"
+            android:id="@+id/lbl_leftSectorLine2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -110,7 +110,7 @@
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/txt_Ss_LeftHab2"
+            android:id="@+id/txt_Ss_leftSectorLine2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10sp"

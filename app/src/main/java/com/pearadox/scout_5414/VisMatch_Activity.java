@@ -37,7 +37,7 @@ public class VisMatch_Activity extends AppCompatActivity {
     String underScore = new String(new char[60]).replace("\0", "_");  // string of 'x' underscores
     String matches = "";  String match_id = "";
     TextView txt_team, txt_teamName, txt_NumMatches, txt_Matches;
-    TextView txt_Ss_LeftHab1, txt_Ss_LeftHab2, txt_noSand, txt_Ss_PowerCellScored, txt_Ss_hatchScored, txt_Ss_droppedHatch;
+    TextView txt_auto_leftSectorLine, txt_noSand, txt_Ss_PowerCellScored, txt_Ss_hatchScored, txt_Ss_droppedHatch;
     TextView txt_Tele_PowerCellScored, txt_Tele_hatchScored, txt_Tele_droppedHatch;
     TextView txt_HabLvl, txt_Lift1NUM, txt_Lift2NUM, txt_WasLiftedNUM;
     TextView txt_2ndCargFloor, txt_2ndCargPlaSta, txt_2ndCargCorral, txt_2ndPanFloor, txt_2ndPanPlaSta , txt_3rdCargFloor, txt_3rdCargPlasta, txt_3rdCargCorral, txt_3rdPanFloor, txt_3rdPanPlaSta;;
@@ -51,7 +51,7 @@ public class VisMatch_Activity extends AppCompatActivity {
     BarChart mBarChart;
     int BarPowerCell = 0;  int BarPanels = 0;  int LastPowerCell = 0;  int LastPanels = 0;
     //----------------------------------
-    int numLeftHAB = 0; int numLeftHAB2 = 0; int noSand = 0;
+    int numleftSectorLine = 0; int numleftSectorLine2 = 0; int noSand = 0;
     int auto_B1 = 0; int auto_B2 = 0; int auto_B3 = 0;
     // NOTE: _ALL_ external mentions of Playere Sta. (PS) were changed to Loading Sta. (LS) so as to NOT be confused with Player Control Sta. (Driver)
     int auto_Ps1 = 0; int auto_Ps2 = 0; int auto_Ps3 = 0;
@@ -98,8 +98,8 @@ public class VisMatch_Activity extends AppCompatActivity {
         spinner_numMatches.setSelection(0, false);
         spinner_numMatches.setOnItemSelectedListener(new numMatches_OnItemSelectedListener());
         /*  Auto  */
-        txt_Ss_LeftHab1 = (TextView) findViewById(R.id.txt_Ss_LeftHab1);
-        txt_Ss_LeftHab2 = (TextView) findViewById(R.id.txt_Ss_LeftHab2);
+        txt_auto_leftSectorLine = (TextView) findViewById(R.id.txt_auto_leftSectorLine);
+//        txt_Ss_leftSectorLine2 = (TextView) findViewById(R.id.txt_Ss_leftSectorLine2);
         txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
         txt_noSand = (TextView) findViewById(R.id.txt_noSand);
         txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
@@ -177,11 +177,11 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isSand_mode()) {
                 noSand++;
             }
-            if (match_inst.isSand_leftHAB()) {
-                numLeftHAB++;
+            if (match_inst.isSand_leftSectorLine()) {
+                numleftSectorLine++;
             }
-            if (match_inst.isSand_leftHAB2()) {
-                numLeftHAB2++;
+            if (match_inst.isSand_leftSectorLine2()) {
+                numleftSectorLine2++;
             }
 
             if (match_inst.getSand_comment().length() > 1) {
@@ -606,9 +606,8 @@ public class VisMatch_Activity extends AppCompatActivity {
 // ================================================================
 // ======  Now start displaying all the data we collected  ========
 // ================================================================
-        txt_Ss_LeftHab1 = (TextView) findViewById(R.id.txt_Ss_LeftHab1);
-        txt_Ss_LeftHab2 = (TextView) findViewById(R.id.txt_Ss_LeftHab2);
-        txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
+        txt_auto_leftSectorLine = (TextView) findViewById(R.id.txt_auto_leftSectorLine);
+         txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
         txt_noSand = (TextView) findViewById(R.id.txt_noSand);
         txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
         txt_Ss_hatchScored  = (TextView) findViewById(R.id.txt_Ss_hatchScored);
@@ -639,8 +638,7 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_Pos3 = (TextView) findViewById(R.id.txt_Pos3);
 
         txt_Matches.setText(matches);
-        txt_Ss_LeftHab1.setText(String.valueOf(numLeftHAB));
-        txt_Ss_LeftHab2.setText(String.valueOf(numLeftHAB2));
+        txt_auto_leftSectorLine.setText(String.valueOf(numleftSectorLine));
         txt_noSand.setText(String.valueOf(noSand));
 //        Log.w(TAG, "Ratio of Placed to Attempted Gears in Auto = " + auto_SwCubesPlaced + "/" + auto_SwCubesAttempted);
         String carScored = "¹" + String.valueOf(cargL1) + " ²" + String.valueOf(cargL2) + " ³" + String.valueOf(cargL3);
@@ -706,8 +704,8 @@ public class VisMatch_Activity extends AppCompatActivity {
 //******************************
     private void init_Values() {
         noSand = 0;
-        numLeftHAB = 0;
-        numLeftHAB2 = 0;
+        numleftSectorLine = 0;
+        numleftSectorLine2 = 0;
         auto_Ps1 = 0;
         auto_Ps2 = 0;
         auto_Ps3 = 0;
