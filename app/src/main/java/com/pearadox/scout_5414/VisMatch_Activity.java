@@ -174,21 +174,21 @@ public class VisMatch_Activity extends AppCompatActivity {
             match_id = match_inst.getMatch();
             matches = matches + match_inst.getMatch() + "  ";   // cumulative list of matches
 
-            if (match_inst.isSand_mode()) {
+            if (match_inst.isAuto_mode()) {
                 noSand++;
             }
-            if (match_inst.isSand_leftSectorLine()) {
+            if (match_inst.isAuto_leftSectorLine()) {
                 numleftSectorLine++;
             }
-            if (match_inst.isSand_leftSectorLine2()) {
-                numleftSectorLine2++;
+
+            if (match_inst.getAuto_comment().length() > 1) {
+                auto_Comments = auto_Comments + match_inst.getMatch() + "-" + match_inst.getAuto_comment() + "\n" + underScore  + "\n" ;
             }
 
-            if (match_inst.getSand_comment().length() > 1) {
-                auto_Comments = auto_Comments + match_inst.getMatch() + "-" + match_inst.getSand_comment() + "\n" + underScore  + "\n" ;
-            }
+            // Pre-Start
             String pos = match_inst.getPre_startPos().trim();
 //            Log.w(TAG, "Start Pos. " + pos);
+            // ToDo - new Start Pos
             switch (pos) {
                 case "Level 1":
                     auto_B1++;
@@ -218,312 +218,14 @@ public class VisMatch_Activity extends AppCompatActivity {
                 default:                //
                     Log.e(TAG, "***  Invalid Player Station!!!  ***" );
             }
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            //@@@@@@@@@@@@@@@@@@@@@@  Autonomous  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-
-            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
-            dropped = dropped + match_inst.getSand_num_Dropped();
-             // =================== PowerCell ============
-            if (match_inst.isSand_LeftRocket_LCarg1()) {
-                cargL1++;
-            }
-            if (match_inst.isSand_LeftRocket_LCarg2()) {
-                cargL2++;
-            }
-            if (match_inst.isSand_LeftRocket_LCarg3()) {
-                cargL3++;
-            }
-            if (match_inst.isSand_LeftRocket_RCarg1()) {
-                cargL1++;
-            }
-            if (match_inst.isSand_LeftRocket_RCarg2()) {
-                cargL2++;
-            }
-            if (match_inst.isSand_LeftRocket_RCarg3()) {
-                cargL3++;
-            }
-            if (match_inst.isSand_RghtRocket_LCarg1()) {
-                cargL1++;
-            }
-            if (match_inst.isSand_RghtRocket_LCarg2()) {
-                cargL2++;
-            }
-            if (match_inst.isSand_RghtRocket_LCarg3()) {
-                cargL3++;
-            }
-            if (match_inst.isSand_RghtRocket_RCarg1()) {
-                cargL1++;
-            }
-            if (match_inst.isSand_RghtRocket_RCarg2()) {
-                cargL2++;
-            }
-            if (match_inst.isSand_RghtRocket_RCarg3()) {
-                cargL3++;
-            }
-            if (match_inst.isSand_PowerCellLCarg1()) {              // PowerCell Ship
-                cargL1++;
-            }
-            if (match_inst.isSand_PowerCellLCarg2()) {
-                cargL1++;
-            }
-            if (match_inst.isSand_PowerCellLCarg3()) {
-                cargL1++;
-            }
-            if (match_inst.isSand_PowerCellRCarg1()) {
-                cargL1++;
-            }
-            if (match_inst.isSand_PowerCellRCarg2()) {
-                cargL1++;
-            }
-            if (match_inst.isSand_PowerCellRCarg3()) {
-                cargL1++;
-            }
-            if (match_inst.isSand_PowerCellEndLPowerCell()) {      // End
-                cargL1++;
-            }
-            if (match_inst.isSand_PowerCellEndRPowerCell()) {      // End
-                cargL1++;
-            }
-            // =================== Panels ============
-            if (match_inst.isSand_LeftRocket_LPan1()) {
-                panL1++;
-            }
-            if (match_inst.isSand_LeftRocket_LPan2()) {
-                panL2++;
-            }
-            if (match_inst.isSand_LeftRocket_LPan3()) {
-                panL3++;
-            }
-            if (match_inst.isSand_LeftRocket_RPan1()) {
-                panL1++;
-            }
-            if (match_inst.isSand_LeftRocket_RPan2()) {
-                panL2++;
-            }
-            if (match_inst.isSand_LeftRocket_RPan3()) {
-                panL3++;
-            }
-            if (match_inst.isSand_RghtRocket_LPan1()) {
-                panL1++;
-            }
-            if (match_inst.isSand_RghtRocket_LPan2()) {
-                panL2++;
-            }
-            if (match_inst.isSand_RghtRocket_LPan3()) {
-                panL3++;
-            }
-            if (match_inst.isSand_RghtRocket_RPan1()) {
-                panL1++;
-            }
-            if (match_inst.isSand_RghtRocket_RPan2()) {
-                panL2++;
-            }
-            if (match_inst.isSand_RghtRocket_RPan3()) {
-                panL3++;
-            }
-            if (match_inst.isSand_PowerCellLPan1()) {              // PowerCell Ship
-                panL1++;
-            }
-            if (match_inst.isSand_PowerCellLPan2()) {
-                panL1++;
-            }
-            if (match_inst.isSand_PowerCellLPan3()) {
-                panL1++;
-            }
-            if (match_inst.isSand_PowerCellRPan1()) {
-                panL1++;
-            }
-            if (match_inst.isSand_PowerCellRPan2()) {
-                panL1++;
-            }
-            if (match_inst.isSand_PowerCellRPan3()) {
-                panL1++;
-            }
-            if (match_inst.isSand_PowerCellEndLPanel()) {
-                panL1++;
-            }
-            if (match_inst.isSand_PowerCellEndRPanel()) {
-                panL1++;
-            }
-            if (match_inst.isSand_PU2ndPanel()) {
-                if (match_inst.isSand_PU2ndPlSta()) {
-                    sand_PanPlasta2++;
-                }
-                if (match_inst.isSand_PU2ndFloor()) {
-                    sand_PanFloor2++;
-                }
-            }
-            if (match_inst.isSand_PU2ndPowerCell()) {
-                if (match_inst.isSand_PU2ndFloor()) {
-                    sand_PowerCellFloor2++;
-                }
-                if (match_inst.isSand_PU2ndPlSta()) {
-                    sand_PowerCellPlasta2++;
-                }
-                if (match_inst.isSand_PU2ndCorral()) {
-                    sand_PowerCellCorral2++;
-                }
-            }
-            if (match_inst.isSand_PU3rdPanel()) {
-                if (match_inst.isSand_PU3rdPlSta()) {
-                    sand_PanPlasta3++;
-                }
-                if (match_inst.isSand_PU3rdFloor()) {
-                    sand_PanFloor3++;
-                }
-            }
-            if (match_inst.isSand_PU3rdPowerCell()) {
-                if (match_inst.isSand_PU3rdFloor()) {
-                    sand_PowerCellFloor3++;
-                }
-                if (match_inst.isSand_PU3rdPlSta()) {
-                    sand_PowerCellPlasta3++;
-                }
-                if (match_inst.isSand_PU3rdCorral()) {
-                    sand_PowerCellCorral3++;
-                }
-            }
 
             // *************************************************
             // ******************** TeleOps ********************
             // *************************************************
-            // =================== PowerCell ============
-            if (match_inst.isTele_LeftRocket_LCarg1()) {
-                TcargL1++;
-            }
-            if (match_inst.isTele_LeftRocket_LCarg2()) {
-                TcargL2++;
-            }
-            if (match_inst.isTele_LeftRocket_LCarg3()) {
-                TcargL3++;
-            }
-            if (match_inst.isTele_LeftRocket_RCarg1()) {
-                TcargL1++;
-            }
-            if (match_inst.isTele_LeftRocket_RCarg2()) {
-                TcargL2++;
-            }
-            if (match_inst.isTele_LeftRocket_RCarg3()) {
-                TcargL3++;
-            }
-            if (match_inst.isTele_RghtRocket_LCarg1()) {
-                TcargL1++;
-            }
-            if (match_inst.isTele_RghtRocket_LCarg2()) {
-                TcargL2++;
-            }
-            if (match_inst.isTele_RghtRocket_LCarg3()) {
-                TcargL3++;
-            }
-            if (match_inst.isTele_RghtRocket_RCarg1()) {
-                TcargL1++;
-            }
-            if (match_inst.isTele_RghtRocket_RCarg2()) {
-                TcargL2++;
-            }
-            if (match_inst.isTele_RghtRocket_RCarg3()) {
-                TcargL3++;
-            }
-            if (match_inst.isTele_PowerCellLCarg1()) {              // PowerCell Ship
-                TcargL1++;
-            }
-            if (match_inst.isTele_PowerCellLCarg2()) {
-                TcargL1++;
-            }
-            if (match_inst.isTele_PowerCellLCarg3()) {
-                TcargL1++;
-            }
-            if (match_inst.isTele_PowerCellRCarg1()) {
-                TcargL1++;
-            }
-            if (match_inst.isTele_PowerCellRCarg2()) {
-                TcargL1++;
-            }
-            if (match_inst.isTele_PowerCellRCarg3()) {
-                TcargL1++;
-            }
-            if (match_inst.isTele_PowerCellEndLPowerCell()) {      // End
-                TcargL1++;
-            }
-            if (match_inst.isTele_PowerCellEndRPowerCell()) {      // End
-                TcargL1++;
-            }
-            // =================== Panels ============
-            if (match_inst.isTele_LeftRocket_LPan1()) {
-                TpanL1++;
-            }
-            if (match_inst.isTele_LeftRocket_LPan2()) {
-                TpanL2++;
-            }
-            if (match_inst.isTele_LeftRocket_LPan3()) {
-                TpanL3++;
-            }
-            if (match_inst.isTele_LeftRocket_RPan1()) {
-                TpanL1++;
-            }
-            if (match_inst.isTele_LeftRocket_RPan2()) {
-                TpanL2++;
-            }
-            if (match_inst.isTele_LeftRocket_RPan3()) {
-                TpanL3++;
-            }
-            if (match_inst.isTele_RghtRocket_LPan1()) {
-                TpanL1++;
-            }
-            if (match_inst.isTele_RghtRocket_LPan2()) {
-                TpanL2++;
-            }
-            if (match_inst.isTele_RghtRocket_LPan3()) {
-                TpanL3++;
-            }
-            if (match_inst.isTele_RghtRocket_RPan1()) {
-                TpanL1++;
-            }
-            if (match_inst.isTele_RghtRocket_RPan2()) {
-                TpanL2++;
-            }
-            if (match_inst.isTele_RghtRocket_RPan3()) {
-                TpanL3++;
-            }
-            if (match_inst.isTele_PowerCellLPan1()) {              // PowerCell Ship
-                TpanL1++;
-            }
-            if (match_inst.isTele_PowerCellLPan2()) {
-                TpanL1++;
-            }
-            if (match_inst.isTele_PowerCellLPan3()) {
-                TpanL1++;
-            }
-            if (match_inst.isTele_PowerCellRPan1()) {
-                TpanL1++;
-            }
-            if (match_inst.isTele_PowerCellRPan2()) {
-                TpanL1++;
-            }
-            if (match_inst.isTele_PowerCellRPan3()) {
-                TpanL1++;
-            }
-            if (match_inst.isTele_PowerCellEndLPanel()) {      // End
-                TpanL1++;
-            }
-            if (match_inst.isTele_PowerCellEndRPanel()) {      // End
-                TpanL1++;
-            }
-
-            if (match_inst.isTele_PowerCell_Corral()) {
-                tele_PowerCellCorral++;
-            }
-            if (match_inst.isTele_PowerCell_floor()) {
-                tele_PowerCellFloor++;
-            }
-            if (match_inst.isTele_PowerCell_playSta()) {
-                tele_PowerCellPlasta++;
-            }
-            if (match_inst.isTele_Panel_floor()) {
-                tele_PanFloor++;
-            }
-            if (match_inst.isTele_Panel_playSta()) {
-                tele_PanPlasta++;
-            }
 
             int endHAB = match_inst.getTele_level_num();        // end HAB Level
             switch (endHAB) {

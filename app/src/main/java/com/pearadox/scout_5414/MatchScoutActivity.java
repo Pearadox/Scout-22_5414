@@ -430,15 +430,15 @@ public class MatchScoutActivity extends AppCompatActivity {
 //        Pearadox.Match_Data.setPre_PlayerSta(p);      // Set at start-up
 
         Pearadox.Match_Data.setPre_startPos(startPos);
-        Pearadox.Match_Data.setSand_mode(noAuto);
+        Pearadox.Match_Data.setAuto_mode(noAuto);
 //        Pearadox.Match_Data.?????(cells_carried);
-        Pearadox.Match_Data.setSand_leftSectorLine(leftSectorLine);
+        Pearadox.Match_Data.setAuto_leftSectorLine(leftSectorLine);
 
         // ToDo - set all 'After Start' variables to object
 //        Pearadox.Match_Data.setSand_PU2ndPanel(PU2ndPanel);
 
         // --------------
-        Pearadox.Match_Data.setSand_comment(autoComment);
+        Pearadox.Match_Data.setAuto_comment(autoComment);
         Pearadox.Match_Data.setFinal_studID(studID);
         Log.w(TAG, "*******  All done with AUTO setters!!");
     }

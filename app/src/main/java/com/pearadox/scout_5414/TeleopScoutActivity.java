@@ -41,7 +41,7 @@ public class TeleopScoutActivity extends Activity {
     /* R Rocket */      CheckBox chk_RghtRocket_LPan1,chk_RghtRocket_LPan2,chk_RghtRocket_LPan3, chk_RghtRocket_LCarg1,chk_RghtRocket_LCarg2,chk_RghtRocket_LCarg3;
                         CheckBox chk_RghtRocket_RPan1,chk_RghtRocket_RPan2,chk_RghtRocket_RPan3, chk_RghtRocket_RCarg1,chk_RghtRocket_RCarg2,chk_RghtRocket_RCarg3;
     /* Comment */       EditText editText_TeleComments;
-    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellPlayerSta, chkBox_Corral, chkBox_PU_Panel_floor, chkBox_PanelPlayerSta;
+    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellLoadSta, chkBox_Corral, chkBox_PU_Panel_floor, chkBox_PanelPlayerSta;
     /* HAB */           RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_One, radio_Two, radio_Three, radio_Zero;
                         CheckBox chk_LiftedBy, chk_Lifted;
     /* Last Sect. */    Button button_GoToFinalActivity, button_Number_PenaltiesPlus, button_Number_PenaltiesUndo, btn_DropPlus, btn_DropMinus;
@@ -58,57 +58,11 @@ public class TeleopScoutActivity extends Activity {
     // ===================  TeleOps Elements for Match Scout Data object ===================
     // Declare & initialize
 
-// ToDo - remove all rocket widgets
-    public boolean LeftRocket_LPan1   = false;  // L-Rocket L-Panel#1
-    public boolean LeftRocket_LPan2   = false;  // L-Rocket L-Panel#2
-    public boolean LeftRocket_LPan3   = false;  // L-Rocket L-Panel#3
-    public boolean LeftRocket_RPan1   = false;  // L-Rocket R-Panel#1
-    public boolean LeftRocket_RPan2   = false;  // L-Rocket R-Panel#2
-    public boolean LeftRocket_RPan3   = false;  // L-Rocket R-Panel#3
-    public boolean LeftRocket_LCarg1  = false; // L-Rocket L-PowerCell#1
-    public boolean LeftRocket_LCarg2  = false; // L-Rocket L-PowerCell#2
-    public boolean LeftRocket_LCarg3  = false; // L-Rocket L-PowerCell#3
-    public boolean LeftRocket_RCarg1  = false; // L-Rocket R-PowerCell#1
-    public boolean LeftRocket_RCarg2  = false; // L-Rocket R-PowerCell#2
-    public boolean LeftRocket_RCarg3  = false; // L-Rocket R-PowerCell#3
-
-    public boolean PowerCellLPan1         = false; // PowerCell L-Panel#1
-    public boolean PowerCellLPan2         = false; // PowerCell L-Panel#2
-    public boolean PowerCellLPan3         = false; // PowerCell L-Panel#3
-    public boolean PowerCellRPan1         = false; // PowerCell R-Panel#1
-    public boolean PowerCellRPan2         = false; // PowerCell R-Panel#2
-    public boolean PowerCellRPan3         = false; // PowerCell R-Panel#3
-    public boolean PowerCellLCarg1        = false; // PowerCell L-PowerCell#1
-    public boolean PowerCellLCarg2        = false; // PowerCell L-PowerCell#2
-    public boolean PowerCellLCarg3        = false; // PowerCell L-PowerCell#3
-    public boolean PowerCellRCarg1        = false; // PowerCell R-PowerCell#1
-    public boolean PowerCellRCarg2        = false; // PowerCell R-PowerCell#2
-    public boolean PowerCellRCarg3        = false; // PowerCell R-PowerCell#3
-    public boolean PowerCellEndLPanel     = false; // PowerCell End L-Panel#1
-    public boolean PowerCellEndLPowerCell     = false; // PowerCell End L-PowerCell#1
-    public boolean PowerCellEndRPanel     = false; // PowerCell End R-Panel#1
-    public boolean PowerCellEndRPowerCell     = false; // PowerCell End R-PowerCell#1
-
-
-    public boolean RghtRocket_LPan1   = false;  // R-Rocket L-Panel#1
-    public boolean RghtRocket_LPan2   = false;  // R-Rocket L-Panel#2
-    public boolean RghtRocket_LPan3   = false;  // R-Rocket L-Panel#3
-    public boolean RghtRocket_RPan1   = false;  // R-Rocket R-Panel#1
-    public boolean RghtRocket_RPan2   = false;  // R-Rocket R-Panel#2
-    public boolean RghtRocket_RPan3   = false;  // R-Rocket R-Panel#3
-    public boolean RghtRocket_LCarg1  = false;  // R-Rocket L-PowerCell#1
-    public boolean RghtRocket_LCarg2  = false;  // R-Rocket L-PowerCell#2
-    public boolean RghtRocket_LCarg3  = false;  // R-Rocket L-PowerCell#3
-    public boolean RghtRocket_RCarg1  = false;  // R-Rocket R-PowerCell#1
-    public boolean RghtRocket_RCarg2  = false;  // R-Rocket R-PowerCell#2
-    public boolean RghtRocket_RCarg3  = false;  // R-Rocket R-PowerCell#3
 
     public boolean PowerCell_floor        = false;  // Did they pickup PowerCell off the ground?
-    public boolean PowerCell_playSta      = false;  // Did they pickup PowerCell from Player Station?
-    public boolean PowerCell_Corral       = false;  // Did they pickup PowerCell from Corral?
-    public boolean panel_floor        = false;  // Did they pickup panel off the ground?
-    public boolean panel_playSta      = false;  // Did they pickup panel off the ground?
-    public int end_Hang_Num          = 99;     // HAB Level
+    public boolean PowerCell_LoadSta      = false;  // Did they get PowerCell from Loading Station?
+    
+    public int end_HangNum          = 99;     // HAB Level
     public boolean got_lift           = false;  // Got Lifted by another robot
     public boolean lifted             = false;  // Got Lifted by another robot
     public int num_Penalties          = 0;      // How many penalties received?
@@ -133,9 +87,9 @@ public class TeleopScoutActivity extends Activity {
         txt_tnum.setText(tn);
 
         editText_TeleComments   = (EditText) findViewById(R.id.editText_teleComments);
-        chkBox_PU_PowerCell_floor   = (CheckBox) findViewById(R.id.chkBox_PU_PowerCell_floor);
-        chkBox_PowerCellPlayerSta   = (CheckBox) findViewById(R.id.chkBox_PowerCellPlayerSta);
-        chkBox_Corral           = (CheckBox) findViewById(R.id.chkBox_Corral);
+        chkBox_PU_PowerCell_floor  = (CheckBox) findViewById(R.id.chkBox_PU_PowerCell_floor);
+        chkBox_PowerCellLoadSta = (CheckBox) findViewById(R.id.chkBox_PowerCellLoadSta);
+//?        chkBox_Corral           = (CheckBox) findViewById(R.id.chkBox_Corral);
         chkBox_PU_Panel_floor   = (CheckBox) findViewById(R.id.chkBox_PU_Panel_floor);
         chkBox_PanelPlayerSta   = (CheckBox) findViewById(R.id.chkBox_PanelPlayerSta);
         radio_Zero              = (RadioButton) findViewById(R.id.radio_Zero);
@@ -155,14 +109,14 @@ public class TeleopScoutActivity extends Activity {
         pfDatabase                = FirebaseDatabase.getInstance();            // Firebase
         pfDevice_DBReference      = pfDatabase.getReference("devices");     // List of Devices
 
-        if (Pearadox.Match_Data.isSand_mode()) {
+        if (Pearadox.Match_Data.isAuto_mode()) {
             Toast toast = Toast.makeText(getBaseContext(), "\n\n*** No Autonomous was set - Watch for any scoring in TeleOps ***\n\n", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
             final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION,  100);
             tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
 //            radio_Zero.setChecked(true);        // didn't move - so NOT on
-//            end_Hang_Num = 0;
+//            end_HangNum = 0;
         }
 
 
@@ -172,8 +126,8 @@ public class TeleopScoutActivity extends Activity {
 
     button_GoToFinalActivity.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-        Log.w(TAG, "###  Clicked Final  ### " + end_Hang_Num);
-            if (end_Hang_Num < 4) {        // Gotta pick one!
+        Log.w(TAG, "###  Clicked Final  ### " + end_HangNum);
+            if (end_HangNum < 4) {        // Gotta pick one!
                 storeTeleData();                    // Put all the TeleOps data collected in Match object
                 updateDev("Final");           // Update 'Phase' for stoplight indicator in ScoutMaster
 
@@ -204,59 +158,19 @@ public class TeleopScoutActivity extends Activity {
             }
         }
     });
-    chkBox_PowerCellPlayerSta.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    chkBox_PowerCellLoadSta.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chkBox_PowerCellPlayerSta Listener");
+            Log.w(TAG, "chkBox_PowerCellLoadSta Listener");
             if (buttonView.isChecked()) {
-                Log.w(TAG,"chkBox_PowerCellPlayerSta is checked.");
-                PowerCell_playSta = true;
+                Log.w(TAG,"chkBox_PowerCellLoadSta is checked.");
+                PowerCell_LoadSta = true;
             } else {  //not checked
-                Log.w(TAG,"chkBox_PowerCellPlayerSta is unchecked.");
-                PowerCell_playSta = false;
+                Log.w(TAG,"chkBox_PowerCellLoadSta is unchecked.");
+                PowerCell_LoadSta = false;
             }
         }
     });
-    chkBox_Corral.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chkBox_Corral Listener");
-            if (buttonView.isChecked()) {
-                Log.w(TAG,"chkBox_Corral is checked.");
-                PowerCell_Corral = true;
-            } else {  //not checked
-                Log.w(TAG,"chkBox_Corral is unchecked.");
-                PowerCell_Corral = false;
-            }
-        }
-    });
-
-    chkBox_PU_Panel_floor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chkBox_PU_Panel_floor Listener");
-            if (buttonView.isChecked()) {
-                Log.w(TAG,"PU_Panel is checked.");
-                panel_floor = true;
-            } else {  //not checked
-                Log.w(TAG,"PU_Panel is unchecked.");
-                panel_floor = false;
-            }
-        }
-    });
-        chkBox_PanelPlayerSta.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chkBox_PanelPlayerSta Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"panel_playSta is checked.");
-                    panel_playSta = true;
-                } else {  //not checked
-                    Log.w(TAG,"panel_playSta is unchecked.");
-                    panel_playSta = false;
-                }
-            }
-        });
 
     chk_LiftedBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
@@ -368,16 +282,16 @@ public class TeleopScoutActivity extends Activity {
         String value = radio_Lift.getText().toString();
         if (value.equals("Not On")) {        // Not On?
             Log.w(TAG, "None");
-            end_Hang_Num = 0;
+            end_HangNum = 0;
         } else if (value.equals("One")){     // One?
             Log.w(TAG, "One");
-            end_Hang_Num = 1;
+            end_HangNum = 1;
         } else if (value.equals("Two")){     // Two
             Log.w(TAG, "Two");
-            end_Hang_Num = 2;
+            end_HangNum = 2;
         } else {                              // Three
             Log.w(TAG, "Three");
-            end_Hang_Num = 3;
+            end_HangNum = 3;
         }
     }
 
