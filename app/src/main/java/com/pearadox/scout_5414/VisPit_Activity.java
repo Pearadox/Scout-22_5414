@@ -161,10 +161,6 @@ public class VisPit_Activity extends AppCompatActivity {
                 chkBox_Ramp = (CheckBox) findViewById(R.id.chkBox_Ramp);
                 chkBox_Hook = (CheckBox) findViewById(R.id.chkBox_Hook);
                 chkBox_OffFloor = (CheckBox) findViewById(R.id.chkBox_OffFloor);
-//                chkBox_PanelFloor = (CheckBox) findViewById(R.id.chkBox_PanelFloor);
-//                chkBox_Hab2 = (CheckBox) findViewById(R.id.chkBox_Hab2);
-//                chkBox_HABLvl_2 = (CheckBox) findViewById(R.id.chkBox_HABLvl_2);
-//                chkBox_HABLvl_3 = (CheckBox) findViewById(R.id.chkBox_HABLvl_3);
                 txt_DriveMotor = (TextView) findViewById(R.id.txt_DriveMotor);
                 txt_ProgLang = (TextView) findViewById(R.id.txt_ProgLang);
                 txt_Speed = (TextView) findViewById(R.id.txt_Speed);

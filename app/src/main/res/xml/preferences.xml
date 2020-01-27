@@ -25,6 +25,7 @@
             android:summary="Multiplier for PowerCell scored at Level 3"
             android:title="Level 3" />
 
+
     </PreferenceCategory>
     //================================================================================
     <PreferenceCategory android:title="Panels">
@@ -154,3 +155,5 @@
     </PreferenceCategory>
 
 </PreferenceScreen>
+
+<!--SAVE-->

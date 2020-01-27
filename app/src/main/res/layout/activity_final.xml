@@ -15,7 +15,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textAlignment="center" />
 
-
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     <CheckBox

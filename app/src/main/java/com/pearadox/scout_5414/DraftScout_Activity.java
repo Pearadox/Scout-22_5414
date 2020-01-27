@@ -334,6 +334,7 @@ public class DraftScout_Activity extends AppCompatActivity {
 //        spinner_numMatches.setSelection(0, false);
 //        spinner_numMatches.setOnItemSelectedListener(new numMatches_OnItemSelectedListener());
 
+
         pfDatabase = FirebaseDatabase.getInstance();
         pfMatchData_DBReference = pfDatabase.getReference("match-data/" + Pearadox.FRC_Event);    // Match Data
 

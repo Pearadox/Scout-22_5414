@@ -156,7 +156,7 @@ pitData Pit_Data = new pitData();
         String param2 = bundle.getString("stud");
         Log.w(TAG, param1 + " " + param2);     // ** DEBUG **
         scout = param2;                         // Scout of record
-
+//
         txt_EventName = (TextView) findViewById(R.id.txt_EventName);
         txt_EventName.setText(Pearadox.FRC_EventName);          // Event Name
         pfDatabase = FirebaseDatabase.getInstance();

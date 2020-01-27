@@ -73,7 +73,6 @@ public class VisMatch_Activity extends AppCompatActivity {
 
     matchData match_inst = new matchData();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

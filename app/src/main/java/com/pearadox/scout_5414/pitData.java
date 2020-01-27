@@ -47,7 +47,6 @@ public class pitData implements Serializable {
     public String  pit_dateTime;                    // Date & Time data was saved
     public String pit_photoURL;                     // URL of the robot photo in Firebase
 
-
     // ===========================================================================
     //  Constructor
 

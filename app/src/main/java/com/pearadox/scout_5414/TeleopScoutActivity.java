@@ -57,6 +57,8 @@ public class TeleopScoutActivity extends Activity {
 
     // ===================  TeleOps Elements for Match Scout Data object ===================
     // Declare & initialize
+
+// ToDo - remove all rocket widgets
     public boolean LeftRocket_LPan1   = false;  // L-Rocket L-Panel#1
     public boolean LeftRocket_LPan2   = false;  // L-Rocket L-Panel#2
     public boolean LeftRocket_LPan3   = false;  // L-Rocket L-Panel#3

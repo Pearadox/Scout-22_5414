@@ -903,7 +903,9 @@ public class MatchScoutActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.w(TAG, "checkbox_leftSectLine Listener");
-                if (buttonView.isChecked()) {
+
+// ToDo change HAB
+            if (buttonView.isChecked()) {
                     leftHAB = true;
                 } else {
                     leftHAB = false;

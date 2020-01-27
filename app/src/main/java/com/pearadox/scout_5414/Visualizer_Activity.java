@@ -109,7 +109,6 @@ public class Visualizer_Activity extends AppCompatActivity {
     ArrayList<matchData> Vis_MD = new ArrayList<>();
     matchData match_inst = new matchData();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
