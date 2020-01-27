@@ -30,8 +30,9 @@
             android:id="@+id/lbl_robotnum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/text_Teleop"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="-5sp"
             android:text="Robot Team Number"
             android:textColor="@color/white" />
 
@@ -40,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="-5sp"
             android:text="0000"
             android:textColor="@color/yellow"
             android:textSize="16sp" />
@@ -47,544 +49,16 @@
 
     // ==============================================================================
     // ==============================================================================
-    <LinearLayout
-        android:id="@+id/lin_AllShips"
-        android:layout_width="match_parent"
-        android:layout_height="250sp"
-        android:layout_below="@+id/lin_TeamNum"
-        android:layout_marginTop="12sp"
-        android:orientation="horizontal">
-
-        // Near Rocket Ship
-        <RelativeLayout
-            android:id="@+id/rel_LeftRocketShip"
-            android:layout_width="160dp"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imageView_LeftRocket"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:contentDescription="Near Rocket"
-                android:src="@drawable/full_ship" />
-            <TextView
-                android:id="@+id/lblNear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:text="Left Rocket"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-            // --------------- LEFT ----------------------------------
-
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_LPan1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="175dp"
-                android:buttonTint="@color/brightblue" />
-
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_LCarg1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="175dp"
-                android:buttonTint="@color/yellow" />
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_LPan2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="130dp"
-                android:buttonTint="@color/brightblue" />
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_LCarg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="130dp"
-                android:buttonTint="@color/yellow" />
-
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_LPan3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="90dp"
-                android:buttonTint="@color/brightblue" />
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_LCarg3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="90dp"
-                android:buttonTint="@color/yellow" />
-            // --------------- RIGHT ----------------------------------
-
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_RPan1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="130dp"
-                android:layout_marginTop="178dp"
-                android:buttonTint="@color/brightblue" />
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_RCarg1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="176dp"
-                android:buttonTint="@color/yellow" />
-
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_RPan2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="130dp"
-                android:layout_marginTop="130dp"
-                android:buttonTint="@color/brightblue" />
-
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_RCarg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="130dp"
-                android:buttonTint="@color/yellow" />
-
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_RPan3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="130dp"
-                android:layout_marginTop="90dp"
-                android:buttonTint="@color/brightblue" />
-
-            <CheckBox
-                android:id="@+id/chk_LeftRocket_RCarg3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="90dp"
-                android:buttonTint="@color/yellow" />
 
 
-        </RelativeLayout>
-        <!--</LinearLayout>-->
-        // ==============================================================================
-        // PowerCell Ship
-        <!--<LinearLayout-->
-        <!--android:id="@+id/lin_PowerCellShip"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="185dp"-->
-        <!--android:layout_below="@+id/lin_LeftRocketShip"-->
-        <!--android:layout_marginTop="12sp"-->
-        <!--android:orientation="horizontal">-->
-
-        <RelativeLayout
-            android:id="@+id/rel_PowerCellShip"
-            android:layout_width="250dp"
-            android:layout_height="match_parent">
-
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView_Switch"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="200dp"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_alignParentTop="true"-->
-<!--                android:contentDescription="PowerCell Ship"-->
-<!--                android:src="@drawable/PowerCell_ship" />-->
-
-            <CheckBox
-                android:id="@+id/chk_PowerCellRCarg1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="140sp"
-                android:layout_marginTop="78dp"
-                android:buttonTint="@color/yellow" />
-
-            <CheckBox
-                android:id="@+id/chk_PowerCellRPan1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="185dp"
-                android:layout_marginTop="78dp"
-                android:buttonTint="@color/brightblue" />
-
-            <CheckBox
-                android:id="@+id/chk_PowerCellRCarg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="140dp"
-                android:layout_marginTop="45dp"
-                android:buttonTint="@color/yellow" />
-
-            <CheckBox
-                android:id="@+id/chk_PowerCellRPan2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="185sp"
-                android:layout_marginTop="45dp"
-                android:buttonTint="@color/brightblue" />
-
-            <CheckBox
-                android:id="@+id/chk_PowerCellRCarg3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="140dp"
-                android:layout_marginTop="12dp"
-                android:buttonTint="@color/yellow" />
-
-            <CheckBox
-                android:id="@+id/chk_PowerCellRPan3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="185dp"
-                android:layout_marginTop="12dp"
-                android:buttonTint="@color/brightblue" />
-
-            // --------------- LEFT ----------------------------------
-            <CheckBox
-                android:id="@+id/chk_PowerCellLPan1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="78dp"
-                android:buttonTint="@color/brightblue" />
-
-            <CheckBox
-                android:id="@+id/chk_PowerCellLCarg1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="82dp"
-                android:layout_marginTop="78dp"
-                android:buttonTint="@color/yellow" />
-            <CheckBox
-                android:id="@+id/chk_PowerCellLPan2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30sp"
-                android:layout_marginTop="45dp"
-                android:buttonTint="@color/brightblue" />
-            <CheckBox
-                android:id="@+id/chk_PowerCellLCarg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="82dp"
-                android:layout_marginTop="45dp"
-                android:buttonTint="@color/yellow" />
-            <CheckBox
-                android:id="@+id/chk_PowerCellLPan3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="12dp"
-                android:buttonTint="@color/brightblue" />
-            <CheckBox
-                android:id="@+id/chk_PowerCellLCarg3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="82dp"
-                android:layout_marginTop="12dp"
-                android:buttonTint="@color/yellow" />
-            // ----------------- END ----------------------------
-            <CheckBox
-                android:id="@+id/chk_PowerCellEndLPanel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="170dp"
-                android:buttonTint="@color/brightblue" />
-
-            <CheckBox
-                android:id="@+id/chk_PowerCellEndLPowerCell"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="130dp"
-                android:buttonTint="@color/yellow" />
-            <CheckBox
-                android:id="@+id/chk_PowerCellEndRPanel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="125dp"
-                android:layout_marginTop="170dp"
-                android:buttonTint="@color/brightblue" />
-            <CheckBox
-                android:id="@+id/chk_PowerCellEndRPowerCell"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="125dp"
-                android:layout_marginTop="130dp"
-                android:buttonTint="@color/yellow" />
-        </RelativeLayout>
-        <!--</LinearLayout>-->
-
-
-        // ==============================================================================
-        // Far Rocket Ship
-        <!--<LinearLayout-->
-        <!--android:id="@+id/lin_LeftRocketShip"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="185dp"-->
-        <!--android:layout_below="@+id/lin_PowerCellShip"-->
-        <!--android:layout_marginTop="12sp"-->
-        <!--android:orientation="horizontal">-->
-        <RelativeLayout
-            android:id="@+id/rel_RghtRocketShip"
-            android:layout_width="160dp"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imageView_RghtRocket"
-                android:layout_width="400dp"
-                android:layout_height="250dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:contentDescription="Far Rocket"
-                android:src="@drawable/full_ship" />
-
-            <TextView
-                android:id="@+id/lblFar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:text="Right Rocket"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-            // --------------- LEFT ----------------------------------
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_LPan1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="175dp"
-                android:buttonTint="@color/brightblue" />
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_LCarg1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="175dp"
-                android:buttonTint="@color/yellow" />
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_LPan2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="130dp"
-                android:buttonTint="@color/brightblue" />
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_LCarg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="130dp"
-                android:buttonTint="@color/yellow" />
-
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_LPan3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="90dp"
-                android:buttonTint="@color/brightblue" />
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_LCarg3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="90dp"
-                android:buttonTint="@color/yellow" />
-            // --------------- RIGHT ----------------------------------
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_RPan1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="130dp"
-                android:layout_marginTop="175dp"
-                android:buttonTint="@color/brightblue" />
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_RCarg1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="175dp"
-                android:buttonTint="@color/yellow" />
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_RPan2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="130dp"
-                android:layout_marginTop="130dp"
-                android:buttonTint="@color/brightblue" />
-
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_RCarg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="130dp"
-                android:buttonTint="@color/yellow" />
-
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_RPan3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="130dp"
-                android:layout_marginTop="90dp"
-                android:buttonTint="@color/brightblue" />
-
-            <CheckBox
-                android:id="@+id/chk_RghtRocket_RCarg3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="90dp"
-                android:buttonTint="@color/yellow" />
-
-        </RelativeLayout>
-    </LinearLayout>
-
-    // ==============================================================================
-    <LinearLayout
-        android:id="@+id/lin_Legend"
-        android:layout_width="match_parent"
-        android:layout_height="50sp"
-        android:layout_below="@+id/lin_AllShips"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/lblDriver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="From Driver's Viewpoint"
-            android:textColor="@color/green"
-            android:textSize="16sp" />
-        <CheckBox
-            android:id="@+id/chk_LegendPanel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:clickable="false"
-            android:layout_marginStart="10dp"
-            android:buttonTint="@color/brightblue"
-            android:text="= Panel " />
-        <CheckBox
-            android:id="@+id/chk_LegendPowerCell"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:clickable="false"
-            android:layout_marginStart="10dp"
-            android:buttonTint="@color/yellow"
-            android:text=" = PowerCell" />
-
-    </LinearLayout>
-// ======= End of Legend
-
-
-    // ==============================================================================
-    // ==============================================================================
-    // ==============================================================================
-    // ==============================================================================
-
-
-    // ==============================================================================
-    // "Dummy" layout to PREVENT Comment field getting focus
-    <LinearLayout
-        android:orientation="horizontal"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_width="0px"
-        android:layout_height="0px"
-        android:id="@+id/linearLayout" />
-
-
-    <ScrollView
-        android:id="@+id/scrollv_comm"
-        android:layout_width="550sp"
-        android:layout_height="80sp"
-        android:layout_below="@+id/lin_Legend"
-        android:layout_alignParentStart="true"
-        android:isScrollContainer="false">
-
-        <EditText
-            android:id="@+id/editText_teleComments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/scrollv_comm"
-            android:layout_alignBottom="@+id/scrollv_comm"
-            android:layout_marginStart="4dp"
-            android:layout_toStartOf="@+id/button_GoToFinalActivity"
-            android:background="@drawable/border"
-            android:ems="12"
-            android:hint="Tap to add any additional comments."
-            android:inputType="textMultiLine"
-            android:lines="3"
-            android:scrollbars="vertical"
-            android:textColor="@color/yellow" />
-    </ScrollView>
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     <TextView
         android:id="@+id/lbl_From"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/lin_TeamNum"
         android:text="Retrieved from:"
-        android:layout_below="@+id/scrollv_comm"
         android:textColor="@color/magenta"
         android:textSize="16sp" />
 
@@ -658,22 +132,22 @@
 
     // ==============================================================================
     <LinearLayout
-        android:id="@+id/lin_HAB"
+        android:id="@+id/lin_END"
         android:layout_width="match_parent"
         android:layout_height="40sp"
         android:layout_below="@+id/lin_Pieces"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/lbl_Lvl"
+            android:id="@+id/lbl_END"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HAB Level @ End"
+            android:text="# Hanging @ End"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
         <RadioGroup
-            android:id="@+id/radgrp_HAB"
+            android:id="@+id/radgrp_END"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -684,7 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="RadioClick_Lifted"
-                android:text="Not On"
+                android:text="None"
                 android:textColor="@color/cyan" />
 
             <RadioButton
@@ -716,7 +190,7 @@
         android:id="@+id/lin_Lift"
         android:layout_width="match_parent"
         android:layout_height="40sp"
-        android:layout_below="@+id/lin_HAB"
+        android:layout_below="@+id/lin_END"
         android:orientation="horizontal">
 
         <CheckBox
@@ -735,7 +209,7 @@
 
     // ==============================================================================
     <LinearLayout
-        android:id="@+id/lin_Penalties"
+        android:id="@+id/lin_Last"
         android:layout_width="match_parent"
         android:layout_height="40sp"
         android:layout_below="@+id/lin_Lift"
@@ -802,6 +276,47 @@
             android:layout_marginStart="15dp"
             android:text="-" />
     </LinearLayout>
+
+
+// ==============================================================================
+// ==============================================================================
+// ==============================================================================
+// ==============================================================================
+// "Dummy" layout to PREVENT Comment field getting focus
+    <LinearLayout
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:id="@+id/linearLayout" />
+
+
+    <ScrollView
+        android:id="@+id/scrollv_comm"
+        android:layout_width="550sp"
+        android:layout_height="80sp"
+        android:layout_below="@+id/lin_Last"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10sp"
+        android:isScrollContainer="false">
+
+        <EditText
+            android:id="@+id/editText_teleComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/scrollv_comm"
+            android:layout_alignBottom="@+id/scrollv_comm"
+            android:layout_marginStart="4dp"
+            android:layout_toStartOf="@+id/button_GoToFinalActivity"
+            android:background="@drawable/border"
+            android:ems="12"
+            android:hint="Tap to add any additional comments."
+            android:inputType="textMultiLine"
+            android:lines="3"
+            android:scrollbars="vertical"
+            android:textColor="@color/yellow" />
+    </ScrollView>
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     <Button

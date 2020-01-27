@@ -44,7 +44,7 @@ public class FinalActivity extends Activity {
     String TAG = "FinalActivity";      // This CLASS name
     TextView txt_dev, txt_stud, txt_match, txt_MyTeam, txt_robotnum;
     EditText editText_Comments;
-    CheckBox chk_lostPart, chk_lostComm, chk_block, chkBox_final_int_Rocket, chk_defense30,chk_PowerCellDefense;
+    CheckBox chk_lostPart, chk_lostComm, chk_block, chkBox_final_int_Trench, chk_defense30,chk_PowerCellDefense;
     Button button_Saved;
     RadioGroup radioGroup_defense;
     RadioButton rdBtn_def_good, radioButton_def_bad;
@@ -105,7 +105,7 @@ public class FinalActivity extends Activity {
         chk_lostPart.requestFocus();        // Don't let EditText mess up layout!!
         chk_lostComm = (CheckBox) findViewById(R.id.chk_lostComm);
         chk_block = (CheckBox) findViewById(R.id.chk_block);
-        chkBox_final_int_Rocket = (CheckBox) findViewById(R.id.chkBox_final_int_Rocket);
+        chkBox_final_int_Trench = (CheckBox) findViewById(R.id.chkBox_final_int_Trench);
         chk_PowerCellDefense = (CheckBox) findViewById(R.id.chk_PowerCellDefense);
         chk_defense30 = (CheckBox) findViewById(R.id.chk_defense30);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
@@ -236,10 +236,10 @@ public class FinalActivity extends Activity {
          }
      }
     );
-        chkBox_final_int_Rocket.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkBox_final_int_Trench.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
          @Override
          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-             Log.i(TAG, "chkBox_final_int_Rocket Listener");
+             Log.i(TAG, "chkBox_final_int_Trench Listener");
              if (buttonView.isChecked()) {
                  Log.i(TAG, "Rocket is checked.");  //checked
                  final_def_RocketInt = true;

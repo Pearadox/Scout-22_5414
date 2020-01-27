@@ -69,18 +69,18 @@
         android:textSize="16sp" />
 
     <CheckBox
-        android:id="@+id/chkBox_final_int_Rocket"
+        android:id="@+id/chkBox_final_int_Trench"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lbl_Defense"
-        android:text="Rocket Interference" />
+        android:text="Trench Interference" />
 
     <CheckBox
         android:id="@+id/chk_block"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/chk_defense30"
-        android:layout_alignBottom="@+id/chkBox_final_int_Rocket"
+        android:layout_alignBottom="@+id/chkBox_final_int_Trench"
         android:text="Blocking" />
 
     <!--<CheckBox-->
@@ -130,8 +130,8 @@
         android:id="@+id/scrollv_comm"
         android:layout_width="500sp"
         android:layout_height="200sp"
-        android:layout_alignStart="@+id/chkBox_final_int_Rocket"
-        android:layout_below="@+id/chkBox_final_int_Rocket"
+        android:layout_alignStart="@+id/chkBox_final_int_Trench"
+        android:layout_below="@+id/chkBox_final_int_Trench"
         android:layout_marginTop="29dp"
         android:isScrollContainer="false">
 

@@ -324,6 +324,7 @@ public class MatchScoutActivity extends AppCompatActivity {
 
             } else {        // It's OK - Match has started
 
+                Log.e(TAG, "*** TeleOps - #Cells=" + cells_carried + "  Start-" + spinner_startPos.getSelectedItemPosition());
                     if ((noAuto==false) &&
                             ((cells_carried >= 0) ) ||
 //                            (PU2ndPanel) && ((!PU2ndPlSta)&&(!PU2ndFloor)) ||
