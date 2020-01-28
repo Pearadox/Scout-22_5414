@@ -227,7 +227,7 @@ public class VisMatch_Activity extends AppCompatActivity {
             // ******************** TeleOps ********************
             // *************************************************
 
-            int endHAB = match_inst.getTele_level_num();        // end HAB Level
+            int endHAB = match_inst.getTele_Hang_num();        // end HAB Level
             switch (endHAB) {
                 case 0:         // Not On
                     climbH0++;

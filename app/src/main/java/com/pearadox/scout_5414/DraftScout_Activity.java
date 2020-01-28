@@ -1082,9 +1082,9 @@ public void Toast_Msg(String choice, Integer minimum) {
                 // ******************** TeleOps ********************
                 // *************************************************
 
-                int endHAB = match_inst.getTele_level_num();        // end HAB Level
-                switch (endHAB) {
-                    case 0:         // Not On
+                int endHang = match_inst.getTele_Hang_num();        // end # Hanging
+                switch (endHang) {
+                    case 0:         // Zero
                         climbH0++;
                         break;
                     case 1:         // Level 1

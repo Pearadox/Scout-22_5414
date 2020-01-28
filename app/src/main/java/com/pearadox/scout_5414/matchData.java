@@ -16,11 +16,17 @@ public class matchData implements Serializable {
     private boolean auto_mode;              // Do they have Autonomous mode?
     private boolean auto_leftSectorLine;    // Did they leave Sector Line
     private boolean auto_Dump;              // Did they Dump balls to partner?
+    private boolean auto_Collect;           // Did they collect more Power Cells?
+    private boolean auto_CollectFloor;      // Collect from Floor?
+    private boolean auto_CollectRobot;      // Collect from a Robot?
+    private boolean auto_CollectTrench;     // Collect from Trench?
+    private boolean auto_CollectSGboundary; // Collect from SG boundary?
     private int     auto_Low;               // # Low Goal balls
     private int     auto_High;              // # High Goal balls
     private boolean auto_conInner;          // Consistent Inner Goal scored?
     private boolean auto_ShootUnder;        // Shoot from Under Power Port
     private boolean auto_ShootLine;         // Shoot from Sector Line
+    private boolean auto_ShootFtrench;      // Shoot from in Front of Trench
 
     private String  auto_comment;           // Auto comment
 
@@ -33,16 +39,19 @@ public class matchData implements Serializable {
     private boolean tele_ShootUnder;        // Shoot from Under Power Port
     private boolean tele_ShootLine;         // Shoot from Sector Line
     private boolean tele_ShootFtrench;      // Shoot from in Front of Trench
-    private boolean tele_ShootBtrench;      // Shoot from in Front of Trench
+    private boolean tele_ShootBtrench;      // Shoot from in Back of Trench
 
 
     private boolean tele_PowerCell_floor;   // Did they pick up PowerCell from floor
     private boolean tele_PowerCell_LoadSta; // Did they get PowerCell from Loading Station
 
+    private boolean tele_Climbed;           // Did they Climb?
+    private boolean tele_UnderSG;           // Parked under Shield Generator
     private boolean tele_got_lift;          // Did they get lifted to higher HAB Level
     private boolean tele_lifted;            // Did they lift a robot to higher HAB Level
     private int     tele_liftedNum;         // How many lifted?
-    private int     tele_level_num;         // Ended on What HAB Level (0-3)
+    private int     tele_Hang_num;          // End - How many on Bar (0-3)
+    private boolean tele_Balanced;          // SG is Balanced
 
     private int     tele_num_Penalties;     // How many penalties received?
     private int     tele_num_Dropped;       // How many Panels dropped?
@@ -65,7 +74,7 @@ public class matchData implements Serializable {
 //  Constructor
 
 
-    public matchData(String match, String team_num, int pre_cells_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftSectorLine, boolean auto_Dump, int auto_Low, int auto_High, boolean auto_conInner, boolean auto_ShootUnder, boolean auto_ShootLine, String auto_comment, int tele_Low, int tele_High, boolean tele_conInner, boolean tele_CPspin, boolean tele_CPcolor, boolean tele_ShootUnder, boolean tele_ShootLine, boolean tele_ShootFtrench, boolean tele_ShootBtrench, boolean tele_PowerCell_floor, boolean tele_PowerCell_LoadSta, boolean tele_got_lift, boolean tele_lifted, int tele_liftedNum, int tele_level_num, int tele_num_Penalties, int tele_num_Dropped, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defLast30, boolean final_defense_good, boolean final_def_Block, boolean final_def_TrenchInt, String final_comment, String final_studID, String final_dateTime) {
+    public matchData(String match, String team_num, int pre_cells_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftSectorLine, boolean auto_Dump, boolean auto_Collect, boolean auto_CollectFloor, boolean auto_CollectRobot, boolean auto_CollectTrench, boolean auto_CollectSGboundary, int auto_Low, int auto_High, boolean auto_conInner, boolean auto_ShootUnder, boolean auto_ShootLine, boolean auto_ShootFtrench, String auto_comment, int tele_Low, int tele_High, boolean tele_conInner, boolean tele_CPspin, boolean tele_CPcolor, boolean tele_ShootUnder, boolean tele_ShootLine, boolean tele_ShootFtrench, boolean tele_ShootBtrench, boolean tele_PowerCell_floor, boolean tele_PowerCell_LoadSta, boolean tele_Climbed, boolean tele_UnderSG, boolean tele_got_lift, boolean tele_lifted, int tele_liftedNum, int tele_Hang_num, boolean tele_Balanced, int tele_num_Penalties, int tele_num_Dropped, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defLast30, boolean final_defense_good, boolean final_def_Block, boolean final_def_TrenchInt, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
         this.pre_cells_carried = pre_cells_carried;
@@ -74,11 +83,17 @@ public class matchData implements Serializable {
         this.auto_mode = auto_mode;
         this.auto_leftSectorLine = auto_leftSectorLine;
         this.auto_Dump = auto_Dump;
+        this.auto_Collect = auto_Collect;
+        this.auto_CollectFloor = auto_CollectFloor;
+        this.auto_CollectRobot = auto_CollectRobot;
+        this.auto_CollectTrench = auto_CollectTrench;
+        this.auto_CollectSGboundary = auto_CollectSGboundary;
         this.auto_Low = auto_Low;
         this.auto_High = auto_High;
         this.auto_conInner = auto_conInner;
         this.auto_ShootUnder = auto_ShootUnder;
         this.auto_ShootLine = auto_ShootLine;
+        this.auto_ShootFtrench = auto_ShootFtrench;
         this.auto_comment = auto_comment;
         this.tele_Low = tele_Low;
         this.tele_High = tele_High;
@@ -91,10 +106,13 @@ public class matchData implements Serializable {
         this.tele_ShootBtrench = tele_ShootBtrench;
         this.tele_PowerCell_floor = tele_PowerCell_floor;
         this.tele_PowerCell_LoadSta = tele_PowerCell_LoadSta;
+        this.tele_Climbed = tele_Climbed;
+        this.tele_UnderSG = tele_UnderSG;
         this.tele_got_lift = tele_got_lift;
         this.tele_lifted = tele_lifted;
         this.tele_liftedNum = tele_liftedNum;
-        this.tele_level_num = tele_level_num;
+        this.tele_Hang_num = tele_Hang_num;
+        this.tele_Balanced = tele_Balanced;
         this.tele_num_Penalties = tele_num_Penalties;
         this.tele_num_Dropped = tele_num_Dropped;
         this.tele_comment = tele_comment;
@@ -189,6 +207,46 @@ public matchData() {
         this.auto_Dump = auto_Dump;
     }
 
+    public boolean isAuto_Collect() {
+        return auto_Collect;
+    }
+
+    public void setAuto_Collect(boolean auto_Collect) {
+        this.auto_Collect = auto_Collect;
+    }
+
+    public boolean isAuto_CollectFloor() {
+        return auto_CollectFloor;
+    }
+
+    public void setAuto_CollectFloor(boolean auto_CollectFloor) {
+        this.auto_CollectFloor = auto_CollectFloor;
+    }
+
+    public boolean isAuto_CollectRobot() {
+        return auto_CollectRobot;
+    }
+
+    public void setAuto_CollectRobot(boolean auto_CollectRobot) {
+        this.auto_CollectRobot = auto_CollectRobot;
+    }
+
+    public boolean isAuto_CollectTrench() {
+        return auto_CollectTrench;
+    }
+
+    public void setAuto_CollectTrench(boolean auto_CollectTrench) {
+        this.auto_CollectTrench = auto_CollectTrench;
+    }
+
+    public boolean isAuto_CollectSGboundary() {
+        return auto_CollectSGboundary;
+    }
+
+    public void setAuto_CollectSGboundary(boolean auto_CollectSGboundary) {
+        this.auto_CollectSGboundary = auto_CollectSGboundary;
+    }
+
     public int getAuto_Low() {
         return auto_Low;
     }
@@ -227,6 +285,14 @@ public matchData() {
 
     public void setAuto_ShootLine(boolean auto_ShootLine) {
         this.auto_ShootLine = auto_ShootLine;
+    }
+
+    public boolean isAuto_ShootFtrench() {
+        return auto_ShootFtrench;
+    }
+
+    public void setAuto_ShootFtrench(boolean auto_ShootFtrench) {
+        this.auto_ShootFtrench = auto_ShootFtrench;
     }
 
     public String getAuto_comment() {
@@ -325,6 +391,22 @@ public matchData() {
         this.tele_PowerCell_LoadSta = tele_PowerCell_LoadSta;
     }
 
+    public boolean isTele_Climbed() {
+        return tele_Climbed;
+    }
+
+    public void setTele_Climbed(boolean tele_Climbed) {
+        this.tele_Climbed = tele_Climbed;
+    }
+
+    public boolean isTele_UnderSG() {
+        return tele_UnderSG;
+    }
+
+    public void setTele_UnderSG(boolean tele_UnderSG) {
+        this.tele_UnderSG = tele_UnderSG;
+    }
+
     public boolean isTele_got_lift() {
         return tele_got_lift;
     }
@@ -349,12 +431,20 @@ public matchData() {
         this.tele_liftedNum = tele_liftedNum;
     }
 
-    public int getTele_level_num() {
-        return tele_level_num;
+    public int getTele_Hang_num() {
+        return tele_Hang_num;
     }
 
-    public void setTele_level_num(int tele_level_num) {
-        this.tele_level_num = tele_level_num;
+    public void setTele_Hang_num(int tele_Hang_num) {
+        this.tele_Hang_num = tele_Hang_num;
+    }
+
+    public boolean isTele_Balanced() {
+        return tele_Balanced;
+    }
+
+    public void setTele_Balanced(boolean tele_Balanced) {
+        this.tele_Balanced = tele_Balanced;
     }
 
     public int getTele_num_Penalties() {

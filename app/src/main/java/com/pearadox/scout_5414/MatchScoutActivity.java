@@ -45,23 +45,13 @@ public class MatchScoutActivity extends AppCompatActivity {
     /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_start1, radio_start2, radio_Pick;
                         Spinner spinner_startPos;
     /* After Start */   CheckBox checkbox_leftSectLine, checkbox_noAUTO, checkbox_Dump;
-    /* L Rocket */      CheckBox chk_LeftRocket_LPan1,chk_LeftRocket_LPan2,chk_LeftRocket_LPan3, chk_LeftRocket_LCarg1,chk_LeftRocket_LCarg2,chk_LeftRocket_LCarg3;
-                        CheckBox chk_LeftRocket_RPan1,chk_LeftRocket_RPan2,chk_LeftRocket_RPan3, chk_LeftRocket_RCarg1,chk_LeftRocket_RCarg2,chk_LeftRocket_RCarg3;
-    /* PowerCellShip */     CheckBox chk_PowerCellLPan1,chk_PowerCellLPan2,chk_PowerCellLPan3, chk_PowerCellLCarg1,chk_PowerCellLCarg2,chk_PowerCellLCarg3;
-                        CheckBox chk_PowerCellRPan1,chk_PowerCellRPan2,chk_PowerCellRPan3, chk_PowerCellRCarg1,chk_PowerCellRCarg2,chk_PowerCellRCarg3;
-                        CheckBox chk_PowerCellEndLPanel,chk_PowerCellEndRPanel,chk_PowerCellEndLPowerCell,chk_PowerCellEndRPowerCell;
-    /* R Rocket */      CheckBox chk_RghtRocket_LPan1,chk_RghtRocket_LPan2,chk_RghtRocket_LPan3, chk_RghtRocket_LCarg1,chk_RghtRocket_LCarg2,chk_RghtRocket_LCarg3;
-                        CheckBox chk_RghtRocket_RPan1,chk_RghtRocket_RPan2,chk_RghtRocket_RPan3, chk_RghtRocket_RCarg1,chk_RghtRocket_RCarg2,chk_RghtRocket_RCarg3;
-    /* 2nd & 3rd */     RadioGroup radgrp_secondPiece; RadioButton radio_none2, radio_hatch2, radio_PowerCell2, radio_2nd;
-                        RadioGroup radgrp_secondPieceLocation; RadioButton radio_playerStation2, radio_corral2, radio_floor2, radio_2ndLoc;
-                        RadioGroup radgrp_thirdPiece; RadioButton radio_none3, radio_hatch3, radio_PowerCell3, radio_3rd;
-                        RadioGroup radgrp_thirdPieceLocation; RadioButton radio_playerStation3, radio_corral3, radio_floor3, radio_3rdLoc;
     /* Last Sect. */    EditText editText_autoComment;
-                        Button btn_DropPlus, btn_DropMinus;  TextView  txt_Num_Dropped;
+                        Button btn_OuterPlus, btn_OuterMinus;  TextView  txt_Outer;
     protected Vibrator vibrate;
     long[] once = { 0, 100 };
     long[] twice = { 0, 100, 400, 100 };
     long[] thrice = { 0, 100, 400, 100, 400, 100 };
+    int num_Outer = 0;
     public static String device = " ";
     private Button button_GoToTeleopActivity, button_GoToArenaLayoutActivity, button_dropMinus, button_dropPlus;
     String team_num, team_name, team_loc;
@@ -249,9 +239,9 @@ public class MatchScoutActivity extends AppCompatActivity {
         checkbox_leftSectLine   = (CheckBox) findViewById(R.id.checkbox_leftSectLine);
         checkbox_Dump         = (CheckBox) findViewById(R.id.checkbox_Dump);
         editText_autoComment    = (EditText) findViewById(R.id.editText_autoComment);
-        btn_DropPlus            = (Button) findViewById(R.id.btn_DropPlus);
-        btn_DropMinus           = (Button) findViewById(R.id.btn_DropMinus);
-        txt_Num_Dropped         = (TextView) findViewById(R.id.txt_Num_Dropped);
+        txt_Outer = (TextView) findViewById(R.id.txt_Outer);
+        btn_OuterPlus = (Button) findViewById(R.id.btn_OuterPlus);
+        btn_OuterMinus = (Button) findViewById(R.id.btn_OuterMinus);
         button_GoToTeleopActivity = (Button) findViewById(R.id.button_GoToTeleopActivity);
         button_GoToArenaLayoutActivity = (Button) findViewById(R.id.button_GoToArenaLayoutActivity);
         final Spinner spinner_startPos = (Spinner) findViewById(R.id.spinner_startPos);
@@ -359,6 +349,23 @@ public class MatchScoutActivity extends AppCompatActivity {
         }
     });
 
+        btn_OuterPlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                num_Outer++;
+                Log.w(TAG, "Outer = " + Integer.toString(num_Outer));      // ** DEBUG **
+                txt_Outer.setText(Integer.toString(num_Outer));    // Perform action on click
+            }
+        });
+        btn_OuterMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (num_Outer >= 1) {
+                    num_Outer--;
+                }
+                Log.w(TAG, "Outer = " + Integer.toString(num_Outer));      // ** DEBUG **
+                txt_Outer.setText(Integer.toString(num_Outer));    // Perform action on click
+            }
+        });
+
         button_GoToArenaLayoutActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i(TAG, "Clicked Sidebar");
@@ -431,7 +438,7 @@ public class MatchScoutActivity extends AppCompatActivity {
 
         Pearadox.Match_Data.setPre_startPos(startPos);
         Pearadox.Match_Data.setAuto_mode(noAuto);
-//        Pearadox.Match_Data.?????(cells_carried);
+        Pearadox.Match_Data.setPre_cells_carried(cells_carried);
         Pearadox.Match_Data.setAuto_leftSectorLine(leftSectorLine);
 
         // ToDo - set all 'After Start' variables to object

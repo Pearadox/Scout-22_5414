@@ -1028,8 +1028,8 @@ public class Visualizer_Activity extends AppCompatActivity {
                         base++;
                     }
 
-                    int endHAB = match_inst.getTele_level_num();        // end HAB Level
-                    switch (endHAB) {
+                    int endHang = match_inst.getTele_Hang_num();        // end HAB Level
+                    switch (endHang) {
                         case 0:         // Not On
                             HAB0++;
                             break;

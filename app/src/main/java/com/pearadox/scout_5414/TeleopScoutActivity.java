@@ -100,11 +100,8 @@ public class TeleopScoutActivity extends Activity {
         chk_Lifted              = (CheckBox) findViewById(R.id.chk_Lifted);
         button_Number_PenaltiesPlus = (Button) findViewById(R.id.button_Number_PenaltiesPlus);
         button_Number_PenaltiesUndo = (Button) findViewById(R.id.button_Number_PenaltiesUndo);
-        btn_DropPlus            = (Button) findViewById(R.id.btn_DropPlus);
-        btn_DropMinus           = (Button) findViewById(R.id.btn_DropMinus);
         button_GoToFinalActivity  = (Button)   findViewById(R.id.button_GoToFinalActivity);
         txt_Number_Penalties    = (TextView) findViewById(R.id.txt_Number_Penalties);
-        txt_Num_Dropped         = (TextView) findViewById(R.id.txt_Num_Dropped);
 
         pfDatabase                = FirebaseDatabase.getInstance();            // Firebase
         pfDevice_DBReference      = pfDatabase.getReference("devices");     // List of Devices
@@ -226,23 +223,6 @@ public class TeleopScoutActivity extends Activity {
                 }
                 Log.w(TAG, "Penalties = " + Integer.toString(num_Penalties));      // ** DEBUG **
                 txt_Number_Penalties.setText(Integer.toString(num_Penalties));    // Perform action on click
-            }
-        });
-
-        btn_DropPlus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                num_Dropped++;
-                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
-                txt_Num_Dropped.setText(Integer.toString(num_Dropped));
-            }
-        });
-        btn_DropMinus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (num_Dropped >= 1) {     // Don't go below zero
-                    num_Dropped--;
-                }
-                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
-                txt_Num_Dropped.setText(Integer.toString(num_Dropped));
             }
         });
 

@@ -396,25 +396,102 @@
 
         // ==============================================================================
 
-    <LinearLayout
-        android:id="@+id/lin_Row4"
-        android:layout_width="match_parent"
-        android:layout_height="40sp"
+
+    <ImageView
+        android:id="@+id/imageView_PP"
+        android:layout_width="30dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/lin_Row3"
-        android:orientation="horizontal">
+        android:contentDescription="Power Port"
+        android:src="@drawable/power_port" />
+
+        // ==============================================================================
+
+        <LinearLayout
+            android:id="@+id/lin_Row4"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_below="@+id/lin_Row3"
+            android:layout_marginStart="40sp"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/lbl_WhoKnows"
+                android:id="@+id/lbl_Outer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Row4 ?????"
-                android:textColor="@color/orange" />
+                android:text="Outer Port"
+                android:textColor="@color/red" />
+            <TextView
+                android:id="@+id/txt_Outer"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23sp"
+                android:text="00"
+                android:textColor="@color/red"
+                android:textSize="16dp" />
+            <Button
+                android:id="@+id/btn_OuterMinus"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:textColor="@color/red"
+                android:text="-" />
+            <Button
+                android:id="@+id/btn_OuterPlus"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:text="+" />
+
+            <CheckBox
+                android:id="@+id/checkbox_Consistent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="-5dp"
+                android:textColor="@color/red"
+                android:text="Consistently Inner?" />
 
         </LinearLayout>
 
-    // ==============================================================================
+        <LinearLayout
+            android:id="@+id/lin_Row5"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_below="@+id/lin_Row4"
+            android:layout_marginStart="40sp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/lbl_Bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bottom Port"
+                android:textColor="@color/yellow" />
+            <TextView
+                android:id="@+id/txt_Bottom"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:text="00"
+                android:textColor="@color/yellow"
+                android:textSize="16dp" />
             <Button
+                android:id="@+id/btn_BottomMinus"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:text="-" />
+            <Button
+                android:id="@+id/btn_BottomPlus"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:text="+" />
+
+        </LinearLayout>
+
+        <Button
                 android:text="TeleOps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -438,7 +515,7 @@
             android:id="@+id/scrollv_comm"
             android:layout_width="400sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/lin_Row4"
+            android:layout_below="@+id/lin_Row5"
             android:layout_alignParentStart="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="10dp"
