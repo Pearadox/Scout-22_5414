@@ -130,20 +130,332 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/lin_Row3"
+        android:layout_width="match_parent"
+        android:layout_height="25sp"
+        android:layout_below="@+id/lin_Pieces"
+        android:layout_marginStart="120sp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lbl_PPheaderClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="______Close______   Inner?"
+            android:textColor="@color/red" />
+        <TextView
+            android:id="@+id/lbl_PPheaderLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50sp"
+            android:text="_______Line_______  Inner?"
+            android:textColor="@color/orange" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView_PP"
+        android:layout_width="70dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/lin_Row3"
+        android:contentDescription="Power Port"
+        android:src="@drawable/power_port" />
+
+    // ==============================================================================
+
+    <LinearLayout
+        android:id="@+id/lin_Row4"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_below="@+id/lin_Row3"
+        android:layout_marginStart="70sp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lbl_Outer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-8dp"
+            android:text="Outer "
+            android:textColor="@color/grey" />
+
+        <TextView
+            android:id="@+id/txt_OuterClose"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="-8dp"
+            android:text="00"
+            android:textColor="@color/red"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_OuterCloseMinus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-4dp"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/btn_OuterClosePlus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-4dp"
+            android:text="+" />
+
+        <CheckBox
+            android:id="@+id/checkbox_OuterCloseConsistent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="-8dp"
+            android:text="C"
+            android:textColor="@color/red" />
+        //===========================================================
+        <TextView
+            android:id="@+id/txt_OuterLine"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50sp"
+            android:layout_marginTop="-8dp"
+            android:text="00"
+            android:textColor="@color/orange"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_OuterLineMinus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-4dp"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/btn_OuterLinePlus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-4dp"
+            android:text="+" />
+
+        <CheckBox
+            android:id="@+id/checkbox_OuterLineConsistent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="-8dp"
+            android:text="L"
+            android:textColor="@color/orange" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_Label2"
+        android:layout_width="match_parent"
+        android:layout_height="25sp"
+        android:layout_below="@+id/lin_Row4"
+        android:layout_marginStart="120sp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lbl_PPheader2FrontCP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="_____Front-CP____  Inner?"
+            android:textColor="@color/magenta" />
+        <TextView
+            android:id="@+id/lbl_PPheader2BackCP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="46sp"
+            android:text="____Back-CP____ Inner?"
+            android:textColor="@color/pink" />
+
+    </LinearLayout>
+
+    // ==============================================================================
+
+    <LinearLayout
+        android:id="@+id/lin_Row5"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_below="@+id/lin_Label2"
+        android:layout_marginStart="70sp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/txt_OuterFrontCP"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="53sp"
+            android:layout_marginTop="-8dp"
+            android:text="00"
+            android:textColor="@color/magenta"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_OuterFrontCPMinus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-4dp"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/btn_OuterFrontCPPlus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-4dp"
+            android:text="+" />
+
+        <CheckBox
+            android:id="@+id/checkbox_OuterFrontCPConsistent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="-8dp"
+            android:text="F"
+            android:textColor="@color/magenta" />
+        //===========================================================
+        <TextView
+            android:id="@+id/txt_OuterBackCP"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50sp"
+            android:layout_marginTop="-8dp"
+            android:text="00"
+            android:textColor="@color/pink"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_OuterBackMinus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-4dp"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/btn_OuterBackPlus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-4dp"
+            android:text="+" />
+
+        <CheckBox
+            android:id="@+id/checkbox_OuterBackConsistent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="-8dp"
+            android:text="B?"
+            android:textColor="@color/pink" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_Row6"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_below="@+id/lin_Row5"
+        android:layout_marginStart="70sp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lbl_Bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bottom"
+            android:textColor="@color/grey" />
+        <TextView
+            android:id="@+id/txt_Bottom"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6sp"
+            android:text="00"
+            android:textColor="@color/yellow"
+            android:textSize="16dp" />
+        <Button
+            android:id="@+id/btn_BottomMinus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:text="-" />
+        <Button
+            android:id="@+id/btn_BottomPlus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:text="+" />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/imageView_CP"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/imageView_PP"
+        android:layout_marginTop="10dp"
+        android:contentDescription="Control Panel"
+        android:src="@drawable/control_panel" />
+
+    // ==============================================================================
+
+    <LinearLayout
+        android:id="@+id/lin_CP"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:layout_below="@+id/imageView_PP"
+        android:layout_marginStart="60sp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lbl_CP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Control Panel"
+            android:textColor="@color/green" />
+
+        <CheckBox
+            android:id="@+id/checkbox_CPspin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Spin?"
+            android:textColor="@color/green" />
+        <CheckBox
+            android:id="@+id/checkbox_CPcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Stop on Color?"
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
     // ==============================================================================
     <LinearLayout
         android:id="@+id/lin_END"
         android:layout_width="match_parent"
         android:layout_height="40sp"
-        android:layout_below="@+id/lin_Pieces"
+        android:layout_below="@+id/lin_CP"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/lbl_END"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="# Hanging @ End"
-            android:textColor="@color/white"
+            android:textColor="@color/cyan"
             android:textSize="16sp" />
 
         <RadioGroup
@@ -198,106 +510,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15sp"
+            android:textColor="@color/brightblue"
             android:text="Was lifted by other Robot" />
         <CheckBox
             android:id="@+id/chk_Lifted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60sp"
+            android:textColor="@color/brightblue"
             android:text="Lifted  Robot(s)" />
-</LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView_PP"
-        android:layout_width="30dp"
-        android:layout_height="70dp"
-        android:layout_below="@+id/lin_Lift"
-        android:contentDescription="Power Port"
-        android:src="@drawable/power_port" />
-
-    // ==============================================================================
-
-    <LinearLayout
-        android:id="@+id/lin_Row4"
-        android:layout_width="match_parent"
-        android:layout_height="40sp"
-        android:layout_below="@+id/lin_Lift"
-        android:layout_marginStart="40sp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/lbl_Outer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Outer Port"
-            android:textColor="@color/red" />
-        <TextView
-            android:id="@+id/txt_Outer"
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="23sp"
-            android:text="00"
-            android:textColor="@color/red"
-            android:textSize="16dp" />
-        <Button
-            android:id="@+id/btn_OuterMinus"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:text="-" />
-        <Button
-            android:id="@+id/btn_OuterPlus"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:text="+" />
-
-        <CheckBox
-            android:id="@+id/checkbox_Consistent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="-5dp"
-            android:textColor="@color/red"
-            android:text="Consistently Inner?" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lin_Row5"
-        android:layout_width="match_parent"
-        android:layout_height="40sp"
-        android:layout_below="@+id/lin_Row4"
-        android:layout_marginStart="40sp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/lbl_Bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bottom Port"
-            android:textColor="@color/yellow" />
-        <TextView
-            android:id="@+id/txt_Bottom"
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10sp"
-            android:text="00"
-            android:textColor="@color/yellow"
-            android:textSize="16dp" />
-        <Button
-            android:id="@+id/btn_BottomMinus"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:text="-" />
-        <Button
-            android:id="@+id/btn_BottomPlus"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:text="+" />
-
     </LinearLayout>
 
 
@@ -305,8 +526,8 @@
     <LinearLayout
         android:id="@+id/lin_Last"
         android:layout_width="match_parent"
-        android:layout_height="40sp"
-        android:layout_below="@+id/lin_Row5"
+        android:layout_height="65sp"
+        android:layout_below="@+id/lin_Lift"
         android:orientation="horizontal">
 
         <TextView

@@ -22,8 +22,12 @@ public class matchData implements Serializable {
     private boolean auto_CollectTrench;     // Collect from Trench?
     private boolean auto_CollectSGboundary; // Collect from SG boundary?
     private int     auto_Low;               // # Low Goal balls
-    private int     auto_High;              // # High Goal balls
-    private boolean auto_conInner;          // Consistent Inner Goal scored?
+    private int     auto_HighClose;         // # High Goal balls - Close
+    private int     auto_HighLine;          // # High Goal balls - Line
+    private int     auto_HighFrontCP;       // # High Goal balls - Front CP
+    private boolean auto_conInnerClose;     // Consistent Inner Goal scored Close?
+    private boolean auto_conInnerLine;      // Consistent Inner Goal scored Con Line?
+    private boolean auto_conInnerFrontCP;   // Consistent Inner Goal scored in Front of CP?
     private boolean auto_ShootUnder;        // Shoot from Under Power Port
     private boolean auto_ShootLine;         // Shoot from Sector Line
     private boolean auto_ShootFtrench;      // Shoot from in Front of Trench
@@ -32,8 +36,14 @@ public class matchData implements Serializable {
 
     // ============== TELE =================
     private int     tele_Low;               // # Low Goal balls
-    private int     tele_High;              // # High Goal balls
-    private boolean tele_conInner;          // Consistent Inner Goal scored?
+    private int     tele_HighClose;         // # High Goal balls - Close
+    private int     tele_HighLine;          // # High Goal balls - Line
+    private int     tele_HighFrontCP;       // # High Goal balls - Front CP
+    private int     tele_HighBackCP;        // # High Goal balls - Back CP
+    private boolean tele_conInnerClose;     // Consistent Inner Goal scored Close?
+    private boolean tele_conInnerLine;      // Consistent Inner Goal scored Con Line?
+    private boolean tele_conInnerFrontCP;   // Consistent Inner Goal scored in Front of CP?
+    private boolean tele_conInnerBackCP;   // Consistent Inner Goal scored in Back of CP?
     private boolean tele_CPspin;            // Control Panel Spin
     private boolean tele_CPcolor;           // Control Panel Color
     private boolean tele_ShootUnder;        // Shoot from Under Power Port
@@ -74,7 +84,7 @@ public class matchData implements Serializable {
 //  Constructor
 
 
-    public matchData(String match, String team_num, int pre_cells_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftSectorLine, boolean auto_Dump, boolean auto_Collect, boolean auto_CollectFloor, boolean auto_CollectRobot, boolean auto_CollectTrench, boolean auto_CollectSGboundary, int auto_Low, int auto_High, boolean auto_conInner, boolean auto_ShootUnder, boolean auto_ShootLine, boolean auto_ShootFtrench, String auto_comment, int tele_Low, int tele_High, boolean tele_conInner, boolean tele_CPspin, boolean tele_CPcolor, boolean tele_ShootUnder, boolean tele_ShootLine, boolean tele_ShootFtrench, boolean tele_ShootBtrench, boolean tele_PowerCell_floor, boolean tele_PowerCell_LoadSta, boolean tele_Climbed, boolean tele_UnderSG, boolean tele_got_lift, boolean tele_lifted, int tele_liftedNum, int tele_Hang_num, boolean tele_Balanced, int tele_num_Penalties, int tele_num_Dropped, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defLast30, boolean final_defense_good, boolean final_def_Block, boolean final_def_TrenchInt, String final_comment, String final_studID, String final_dateTime) {
+    public matchData(String match, String team_num, int pre_cells_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftSectorLine, boolean auto_Dump, boolean auto_Collect, boolean auto_CollectFloor, boolean auto_CollectRobot, boolean auto_CollectTrench, boolean auto_CollectSGboundary, int auto_Low, int auto_HighClose, int auto_HighLine, int auto_HighFrontCP, boolean auto_conInnerClose, boolean auto_conInnerLine, boolean auto_conInnerFrontCP, boolean auto_ShootUnder, boolean auto_ShootLine, boolean auto_ShootFtrench, String auto_comment, int tele_Low, int tele_HighClose, int tele_HighLine, int tele_HighFrontCP, int tele_HighBackCP, boolean tele_conInnerClose, boolean tele_conInnerLine, boolean tele_conInnerFrontCP, boolean tele_conInnerBackCP, boolean tele_CPspin, boolean tele_CPcolor, boolean tele_ShootUnder, boolean tele_ShootLine, boolean tele_ShootFtrench, boolean tele_ShootBtrench, boolean tele_PowerCell_floor, boolean tele_PowerCell_LoadSta, boolean tele_Climbed, boolean tele_UnderSG, boolean tele_got_lift, boolean tele_lifted, int tele_liftedNum, int tele_Hang_num, boolean tele_Balanced, int tele_num_Penalties, int tele_num_Dropped, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defLast30, boolean final_defense_good, boolean final_def_Block, boolean final_def_TrenchInt, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
         this.pre_cells_carried = pre_cells_carried;
@@ -89,15 +99,25 @@ public class matchData implements Serializable {
         this.auto_CollectTrench = auto_CollectTrench;
         this.auto_CollectSGboundary = auto_CollectSGboundary;
         this.auto_Low = auto_Low;
-        this.auto_High = auto_High;
-        this.auto_conInner = auto_conInner;
+        this.auto_HighClose = auto_HighClose;
+        this.auto_HighLine = auto_HighLine;
+        this.auto_HighFrontCP = auto_HighFrontCP;
+        this.auto_conInnerClose = auto_conInnerClose;
+        this.auto_conInnerLine = auto_conInnerLine;
+        this.auto_conInnerFrontCP = auto_conInnerFrontCP;
         this.auto_ShootUnder = auto_ShootUnder;
         this.auto_ShootLine = auto_ShootLine;
         this.auto_ShootFtrench = auto_ShootFtrench;
         this.auto_comment = auto_comment;
         this.tele_Low = tele_Low;
-        this.tele_High = tele_High;
-        this.tele_conInner = tele_conInner;
+        this.tele_HighClose = tele_HighClose;
+        this.tele_HighLine = tele_HighLine;
+        this.tele_HighFrontCP = tele_HighFrontCP;
+        this.tele_HighBackCP = tele_HighBackCP;
+        this.tele_conInnerClose = tele_conInnerClose;
+        this.tele_conInnerLine = tele_conInnerLine;
+        this.tele_conInnerFrontCP = tele_conInnerFrontCP;
+        this.tele_conInnerBackCP = tele_conInnerBackCP;
         this.tele_CPspin = tele_CPspin;
         this.tele_CPcolor = tele_CPcolor;
         this.tele_ShootUnder = tele_ShootUnder;
@@ -255,20 +275,52 @@ public matchData() {
         this.auto_Low = auto_Low;
     }
 
-    public int getAuto_High() {
-        return auto_High;
+    public int getAuto_HighClose() {
+        return auto_HighClose;
     }
 
-    public void setAuto_High(int auto_High) {
-        this.auto_High = auto_High;
+    public void setAuto_HighClose(int auto_HighClose) {
+        this.auto_HighClose = auto_HighClose;
     }
 
-    public boolean isAuto_conInner() {
-        return auto_conInner;
+    public int getAuto_HighLine() {
+        return auto_HighLine;
     }
 
-    public void setAuto_conInner(boolean auto_conInner) {
-        this.auto_conInner = auto_conInner;
+    public void setAuto_HighLine(int auto_HighLine) {
+        this.auto_HighLine = auto_HighLine;
+    }
+
+    public int getAuto_HighFrontCP() {
+        return auto_HighFrontCP;
+    }
+
+    public void setAuto_HighFrontCP(int auto_HighFrontCP) {
+        this.auto_HighFrontCP = auto_HighFrontCP;
+    }
+
+    public boolean isAuto_conInnerClose() {
+        return auto_conInnerClose;
+    }
+
+    public void setAuto_conInnerClose(boolean auto_conInnerClose) {
+        this.auto_conInnerClose = auto_conInnerClose;
+    }
+
+    public boolean isAuto_conInnerLine() {
+        return auto_conInnerLine;
+    }
+
+    public void setAuto_conInnerLine(boolean auto_conInnerLine) {
+        this.auto_conInnerLine = auto_conInnerLine;
+    }
+
+    public boolean isAuto_conInnerFrontCP() {
+        return auto_conInnerFrontCP;
+    }
+
+    public void setAuto_conInnerFrontCP(boolean auto_conInnerFrontCP) {
+        this.auto_conInnerFrontCP = auto_conInnerFrontCP;
     }
 
     public boolean isAuto_ShootUnder() {
@@ -311,20 +363,68 @@ public matchData() {
         this.tele_Low = tele_Low;
     }
 
-    public int getTele_High() {
-        return tele_High;
+    public int getTele_HighClose() {
+        return tele_HighClose;
     }
 
-    public void setTele_High(int tele_High) {
-        this.tele_High = tele_High;
+    public void setTele_HighClose(int tele_HighClose) {
+        this.tele_HighClose = tele_HighClose;
     }
 
-    public boolean isTele_conInner() {
-        return tele_conInner;
+    public int getTele_HighLine() {
+        return tele_HighLine;
     }
 
-    public void setTele_conInner(boolean tele_conInner) {
-        this.tele_conInner = tele_conInner;
+    public void setTele_HighLine(int tele_HighLine) {
+        this.tele_HighLine = tele_HighLine;
+    }
+
+    public int getTele_HighFrontCP() {
+        return tele_HighFrontCP;
+    }
+
+    public void setTele_HighFrontCP(int tele_HighFrontCP) {
+        this.tele_HighFrontCP = tele_HighFrontCP;
+    }
+
+    public int getTele_HighBackCP() {
+        return tele_HighBackCP;
+    }
+
+    public void setTele_HighBackCP(int tele_HighBackCP) {
+        this.tele_HighBackCP = tele_HighBackCP;
+    }
+
+    public boolean isTele_conInnerClose() {
+        return tele_conInnerClose;
+    }
+
+    public void setTele_conInnerClose(boolean tele_conInnerClose) {
+        this.tele_conInnerClose = tele_conInnerClose;
+    }
+
+    public boolean isTele_conInnerLine() {
+        return tele_conInnerLine;
+    }
+
+    public void setTele_conInnerLine(boolean tele_conInnerLine) {
+        this.tele_conInnerLine = tele_conInnerLine;
+    }
+
+    public boolean isTele_conInnerFrontCP() {
+        return tele_conInnerFrontCP;
+    }
+
+    public void setTele_conInnerFrontCP(boolean tele_conInnerFrontCP) {
+        this.tele_conInnerFrontCP = tele_conInnerFrontCP;
+    }
+
+    public boolean isTele_conInnerBackCP() {
+        return tele_conInnerBackCP;
+    }
+
+    public void setTele_conInnerBackCP(boolean tele_conInnerBackCP) {
+        this.tele_conInnerBackCP = tele_conInnerBackCP;
     }
 
     public boolean isTele_CPspin() {
