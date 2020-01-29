@@ -375,35 +375,59 @@
 
         // ==============================================================================
 
-        <LinearLayout
-            android:id="@+id/lin_Row3"
-            android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:layout_below="@+id/lin_Row2"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/lin_Row3"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50sp"-->
+<!--            android:layout_below="@+id/lin_Row2"-->
+<!--            android:orientation="horizontal">-->
 
-            <TextView
-                android:id="@+id/lbl_What"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Row3 ???????  "
-                android:textColor="@color/cyan"
-                android:textStyle="bold"
-                tools:layout_height="wrap_content" />
+<!--            <TextView-->
+<!--                android:id="@+id/lbl_What"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:text="Row3 ???????  "-->
+<!--                android:textColor="@color/cyan"-->
+<!--                android:textStyle="bold"-->
+<!--                tools:layout_height="wrap_content" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
         // ==============================================================================
 
 
-    <ImageView
-        android:id="@+id/imageView_PP"
-        android:layout_width="30dp"
-        android:layout_height="70dp"
-        android:layout_below="@+id/lin_Row3"
-        android:contentDescription="Power Port"
-        android:src="@drawable/power_port" />
+        <LinearLayout
+            android:id="@+id/lin_Row3"
+            android:layout_width="match_parent"
+            android:layout_height="25sp"
+            android:layout_below="@+id/lin_Row2"
+            android:layout_marginStart="120sp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbl_PPheaderClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="______Under______   Inner?"
+                android:textColor="@color/red" />
+            <TextView
+                android:id="@+id/lbl_PPheaderLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="46sp"
+                android:text="_______Line______   Inner?"
+                android:textColor="@color/orange" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView_PP"
+            android:layout_width="70dp"
+            android:layout_height="160dp"
+            android:layout_below="@+id/lin_Row3"
+            android:contentDescription="Power Port"
+            android:src="@drawable/power_port" />
 
         // ==============================================================================
 
@@ -412,66 +436,215 @@
             android:layout_width="match_parent"
             android:layout_height="40sp"
             android:layout_below="@+id/lin_Row3"
-            android:layout_marginStart="40sp"
+            android:layout_marginStart="70sp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/lbl_Outer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Outer Port"
-                android:textColor="@color/red" />
+                android:layout_marginTop="-8dp"
+                android:text="Outer "
+                android:textColor="@color/grey" />
+
             <TextView
-                android:id="@+id/txt_Outer"
+                android:id="@+id/txt_OuterClose"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="23sp"
+                android:layout_marginStart="15sp"
+                android:layout_marginTop="-8dp"
                 android:text="00"
                 android:textColor="@color/red"
                 android:textSize="16dp" />
+
             <Button
-                android:id="@+id/btn_OuterMinus"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="15dp"
-                android:text="-" />
-            <Button
-                android:id="@+id/btn_OuterPlus"
+                android:id="@+id/btn_OuterCloseMinus"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="-4dp"
+                android:text="-" />
+
+            <Button
+                android:id="@+id/btn_OuterClosePlus"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-4dp"
                 android:text="+" />
 
             <CheckBox
-                android:id="@+id/checkbox_Consistent"
+                android:id="@+id/checkbox_OuterCloseConsistent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="-5dp"
-                android:textColor="@color/red"
-                android:text="Consistently Inner?" />
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="-8dp"
+                android:text="C"
+                android:textColor="@color/red" />
+            //===========================================================
+            <TextView
+                android:id="@+id/txt_OuterLine"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50sp"
+                android:layout_marginTop="-8dp"
+                android:text="00"
+                android:textColor="@color/orange"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/btn_OuterLineMinus"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-4dp"
+                android:text="-" />
+
+            <Button
+                android:id="@+id/btn_OuterLinePlus"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-4dp"
+                android:text="+" />
+
+            <CheckBox
+                android:id="@+id/checkbox_OuterLineConsistent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="-8dp"
+                android:text="L"
+                android:textColor="@color/orange" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lin_Label2"
+            android:layout_width="match_parent"
+            android:layout_height="25sp"
+            android:layout_below="@+id/lin_Row4"
+            android:layout_marginStart="120sp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbl_PPheader2FrontCP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="_____Front-CP____  Inner?"
+                android:textColor="@color/magenta" />
+<!--            <TextView-->
+<!--                android:id="@+id/lbl_PPheader2BackCP"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="46sp"-->
+<!--                android:text="_____Back-CP_____  Inner?"-->
+<!--                android:textColor="@color/pink" />-->
+
+        </LinearLayout>
+
+        // ==============================================================================
+
+        <LinearLayout
             android:id="@+id/lin_Row5"
             android:layout_width="match_parent"
+            android:layout_height="45sp"
+            android:layout_below="@+id/lin_Label2"
+            android:layout_marginStart="70sp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/txt_OuterFrontCP"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53sp"
+                android:layout_marginTop="-8dp"
+                android:text="00"
+                android:textColor="@color/magenta"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/btn_OuterFrontCPMinus"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-4dp"
+                android:text="-" />
+
+            <Button
+                android:id="@+id/btn_OuterFrontCPPlus"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-4dp"
+                android:text="+" />
+
+            <CheckBox
+                android:id="@+id/checkbox_OuterFrontCPConsistent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="-8dp"
+                android:text="F"
+                android:textColor="@color/magenta" />
+            //===========================================================
+<!--            <TextView-->
+<!--                android:id="@+id/txt_OuterBackCP"-->
+<!--                android:layout_width="25dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="50sp"-->
+<!--                android:layout_marginTop="-8dp"-->
+<!--                android:text="00"-->
+<!--                android:textColor="@color/pink"-->
+<!--                android:textSize="16dp" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btn_OuterBackMinus"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginTop="-4dp"-->
+<!--                android:text="-" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btn_OuterBackPlus"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginTop="-4dp"-->
+<!--                android:text="+" />-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkbox_OuterBackConsistent"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_marginTop="-8dp"-->
+<!--                android:text="B"-->
+<!--                android:textColor="@color/pink" />-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_Row6"
+            android:layout_width="match_parent"
             android:layout_height="40sp"
-            android:layout_below="@+id/lin_Row4"
-            android:layout_marginStart="40sp"
+            android:layout_below="@+id/lin_Row5"
+            android:layout_marginStart="70sp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/lbl_Bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bottom Port"
-                android:textColor="@color/yellow" />
+                android:text="Bottom"
+                android:textColor="@color/grey" />
             <TextView
                 android:id="@+id/txt_Bottom"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10sp"
+                android:layout_marginStart="6sp"
                 android:text="00"
                 android:textColor="@color/yellow"
                 android:textSize="16dp" />
@@ -479,7 +652,7 @@
                 android:id="@+id/btn_BottomMinus"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="10dp"
                 android:text="-" />
             <Button
                 android:id="@+id/btn_BottomPlus"
@@ -514,7 +687,7 @@
             android:id="@+id/scrollv_comm"
             android:layout_width="400sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/lin_Row5"
+            android:layout_below="@+id/lin_Row6"
             android:layout_alignParentStart="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="10dp"

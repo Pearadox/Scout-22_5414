@@ -47,9 +47,6 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    // ==============================================================================
-    // ==============================================================================
-
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -98,43 +95,28 @@
             android:layout_marginStart="20dp"
             android:text="Floor" />
 
+        <CheckBox
+            android:id="@+id/chkBox_ContorlPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="ContorlPanel" />
+
+        <CheckBox
+            android:id="@+id/chkBox_PU_Cell_Trench"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Trench" />
+
     </LinearLayout>
 
     // ==============================================================================
     <LinearLayout
-        android:id="@+id/lin_Pieces"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:layout_below="@+id/lin_PowerCell"
-        android:orientation="horizontal">
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView_Hatch"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:contentDescription="Hatch Panel"-->
-<!--            android:src="@drawable/hatch_panel" />-->
-
-        <CheckBox
-            android:id="@+id/chkBox_PanelPlayerSta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Player Station" />
-
-        <CheckBox
-            android:id="@+id/chkBox_PU_Panel_floor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="Floor" />
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/lin_Row3"
         android:layout_width="match_parent"
         android:layout_height="25sp"
-        android:layout_below="@+id/lin_Pieces"
+        android:layout_below="@+id/lin_PowerCell"
         android:layout_marginStart="120sp"
         android:orientation="horizontal">
 
@@ -142,14 +124,14 @@
             android:id="@+id/lbl_PPheaderClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="______Close______   Inner?"
+            android:text="______Under______   Inner?"
             android:textColor="@color/red" />
         <TextView
             android:id="@+id/lbl_PPheaderLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50sp"
-            android:text="_______Line_______  Inner?"
+            android:layout_marginStart="46sp"
+            android:text="_______Line______   Inner?"
             android:textColor="@color/orange" />
 
     </LinearLayout>
@@ -271,7 +253,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="46sp"
-            android:text="____Back-CP____ Inner?"
+            android:text="_____Back-CP_____  Inner?"
             android:textColor="@color/pink" />
 
     </LinearLayout>
@@ -354,7 +336,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="-8dp"
-            android:text="B?"
+            android:text="B"
             android:textColor="@color/pink" />
 
     </LinearLayout>
@@ -469,7 +451,7 @@
                 android:id="@+id/radio_Zero"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="RadioClick_Lifted"
+                android:onClick="RadioClick_Hanging"
                 android:text="None"
                 android:textColor="@color/cyan" />
 
@@ -477,7 +459,7 @@
                 android:id="@+id/radio_One"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="RadioClick_Lifted"
+                android:onClick="RadioClick_Hanging"
                 android:text="One"
                 android:textColor="@color/cyan" />
 
@@ -485,18 +467,19 @@
                 android:id="@+id/radio_Two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="RadioClick_Lifted"
+                android:onClick="RadioClick_Hanging"
                 android:text="Two"
                 android:textColor="@color/cyan" />
             <RadioButton
                 android:id="@+id/radio_Three"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="RadioClick_Lifted"
+                android:onClick="RadioClick_Hanging"
                 android:text="Three"
                 android:textColor="@color/cyan" />
         </RadioGroup>
     </LinearLayout>
+    // ==============================================================================
 
     <LinearLayout
         android:id="@+id/lin_Lift"
@@ -516,10 +499,27 @@
             android:id="@+id/chk_Lifted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60sp"
+            android:layout_marginLeft="20sp"
             android:textColor="@color/brightblue"
-            android:text="Lifted  Robot(s)" />
+            android:text="Lifted Robot(s)" />
+        <Spinner
+            android:id="@+id/spinner_numRobots"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/brightblue" />
     </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_SG"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_below="@+id/lin_Lift"
+            android:orientation="horizontal">
+
+            <!--        Climbed, # Robots hanging, Under SG   -->
+        </LinearLayout>
 
 
     // ==============================================================================
@@ -527,7 +527,7 @@
         android:id="@+id/lin_Last"
         android:layout_width="match_parent"
         android:layout_height="65sp"
-        android:layout_below="@+id/lin_Lift"
+        android:layout_below="@+id/lin_SG"
         android:orientation="horizontal">
 
         <TextView

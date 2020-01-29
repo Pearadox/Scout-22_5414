@@ -12,18 +12,23 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.app.Activity;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import static android.view.View.VISIBLE;
 
 /**
  * Created by mlm.02000 on 2/5/2017.
@@ -33,19 +38,12 @@ public class TeleopScoutActivity extends Activity {
 
     String TAG = "TeleopScoutActivity";      // This CLASS name
     /* Header Sect. */  TextView txt_dev, txt_stud, txt_match, txt_tnum;
-    /* L Rocket */      CheckBox chk_LeftRocket_LPan1,chk_LeftRocket_LPan2,chk_LeftRocket_LPan3, chk_LeftRocket_LCarg1,chk_LeftRocket_LCarg2,chk_LeftRocket_LCarg3;
-                        CheckBox chk_LeftRocket_RPan1,chk_LeftRocket_RPan2,chk_LeftRocket_RPan3, chk_LeftRocket_RCarg1,chk_LeftRocket_RCarg2,chk_LeftRocket_RCarg3;
-    /* PowerCellShip */     CheckBox chk_PowerCellLPan1,chk_PowerCellLPan2,chk_PowerCellLPan3, chk_PowerCellLCarg1,chk_PowerCellLCarg2,chk_PowerCellLCarg3;
-                        CheckBox chk_PowerCellRPan1,chk_PowerCellRPan2,chk_PowerCellRPan3, chk_PowerCellRCarg1,chk_PowerCellRCarg2,chk_PowerCellRCarg3;
-                        CheckBox chk_PowerCellEndLPanel,chk_PowerCellEndRPanel,chk_PowerCellEndLPowerCell,chk_PowerCellEndRPowerCell;
-    /* R Rocket */      CheckBox chk_RghtRocket_LPan1,chk_RghtRocket_LPan2,chk_RghtRocket_LPan3, chk_RghtRocket_LCarg1,chk_RghtRocket_LCarg2,chk_RghtRocket_LCarg3;
-                        CheckBox chk_RghtRocket_RPan1,chk_RghtRocket_RPan2,chk_RghtRocket_RPan3, chk_RghtRocket_RCarg1,chk_RghtRocket_RCarg2,chk_RghtRocket_RCarg3;
+    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellLoadSta, chkBox_PU_Cell_Trench, chkBox_ContorlPanel;    /* Shoot Sect. */  Button btn_OuterClosePlus, btn_OuterCloseMinus;  TextView  txt_OuterClose;
+                        RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_One, radio_Two, radio_Three, radio_Zero;
+                        CheckBox chk_LiftedBy, chk_Lifted;  Spinner spinner_numRobots;
     /* Comment */       EditText editText_TeleComments;
-    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellLoadSta, chkBox_Corral, chkBox_PU_Panel_floor, chkBox_PanelPlayerSta;
-    /* HAB */           RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_One, radio_Two, radio_Three, radio_Zero;
-                        CheckBox chk_LiftedBy, chk_Lifted;
-    /* Last Sect. */    Button button_GoToFinalActivity, button_Number_PenaltiesPlus, button_Number_PenaltiesUndo, btn_DropPlus, btn_DropMinus;
-                        TextView txt_Number_Penalties, txt_Num_Dropped;
+    /* Last Sect. */    Button button_GoToFinalActivity, button_Number_PenaltiesPlus, button_Number_PenaltiesUndo;
+                        TextView txt_Number_Penalties;
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     private FirebaseDatabase  pfDatabase;
 //    private DatabaseReference pfTeam_DBReference;
@@ -54,21 +52,40 @@ public class TeleopScoutActivity extends Activity {
 //    private DatabaseReference pfCur_Match_DBReference;
     String key = null;
     String tn  = " ";
+    public static String[] carry = new String[]             // Num. of robots this robot can lift
+            {" ","1","2"};
 
     // ===================  TeleOps Elements for Match Scout Data object ===================
     // Declare & initialize
 
+    public boolean PowerCell_floor      = false;    // Did they pickup PowerCell off the ground?
+    public boolean PowerCell_LoadSta    = false;    // Did they get PowerCell from Loading Station?
+    public int     Low                  = 0;        // # Low Goal balls
+    public int     HighClose            = 0;        // # High Goal balls - Close
+    public int     HighLine             = 0;        // # High Goal balls - Line
+    public int     HighFrontCP          = 0;        // # High Goal balls - Front CP
+    public int     HighBackCP           = 0;        // # High Goal balls - Back CP
+    public boolean conInnerClose        = false;    // Consistent Inner Goal scored Close?
+    public boolean conInnerLine         = false;    // Consistent Inner Goal scored Con Line?
+    public boolean conInnerFrontCP      = false;    // Consistent Inner Goal scored in Front of CP?
+    public boolean conInnerBackCP       = false;    // Consistent Inner Goal scored in Back of CP?
+    public boolean CPspin               = false;    // Control Panel Spin
+    public boolean CPcolor              = false;    // Control Panel Color
+    public boolean ShootUnder           = false;    // Shoot from Under Power Port
+    public boolean ShootLine            = false;    // Shoot from Sector Line
+    public boolean ShootFtrench         = false;    // Shoot from in Front of Trench
+    public boolean ShootBtrench         = false;    // Shoot from in Back of Trench
 
-    public boolean PowerCell_floor        = false;  // Did they pickup PowerCell off the ground?
-    public boolean PowerCell_LoadSta      = false;  // Did they get PowerCell from Loading Station?
-    
-    public int end_HangNum          = 99;     // HAB Level
-    public boolean got_lift           = false;  // Got Lifted by another robot
-    public boolean lifted             = false;  // Got Lifted by another robot
-    public int num_Penalties          = 0;      // How many penalties received?
-    public int num_Dropped            = 0;      // How many Panels dropped?
+    public boolean Climbed              = false;    // Did they Climb?
+    public boolean UnderSG              = false;    // Parked under Shield Generator
+    public int     liftedNum            = 0;        // How many lifted?
+    public int     Hang_Num             = 99;       // End - How many on Bar (0-3)
+    public boolean Balanced             = false;    // SG is Balanced
+    public boolean got_lift             = false;    // Got Lifted by another robot
+    public boolean lifted               = false;    // Got Lifted by another robot
+    public int num_Penalties            = 0;        // How many penalties received?
     /* */
-    public String  teleComment        = " ";    // Tele Comment
+    public String  teleComment          = " ";    // Tele Comment
     // ===========================================================================
     matchData match_cycle = new matchData();
 
@@ -89,19 +106,28 @@ public class TeleopScoutActivity extends Activity {
         editText_TeleComments   = (EditText) findViewById(R.id.editText_teleComments);
         chkBox_PU_PowerCell_floor  = (CheckBox) findViewById(R.id.chkBox_PU_PowerCell_floor);
         chkBox_PowerCellLoadSta = (CheckBox) findViewById(R.id.chkBox_PowerCellLoadSta);
-//?        chkBox_Corral           = (CheckBox) findViewById(R.id.chkBox_Corral);
-        chkBox_PU_Panel_floor   = (CheckBox) findViewById(R.id.chkBox_PU_Panel_floor);
-        chkBox_PanelPlayerSta   = (CheckBox) findViewById(R.id.chkBox_PanelPlayerSta);
+        chkBox_PU_Cell_Trench   = (CheckBox) findViewById(R.id.chkBox_PU_Cell_Trench);
+        chkBox_ContorlPanel   = (CheckBox) findViewById(R.id.chkBox_ContorlPanel);
         radio_Zero              = (RadioButton) findViewById(R.id.radio_Zero);
         radio_One               = (RadioButton) findViewById(R.id.radio_One);
         radio_Two               = (RadioButton) findViewById(R.id.radio_Two);
         radio_Three             = (RadioButton) findViewById(R.id.radio_Three);
         chk_LiftedBy            = (CheckBox) findViewById(R.id.chk_LiftedBy);
         chk_Lifted              = (CheckBox) findViewById(R.id.chk_Lifted);
+        btn_OuterClosePlus      = (Button) findViewById(R.id.btn_OuterClosePlus);
+        btn_OuterCloseMinus     = (Button) findViewById(R.id.btn_OuterCloseMinus);
+        txt_OuterClose          = (TextView) findViewById(R.id.txt_OuterClose);
         button_Number_PenaltiesPlus = (Button) findViewById(R.id.button_Number_PenaltiesPlus);
         button_Number_PenaltiesUndo = (Button) findViewById(R.id.button_Number_PenaltiesUndo);
         button_GoToFinalActivity  = (Button)   findViewById(R.id.button_GoToFinalActivity);
         txt_Number_Penalties    = (TextView) findViewById(R.id.txt_Number_Penalties);
+        final Spinner spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
+        ArrayAdapter adapter_Robs = new ArrayAdapter<String>(this, R.layout.robonum_list_layout, carry);
+        adapter_Robs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_numRobots.setAdapter(adapter_Robs);
+        spinner_numRobots.setSelection(0, false);
+        spinner_numRobots.setOnItemSelectedListener(new TeleopScoutActivity.numRobots_OnItemSelectedListener());
+        spinner_numRobots.setVisibility(View.GONE);
 
         pfDatabase                = FirebaseDatabase.getInstance();            // Firebase
         pfDevice_DBReference      = pfDatabase.getReference("devices");     // List of Devices
@@ -112,8 +138,6 @@ public class TeleopScoutActivity extends Activity {
             toast.show();
             final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION,  100);
             tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
-//            radio_Zero.setChecked(true);        // didn't move - so NOT on
-//            end_HangNum = 0;
         }
 
 
@@ -123,8 +147,8 @@ public class TeleopScoutActivity extends Activity {
 
     button_GoToFinalActivity.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-        Log.w(TAG, "###  Clicked Final  ### " + end_HangNum);
-            if (end_HangNum < 4) {        // Gotta pick one!
+        Log.w(TAG, "###  Clicked Final  ### " + Hang_Num);
+            if (Hang_Num < 4) {        // Gotta pick one!
                 storeTeleData();                    // Put all the TeleOps data collected in Match object
                 updateDev("Final");           // Update 'Phase' for stoplight indicator in ScoutMaster
 
@@ -169,6 +193,24 @@ public class TeleopScoutActivity extends Activity {
         }
     });
 
+        btn_OuterClosePlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                HighClose++;
+                Log.w(TAG, "Outer = " + Integer.toString(HighClose));      // ** DEBUG **
+                txt_OuterClose.setText(Integer.toString(HighClose));    // Perform action on click
+            }
+        });
+        btn_OuterCloseMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (HighClose >= 1) {
+                    HighClose--;
+                }
+                Log.w(TAG, "Outer = " + Integer.toString(HighClose));      // ** DEBUG **
+                txt_OuterClose.setText(Integer.toString(HighClose));    // Perform action on click
+            }
+        });
+
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==
     chk_LiftedBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
@@ -184,7 +226,6 @@ public class TeleopScoutActivity extends Activity {
                 //not checked
                 Log.w(TAG,"LiftedBy is unchecked.");
                 got_lift = false;
-                //chkBox_Platform.setChecked(false);       // Have to be on platform to get lifted!
             }
         }
     });
@@ -198,12 +239,14 @@ public class TeleopScoutActivity extends Activity {
                 Log.w(TAG,"Lifted is checked.");
                 got_lift = true;
                 chk_LiftedBy.setChecked(false);       // Can't be both!!
+                spinner_numRobots.setVisibility(VISIBLE);
                 lifted = false;
             }
             else {
                 //not checked
                 Log.w(TAG,"Lifted is unchecked.");
                 got_lift = false;
+                spinner_numRobots.setVisibility(View.GONE);
             }
         }
     });
@@ -245,6 +288,7 @@ public class TeleopScoutActivity extends Activity {
         }
     });
 
+
         // === End of OnCreate ===
     }
 
@@ -253,8 +297,8 @@ public class TeleopScoutActivity extends Activity {
     /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
     /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
     /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-    public void RadioClick_Lifted(View view) {
-        Log.w(TAG, "@@ RadioClick_Lifted @@");
+    public void RadioClick_Hanging(View view) {
+        Log.w(TAG, "@@ RadioClick_Hanging @@");
         radgrp_END = (RadioGroup) findViewById(R.id.radgrp_END);
         int selectedId = radgrp_END.getCheckedRadioButtonId();
 //        Log.w(TAG, "*** Selected=" + selectedId);
@@ -262,18 +306,40 @@ public class TeleopScoutActivity extends Activity {
         String value = radio_Lift.getText().toString();
         if (value.equals("Not On")) {        // Not On?
             Log.w(TAG, "None");
-            end_HangNum = 0;
+            Hang_Num = 0;
         } else if (value.equals("One")){     // One?
             Log.w(TAG, "One");
-            end_HangNum = 1;
+            Hang_Num = 1;
         } else if (value.equals("Two")){     // Two
             Log.w(TAG, "Two");
-            end_HangNum = 2;
+            Hang_Num = 2;
         } else {                              // Three
             Log.w(TAG, "Three");
-            end_HangNum = 3;
+            Hang_Num = 3;
         }
     }
+
+    public class numRobots_OnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+        public void onItemSelected(AdapterView<?> parent,
+                                   View view, int pos, long id) {
+            String num = " ";
+            num = parent.getItemAtPosition(pos).toString();
+            if (pos > 0) {
+                liftedNum = Integer.parseInt(num);
+            } else {
+                Toast toast = Toast.makeText(getBaseContext(), "Must specify # robots lifted!", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                tg.startTone(ToneGenerator.TONE_PROP_BEEP);
+            }
+            Log.w(TAG, ">>>>> NumRobots '" + liftedNum + "'");
+        }
+        public void onNothingSelected(AdapterView<?> parent) {
+            // Do nothing.
+        }
+    }
+
 
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -281,8 +347,12 @@ public class TeleopScoutActivity extends Activity {
     private void storeTeleData() {
         Log.w(TAG, ">>>>  storeTeleData  <<<<");
         // New Match Data Object *** GLF 1/26/20
+        Pearadox.Match_Data.setTele_PowerCell_LoadSta(PowerCell_LoadSta);
+        Pearadox.Match_Data.setTele_PowerCell_floor(PowerCell_floor);
 
         Pearadox.Match_Data.setTele_got_lift(got_lift);
+        Pearadox.Match_Data.setTele_lifted(lifted);
+        Pearadox.Match_Data.setTele_liftedNum(liftedNum);
         Pearadox.Match_Data.setTele_num_Penalties(num_Penalties);
 
         // **

@@ -46,12 +46,12 @@ public class MatchScoutActivity extends AppCompatActivity {
                         Spinner spinner_startPos;
     /* After Start */   CheckBox checkbox_leftSectLine, checkbox_noAUTO, checkbox_Dump;
     /* Last Sect. */    EditText editText_autoComment;
-                        Button btn_OuterPlus, btn_OuterMinus;  TextView  txt_Outer;
+                        Button btn_OuterClosePlus, btn_OuterCloseMinus;  TextView  txt_OuterClose;
     protected Vibrator vibrate;
     long[] once = { 0, 100 };
     long[] twice = { 0, 100, 400, 100 };
     long[] thrice = { 0, 100, 400, 100, 400, 100 };
-    int num_Outer = 0;
+    public static final int ZERO = 0;
     public static String device = " ";
     private Button button_GoToTeleopActivity, button_GoToArenaLayoutActivity, button_dropMinus, button_dropPlus;
     String team_num, team_name, team_loc;
@@ -68,14 +68,28 @@ public class MatchScoutActivity extends AppCompatActivity {
     // Declare & initialize
     public String matchID               = "T00";    // Type + #
     public String tn                    = "";       // Team #
-    public int cells_carried            = -1;        // #cells carried
-    public boolean carry_PowerCell    = false;  // Do they carry PowerCell
-    public String  startPos           = " ";    // Start Position
-    // ---- AFTER Start ----
-    public boolean noAuto               = false;  // Do they have Autonomous mode?
-    public boolean leftSectorLine            = false;  // Did they leave HAB
-    public boolean leftSectorLine2           = false;  // Did they start from Hab level 2
+    public int PlayerSta                = 0;        // #cells carried
 
+    public int cells_carried            = -1;       // #cells carried
+    public boolean carry_PowerCell      = false;    // Do they carry PowerCell
+    public String  startPos             = " ";      // Start Position
+    // ---- AFTER Start ----
+    public boolean noAuto               = false;    // Do they have Autonomous mode?
+    public boolean leftSectorLine       = false;    // Did they leave HAB
+    private boolean Dump                = false;    // Did they Dump balls to partner?
+    private boolean Collect             = false;    // Did they collect more Power Cells?
+    private boolean CollectFloor        = false;    // Collect from Floor?
+    private boolean CollectRobot        = false;    // Collect from a Robot?
+    private boolean CollectTrench       = false;    // Collect from Trench?
+    private boolean CollectSGboundary   = false;    // Collect from SG boundary?
+    private int     Low                 = 0;        // # Low Goal balls
+    private int     HighClose           = 0;        // # High Goal balls - Close
+    private int     HighLine            = 0;        // # High Goal balls - Line
+    private int     HighFrontCP         = 0;        // # High Goal balls - Front CP
+    private boolean conInnerClose       = false;    // Consistent Inner Goal scored Close?
+    private boolean conInnerLine        = false;    // Consistent Inner Goal scored on Line?
+    private boolean conInnerFrontCP     = false;    // Consistent Inner Goal scored in Front of CP?
+    private boolean ShootUnder          = false;    // Shoot from Under Power Port
 
     /* */
     public String autoComment = " ";        // Comment
@@ -96,8 +110,7 @@ public class MatchScoutActivity extends AppCompatActivity {
         studID = bundle.getString("stud");
         Log.w(TAG, device + " " + studID);      // ** DEBUG **
         String ps = device.substring(device.length() - 1);
-        int p = Integer.valueOf(ps);
-        Pearadox.Match_Data.setPre_PlayerSta(p);
+        PlayerSta = Integer.valueOf(ps);
 //
         tn = bundle.getString("tnum");
         Pearadox.MatchData_Saved = false;    // Set flag to show need to saved
@@ -239,9 +252,9 @@ public class MatchScoutActivity extends AppCompatActivity {
         checkbox_leftSectLine   = (CheckBox) findViewById(R.id.checkbox_leftSectLine);
         checkbox_Dump         = (CheckBox) findViewById(R.id.checkbox_Dump);
         editText_autoComment    = (EditText) findViewById(R.id.editText_autoComment);
-        txt_Outer = (TextView) findViewById(R.id.txt_Outer);
-        btn_OuterPlus = (Button) findViewById(R.id.btn_OuterPlus);
-        btn_OuterMinus = (Button) findViewById(R.id.btn_OuterMinus);
+        txt_OuterClose = (TextView) findViewById(R.id.txt_OuterClose);
+        btn_OuterClosePlus = (Button) findViewById(R.id.btn_OuterClosePlus);
+        btn_OuterCloseMinus = (Button) findViewById(R.id.btn_OuterCloseMinus);
         button_GoToTeleopActivity = (Button) findViewById(R.id.button_GoToTeleopActivity);
         button_GoToArenaLayoutActivity = (Button) findViewById(R.id.button_GoToArenaLayoutActivity);
         final Spinner spinner_startPos = (Spinner) findViewById(R.id.spinner_startPos);
@@ -314,15 +327,11 @@ public class MatchScoutActivity extends AppCompatActivity {
 
             } else {        // It's OK - Match has started
 
-                Log.e(TAG, "*** TeleOps - #Cells=" + cells_carried + "  Start-" + spinner_startPos.getSelectedItemPosition());
+                Log.e(TAG, "*** TeleOps - #Cells=" + cells_carried + "  Start=" + spinner_startPos.getSelectedItemPosition());
+                // ToDo - check to see if ALL required fields entered (Start-pos, cells, ....)
                     if ((noAuto==false) &&
-                            ((cells_carried >= 0) ) ||
-//                            (PU2ndPanel) && ((!PU2ndPlSta)&&(!PU2ndFloor)) ||
-//                            (PU3rdPanel) && ((!PU3rdPlSta)&&(!PU3rdFloor)) ||
-//                            (PU2ndPowerCell) && ((!PU2ndPlSta)&&(!PU2ndFloor)&&(!PU2ndCorral)) ||
-//                            (PU3rdPowerCell) && ((!PU3rdPlSta)&&(!PU3rdFloor)&&(!PU3rdCorral)) ||
-                            (spinner_startPos.getSelectedItemPosition() == 0) ) {  //Required fields
-                        // ToDo - check to see if ALL required fields entered (Start-pos, cells, ....)
+                            ((cells_carried <= ZERO)  ||
+                            (spinner_startPos.getSelectedItemPosition() == 0))) {  //Required fields
 
                         Toast.makeText(getBaseContext(), "\t*** Select _ALL_ required fields!  ***\n Starting Position, # Cells ", Toast.LENGTH_LONG).show();
                         if (spinner_startPos.getSelectedItemPosition() == 0) {
@@ -349,20 +358,20 @@ public class MatchScoutActivity extends AppCompatActivity {
         }
     });
 
-        btn_OuterPlus.setOnClickListener(new View.OnClickListener() {
+        btn_OuterClosePlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                num_Outer++;
-                Log.w(TAG, "Outer = " + Integer.toString(num_Outer));      // ** DEBUG **
-                txt_Outer.setText(Integer.toString(num_Outer));    // Perform action on click
+                HighClose++;
+                Log.w(TAG, "Outer = " + Integer.toString(HighClose));      // ** DEBUG **
+                txt_OuterClose.setText(Integer.toString(HighClose));    // Perform action on click
             }
         });
-        btn_OuterMinus.setOnClickListener(new View.OnClickListener() {
+        btn_OuterCloseMinus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (num_Outer >= 1) {
-                    num_Outer--;
+                if (HighClose >= 1) {
+                    HighClose--;
                 }
-                Log.w(TAG, "Outer = " + Integer.toString(num_Outer));      // ** DEBUG **
-                txt_Outer.setText(Integer.toString(num_Outer));    // Perform action on click
+                Log.w(TAG, "Outer = " + Integer.toString(HighClose));      // ** DEBUG **
+                txt_OuterClose.setText(Integer.toString(HighClose));    // Perform action on click
             }
         });
 
@@ -387,7 +396,7 @@ public class MatchScoutActivity extends AppCompatActivity {
 //        });
 //        btn_DropMinus.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
-//                if (num_Dropped >= 1) {     // Don't go below zero
+//                if (num_Dropped >= 1) {     // Don't go below ZERO
 //                    num_Dropped--;
 //                }
 //                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
@@ -434,11 +443,11 @@ public class MatchScoutActivity extends AppCompatActivity {
         Log.i(TAG, ">>>>  storeAutoData  <<<< " + studID);
         Pearadox.Match_Data.setMatch(matchID);
         Pearadox.Match_Data.setTeam_num(tn);
-//        Pearadox.Match_Data.setPre_PlayerSta(p);      // Set at start-up
-
-        Pearadox.Match_Data.setPre_startPos(startPos);
-        Pearadox.Match_Data.setAuto_mode(noAuto);
+        Pearadox.Match_Data.setPre_PlayerSta(PlayerSta);
         Pearadox.Match_Data.setPre_cells_carried(cells_carried);
+        Pearadox.Match_Data.setPre_startPos(startPos);
+
+        Pearadox.Match_Data.setAuto_mode(noAuto);
         Pearadox.Match_Data.setAuto_leftSectorLine(leftSectorLine);
 
         // ToDo - set all 'After Start' variables to object
