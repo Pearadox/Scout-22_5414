@@ -85,28 +85,6 @@
         android:textColor="@color/magenta"
         android:textSize="14sp" />
 
-    <!--<Spinner-->
-    <!--android:id="@+id/spinner_MatchType"-->
-    <!--android:layout_width="140dp"-->
-    <!--android:layout_height="25dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:prompt="@string/mtchtyp_prompt"-->
-    <!--android:visibility="invisible"-->
-    <!--android:layout_alignTop="@+id/lbl_MatchType"-->
-    <!--android:layout_toRightOf="@+id/lbl_MatchType"-->
-    <!--android:layout_toEndOf="@+id/lbl_MatchType" />-->
-
-    <!--<Spinner-->
-    <!--android:id="@+id/spinner_MatchNum"-->
-    <!--android:layout_width="80dp"-->
-    <!--android:layout_height="25dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:visibility="invisible"-->
-    <!--android:layout_below="@+id/spinner_MatchType"-->
-    <!--android:layout_alignLeft="@+id/spinner_MatchType"-->
-    <!--android:layout_alignStart="@+id/spinner_MatchType"-->
-    <!--android:layout_marginLeft="14sp"-->
-    <!--android:layout_marginStart="14sp" />-->
 
     <TextView
         android:id="@+id/lbl_MatchType"
