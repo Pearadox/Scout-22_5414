@@ -546,8 +546,8 @@
                     android:padding="1dip"
                     android:paddingLeft="1dip"
                     android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                    android:textColor="@color/grey"
-                    android:textSize="10sp" />
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -692,8 +692,8 @@
                     android:padding="1dip"
                     android:paddingLeft="1dip"
                     android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                    android:textColor="@color/grey"
-                    android:textSize="10sp" />
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -839,8 +839,8 @@
                         android:padding="1dip"
                         android:paddingLeft="1dip"
                         android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                        android:textColor="@color/grey"
-                        android:textSize="10sp" />
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -988,8 +988,8 @@
                         android:padding="1dip"
                         android:paddingLeft="1dip"
                         android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                        android:textColor="@color/grey"
-                        android:textSize="10sp" />
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -1137,8 +1137,8 @@
                         android:padding="1dip"
                         android:paddingLeft="1dip"
                         android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                        android:textColor="@color/grey"
-                        android:textSize="10sp" />
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -1286,8 +1286,8 @@
                         android:padding="1dip"
                         android:paddingLeft="1dip"
                         android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                        android:textColor="@color/grey"
-                        android:textSize="10sp" />
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
 

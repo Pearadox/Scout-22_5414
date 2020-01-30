@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference pfPitData_DBReference;
     private DatabaseReference pfMatchData_DBReference;
     private DatabaseReference pfMatch_DBReference;
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
     String team_num, team_name, team_loc;
     String key = null;
     Uri currentImageUri;
@@ -146,11 +146,11 @@ public class MainActivity extends AppCompatActivity {
         Button btn_StoreData = (Button) findViewById(R.id.btn_StoreData);
         isInternetAvailable();          // See if device has Internet
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);     // Enable 'Offline' Database
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);     // Enable 'Offline' Database
         //loadStudentString();            // Force student load from Strings
         pfDatabase = FirebaseDatabase.getInstance();
         if (Pearadox.is_Network) {      // is Internet available?
-            Log.w(TAG, "%%%%%  FireBase %%%%%");                                       // ** DEBUG
+            Log.w(TAG, "%%%%%  FireBase init %%%%%");                                       // ** DEBUG
             pfEvent_DBReference = pfDatabase.getReference("competitions");      // Get list of Events/Competitions
             pfStudent_DBReference = pfDatabase.getReference("students");        // Get list of Students
             addStud_VE_Listener(pfStudent_DBReference);
@@ -1050,7 +1050,7 @@ private void preReqs() {
 
 //______________________________________
     private void Fb_Auth() {
-        Log.w(TAG, "===Fb_Auth===  " + Pearadox.is_Network);
+        Log.w(TAG, "===Fb_Auth===    Net=" + Pearadox.is_Network);
         FB_logon = false;
         String pw = " "; String eMail="scout.5414@gmail.com";
         if (Pearadox.is_Network) {
@@ -1066,7 +1066,7 @@ private void preReqs() {
                 }
                 fileReader.close();
                 pw = (stringBuffer.toString());
-                pw = pw.substring(0, 11);    //Remove CR/LF
+                pw = pw.substring(0, pw.length()-1);    //Remove CR/LF
             Log.e(TAG, "Pearadox = '" + pw + "'");
             } catch (IOException e) {
                 final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
@@ -1076,7 +1076,7 @@ private void preReqs() {
                 toast.show();
                 e.printStackTrace();
             }
-            Log.e(TAG, "Sign-In " + eMail + "  '" + pw + "'");
+            Log.w(TAG, "****  Found P/W file - about to Authorize  ****   FB=" + FB_logon);
 
             mAuth.signInWithEmailAndPassword(eMail, pw)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -1124,6 +1124,7 @@ private void preReqs() {
 //    FirebaseDatabase.getInstance().setPersistenceEnabled(true);     // Enable 'Offline' Database
         mAuth = FirebaseAuth.getInstance();
 //    if (FB_logon) {
+
         Fb_Auth();      // Authenticate with Firebase
 //    }
 //    loadEvents();
