@@ -38,9 +38,10 @@ public class TeleopScoutActivity extends Activity {
 
     String TAG = "TeleopScoutActivity";      // This CLASS name
     /* Header Sect. */  TextView txt_dev, txt_stud, txt_match, txt_tnum;
-    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellLoadSta, chkBox_PU_Cell_Trench, chkBox_ContorlPanel;    /* Shoot Sect. */  Button btn_OuterClosePlus, btn_OuterCloseMinus;  TextView  txt_OuterClose;
+    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellLoadSta, chkBox_PU_Cell_Trench, chkBox_ControlPanel;    /* Shoot Sect. */  Button btn_OuterClosePlus, btn_OuterCloseMinus;  TextView  txt_OuterClose;
                         RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_One, radio_Two, radio_Three, radio_Zero;
-                        CheckBox chk_LiftedBy, chk_Lifted;  Spinner spinner_numRobots;
+    /* Climb Sect. */   CheckBox chk_Climbed, chk_Balanced, chk_UnderSG;
+                        CheckBox chk_LiftedBy, chk_Lifted; Spinner spinner_numRobots;
     /* Comment */       EditText editText_TeleComments;
     /* Last Sect. */    Button button_GoToFinalActivity, button_Number_PenaltiesPlus, button_Number_PenaltiesUndo;
                         TextView txt_Number_Penalties;
@@ -107,7 +108,10 @@ public class TeleopScoutActivity extends Activity {
         chkBox_PU_PowerCell_floor  = (CheckBox) findViewById(R.id.chkBox_PU_PowerCell_floor);
         chkBox_PowerCellLoadSta = (CheckBox) findViewById(R.id.chkBox_PowerCellLoadSta);
         chkBox_PU_Cell_Trench   = (CheckBox) findViewById(R.id.chkBox_PU_Cell_Trench);
-        chkBox_ContorlPanel   = (CheckBox) findViewById(R.id.chkBox_ContorlPanel);
+        chkBox_ControlPanel     = (CheckBox) findViewById(R.id.chkBox_ControlPanel);
+        chk_Climbed             = (CheckBox) findViewById(R.id.chk_Climbed);
+        chk_Balanced            = (CheckBox) findViewById(R.id.chk_Balanced);
+        chk_UnderSG             = (CheckBox) findViewById(R.id.chk_UnderSG);
         radio_Zero              = (RadioButton) findViewById(R.id.radio_Zero);
         radio_One               = (RadioButton) findViewById(R.id.radio_One);
         radio_Two               = (RadioButton) findViewById(R.id.radio_Two);
@@ -211,7 +215,49 @@ public class TeleopScoutActivity extends Activity {
         });
 
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==
-    chk_LiftedBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_Climbed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+            Log.w(TAG, "chk_Climbed Listener");
+            if (buttonView.isChecked()) {
+                Log.w(TAG,"Climbed is checked.");
+                Climbed = true;
+            } else {  //not checked
+                Log.w(TAG,"Climbed is unchecked.");
+                Climbed = false;
+            }
+        }
+    });
+
+        chk_Balanced.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                Log.w(TAG, "chk_Balanced Listener");
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"Balanced is checked.");
+                    Balanced = true;
+                } else {  //not checked
+                    Log.w(TAG,"Balanced is unchecked.");
+                    Balanced = false;
+                }
+            }
+        });
+
+        chk_UnderSG.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                Log.w(TAG, "chk_UnderSG Listener");
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"Balanced is checked.");
+                    UnderSG = true;
+                } else {  //not checked
+                    Log.w(TAG,"Balanced is unchecked.");
+                    UnderSG = false;
+                }
+            }
+        });
+
+        chk_LiftedBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
             Log.w(TAG, "chk_LiftedBy Listener");
@@ -350,6 +396,10 @@ public class TeleopScoutActivity extends Activity {
         Pearadox.Match_Data.setTele_PowerCell_LoadSta(PowerCell_LoadSta);
         Pearadox.Match_Data.setTele_PowerCell_floor(PowerCell_floor);
 
+        Pearadox.Match_Data.setTele_Climbed(Climbed);
+        Pearadox.Match_Data.setTele_Hang_num(Hang_Num);
+        Pearadox.Match_Data.setTele_Balanced(Balanced);
+        Pearadox.Match_Data.setTele_UnderSG(UnderSG);
         Pearadox.Match_Data.setTele_got_lift(got_lift);
         Pearadox.Match_Data.setTele_lifted(lifted);
         Pearadox.Match_Data.setTele_liftedNum(liftedNum);

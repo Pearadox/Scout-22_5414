@@ -96,7 +96,7 @@
             android:text="Floor" />
 
         <CheckBox
-            android:id="@+id/chkBox_ContorlPanel"
+            android:id="@+id/chkBox_ControlPanel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -431,10 +431,20 @@
         android:layout_below="@+id/lin_CP"
         android:orientation="horizontal">
 
+        <CheckBox
+            android:id="@+id/chk_Climbed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0sp"
+            android:layout_marginTop="5dp"
+            android:text="Climbed"
+            android:textColor="@color/cyan" />
+
         <TextView
             android:id="@+id/lbl_END"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:text="# Hanging @ End"
             android:textColor="@color/cyan"
@@ -478,6 +488,13 @@
                 android:text="Three"
                 android:textColor="@color/cyan" />
         </RadioGroup>
+        <CheckBox
+            android:id="@+id/chk_Balanced"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:textColor="@color/cyan"
+            android:text="SG⚖" />
     </LinearLayout>
     // ==============================================================================
 
@@ -492,9 +509,8 @@
             android:id="@+id/chk_LiftedBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15sp"
-            android:textColor="@color/brightblue"
-            android:text="Was lifted by other Robot" />
+            android:text="Was lifted by other Robot"
+            android:textColor="@color/brightblue" />
         <CheckBox
             android:id="@+id/chk_Lifted"
             android:layout_width="wrap_content"
@@ -518,7 +534,14 @@
             android:layout_below="@+id/lin_Lift"
             android:orientation="horizontal">
 
-            <!--        Climbed, # Robots hanging, Under SG   -->
+            <!--        Climbed, # Balanced, Under SG   -->
+            <CheckBox
+                android:id="@+id/chk_UnderSG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0sp"
+                android:textColor="@color/brightblue"
+                android:text="Under SG" />
         </LinearLayout>
 
 
