@@ -16,11 +16,11 @@ public class matchData implements Serializable {
     private boolean auto_mode;              // Do they have Autonomous mode?
     private boolean auto_leftSectorLine;    // Did they leave Sector Line
     private boolean auto_Dump;              // Did they Dump balls to partner?
-    private boolean auto_Collect;           // Did they collect more Power Cells?
     private boolean auto_CollectFloor;      // Collect from Floor?
-    private boolean auto_CollectRobot;      // Collect from a Robot?
+    private boolean auto_CollectCP;         // Collect from Control Panel?
     private boolean auto_CollectTrench;     // Collect from Trench?
     private boolean auto_CollectSGboundary; // Collect from SG boundary?
+    private boolean auto_CollectRobot;      // Collect from a Robot?
     private int     auto_Low;               // # Low Goal balls
     private int     auto_HighClose;         // # High Goal balls - Close
     private int     auto_HighLine;          // # High Goal balls - Line
@@ -84,7 +84,7 @@ public class matchData implements Serializable {
 //  Constructor
 
 
-    public matchData(String match, String team_num, int pre_cells_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftSectorLine, boolean auto_Dump, boolean auto_Collect, boolean auto_CollectFloor, boolean auto_CollectRobot, boolean auto_CollectTrench, boolean auto_CollectSGboundary, int auto_Low, int auto_HighClose, int auto_HighLine, int auto_HighFrontCP, boolean auto_conInnerClose, boolean auto_conInnerLine, boolean auto_conInnerFrontCP, boolean auto_ShootUnder, boolean auto_ShootLine, boolean auto_ShootFtrench, String auto_comment, boolean tele_PowerCell_floor, boolean tele_PowerCell_LoadSta, boolean tele_PowerCell_CP, boolean tele_PowerCell_Trench, int tele_Low, int tele_HighClose, int tele_HighLine, int tele_HighFrontCP, int tele_HighBackCP, boolean tele_conInnerClose, boolean tele_conInnerLine, boolean tele_conInnerFrontCP, boolean tele_conInnerBackCP, boolean tele_CPspin, boolean tele_CPcolor, boolean tele_ShootUnder, boolean tele_ShootLine, boolean tele_ShootFtrench, boolean tele_ShootBtrench, boolean tele_Climbed, boolean tele_UnderSG, boolean tele_got_lift, boolean tele_lifted, int tele_liftedNum, int tele_Hang_num, boolean tele_Balanced, int tele_num_Penalties, int tele_num_Dropped, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defLast30, boolean final_defense_good, boolean final_def_Block, boolean final_def_TrenchInt, String final_comment, String final_studID, String final_dateTime) {
+    public matchData(String match, String team_num, int pre_cells_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftSectorLine, boolean auto_Dump, boolean auto_CollectFloor, boolean auto_CollectCP, boolean auto_CollectTrench, boolean auto_CollectSGboundary, boolean auto_CollectRobot, int auto_Low, int auto_HighClose, int auto_HighLine, int auto_HighFrontCP, boolean auto_conInnerClose, boolean auto_conInnerLine, boolean auto_conInnerFrontCP, boolean auto_ShootUnder, boolean auto_ShootLine, boolean auto_ShootFtrench, String auto_comment, boolean tele_PowerCell_floor, boolean tele_PowerCell_LoadSta, boolean tele_PowerCell_CP, boolean tele_PowerCell_Trench, int tele_Low, int tele_HighClose, int tele_HighLine, int tele_HighFrontCP, int tele_HighBackCP, boolean tele_conInnerClose, boolean tele_conInnerLine, boolean tele_conInnerFrontCP, boolean tele_conInnerBackCP, boolean tele_CPspin, boolean tele_CPcolor, boolean tele_ShootUnder, boolean tele_ShootLine, boolean tele_ShootFtrench, boolean tele_ShootBtrench, boolean tele_Climbed, boolean tele_UnderSG, boolean tele_got_lift, boolean tele_lifted, int tele_liftedNum, int tele_Hang_num, boolean tele_Balanced, int tele_num_Penalties, int tele_num_Dropped, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defLast30, boolean final_defense_good, boolean final_def_Block, boolean final_def_TrenchInt, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
         this.pre_cells_carried = pre_cells_carried;
@@ -93,11 +93,11 @@ public class matchData implements Serializable {
         this.auto_mode = auto_mode;
         this.auto_leftSectorLine = auto_leftSectorLine;
         this.auto_Dump = auto_Dump;
-        this.auto_Collect = auto_Collect;
         this.auto_CollectFloor = auto_CollectFloor;
-        this.auto_CollectRobot = auto_CollectRobot;
+        this.auto_CollectCP = auto_CollectCP;
         this.auto_CollectTrench = auto_CollectTrench;
         this.auto_CollectSGboundary = auto_CollectSGboundary;
+        this.auto_CollectRobot = auto_CollectRobot;
         this.auto_Low = auto_Low;
         this.auto_HighClose = auto_HighClose;
         this.auto_HighLine = auto_HighLine;
@@ -229,14 +229,6 @@ public matchData() {
         this.auto_Dump = auto_Dump;
     }
 
-    public boolean isAuto_Collect() {
-        return auto_Collect;
-    }
-
-    public void setAuto_Collect(boolean auto_Collect) {
-        this.auto_Collect = auto_Collect;
-    }
-
     public boolean isAuto_CollectFloor() {
         return auto_CollectFloor;
     }
@@ -245,12 +237,12 @@ public matchData() {
         this.auto_CollectFloor = auto_CollectFloor;
     }
 
-    public boolean isAuto_CollectRobot() {
-        return auto_CollectRobot;
+    public boolean isAuto_CollectCP() {
+        return auto_CollectCP;
     }
 
-    public void setAuto_CollectRobot(boolean auto_CollectRobot) {
-        this.auto_CollectRobot = auto_CollectRobot;
+    public void setAuto_CollectCP(boolean auto_CollectCP) {
+        this.auto_CollectCP = auto_CollectCP;
     }
 
     public boolean isAuto_CollectTrench() {
@@ -267,6 +259,14 @@ public matchData() {
 
     public void setAuto_CollectSGboundary(boolean auto_CollectSGboundary) {
         this.auto_CollectSGboundary = auto_CollectSGboundary;
+    }
+
+    public boolean isAuto_CollectRobot() {
+        return auto_CollectRobot;
+    }
+
+    public void setAuto_CollectRobot(boolean auto_CollectRobot) {
+        this.auto_CollectRobot = auto_CollectRobot;
     }
 
     public int getAuto_Low() {

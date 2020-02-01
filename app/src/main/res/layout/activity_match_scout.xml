@@ -327,7 +327,7 @@
     <LinearLayout
         android:id="@+id/lin_Row1"
         android:layout_width="match_parent"
-        android:layout_height="40sp"
+        android:layout_height="50sp"
         android:layout_alignTop="@+id/button_GoToArenaLayoutActivity"
         android:orientation="horizontal">
 
@@ -341,12 +341,14 @@
             android:id="@+id/checkbox_leftSectLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:text="Left Sect.Line?" />
 
         <CheckBox
             android:id="@+id/checkbox_Dump"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:text="Dump Cells?" />
 
     </LinearLayout>
@@ -357,19 +359,55 @@
         <LinearLayout
             android:id="@+id/lin_Row2"
             android:layout_width="match_parent"
-            android:layout_height="40sp"
+            android:layout_height="60sp"
             android:layout_below="@+id/lin_Row1"
             android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/imageView_PowerCell"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="PowerCell Ball"
+                android:src="@drawable/power_cell" />
             <TextView
-                android:id="@+id/lbl_Row1"
+                android:id="@+id/lbl_Row2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Row2 ???????  "
+                android:layout_marginStart="5dp"
+                android:text="Retrieved\n from:"
                 android:textColor="@color/cyan"
                 android:textStyle="bold"
                 tools:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/chkBox_PU_PowerCell_floor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Floor" />
+            <CheckBox
+                android:id="@+id/chkBox_ControlPanel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="C.P." />
+            <CheckBox
+                android:id="@+id/chkBox_PU_Cell_Trench"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Trench" />
+            <CheckBox
+                android:id="@+id/chkBox_PU_Cell_Boundary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Boundary" />
+            <CheckBox
+                android:id="@+id/chkBox_GotCell_Robot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Robot" />
 
         </LinearLayout>
 
@@ -533,13 +571,6 @@
                 android:layout_height="wrap_content"
                 android:text="_____Front-CP____  Inner?"
                 android:textColor="@color/magenta" />
-<!--            <TextView-->
-<!--                android:id="@+id/lbl_PPheader2BackCP"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="46sp"-->
-<!--                android:text="_____Back-CP_____  Inner?"-->
-<!--                android:textColor="@color/pink" />-->
 
         </LinearLayout>
 
@@ -690,7 +721,7 @@
             android:layout_below="@+id/lin_Row6"
             android:layout_alignParentStart="true"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:isScrollContainer="false">
 
             <EditText
