@@ -38,10 +38,15 @@ public class TeleopScoutActivity extends Activity {
 
     String TAG = "TeleopScoutActivity";      // This CLASS name
     /* Header Sect. */  TextView txt_dev, txt_stud, txt_match, txt_tnum;
-    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellLoadSta, chkBox_PU_Cell_Trench, chkBox_ControlPanel;    /* Shoot Sect. */  Button btn_OuterClosePlus, btn_OuterCloseMinus;  TextView  txt_OuterClose;
-                        RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_One, radio_Two, radio_Three, radio_Zero;
+    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellLoadSta, chkBox_PU_Cell_Trench, chkBox_ControlPanel;
+    /* Shoot Sect. */   TextView  txt_OuterClose; Button btn_OuterClosePlus, btn_OuterCloseMinus;
+                        TextView  txt_OuterLine; Button btn_OuterLineMinus, btn_OuterLinePlus;  CheckBox checkbox_OuterLineConsistent;
+                        TextView  txt_OuterFrontCP; Button btn_OuterFrontCPMinus, btn_OuterFrontCPPlus;  CheckBox checkbox_OuterFrontCPConsistent;
+                        TextView  txt_Bottom; Button btn_BottomMinus, btn_BottomPlus;
+                        TextView  txt_OuterBackCP; Button btn_OuterBackCPMinus, btn_OuterBackCPPlus;  CheckBox checkbox_OuterBackCPConsistent;
     /* Climb Sect. */   CheckBox chk_Climbed, chk_Balanced, chk_UnderSG;
                         CheckBox chk_LiftedBy, chk_Lifted; Spinner spinner_numRobots;
+                        RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_One, radio_Two, radio_Three, radio_Zero;
     /* Comment */       EditText editText_TeleComments;
     /* Last Sect. */    Button button_GoToFinalActivity, button_Number_PenaltiesPlus, button_Number_PenaltiesUndo;
                         TextView txt_Number_Penalties;
@@ -120,7 +125,19 @@ public class TeleopScoutActivity extends Activity {
         chk_Lifted              = (CheckBox) findViewById(R.id.chk_Lifted);
         btn_OuterClosePlus      = (Button) findViewById(R.id.btn_OuterClosePlus);
         btn_OuterCloseMinus     = (Button) findViewById(R.id.btn_OuterCloseMinus);
+        btn_OuterLinePlus           = (Button) findViewById(R.id.btn_OuterLinePlus);
+        btn_OuterLineMinus          = (Button) findViewById(R.id.btn_OuterLineMinus);
+        btn_OuterFrontCPPlus        = (Button) findViewById(R.id.btn_OuterFrontCPPlus);
+        btn_OuterFrontCPMinus       = (Button) findViewById(R.id.btn_OuterFrontCPMinus);
+        btn_OuterBackCPPlus        = (Button) findViewById(R.id.btn_OuterBackCPPlus);
+        btn_OuterBackCPMinus       = (Button) findViewById(R.id.btn_OuterBackCPMinus);
+        btn_BottomPlus              = (Button) findViewById(R.id.btn_BottomPlus);
+        btn_BottomMinus             = (Button) findViewById(R.id.btn_BottomMinus);
         txt_OuterClose          = (TextView) findViewById(R.id.txt_OuterClose);
+        txt_OuterLine               = (TextView) findViewById(R.id.txt_OuterLine);
+        txt_OuterFrontCP            = (TextView) findViewById(R.id.txt_OuterFrontCP);
+        txt_OuterBackCP            = (TextView) findViewById(R.id.txt_OuterBackCP);
+        txt_Bottom                  = (TextView) findViewById(R.id.txt_Bottom);
         button_Number_PenaltiesPlus = (Button) findViewById(R.id.button_Number_PenaltiesPlus);
         button_Number_PenaltiesUndo = (Button) findViewById(R.id.button_Number_PenaltiesUndo);
         button_GoToFinalActivity  = (Button)   findViewById(R.id.button_GoToFinalActivity);
@@ -214,6 +231,77 @@ public class TeleopScoutActivity extends Activity {
             }
         });
 
+        btn_OuterLinePlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                HighLine++;
+                Log.w(TAG, "OuterLine = " + Integer.toString(HighLine));      // ** DEBUG **
+                txt_OuterLine.setText(Integer.toString(HighLine));
+            }
+        });
+        btn_OuterLineMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (HighLine >= 1) {
+                    HighLine--;
+                }
+                Log.w(TAG, "OuterLine = " + Integer.toString(HighLine));      // ** DEBUG **
+                txt_OuterLine.setText(Integer.toString(HighLine));
+            }
+        });
+
+        btn_OuterFrontCPPlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d(TAG, "btn_OuterFrontCPPlus Listener");
+                HighFrontCP++;
+                Log.w(TAG, "OuterFrontCP = " + Integer.toString(HighFrontCP));      // ** DEBUG **
+                txt_OuterFrontCP.setText(Integer.toString(HighFrontCP));
+            }
+        });
+        btn_OuterFrontCPMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d(TAG, "btn_OuterFrontCPMinus Listener");
+                if (HighFrontCP >= 1) {
+                    HighFrontCP--;
+                }
+                Log.w(TAG, "OuterFrontCP = " + Integer.toString(HighFrontCP));      // ** DEBUG **
+                txt_OuterFrontCP.setText(Integer.toString(HighFrontCP));
+            }
+        });
+
+        btn_OuterBackCPPlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                HighBackCP++;
+                Log.w(TAG, "OuterBackCP = " + Integer.toString(HighBackCP));      // ** DEBUG **
+                txt_OuterBackCP.setText(Integer.toString(HighBackCP));
+            }
+        });
+        btn_OuterBackCPMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (HighBackCP >= 1) {
+                    HighBackCP--;
+                }
+                Log.w(TAG, "OuterBackCP = " + Integer.toString(HighBackCP));      // ** DEBUG **
+                txt_OuterBackCP.setText(Integer.toString(HighBackCP));
+            }
+        });
+
+        btn_BottomPlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Low++;
+                Log.w(TAG, "Bottom = " + Integer.toString(Low));      // ** DEBUG **
+                txt_Bottom.setText(Integer.toString(Low));
+            }
+        });
+        btn_BottomMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (Low >= 1) {
+                    Low--;
+                }
+                Log.w(TAG, "Bottom = " + Integer.toString(Low));      // ** DEBUG **
+                txt_Bottom.setText(Integer.toString(Low));
+            }
+        });
+
+
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==
         chk_Climbed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
@@ -222,9 +310,11 @@ public class TeleopScoutActivity extends Activity {
             if (buttonView.isChecked()) {
                 Log.w(TAG,"Climbed is checked.");
                 Climbed = true;
+                chk_UnderSG.setEnabled(false);
             } else {  //not checked
                 Log.w(TAG,"Climbed is unchecked.");
                 Climbed = false;
+                chk_UnderSG.setEnabled(true);
             }
         }
     });
@@ -248,11 +338,19 @@ public class TeleopScoutActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 Log.w(TAG, "chk_UnderSG Listener");
                 if (buttonView.isChecked()) {
-                    Log.w(TAG,"Balanced is checked.");
-                    UnderSG = true;
+                    Log.w(TAG, "UnderSG is checked.");
+                    if (Climbed) {
+                        Log.e(TAG, "ERROR - cannot select if 'Climmbed' checked");
+                        Toast.makeText(getBaseContext(), "*** End # Hanging _MUST_ be selected ***", Toast.LENGTH_LONG).show();
+                        final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                        tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
+                    } else {
+                        UnderSG = true;
+                        chk_Climbed.setEnabled(false);                   }
                 } else {  //not checked
-                    Log.w(TAG,"Balanced is unchecked.");
+                    Log.w(TAG,"UnderSG is unchecked.");
                     UnderSG = false;
+                    chk_Climbed.setEnabled(true);
                 }
             }
         });
@@ -350,18 +448,26 @@ public class TeleopScoutActivity extends Activity {
 //        Log.w(TAG, "*** Selected=" + selectedId);
         radio_Lift = (RadioButton) findViewById(selectedId);
         String value = radio_Lift.getText().toString();
-        if (value.equals("Not On")) {        // Not On?
+        if (value.equals("None")) {             // Not On?
             Log.w(TAG, "None");
             Hang_Num = 0;
-        } else if (value.equals("One")){     // One?
+        } else if (value.equals("One")){        // One?
             Log.w(TAG, "One");
             Hang_Num = 1;
-        } else if (value.equals("Two")){     // Two
+        } else if (value.equals("Two")){        // Two
             Log.w(TAG, "Two");
             Hang_Num = 2;
-        } else {                              // Three
+        } else {                                // Three
             Log.w(TAG, "Three");
-            Hang_Num = 3;
+            if (!UnderSG) {
+                Hang_Num = 3;
+            } else {
+                Toast toast = Toast.makeText(getBaseContext(), "'Under SG' is checked; pick  # Hanging less than 3!", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                tg.startTone(ToneGenerator.TONE_PROP_BEEP);
+            }
         }
     }
 

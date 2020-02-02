@@ -82,7 +82,7 @@ public class MatchScoutActivity extends AppCompatActivity {
     public boolean leftSectorLine       = false;    // Did they leave HAB
     private boolean Dump                = false;    // Did they Dump balls to partner?
     private boolean CollectFloor        = false;    // Collect from Floor?
-    private boolean CollectCP        = false;    // Collect from a Robot?
+    private boolean CollectCP           = false;    // Collect from Control Panel?
     private boolean CollectTrench       = false;    // Collect from Trench?
     private boolean CollectSGboundary   = false;    // Collect from SG boundary?
     private boolean CollectRobot        = false;    // Collect from Floor?
@@ -90,6 +90,7 @@ public class MatchScoutActivity extends AppCompatActivity {
     private int     HighClose           = 0;        // # High Goal balls - Close
     private int     HighLine            = 0;        // # High Goal balls - Line
     private int     HighFrontCP         = 0;        // # High Goal balls - Front CP
+    private int     HighBackCP          = 0;        // # High Goal balls - Back CP
     private boolean conInnerClose       = false;    // Consistent Inner Goal scored Close?
     private boolean conInnerLine        = false;    // Consistent Inner Goal scored on Line?
     private boolean conInnerFrontCP     = false;    // Consistent Inner Goal scored in Front of CP?
@@ -424,6 +425,7 @@ public class MatchScoutActivity extends AppCompatActivity {
                 } else {
                     conInnerLine = false;
                 }
+                Log.d(TAG, "OuterLineConsistent " + conInnerLine);
             }
         });
 
@@ -478,7 +480,7 @@ public class MatchScoutActivity extends AppCompatActivity {
         btn_OuterFrontCPPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 HighFrontCP++;
-                Log.w(TAG, "OuterCP = " + Integer.toString(HighFrontCP));      // ** DEBUG **
+                Log.w(TAG, "OuterFrontCP = " + Integer.toString(HighFrontCP));      // ** DEBUG **
                 txt_OuterFrontCP.setText(Integer.toString(HighFrontCP));
             }
         });
@@ -487,7 +489,7 @@ public class MatchScoutActivity extends AppCompatActivity {
                 if (HighFrontCP >= 1) {
                     HighFrontCP--;
                 }
-                Log.w(TAG, "OuterUnder = " + Integer.toString(HighFrontCP));      // ** DEBUG **
+                Log.w(TAG, "OuterFrontCP = " + Integer.toString(HighFrontCP));      // ** DEBUG **
                 txt_OuterFrontCP.setText(Integer.toString(HighFrontCP));
             }
         });

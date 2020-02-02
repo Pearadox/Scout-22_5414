@@ -74,40 +74,43 @@
             android:contentDescription="PowerCell Ball"
             android:src="@drawable/power_cell" />
 
-<!--        <CheckBox-->
-<!--            android:id="@+id/chkBox_Corral"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:text="Corral" />-->
-
         <CheckBox
             android:id="@+id/chkBox_PowerCellLoadSta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Loading Station" />
+            android:layout_marginLeft="0dp"
+            android:text="LoadingSta." />
 
         <CheckBox
             android:id="@+id/chkBox_PU_PowerCell_floor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="5dp"
             android:text="Floor" />
-
         <CheckBox
             android:id="@+id/chkBox_ControlPanel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="ContorlPanel" />
-
+            android:layout_marginLeft="5dp"
+            android:text="C.P." />
         <CheckBox
             android:id="@+id/chkBox_PU_Cell_Trench"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="5dp"
             android:text="Trench" />
+        <CheckBox
+            android:id="@+id/chkBox_PU_Cell_Boundary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Boundary" />
+        <CheckBox
+            android:id="@+id/chkBox_GetCell_Robot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Robot" />
 
     </LinearLayout>
 
@@ -194,7 +197,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="-8dp"
-            android:text="C"
+            android:text="U"
             android:textColor="@color/red" />
         //===========================================================
         <TextView
@@ -315,7 +318,7 @@
             android:textSize="16dp" />
 
         <Button
-            android:id="@+id/btn_OuterBackMinus"
+            android:id="@+id/btn_OuterBackCPMinus"
             android:layout_width="30dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
@@ -323,7 +326,7 @@
             android:text="-" />
 
         <Button
-            android:id="@+id/btn_OuterBackPlus"
+            android:id="@+id/btn_OuterBackCPPlus"
             android:layout_width="30dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
