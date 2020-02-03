@@ -1020,11 +1020,11 @@ public class Visualizer_Activity extends AppCompatActivity {
                 int TcellNumUnder = 0; int TcellNumLine = 0; int TcellNumCPFront = 0;  int TcellNumCPBack = 0;
                 int AconUnderNum = 0; int AconLineNum = 0; int AconFrontNum = 0;
                 int TconUnderNum = 0; int TconLineNum = 0; int TconFrontNum = 0; int TconBackNum = 0;
-                int CPspinNum = 0; int CPcolorNum = 0;
+                int CPspinNum = 0; int CPcolorNum = 0; int undSG=0;
                 int Hang0=0; int Hang1=0; int Hang2=0; int Hang3=0; int lift1=0; int was=0; int climbed=0; int bal=0; int pen=0; int floor=0; int tfloor=0;
+
                 for (int i = 0; i < md; i++) {
                 match_inst = Vis_MD.get(i);      // Get instance of Match Data
-                    // ToDo - Add DUMP
                 String mdt = match_inst.getTeam_num();
                 if (mdt.matches(team)) {        // is this match data for the team we are working on?
                 Log.w(TAG, "GMFT TEAM  " + mdt);
@@ -1075,6 +1075,9 @@ public class Visualizer_Activity extends AppCompatActivity {
                     }
                     if (match_inst.isTele_Balanced()) {
                         bal ++;
+                    }
+                    if (match_inst.isTele_UnderSG()) {
+                        undSG ++;
                     }
                     if (match_inst.isTele_CPspin()) {
                         CPspinNum ++;
@@ -1156,42 +1159,42 @@ public class Visualizer_Activity extends AppCompatActivity {
                 tbl_event1R1.setText("Auto" + " \n" + "Tele");
                 tbl_rate1R1.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum );
                 tbl_event2R1.setText("Hang" + "\n" + "Final");
-                tbl_rate2R1.setText("♺ " + climbed + "  ⚖" + bal + "  ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum+ "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen);
+                tbl_rate2R1.setText("♺ " + climbed + "  ⚖" + bal + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + "   円" + undSG + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum+ "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen );
                 break;
             case 1:
                 txt_MatchesR2.setText(String.valueOf(numMDs));
                 tbl_event1R2.setText("Auto" + " \n" + "Tele");
-                tbl_rate1R2.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + "1 L2"  );
+                tbl_rate1R2.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum  );
                 tbl_event2R2.setText("Hang" + "\n" + "Final");
-                tbl_rate2R2.setText( "♺ " + climbed + "  ⚖" + bal + "  ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum+ "  Lift " + lift1 + "  ↕ " + was+  "  ⚑ " + pen);
+                tbl_rate2R2.setText( "♺ " + climbed + "  ⚖" + bal + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + "   円" + undSG + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum+ "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen );
                 break;
             case 2:
                 txt_MatchesR3.setText(String.valueOf(numMDs));
                 tbl_event1R3.setText("Auto" + " \n" + "Tele");
-                tbl_rate1R3.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + "1 L2"  );
+                tbl_rate1R3.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum  );
                 tbl_event2R3.setText("Hang" + "\n" + "Final");
-                tbl_rate2R3.setText("♺ " + climbed + "  ⚖" + bal + "  ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum + "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen);
+                tbl_rate2R3.setText("♺ " + climbed + "  ⚖" + bal + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + "   円" + undSG + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum+ "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen );
                 break;
             case 3:
                 txt_MatchesB1.setText(String.valueOf(numMDs));
                 tbl_event1B1.setText("Auto" + " \n" + "Tele");
-                tbl_rate1B1.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + "1 L2"  );
+                tbl_rate1B1.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum  );
                 tbl_event2B1.setText("Hang" + "\n" + "Final");
-                tbl_rate2B1.setText("♺ " + climbed + "  ⚖" + bal + "  ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum + "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen);
+                tbl_rate2B1.setText("♺ " + climbed + "  ⚖" + bal + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + "   円" + undSG + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum+ "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen );
                 break;
             case 4:
                 txt_MatchesB2.setText(String.valueOf(numMDs));
                 tbl_event1B2.setText("Auto" + " \n" + "Tele");
-                tbl_rate1B2.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + "1 L2"  );
+                tbl_rate1B2.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum  );
                 tbl_event2B2.setText("Hang" + "\n" + "Final");
-                tbl_rate2B2.setText("♺ " + climbed + "  ⚖" + bal + "  ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum + "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen);
+                tbl_rate2B2.setText("♺ " + climbed + "  ⚖" + bal + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + "   円" + undSG + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum+ "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen );
                 break;
             case 5:
                 txt_MatchesB3.setText(String.valueOf(numMDs));
                 tbl_event1B3.setText("Auto" + " \n" + "Tele");
-                tbl_rate1B3.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + "1 L2"  );
+                tbl_rate1B3.setText( "≠" + base + " ▼" + AdumpNum + "  ⚫" + AbotNum + " U" + AcellNumUnder + " L" + AcellNumLine + " F" + AcellNumCPFront + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum + " \n" + "⚫" + TbotNum + " U" + TcellNumUnder + " L" + TcellNumLine + " F" + TcellNumCPFront  + " B" + TcellNumCPBack + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum  );
                 tbl_event2B3.setText("Hang" + "\n" + "Final");
-                tbl_rate2B3.setText("♺ " + climbed + "  ⚖" + bal + "  ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum + "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen);
+                tbl_rate2B3.setText("♺ " + climbed + "  ⚖" + bal + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + "   円" + undSG + " \n" + "☢ ¹" + CPspinNum + " ²"  + CPcolorNum+ "  Lift " + lift1 + "  ↕ " + was+ "  ⚑ " + pen );
                 break;
             default:                // ????
                 Log.e(TAG, "*** Error - bad NDX  ***");

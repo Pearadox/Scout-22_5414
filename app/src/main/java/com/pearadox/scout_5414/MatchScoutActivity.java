@@ -523,7 +523,7 @@ public class MatchScoutActivity extends AppCompatActivity {
                 Log.e(TAG, "*** TeleOps - #Cells=" + cells_carried + "  Start=" + spinner_startPos.getSelectedItemPosition());
                 // ToDo - check to see if ALL required fields entered (Start-pos, cells, ....)
                     if ((noAuto==false) &&
-                            ((cells_carried <= ZERO)  ||
+                            ((cells_carried < ZERO)  ||
                             (spinner_startPos.getSelectedItemPosition() == 0))) {  //Required fields
 
                         Toast.makeText(getBaseContext(), "\t*** Select _ALL_ required fields!  ***\n Starting Position, # Cells ", Toast.LENGTH_LONG).show();
