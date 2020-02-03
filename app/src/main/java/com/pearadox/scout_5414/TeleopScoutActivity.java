@@ -38,12 +38,13 @@ public class TeleopScoutActivity extends Activity {
 
     String TAG = "TeleopScoutActivity";      // This CLASS name
     /* Header Sect. */  TextView txt_dev, txt_stud, txt_match, txt_tnum;
-    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellLoadSta, chkBox_PU_Cell_Trench, chkBox_ControlPanel;
-    /* Shoot Sect. */   TextView  txt_OuterClose; Button btn_OuterClosePlus, btn_OuterCloseMinus;
+    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellLoadSta, chkBox_PU_Cell_Trench, chkBox_ControlPanel, chkBox_PU_Cell_Boundary, chkBox_GotCell_Robot;
+    /* Shoot Sect. */   TextView  txt_OuterClose; Button btn_OuterClosePlus, btn_OuterCloseMinus;  CheckBox checkbox_OuterCloseConsistent;
                         TextView  txt_OuterLine; Button btn_OuterLineMinus, btn_OuterLinePlus;  CheckBox checkbox_OuterLineConsistent;
                         TextView  txt_OuterFrontCP; Button btn_OuterFrontCPMinus, btn_OuterFrontCPPlus;  CheckBox checkbox_OuterFrontCPConsistent;
+                        TextView  txt_OuterBackCP; Button btn_OuterBackCPMinus, btn_OuterBackCPPlus;  CheckBox checkbox_OuterBackConsistent;
                         TextView  txt_Bottom; Button btn_BottomMinus, btn_BottomPlus;
-                        TextView  txt_OuterBackCP; Button btn_OuterBackCPMinus, btn_OuterBackCPPlus;  CheckBox checkbox_OuterBackCPConsistent;
+                        CheckBox checkbox_CPspin, checkbox_CPcolor;
     /* Climb Sect. */   CheckBox chk_Climbed, chk_Balanced, chk_UnderSG;
                         CheckBox chk_LiftedBy, chk_Lifted; Spinner spinner_numRobots;
                         RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_One, radio_Two, radio_Three, radio_Zero;
@@ -66,6 +67,10 @@ public class TeleopScoutActivity extends Activity {
 
     public boolean PowerCell_floor      = false;    // Did they pickup PowerCell off the ground?
     public boolean PowerCell_LoadSta    = false;    // Did they get PowerCell from Loading Station?
+    public boolean PowerCell_CP         = false;    // Did they pick up PowerCell from Control Panel
+    public boolean PowerCell_Trench     = false;    // Did they get PowerCell from Loading Station
+    public boolean PowerCell_Boundary   = false;    // Did they get PowerCell from SG boundary?
+    public boolean PowerCell_Robot      = false;    // Get from a Robot?
     public int     Low                  = 0;        // # Low Goal balls
     public int     HighClose            = 0;        // # High Goal balls - Close
     public int     HighLine             = 0;        // # High Goal balls - Line
@@ -77,10 +82,6 @@ public class TeleopScoutActivity extends Activity {
     public boolean conInnerBackCP       = false;    // Consistent Inner Goal scored in Back of CP?
     public boolean CPspin               = false;    // Control Panel Spin
     public boolean CPcolor              = false;    // Control Panel Color
-    public boolean ShootUnder           = false;    // Shoot from Under Power Port
-    public boolean ShootLine            = false;    // Shoot from Sector Line
-    public boolean ShootFtrench         = false;    // Shoot from in Front of Trench
-    public boolean ShootBtrench         = false;    // Shoot from in Back of Trench
 
     public boolean Climbed              = false;    // Did they Climb?
     public boolean UnderSG              = false;    // Parked under Shield Generator
@@ -110,10 +111,14 @@ public class TeleopScoutActivity extends Activity {
         txt_tnum.setText(tn);
 
         editText_TeleComments   = (EditText) findViewById(R.id.editText_teleComments);
-        chkBox_PU_PowerCell_floor  = (CheckBox) findViewById(R.id.chkBox_PU_PowerCell_floor);
+        chkBox_PU_PowerCell_floor = (CheckBox) findViewById(R.id.chkBox_PU_PowerCell_floor);
         chkBox_PowerCellLoadSta = (CheckBox) findViewById(R.id.chkBox_PowerCellLoadSta);
         chkBox_PU_Cell_Trench   = (CheckBox) findViewById(R.id.chkBox_PU_Cell_Trench);
         chkBox_ControlPanel     = (CheckBox) findViewById(R.id.chkBox_ControlPanel);
+        chkBox_PU_Cell_Boundary = (CheckBox) findViewById(R.id.chkBox_PU_Cell_Boundary);
+        chkBox_GotCell_Robot    = (CheckBox) findViewById(R.id.chkBox_GotCell_Robot);
+        checkbox_CPspin         = (CheckBox) findViewById(R.id.checkbox_CPspin);
+        checkbox_CPcolor        = (CheckBox) findViewById(R.id.checkbox_CPcolor);
         chk_Climbed             = (CheckBox) findViewById(R.id.chk_Climbed);
         chk_Balanced            = (CheckBox) findViewById(R.id.chk_Balanced);
         chk_UnderSG             = (CheckBox) findViewById(R.id.chk_UnderSG);
@@ -138,6 +143,10 @@ public class TeleopScoutActivity extends Activity {
         txt_OuterFrontCP            = (TextView) findViewById(R.id.txt_OuterFrontCP);
         txt_OuterBackCP            = (TextView) findViewById(R.id.txt_OuterBackCP);
         txt_Bottom                  = (TextView) findViewById(R.id.txt_Bottom);
+        checkbox_OuterCloseConsistent = (CheckBox) findViewById(R.id.checkbox_OuterCloseConsistent);
+        checkbox_OuterLineConsistent = (CheckBox) findViewById(R.id.checkbox_OuterLineConsistent);
+        checkbox_OuterFrontCPConsistent = (CheckBox) findViewById(R.id.checkbox_OuterFrontCPConsistent);
+        checkbox_OuterBackConsistent = (CheckBox) findViewById(R.id.checkbox_OuterBackConsistent);
         button_Number_PenaltiesPlus = (Button) findViewById(R.id.button_Number_PenaltiesPlus);
         button_Number_PenaltiesUndo = (Button) findViewById(R.id.button_Number_PenaltiesUndo);
         button_GoToFinalActivity  = (Button)   findViewById(R.id.button_GoToFinalActivity);
@@ -213,7 +222,61 @@ public class TeleopScoutActivity extends Activity {
             }
         }
     });
+    chkBox_PU_Cell_Trench.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+            Log.w(TAG, "chkBox_PU_Cell_Trench Listener");
+            if (buttonView.isChecked()) {
+                Log.w(TAG,"chkBox_PU_Cell_Trench is checked.");
+                PowerCell_Trench = true;
+            } else {  //not checked
+                Log.w(TAG,"chkBox_PU_Cell_Trench is unchecked.");
+                PowerCell_Trench = false;
+            }
+        }
+    });
+    chkBox_ControlPanel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+        Log.w(TAG, "chkBox_ControlPanel Listener");
+        if (buttonView.isChecked()) {
+            Log.w(TAG,"chkBox_ControlPanel is checked.");
+            PowerCell_CP = true;
+        } else {  //not checked
+            Log.w(TAG,"chkBox_ControlPanel is unchecked.");
+            PowerCell_CP = false;
+        }
+    }
+    });
+        chkBox_PU_Cell_Boundary.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+            Log.w(TAG, "chkBox_PU_Cell_Boundary Listener");
+            if (buttonView.isChecked()) {
+                Log.w(TAG,"chkBox_PU_Cell_Boundary is checked.");
+                PowerCell_Boundary = true;
+            } else {  //not checked
+                Log.w(TAG,"chkBox_PU_Cell_Boundary is unchecked.");
+                PowerCell_Boundary = false;
+            }
+        }
+    });
+        chkBox_GotCell_Robot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                Log.w(TAG, "chkBox_GotCell_Robot Listener");
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"chkBox_GotCell_Robot is checked.");
+                    PowerCell_Robot = true;
+                } else {  //not checked
+                    Log.w(TAG,"chkBox_GotCell_Robot is unchecked.");
+                    PowerCell_Robot = false;
+                }
+            }
+        });
 
+
+        //============================================================================
         btn_OuterClosePlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 HighClose++;
@@ -301,37 +364,112 @@ public class TeleopScoutActivity extends Activity {
             }
         });
 
-
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==
-        chk_Climbed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chk_Climbed Listener");
-            if (buttonView.isChecked()) {
-                Log.w(TAG,"Climbed is checked.");
-                Climbed = true;
-                chk_UnderSG.setEnabled(false);
-            } else {  //not checked
-                Log.w(TAG,"Climbed is unchecked.");
-                Climbed = false;
-                chk_UnderSG.setEnabled(true);
+        checkbox_OuterCloseConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.w(TAG, "checkbox_OuterCloseConsistent Listener");
+                if (buttonView.isChecked()) {
+                    conInnerClose = true;
+                } else {
+                    conInnerClose = false;
+                }
+                Log.d(TAG, "OuterCloseConsistent " + conInnerClose);
             }
-        }
-    });
+        });
+        checkbox_OuterLineConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.w(TAG, "checkbox_OuterLineConsistent Listener");
+                if (buttonView.isChecked()) {
+                    conInnerLine = true;
+                } else {
+                    conInnerLine = false;
+                }
+                Log.d(TAG, "OuterLineConsistent " + conInnerLine);
+            }
+        });
+        checkbox_OuterFrontCPConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.w(TAG, "checkbox_OuterCloseConsistent Listener");
+                if (buttonView.isChecked()) {
+                    conInnerFrontCP = true;
+                } else {
+                    conInnerFrontCP = false;
+                }
+                Log.d(TAG, "OuterFrontCPConsistent " + conInnerFrontCP);
+            }
+        });
+        checkbox_OuterBackConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.w(TAG, "checkbox_OuterBackConsistent Listener");
+                if (buttonView.isChecked()) {
+                    conInnerBackCP = true;
+                } else {
+                    conInnerBackCP = false;
+                }
+                Log.d(TAG, "OuterBackConsistent " + conInnerBackCP);
+            }
+        });
 
-        chk_Balanced.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkbox_CPspin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chk_Balanced Listener");
+                Log.w(TAG, "checkbox_CPspin Listener");
                 if (buttonView.isChecked()) {
-                    Log.w(TAG,"Balanced is checked.");
-                    Balanced = true;
+                    Log.w(TAG,"checkbox_CPspin is checked.");
+                    CPspin = true;
                 } else {  //not checked
-                    Log.w(TAG,"Balanced is unchecked.");
-                    Balanced = false;
+                    Log.w(TAG,"checkbox_CPspin is unchecked.");
+                    CPspin = false;
                 }
             }
         });
+        checkbox_CPcolor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                Log.w(TAG, "checkbox_CPcolor Listener");
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"checkbox_CPcolor is checked.");
+                    CPcolor = true;
+                } else {  //not checked
+                    Log.w(TAG,"checkbox_CPcolor is unchecked.");
+                    CPcolor = false;
+                }
+            }
+        });
+
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==
+    chk_Climbed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+        Log.w(TAG, "chk_Climbed Listener");
+        if (buttonView.isChecked()) {
+            Log.w(TAG,"Climbed is checked.");
+            Climbed = true;
+            chk_UnderSG.setEnabled(false);
+        } else {  //not checked
+            Log.w(TAG,"Climbed is unchecked.");
+            Climbed = false;
+            chk_UnderSG.setEnabled(true);
+        }
+        }
+    });
+
+    chk_Balanced.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+            Log.w(TAG, "chk_Balanced Listener");
+            if (buttonView.isChecked()) {
+                Log.w(TAG,"Balanced is checked.");
+                Balanced = true;
+            } else {  //not checked
+                Log.w(TAG,"Balanced is unchecked.");
+                Balanced = false;
+            }
+        }
+    });
 
         chk_UnderSG.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -501,11 +639,25 @@ public class TeleopScoutActivity extends Activity {
         // New Match Data Object *** GLF 1/26/20
         Pearadox.Match_Data.setTele_PowerCell_LoadSta(PowerCell_LoadSta);
         Pearadox.Match_Data.setTele_PowerCell_floor(PowerCell_floor);
-
+        Pearadox.Match_Data.setTele_PowerCell_CP(PowerCell_CP);
+        Pearadox.Match_Data.setTele_PowerCell_Trench(PowerCell_Trench);
+        Pearadox.Match_Data.setTele_PowerCell_Boundary(PowerCell_Boundary);
+        Pearadox.Match_Data.setTele_PowerCell_Robot(PowerCell_Robot);
+        Pearadox.Match_Data.setTele_Low(Low);
+        Pearadox.Match_Data.setTele_HighClose(HighClose);
+        Pearadox.Match_Data.setTele_HighLine(HighLine);
+        Pearadox.Match_Data.setTele_HighFrontCP(HighFrontCP);
+        Pearadox.Match_Data.setTele_HighBackCP(HighBackCP);
+        Pearadox.Match_Data.setTele_conInnerClose(conInnerClose);
+        Pearadox.Match_Data.setTele_conInnerLine(conInnerLine);
+        Pearadox.Match_Data.setTele_conInnerFrontCP(conInnerFrontCP);
+        Pearadox.Match_Data.setTele_conInnerBackCP(conInnerBackCP);
+        Pearadox.Match_Data.setTele_CPspin(CPspin);
+        Pearadox.Match_Data.setTele_CPcolor(CPcolor);
         Pearadox.Match_Data.setTele_Climbed(Climbed);
+        Pearadox.Match_Data.setTele_UnderSG(UnderSG);
         Pearadox.Match_Data.setTele_Hang_num(Hang_Num);
         Pearadox.Match_Data.setTele_Balanced(Balanced);
-        Pearadox.Match_Data.setTele_UnderSG(UnderSG);
         Pearadox.Match_Data.setTele_got_lift(got_lift);
         Pearadox.Match_Data.setTele_lifted(lifted);
         Pearadox.Match_Data.setTele_liftedNum(liftedNum);

@@ -106,7 +106,7 @@
             android:layout_marginStart="5dp"
             android:text="Boundary" />
         <CheckBox
-            android:id="@+id/chkBox_GetCell_Robot"
+            android:id="@+id/chkBox_GotCell_Robot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"

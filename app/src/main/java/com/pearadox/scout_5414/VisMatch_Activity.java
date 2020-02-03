@@ -250,10 +250,6 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isTele_got_lift()) {
                 WasLifted++;
             }
-            Tdropped = Tdropped + match_inst.getTele_num_Dropped();
-            if (match_inst.isTele_lifted()) {
-                lift1Num++;
-            }
 //                if (match_inst.isTele_lift_two()) {
 //                    lift2Num++;
 //                }
