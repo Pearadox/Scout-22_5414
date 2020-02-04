@@ -242,23 +242,23 @@
 
         <RadioButton
             android:id="@+id/radio_PowerCell"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="PowerCell" />
-
-        <RadioButton
-            android:id="@+id/radio_Panels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="Panels" />
+            android:layout_marginStart="10dp"
+            android:text="Cell" />
+
+        <RadioButton
+            android:id="@+id/radio_ControlPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="C.P." />
 
         <RadioButton
             android:id="@+id/radio_Climb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
+            android:layout_marginStart="10dp"
             android:text="Climb" />
 
         //-----------------------------------
@@ -268,7 +268,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_Pit"
-            android:layout_marginStart="-280dp"
+            android:layout_marginStart="-240dp"
             android:layout_marginTop="30dp"
             android:text="Combined" />
 
