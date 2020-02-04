@@ -4,64 +4,85 @@
 
     <PreferenceCategory android:title="PowerCell">
         <EditTextPreference
+            android:id="@+id/txt_PowerCellL0"
+            android:inputType="numberDecimal"
+            android:defaultValue="1.0"
+            android:key="prefPowerCell_L0"
+            android:summary="Multiplier for PowerCell scored in Low Goal"
+            android:title="Low" />
+        <EditTextPreference
             android:id="@+id/txt_PowerCellL1"
             android:inputType="numberDecimal"
             android:defaultValue="1.0"
             android:key="prefPowerCell_L1"
-            android:summary="Multiplier for PowerCell scored at Level 1"
-            android:title="Level 1" />
+            android:summary="Multiplier for PowerCell scored in Outside Goal from UNDER"
+            android:title="Under" />
         <EditTextPreference
             android:id="@+id/txt_PowerCellL2"
             android:inputType="numberDecimal"
             android:defaultValue="2.0"
             android:key="prefPowerCell_L2"
-            android:summary="Multiplier for PowerCell scored at Level 2"
-            android:title="Level 2" />
+            android:summary="Multiplier for PowerCell scored in Outside Goal from Sector Line"
+            android:title="Sector Line" />
         <EditTextPreference
             android:id="@+id/txt_PowerCellL3"
             android:inputType="numberDecimal"
             android:defaultValue="3.0"
             android:key="prefPowerCell_L3"
-            android:summary="Multiplier for PowerCell scored at Level 3"
-            android:title="Level 3" />
+            android:summary="Multiplier for PowerCell scored in Outside Goal from Front of CP"
+            android:title="Front CP" />
+        <EditTextPreference
+            android:id="@+id/txt_PowerCellL4"
+            android:inputType="numberDecimal"
+            android:defaultValue="3.0"
+            android:key="prefPowerCell_L3"
+            android:summary="Multiplier for PowerCell scored in Outside Goal from Back of CP"
+            android:title="Back CP" />
 
 
     </PreferenceCategory>
     //================================================================================
-    <PreferenceCategory android:title="Panels">
+    <PreferenceCategory android:title="Control Panel">
         <EditTextPreference
             android:id="@+id/txt_panelL1"
             android:inputType="numberDecimal"
             android:defaultValue="1.0"
             android:key="prefPanel_L1"
-            android:summary="Multiplier for Panels scored at Level 1"
-            android:title="Level 1" />
+            android:summary="Multiplier for Control Panel spin stop"
+            android:title="Spin" />
         <EditTextPreference
             android:id="@+id/txt_panelL2"
             android:inputType="numberDecimal"
             android:defaultValue="2.0"
             android:key="prefPanel_L2"
-            android:summary="Multiplier for Panels scored at Level 2"
-            android:title="Level 2" />
-        <EditTextPreference
-            android:id="@+id/txt_panelL3"
-            android:inputType="numberDecimal"
-            android:defaultValue="3.0"
-            android:key="prefPanel_L3"
-            android:summary="Multiplier for Panels scored at Level 3"
-            android:title="Level 3" />
-        <EditTextPreference
-            android:id="@+id/txt_panelDrop"
-            android:inputType="numberDecimal"
-            android:defaultValue="-1.0"
-            android:key="prefPanel_Drop"
-            android:summary="Multiplier for Panels dropped"
-            android:title="Panels Dropped" />
+            android:summary="Multiplier for Control Panel color stop"
+            android:title="Color" />
 
     </PreferenceCategory>
 //================================================================================
     <PreferenceCategory android:title="Climb">
 
+        <EditTextPreference
+            android:id="@+id/txt_climbSG"
+            android:inputType="numberDecimal"
+            android:defaultValue="1.5"
+            android:key="prefClimb_climb"
+            android:summary="Multiplier for Climbing successfully"
+            android:title="Climb" />
+        <EditTextPreference
+            android:id="@+id/txt_parkSG"
+            android:inputType="numberDecimal"
+            android:defaultValue="0.5"
+            android:key="prefClimb_park"
+            android:summary="Multiplier for Parking under SG"
+            android:title="Park" />
+        <EditTextPreference
+            android:id="@+id/txt_Balanced"
+            android:inputType="numberDecimal"
+            android:defaultValue="1.0"
+            android:key="prefClimb_Balanced"
+            android:summary="Multiplier for being Balanced"
+            android:title="Balanced" />
         <EditTextPreference
             android:id="@+id/txt_Lift1"
             android:inputType="numberDecimal"
@@ -87,33 +108,33 @@
             android:title="Was Lifted" />
 
         <EditTextPreference
-            android:id="@+id/txt_HAB0"
+            android:id="@+id/txt_Hang0"
             android:inputType="numberDecimal"
             android:defaultValue="-1.0"
-            android:key="prefClimb_HAB0"
-            android:summary="Multiplier for NOT being on Platform at end"
-            android:title="HAB0" />
+            android:key="prefClimb_Hang0"
+            android:summary="Multiplier for Alliance Hang 0"
+            android:title="Hang 0" />
         <EditTextPreference
-            android:id="@+id/txt_HAB1"
+            android:id="@+id/txt_Hang1"
             android:inputType="numberDecimal"
             android:defaultValue="1.0"
-            android:key="prefClimb_HAB1"
-            android:summary="Multiplier for being on HAB Level 1"
-            android:title="HAB1" />
+            android:key="prefClimb_Hang1"
+            android:summary="Multiplier for Alliance Hang 1"
+            android:title="Hang 1" />
         <EditTextPreference
-            android:id="@+id/txt_HAB2"
+            android:id="@+id/txt_Hang2"
             android:inputType="numberDecimal"
             android:defaultValue="2.5"
-            android:key="prefClimb_HAB2"
-            android:summary="Multiplier for being on HAB Level 2"
-            android:title="HAB2" />
+            android:key="prefClimb_Hang2"
+            android:summary="Multiplier for Alliance Hang 2"
+            android:title="Hang 2" />
         <EditTextPreference
-            android:id="@+id/txt_HAB3"
+            android:id="@+id/txt_Hang3"
             android:inputType="numberDecimal"
             android:defaultValue="5.0"
-            android:key="prefClimb_HAB3"
-            android:summary="Multiplier for being on HAB Level 3"
-            android:title="HAB3" />
+            android:key="prefClimb_Hang3"
+            android:summary="Multiplier for Alliance Hang 2"
+            android:title="Hang 3" />
 
     </PreferenceCategory>
 
@@ -122,24 +143,24 @@
         <EditTextPreference
             android:id="@+id/txt_ClimbWt"
             android:inputType="number"
-            android:defaultValue="1.0"
+            android:defaultValue="3.0"
             android:key="prefWeight_climb"
-            android:summary="Multiplier for Climbing"
+            android:summary="Multiplier for Climbing Score"
             android:title="Climb Weight" />
         <EditTextPreference
             android:id="@+id/txt_PowerCellWt"
             android:inputType="number"
-            android:defaultValue="1.0"
+            android:defaultValue="2.0"
             android:key="prefWeight_PowerCell"
-            android:summary="Multiplier for PowerCell Scored"
+            android:summary="Multiplier for PowerCell Score"
             android:title="PowerCell Weight" />
         <EditTextPreference
             android:id="@+id/txt_PanelWt"
             android:inputType="number"
-            android:defaultValue="1.5"
-            android:key="prefWeight_panels"
-            android:summary="Multiplier for Panels Scored"
-            android:title="Panels Weight" />
+            android:defaultValue="1.0"
+            android:key="prefWeight_panel"
+            android:summary="Multiplier for Control Panel Score"
+            android:title="Control Panel Weight" />
 
     </PreferenceCategory>
 
