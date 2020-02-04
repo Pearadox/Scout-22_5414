@@ -4,6 +4,13 @@
 
     <PreferenceCategory android:title="PowerCell">
         <EditTextPreference
+            android:id="@+id/txt_PowerCellDump"
+            android:inputType="numberDecimal"
+            android:defaultValue="0.5"
+            android:key="prefPowerCell_Dump"
+            android:summary="Multiplier for PowerCells transferred to Partner"
+            android:title="Dump" />
+        <EditTextPreference
             android:id="@+id/txt_PowerCellL0"
             android:inputType="numberDecimal"
             android:defaultValue="1.0"
@@ -79,7 +86,7 @@
         <EditTextPreference
             android:id="@+id/txt_Balanced"
             android:inputType="numberDecimal"
-            android:defaultValue="1.0"
+            android:defaultValue="2.5"
             android:key="prefClimb_Balanced"
             android:summary="Multiplier for being Balanced"
             android:title="Balanced" />
