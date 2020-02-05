@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +21,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -69,7 +71,7 @@ public class PitScoutActivity extends AppCompatActivity {
     String TAG = "PitScout_Activity";      // This CLASS name
     TextView txt_EventName, txt_dev, txt_stud, txt_TeamName, txt_NumWheels;
     EditText editTxt_Team, txtEd_Weight, editText_Comments;
-    ImageView imgScoutLogo, img_Photo;
+    ImageView imgScoutLogo, img_Photo, imageView_numEnt;
     Spinner spinner_Team, spinner_Traction, spinner_Omni, spinner_Mecanum, spinner_Pneumatic;
     Spinner spinner_numRobots, spinner_Motor, spinner_Lang, spinner_autoMode;
     ArrayAdapter<String> adapter;
@@ -155,7 +157,7 @@ pitData Pit_Data = new pitData();
         String param1 = bundle.getString("dev");
         String param2 = bundle.getString("stud");
         Log.w(TAG, param1 + " " + param2);     // ** DEBUG **
-        scout = param2;                         // Scout of record
+        scout = param2;                             // Scout of record
 //
         txt_EventName = (TextView) findViewById(R.id.txt_EventName);
         txt_EventName.setText(Pearadox.FRC_EventName);          // Event Name
@@ -165,6 +167,7 @@ pitData Pit_Data = new pitData();
         StorageReference storageRef = storage.getReference();
 
         ImageView img_Photo = (ImageView) findViewById(R.id.img_Photo);
+        ImageView imageView_numEnt = (ImageView) findViewById(R.id.imageView_numEnt);
         txt_dev = (TextView) findViewById(R.id.txt_Dev);
         txt_stud = (TextView) findViewById(R.id.txt_stud);
         txt_TeamName = (TextView) findViewById(R.id.txt_TeamName);
@@ -188,6 +191,7 @@ pitData Pit_Data = new pitData();
             spinner_Team.setAdapter(adapter);
             spinner_Team.setSelection(0, false);
             spinner_Team.setOnItemSelectedListener(new team_OnItemSelectedListener());
+
         } else {        // Have the user type in Team #
             editTxt_Team.setText("");
             editTxt_Team.setVisibility(View.VISIBLE);
@@ -276,8 +280,23 @@ pitData Pit_Data = new pitData();
         chkBox_OffFloor = (CheckBox) findViewById(R.id.chkBox_OffFloor);
         chkBox_Climb = (CheckBox) findViewById(R.id.chkBox_Climb);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
+        editText_Comments.setFocusable(false);
         editText_Comments.setClickable(true);
 
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        Log.d(TAG, "Manuf.=" + manufacturer + "  Model=" + model);
+        if (model.equals("K88")) {
+            imageView_numEnt.setImageDrawable(getResources().getDrawable(R.drawable.k88num_enter));
+        } else {
+            imageView_numEnt.setImageDrawable(getResources().getDrawable(R.drawable.num_enter));
+        }
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //  hide the keyboard
+        txtEd_Weight.clearFocus();  //
+//        if (spinner_Team.getSelectedItemPosition() == 0) {
+//            spinner_Team.performClick(); // Make them select team first!
+//        }
 
 //        final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 200);
 //        tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
@@ -425,6 +444,7 @@ pitData Pit_Data = new pitData();
                         weight = Integer.valueOf(String.valueOf(txtEd_Weight.getText()));
                         Wt_entered = true;
                         Log.w(TAG, "### Used the right key!!  ### " + Wt_entered);
+                        editText_Comments.setFocusable(true);
                         return true;
                     } else {
                         final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
