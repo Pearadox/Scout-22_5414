@@ -34,7 +34,7 @@ public class VisPit_Activity extends AppCompatActivity {
     String tnum = "", tname = "", imgURL = "";
     TextView txt_team, txt_teamName;
     TextView txt_Ht, txt_TotWheels, txt_NumTrac, txt_NumOmni, txt_NumMecanum, txt_NumPneumatic, txt_LiftCap, txt_Scout, txt_Comments;
-    TextView txt_DriveMotor, txt_ProgLang, txt_Speed;
+    TextView txt_DriveMotor, txt_ProgLang;
     TextView txt_autoMode;
     ImageView imgView_Robot, imgView_LARGE;                // Robot image
     CheckBox chkBox_Vision, chkBox_Pneumatics, chkBox_Climb, chkBox_Lift, chkBox_Hook, chkBox_Ramp;
@@ -163,7 +163,6 @@ public class VisPit_Activity extends AppCompatActivity {
                 chkBox_OffFloor = (CheckBox) findViewById(R.id.chkBox_OffFloor);
                 txt_DriveMotor = (TextView) findViewById(R.id.txt_DriveMotor);
                 txt_ProgLang = (TextView) findViewById(R.id.txt_ProgLang);
-                txt_Speed = (TextView) findViewById(R.id.txt_Speed);
                 txt_autoMode = (TextView) findViewById(R.id.txt_Mode);
 
                 txt_Scout = (TextView) findViewById(R.id.txt_Scout);
@@ -176,6 +175,8 @@ public class VisPit_Activity extends AppCompatActivity {
                 txt_NumOmni.setText(String.valueOf(Pit_Data.getPit_numOmni()));
                 txt_NumMecanum.setText(String.valueOf(Pit_Data.getPit_numMecanum()));
                 txt_NumPneumatic.setText(String.valueOf(Pit_Data.getPit_numPneumatic()));
+
+                chkBox_Under.setChecked(Pit_Data.isp);
 
                 txt_autoMode.setText(String.valueOf(Pit_Data.getPit_autoMode()));
                 txt_ProgLang.setText(String.valueOf(Pit_Data.getPit_lang()));
