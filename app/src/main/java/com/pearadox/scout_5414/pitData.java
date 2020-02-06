@@ -14,7 +14,7 @@ public class pitData implements Serializable {
     public int pit_numPneumatic = 0;                // Num. of Pneumatic wheels
     public boolean pit_vision = false;              // presence of Vision Camera
     public boolean pit_pneumatics = false;          // presence of Pneumatics
-    public boolean pit_climber = false;               // presence of a Climbing mechanism
+    public boolean pit_climber = false;             // presence of a Climbing mechanism
     public boolean pit_spin = false;                // Ability to Spin # turns on Control Panel
     public boolean pit_color = false;               // Ability to Stop Wheel on color
     public boolean pit_PowerCellFloor = false;      // presence of a way to pick up PowerCell from floor

@@ -78,7 +78,7 @@ public class PitScoutActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter_Trac, adapter_Omni, adapter_Mac, adapter_Pneu ;
     ArrayAdapter<String> adapter_driveMotor, adapter_progLang,adapter_autoMode;
     CheckBox chkBox_Ramp, chkBox_CanLift, chkBox_Hook, chkBox_Vision, chkBox_Pneumatics, chkBox_Climb;
-    CheckBox chkBox_OffFloor;
+    CheckBox chkBox_OffFloor, chkBox_LoadSta;
 
     Button btn_Save;
     Uri currentImageUri;
@@ -278,6 +278,7 @@ pitData Pit_Data = new pitData();
         chkBox_Pneumatics = (CheckBox) findViewById(R.id.chkBox_Pneumatics);
         chkBox_CanLift = (CheckBox) findViewById(R.id.chkBox_CanLift);
         chkBox_OffFloor = (CheckBox) findViewById(R.id.chkBox_OffFloor);
+        chkBox_LoadSta = (CheckBox) findViewById(R.id.chkBox_LoadSta);
         chkBox_Climb = (CheckBox) findViewById(R.id.chkBox_Climb);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
         editText_Comments.setFocusable(false);
@@ -775,12 +776,11 @@ pitData Pit_Data = new pitData();
                         spinner_Pneumatic.setSelection((Pit_Load.getPit_numPneumatic()));
 
 
-                        chkBox_Climb.setChecked(Pit_Load.isPit_climb());
+                        chkBox_Climb.setChecked(Pit_Load.isPit_climber());
                         chkBox_Vision.setChecked(Pit_Load.isPit_vision());
                         chkBox_Pneumatics.setChecked(Pit_Load.isPit_pneumatics());
-                        chkBox_OffFloor.setChecked(Pit_Load.isPit_PowerCellManip());
-
-                        chkBox_OffFloor.setChecked(Pit_Load.isPit_PowerCellManip());
+                        chkBox_OffFloor.setChecked(Pit_Load.isPit_PowerCellFloor());
+                        chkBox_LoadSta.setChecked(Pit_Load.isPit_PowerCellLoad());
 
                         chkBox_CanLift.setChecked(Pit_Load.isPit_canLift());
                         if (Pit_Load.isPit_canLift()) {
@@ -1073,10 +1073,10 @@ pitData Pit_Data = new pitData();
         Pit_Data.setPit_numOmni(numOmni);
         Pit_Data.setPit_numMecanum(numMecanums);
         Pit_Data.setPit_numPneumatic(numPneumatic);
-        Pit_Data.setPit_PowerCellManip(PowerCellManip);
+        Pit_Data.setPit_PowerCellFloor(PowerCellManip);
         Pit_Data.setPit_vision(vision);
         Pit_Data.setPit_pneumatics(pneumatics);
-        Pit_Data.setPit_climb(climb);
+        Pit_Data.setPit_climber(climb);
         Pit_Data.setPit_canLift(canLift);
         Pit_Data.setPit_numLifted (numLifted );
         Pit_Data.setPit_liftRamp(liftRamp);
