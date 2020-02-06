@@ -38,8 +38,8 @@ public class VisPit_Activity extends AppCompatActivity {
     TextView txt_autoMode;
     ImageView imgView_Robot, imgView_LARGE;                // Robot image
     CheckBox chkBox_Vision, chkBox_Pneumatics, chkBox_Climb, chkBox_Lift, chkBox_Hook, chkBox_Ramp;
-    CheckBox chkBox_Low, chkBox_Under, chkBox_Line;
-    CheckBox chkBox_OffFloor, chkBox_PanelFloor;
+    CheckBox chkBox_Low, chkBox_Under, chkBox_Line, chkBox_Front, chkBox_Back, chkBox_Spin, chkBox_Color, chkBox_CP_under;
+    CheckBox chkBox_OffFloor, chkBox_Load, chkBox_Dump;
     private FirebaseDatabase pfDatabase;
     private DatabaseReference pfPitData_DBReference;
 
@@ -157,13 +157,23 @@ public class VisPit_Activity extends AppCompatActivity {
                 chkBox_Vision = (CheckBox) findViewById(R.id.chkBox_Vision);
                 chkBox_Pneumatics = (CheckBox) findViewById(R.id.chkBox_Pneumatics);
                 chkBox_Lift = (CheckBox) findViewById(R.id.chkBox_Lift);
+                chkBox_Dump = (CheckBox) findViewById(R.id.chkBox_Dump);
                 txt_LiftCap = (TextView) findViewById(R.id.txt_LiftCap);
                 chkBox_Ramp = (CheckBox) findViewById(R.id.chkBox_Ramp);
                 chkBox_Hook = (CheckBox) findViewById(R.id.chkBox_Hook);
                 chkBox_OffFloor = (CheckBox) findViewById(R.id.chkBox_OffFloor);
+                chkBox_Load = (CheckBox) findViewById(R.id.chkBox_Load);
                 txt_DriveMotor = (TextView) findViewById(R.id.txt_DriveMotor);
                 txt_ProgLang = (TextView) findViewById(R.id.txt_ProgLang);
                 txt_autoMode = (TextView) findViewById(R.id.txt_Mode);
+                chkBox_Low = (CheckBox) findViewById(R.id.chkBox_Low);
+                chkBox_Under = (CheckBox) findViewById(R.id.chkBox_Under);
+                chkBox_Line = (CheckBox) findViewById(R.id.chkBox_Line);
+                chkBox_Front = (CheckBox) findViewById(R.id.chkBox_Front);
+                chkBox_Back = (CheckBox) findViewById(R.id.chkBox_Back);
+                chkBox_Spin = (CheckBox) findViewById(R.id.chkBox_Spin);
+                chkBox_Color = (CheckBox) findViewById(R.id.chkBox_Color);
+                chkBox_CP_under = (CheckBox) findViewById(R.id.chkBox_CP_under);
 
                 txt_Scout = (TextView) findViewById(R.id.txt_Scout);
                 txt_Comments = (TextView) findViewById(R.id.txt_Comments);
@@ -176,17 +186,28 @@ public class VisPit_Activity extends AppCompatActivity {
                 txt_NumMecanum.setText(String.valueOf(Pit_Data.getPit_numMecanum()));
                 txt_NumPneumatic.setText(String.valueOf(Pit_Data.getPit_numPneumatic()));
 
-                chkBox_Under.setChecked(Pit_Data.isp);
+                chkBox_Low.setChecked(Pit_Data.isPit_shootLow());
+                chkBox_Under.setChecked(Pit_Data.isPit_shootUnder());
+                chkBox_Line.setChecked(Pit_Data.isPit_shootLine());
+                chkBox_Front.setChecked(Pit_Data.isPit_shootFront());
+                chkBox_Back.setChecked(Pit_Data.isPit_shootBack());
+                chkBox_Dump.setChecked(Pit_Data.pit_dump);
+                chkBox_Spin.setChecked(Pit_Data.pit_spin);
+                chkBox_Color.setChecked(Pit_Data.pit_color);
+                chkBox_CP_under.setChecked(Pit_Data.pit_undTrench);
 
                 txt_autoMode.setText(String.valueOf(Pit_Data.getPit_autoMode()));
                 txt_ProgLang.setText(String.valueOf(Pit_Data.getPit_lang()));
                 txt_DriveMotor.setText(String.valueOf(Pit_Data.getPit_motor()));
 
-                chkBox_Climb.setChecked(Pit_Data.isPit_climb());
+                chkBox_Climb.setChecked(Pit_Data.isPit_climber());
                 chkBox_Vision.setChecked(Pit_Data.isPit_vision());
                 chkBox_Pneumatics.setChecked(Pit_Data.isPit_pneumatics());
                 chkBox_Lift.setChecked(Pit_Data.isPit_canLift());
-                chkBox_OffFloor.setChecked(Pit_Data.isPit_PowerCellManip());
+                chkBox_OffFloor.setChecked(Pit_Data.isPit_PowerCellFloor());
+                chkBox_Load.setChecked(Pit_Data.isPit_PowerCellLoad());
+
+
                 if (Pit_Data.isPit_canLift()) {
                     txt_LiftCap.setVisibility(View.VISIBLE);
                     txt_LiftCap.setText(String.valueOf(Pit_Data.getPit_numLifted()));
