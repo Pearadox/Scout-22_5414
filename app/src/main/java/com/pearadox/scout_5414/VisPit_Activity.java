@@ -38,7 +38,7 @@ public class VisPit_Activity extends AppCompatActivity {
     TextView txt_autoMode;
     ImageView imgView_Robot, imgView_LARGE;                // Robot image
     CheckBox chkBox_Vision, chkBox_Pneumatics, chkBox_Climb, chkBox_Lift, chkBox_Hook, chkBox_Ramp;
-    CheckBox chkBox_Hab2, chkBox_HABLvl_2, chkBox_HABLvl_3;
+    CheckBox chkBox_Low, chkBox_Under, chkBox_Line;
     CheckBox chkBox_OffFloor, chkBox_PanelFloor;
     private FirebaseDatabase pfDatabase;
     private DatabaseReference pfPitData_DBReference;
