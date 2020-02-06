@@ -203,6 +203,48 @@
         android:clickable="false"
         android:text="Can Climb" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chkBox_Climb"
+        android:id="@+id/CP">
+
+        <TextView
+            android:id="@+id/lbl_CP"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="Control Panel"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            android:textStyle="bold"></TextView>
+
+        <CheckBox
+            android:id="@+id/chkBox_Spin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:clickable="false"
+            android:text="Spin?" />
+
+        <CheckBox
+            android:id="@+id/chkBox_Color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:clickable="false"
+            android:text="Stop on Color?" />
+
+        <CheckBox
+            android:id="@+id/chkBox_CP_under"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:clickable="false"
+            android:text="Drive Under CP" />
+        </LinearLayout>
+
+
     <CheckBox
         android:id="@+id/chkBox_Lift"
         android:layout_width="140sp"
@@ -210,7 +252,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/arm_char"
         android:clickable="false"
-        android:text="Can Lift Robots" />
+        android:text="Can Lift Robots"
+        android:textColor="@color/red"/>
 
     <TextView
         android:id="@+id/txt_LiftCap"
@@ -221,7 +264,7 @@
         android:layout_marginStart="14dp"
         android:layout_toEndOf="@+id/chkBox_Lift"
         android:text="0"
-        android:textColor="@color/white"
+        android:textColor="@color/orange"
         android:textSize="16dp" />
 
     <CheckBox
@@ -231,7 +274,8 @@
         android:layout_alignBottom="@+id/txt_LiftCap"
         android:layout_toEndOf="@+id/txt_LiftCap"
         android:clickable="false"
-        android:text="Ramp" />
+        android:text="Ramp"
+        android:textColor="@color/orange"/>
 
     <CheckBox
         android:id="@+id/chkBox_Hook"
@@ -241,32 +285,42 @@
         android:layout_alignTop="@+id/chkBox_Ramp"
         android:layout_toEndOf="@+id/chkBox_Ramp"
         android:clickable="false"
-        android:text="Hook" />
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        android:text="Hook"
+        android:textColor="@color/orange"/>
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Can get PowerCell off
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/chkBox_Climb"
+        android:layout_below="@+id/CP"
         android:id="@+id/arm_char">
+
+        <TextView
+            android:id="@+id/lbl_PCFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="PowerCell from:"
+            android:textColor="@color/magenta"
+            android:textSize="16sp"
+            android:textStyle="bold"></TextView>
 
         <CheckBox
             android:id="@+id/chkBox_OffFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Can get PowerCell off floor"
-            android:clickable= "false"
-            android:textColor="@color/grey"
-            android:orientation="horizontal">
-        </CheckBox>
+            android:layout_marginStart="5dp"
+            android:clickable="false"
+            android:orientation="horizontal"
+            android:text="Floor"
+            android:textColor="@color/magenta"></CheckBox>
 
         <CheckBox
-            android:id="@+id/chkBox_PanelFloor"
+            android:id="@+id/chkBox_Load"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Can get panel off floor"
+            android:text="Loading station"
             android:clickable= "false"
-            android:textColor="@color/grey"
+            android:textColor="@color/magenta"
             android:orientation="horizontal">
         </CheckBox>
 
@@ -301,31 +355,12 @@ android:orientation="horizontal">
     android:textSize="16sp" />
 
 <TextView
-    android:id="@+id/lbl_Speed"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="5dp"
-    android:text="Speed (ft/sec.)"
-    android:textColor="@color/cyan"
-    android:textSize="16sp"
-    android:textStyle="bold" />
-
-<TextView
-    android:id="@+id/txt_Speed"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
-    android:text="99"
-    android:textColor="@color/white"
-    android:textSize="16sp" />
-
-<TextView
     android:id="@+id/lbl_ProgLang"
     android:layout_width="wrap_content"
     android:layout_height="25dp"
     android:layout_marginStart="20dp"
     android:text="Prog. Language"
-    android:textColor="@color/limegreen"
+    android:textColor="@color/cyan"
     android:textSize="16sp"
     android:textStyle="bold"></TextView>
 
@@ -349,48 +384,54 @@ android:orientation="horizontal">
     android:id="@+id/cube_mech">
 
     <TextView
-    android:id="@+id/lbl_Autonomous"
+    android:id="@+id/lbl_ShootFrom"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Autonomous"
-    android:textColor="@color/brightblue"
+    android:text="Shoot From"
+    android:textColor="@color/blue"
     android:textSize="15sp"
     android:textStyle="bold" />
 
     <CheckBox
-    android:id="@+id/chkBox_Hab2"
+    android:id="@+id/chkBox_Low"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="false"
-    android:text="Leave HAB level 2"
+    android:text="Low Goal"
     android:textColor="@color/brightblue" />
 
-    <TextView
-    android:id="@+id/lbl_HAB_End"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:clickable="false"
-    android:text="HAB End"
-    android:textColor="@color/orange" />
-
-
     <CheckBox
-    android:id="@+id/chkBox_HABLvl_2"
+    android:id="@+id/chkBox_Under"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginRight="10dp"
     android:clickable="false"
-    android:text="Level 2"
-    android:textColor="@color/orange" />
+    android:text="Under PP"
+    android:textColor="@color/brightblue" />
 
     <CheckBox
-    android:id="@+id/chkBox_HABLvl_3"
+    android:id="@+id/chkBox_Line"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Level 3"
+    android:text="Sect. Line"
     android:clickable="false"
-    android:textColor="@color/orange" />
+    android:textColor="@color/brightblue" />
+
+    <CheckBox
+        android:id="@+id/chkBox_Front"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Front CP"
+        android:clickable="false"
+        android:textColor="@color/brightblue" />
+
+    <CheckBox
+    android:id="@+id/chkBox_Back"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Back CP"
+    android:clickable="false"
+    android:textColor="@color/brightblue" />
 </LinearLayout>
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -417,8 +458,8 @@ android:orientation="horizontal">
         android:id="@+id/lbl_Mode"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:text="SS Oper. Mode"
-        android:textColor="@color/magenta"
+        android:text="Auto Oper. Mode"
+        android:textColor="@color/orange"
         android:textSize="16sp"
         android:textStyle="bold"></TextView>
 
@@ -428,9 +469,15 @@ android:orientation="horizontal">
             android:layout_height="25dp"
             android:layout_marginStart="20dp"
             android:text="Hybrid (P+V)"
-            android:textColor="@color/pink"
+            android:textColor="@color/orange"
             android:textSize="16sp"></TextView>
-    >
+        <CheckBox
+            android:id="@+id/chkBox_Dump"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dump to Robot"
+            android:clickable="false"
+            android:textColor="@color/orange" />
 
 
 
