@@ -1037,9 +1037,9 @@ pitData Pit_Data = new pitData();
                         chkBox_Climb.setChecked(Pit_Load.isPit_climber());
                         chkBox_Vision.setChecked(Pit_Load.isPit_vision());
                         chkBox_Pneumatics.setChecked(Pit_Load.isPit_pneumatics());
-                        checkbox_CPspin.setEnabled(Pit_Load.isPit_spin());
-                        checkbox_CPcolor.setEnabled(Pit_Load.isPit_color());
-                        chkBox_Trench.setEnabled(Pit_Load.isPit_undTrench());
+                        checkbox_CPspin.setChecked(Pit_Load.isPit_spin());
+                        checkbox_CPcolor.setChecked(Pit_Load.isPit_color());
+                        chkBox_Trench.setChecked(Pit_Load.isPit_undTrench());
                         chkBox_OffFloor.setChecked(Pit_Load.isPit_PowerCellFloor());
                         chkBox_LoadSta.setChecked(Pit_Load.isPit_PowerCellLoad());
 
@@ -1057,11 +1057,11 @@ pitData Pit_Data = new pitData();
                             chkBox_Hook.setVisibility(View.INVISIBLE);
                         }
 
-                        chkBox_ShootLow.setEnabled(Pit_Load.isPit_shootLow());
-                        chkBox_ShootUnder.setEnabled(Pit_Load.isPit_shootLow());
-                        chkBox_ShootLine.setEnabled(Pit_Load.isPit_shootLine());
-                        chkBox_ShootFront.setEnabled(Pit_Load.isPit_shootFront());
-                        chkBox_ShootBack.setEnabled(Pit_Load.isPit_shootBack());
+                        chkBox_ShootLow.setChecked(Pit_Load.isPit_shootLow());
+                        chkBox_ShootUnder.setChecked(Pit_Load.isPit_shootLow());
+                        chkBox_ShootLine.setChecked(Pit_Load.isPit_shootLine());
+                        chkBox_ShootFront.setChecked(Pit_Load.isPit_shootFront());
+                        chkBox_ShootBack.setChecked(Pit_Load.isPit_shootBack());
 
                         String motr = Pit_Load.getPit_motor();
                         Log.w(TAG, "Motor = '" + motr + "'");
@@ -1114,7 +1114,7 @@ pitData Pit_Data = new pitData();
                                 Log.w(TAG, "►►►►►  E R R O R  ◄◄◄◄◄");
                                 break;
                         }
-                        chkBox_Dump.setEnabled(Pit_Load.isPit_dump());
+                        chkBox_Dump.setChecked(Pit_Load.isPit_dump());
 
                         // Finally ...
                         scout = scout + " & " + Pit_Load.getPit_scout();    // Append original scout name
