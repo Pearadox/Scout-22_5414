@@ -1013,7 +1013,6 @@ pitData Pit_Data = new pitData();
                             }
                         }
                         // Now load the screen & variables
-                        // ToDo - Load all _NEW_ variables
                         teamSelected = Pit_Load.getPit_team();
                         //  Height _NOT_ coming back?  Scouters _MUST_ use > keyboard key and NOT Exit
                         txtEd_Weight.setText(String.valueOf(Pit_Load.getPit_weight()));
