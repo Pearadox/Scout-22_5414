@@ -27,17 +27,17 @@ public class pitData implements Serializable {
     public String pit_motor;                        // Type of Motor
     public String pit_lang;                         // Programming  Language
     public String pit_autoMode;                     // Autonomous Operatong Mode
-    //                                              // Grid
-    public boolean pit_climberL1 = false;             //   L1--M1--R1
-    public boolean pit_climberL2 = false;             //   |    |   |
-    public boolean pit_climberL3 = false;             //   |    |   |
-    public boolean pit_climberM1 = false;             //   L2--M2--R2
-    public boolean pit_climberM2 = false;             //   |    |   |
-    public boolean pit_climberM3 = false;             //   |    |   |
-    public boolean pit_climberR1 = false;             //   L3--M3--R3
-    public boolean pit_climberR2 = false;             //
-    public boolean pit_climberR3 = false;             //
     public boolean pit_dump = false;                // Can dump cells to partner
+    //                                              // Grid
+    public boolean pit_climberL1 = false;           //   L1--M1--R1
+    public boolean pit_climberL2 = false;           //   |    |   |
+    public boolean pit_climberL3 = false;           //   |    |   |
+    public boolean pit_climberM1 = false;           //   L2--M2--R2
+    public boolean pit_climberM2 = false;           //   |    |   |
+    public boolean pit_climberM3 = false;           //   |    |   |
+    public boolean pit_climberR1 = false;           //   L3--M3--R3
+    public boolean pit_climberR2 = false;           //
+    public boolean pit_climberR3 = false;           //
     public boolean pit_shootLow = false;            // Can Shoot into Bottom Port
     public boolean pit_shootUnder = false;          // Can Shoot into Port from Under
     public boolean pit_shootLine = false;           // Can Shoot into Port from Sector Line
