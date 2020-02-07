@@ -103,7 +103,7 @@
         android:layout_height="25sp"
         android:textSize="14sp"
         tools:focusable="false"
-        android:textColor="@color/brightblue"
+        android:textColor="@color/lightblue"
         android:layout_below="@+id/lbl_Team"
         android:layout_alignStart="@+id/txt_stud" />
 
@@ -125,7 +125,7 @@
         android:layout_height="40sp"
         android:inputType="number"
         android:ems="10"
-        android:textColor="@color/brightblue"
+        android:textColor="@color/lightblue"
         android:text=""
         android:visibility="gone"
         android:layout_alignBaseline="@+id/lbl_Team"

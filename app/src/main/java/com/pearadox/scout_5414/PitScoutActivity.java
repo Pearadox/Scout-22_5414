@@ -78,8 +78,9 @@ public class PitScoutActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter_Trac, adapter_Omni, adapter_Mac, adapter_Pneu ;
     ArrayAdapter<String> adapter_driveMotor, adapter_progLang,adapter_autoMode;
     CheckBox chkBox_Ramp, chkBox_CanLift, chkBox_Hook, chkBox_Vision, chkBox_Pneumatics, chkBox_Climb;
-    CheckBox chkBox_OffFloor, chkBox_LoadSta, checkbox_CPspin, checkbox_CPcolor, chkBox_Trench;
+    CheckBox chkBox_OffFloor, chkBox_LoadSta, checkbox_CPspin, checkbox_CPcolor, chkBox_Trench, chkBox_Dump;
     CheckBox chkBox_ClimberL1, chkBox_ClimberL2, chkBox_ClimberL3, chkBox_ClimberM1, chkBox_ClimberM2, chkBox_ClimberM3,chkBox_ClimberR1, chkBox_ClimberR2, chkBox_ClimberR3;
+    CheckBox chkBox_ShootLow, chkBox_ShootUnder, chkBox_ShootLine, chkBox_ShootFront, chkBox_ShootBack;
 
     Button btn_Save;
     Uri currentImageUri;
@@ -286,6 +287,12 @@ pitData Pit_Data = new pitData();
         checkbox_CPcolor = (CheckBox) findViewById(R.id.checkbox_CPcolor);
         chkBox_LoadSta = (CheckBox) findViewById(R.id.chkBox_LoadSta);
         chkBox_Trench = (CheckBox) findViewById(R.id.chkBox_Trench);
+        chkBox_Dump = (CheckBox) findViewById(R.id.chkBox_Dump);
+        chkBox_ShootLow = (CheckBox) findViewById(R.id.chkBox_ShootLow);
+        chkBox_ShootUnder = (CheckBox) findViewById(R.id.chkBox_ShootUnder);
+        chkBox_ShootLine = (CheckBox) findViewById(R.id.chkBox_ShootLine);
+        chkBox_ShootFront = (CheckBox) findViewById(R.id.chkBox_ShootFront);
+        chkBox_ShootBack = (CheckBox) findViewById(R.id.chkBox_ShootBack);
         chkBox_Climb = (CheckBox) findViewById(R.id.chkBox_Climb);
         chkBox_ClimberL1 = (CheckBox) findViewById(R.id.chkBox_ClimberL1);
         chkBox_ClimberL2 = (CheckBox) findViewById(R.id.chkBox_ClimberL2);
@@ -469,7 +476,6 @@ pitData Pit_Data = new pitData();
         chkBox_Trench.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chkBox_Trench Listener");
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"Trench is checked.");
                     undTrench = true;
@@ -479,6 +485,85 @@ pitData Pit_Data = new pitData();
                 }
             }
         });
+
+        chkBox_Dump.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"Dump is checked.");
+                    dump = true;
+                } else {
+                    Log.w(TAG,"Dump is unchecked.");
+                    dump = false;
+                }
+            }
+        });
+
+        chkBox_ShootLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"Shoot Low is checked.");
+                    shootLow = true;
+                } else {
+                    Log.w(TAG,"Shoot Low is unchecked.");
+                    shootLow = false;
+                }
+            }
+        });
+
+        chkBox_ShootUnder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"Shoot Under is checked.");
+                    shootUnder = true;
+                } else {
+                    Log.w(TAG,"Shoot Under is unchecked.");
+                    shootUnder = false;
+                }
+            }
+        });
+
+        chkBox_ShootLine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"Shoot Line is checked.");
+                    shootLine = true;
+                } else {
+                    Log.w(TAG,"Shoot Line is unchecked.");
+                    shootLine = false;
+                }
+            }
+        });
+
+        chkBox_ShootFront.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"Shoot Front is checked.");
+                    shootFront = true;
+                } else {
+                    Log.w(TAG,"Shoot Front is unchecked.");
+                    shootFront = false;
+                }
+            }
+        });
+
+        chkBox_ShootBack.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"Shoot Back is checked.");
+                    shootBack = true;
+                } else {
+                    Log.w(TAG,"Shoot Back is unchecked.");
+                    shootBack = false;
+                }
+            }
+        });
+
 
         // ++++++++++++++++++++=   G R I D    +++++++++++++++++++++++++
         chkBox_ClimberL1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -798,20 +883,6 @@ pitData Pit_Data = new pitData();
         Log.w(TAG, "Photo = '" + picname + "'");
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);     // ByteArrayOutputStream
         byte[] data = baos.toByteArray();
-        //                  gs://paradox-2017.appspot.com/images/txZZ/
-// ToDo - ????
-//        StorageReference storageReference = storage.getReferenceFromUrl("gs://paradox-2017.appspot.com").child(picname);
-
-//        UploadTask uploadTask = storageRef.putBytes(data);
-//        uploadTask.addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//            }
-//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//            }
-//        });
     }
 
     /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
@@ -921,7 +992,7 @@ pitData Pit_Data = new pitData();
                         Spinner spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
 
                         if (pitFB) {
-                            // Already loaded data from Firebase in Pit_Load
+                            // Already loaded data from Firebase into Pit_Load during 'getTeam_Pit'
                         } else {
                             File direct_pit = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/pit/" + Pearadox.FRC_Event);
                             try {
@@ -953,11 +1024,22 @@ pitData Pit_Data = new pitData();
                         spinner_Omni.setSelection((Pit_Load.getPit_numOmni()));
                         spinner_Mecanum.setSelection((Pit_Load.getPit_numMecanum()));
                         spinner_Pneumatic.setSelection((Pit_Load.getPit_numPneumatic()));
-
+                        chkBox_ClimberL1.setChecked(Pit_Load.isPit_climberL1());
+                        chkBox_ClimberL2.setChecked(Pit_Load.isPit_climberL2());
+                        chkBox_ClimberL3.setChecked(Pit_Load.isPit_climberL3());
+                        chkBox_ClimberM1.setChecked(Pit_Load.isPit_climberM1());
+                        chkBox_ClimberM2.setChecked(Pit_Load.isPit_climberM2());
+                        chkBox_ClimberM3.setChecked(Pit_Load.isPit_climberM3());
+                        chkBox_ClimberR1.setChecked(Pit_Load.isPit_climberR1());
+                        chkBox_ClimberR2.setChecked(Pit_Load.isPit_climberR2());
+                        chkBox_ClimberR3.setChecked(Pit_Load.isPit_climberR3());
 
                         chkBox_Climb.setChecked(Pit_Load.isPit_climber());
                         chkBox_Vision.setChecked(Pit_Load.isPit_vision());
                         chkBox_Pneumatics.setChecked(Pit_Load.isPit_pneumatics());
+                        checkbox_CPspin.setEnabled(Pit_Load.isPit_spin());
+                        checkbox_CPcolor.setEnabled(Pit_Load.isPit_color());
+                        chkBox_Trench.setEnabled(Pit_Load.isPit_undTrench());
                         chkBox_OffFloor.setChecked(Pit_Load.isPit_PowerCellFloor());
                         chkBox_LoadSta.setChecked(Pit_Load.isPit_PowerCellLoad());
 
@@ -974,6 +1056,12 @@ pitData Pit_Data = new pitData();
                             chkBox_Ramp.setVisibility(View.INVISIBLE);
                             chkBox_Hook.setVisibility(View.INVISIBLE);
                         }
+
+                        chkBox_ShootLow.setEnabled(Pit_Load.isPit_shootLow());
+                        chkBox_ShootUnder.setEnabled(Pit_Load.isPit_shootLow());
+                        chkBox_ShootLine.setEnabled(Pit_Load.isPit_shootLine());
+                        chkBox_ShootFront.setEnabled(Pit_Load.isPit_shootFront());
+                        chkBox_ShootBack.setEnabled(Pit_Load.isPit_shootBack());
 
                         String motr = Pit_Load.getPit_motor();
                         Log.w(TAG, "Motor = '" + motr + "'");
@@ -1026,9 +1114,10 @@ pitData Pit_Data = new pitData();
                                 Log.w(TAG, "►►►►►  E R R O R  ◄◄◄◄◄");
                                 break;
                         }
+                        chkBox_Dump.setEnabled(Pit_Load.isPit_dump());
 
                         // Finally ...
-                        scout = scout + " & " + Pit_Load.getPit_scout();    // Append scout name
+                        scout = scout + " & " + Pit_Load.getPit_scout();    // Append original scout name
                         editText_Comments.setText(Pit_Load.getPit_comment());
                         photoURL = Pit_Load.pit_photoURL;
                     }
