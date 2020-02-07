@@ -1231,7 +1231,6 @@ public void Toast_Msg(String choice, Integer minimum) {
             climb_Hang0 = "0"; climb_Hang1 = "0"; climb_Hang2 = "0"; climb_Hang3 = "0";
             liftOne = "0";
             liftTwo = "0";
-//            onPlatform = "0";
             gotLifted = "0";
         }
         //============================
