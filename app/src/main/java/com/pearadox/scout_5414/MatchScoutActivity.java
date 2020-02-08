@@ -574,6 +574,7 @@ public class MatchScoutActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.w(TAG, "******  onTextChanged TextWatcher  ******" + s);
                 autoComment = String.valueOf(s);
+                Log.d(TAG, "AutoComment: " + editText_autoComment.getText() + " " + autoComment);
             }
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -584,6 +585,7 @@ public class MatchScoutActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 Log.w(TAG, "******  onTextChanged TextWatcher  ******" + s );
                 autoComment = String.valueOf(s);
+                Log.d(TAG, "AutoComment: " + editText_autoComment.getText() + " " + autoComment);
             }
         });
 
@@ -790,7 +792,9 @@ public class MatchScoutActivity extends AppCompatActivity {
                 Log.e(TAG, "### Team/robot is a No Show ###" );
                 NoShow = true;
                 editText_autoComment.setText(R.string.NoShowMsg);
-                autoComment = String.valueOf((R.string.NoShowMsg));
+                autoComment = String.valueOf(R.string.NoShowMsg);
+                Log.d(TAG, "No Show" + editText_autoComment.getText() + " " + autoComment);
+                ;
                 checkbox_noAUTO.setChecked(true);
                 // ????? - Do we want to turn off all other widgets?
             }
