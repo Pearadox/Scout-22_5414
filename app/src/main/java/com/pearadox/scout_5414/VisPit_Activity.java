@@ -35,7 +35,7 @@ public class VisPit_Activity extends AppCompatActivity {
     TextView txt_team, txt_teamName;
     TextView txt_Ht, txt_TotWheels, txt_NumTrac, txt_NumOmni, txt_NumMecanum, txt_NumPneumatic, txt_LiftCap, txt_Scout, txt_Comments;
     TextView txt_DriveMotor, txt_ProgLang;
-    TextView txt_autoMode;
+    TextView txt_autoMode, txt_CG;
     ImageView imgView_Robot, imgView_LARGE;                // Robot image
     CheckBox chkBox_Vision, chkBox_Pneumatics, chkBox_Climb, chkBox_Lift, chkBox_Hook, chkBox_Ramp;
     CheckBox chkBox_Low, chkBox_Under, chkBox_Line, chkBox_Front, chkBox_Back, chkBox_Spin, chkBox_Color, chkBox_CP_under;
@@ -174,7 +174,7 @@ public class VisPit_Activity extends AppCompatActivity {
                 chkBox_Spin = (CheckBox) findViewById(R.id.chkBox_Spin);
                 chkBox_Color = (CheckBox) findViewById(R.id.chkBox_Color);
                 chkBox_CP_under = (CheckBox) findViewById(R.id.chkBox_CP_under);
-
+                txt_CG = (TextView) findViewById(R.id.txt_CG);
                 txt_Scout = (TextView) findViewById(R.id.txt_Scout);
                 txt_Comments = (TextView) findViewById(R.id.txt_Comments);
 
@@ -185,6 +185,7 @@ public class VisPit_Activity extends AppCompatActivity {
                 txt_NumOmni.setText(String.valueOf(Pit_Data.getPit_numOmni()));
                 txt_NumMecanum.setText(String.valueOf(Pit_Data.getPit_numMecanum()));
                 txt_NumPneumatic.setText(String.valueOf(Pit_Data.getPit_numPneumatic()));
+
 
                 chkBox_Low.setChecked(Pit_Data.isPit_shootLow());
                 chkBox_Under.setChecked(Pit_Data.isPit_shootUnder());
@@ -199,6 +200,36 @@ public class VisPit_Activity extends AppCompatActivity {
                 txt_autoMode.setText(String.valueOf(Pit_Data.getPit_autoMode()));
                 txt_ProgLang.setText(String.valueOf(Pit_Data.getPit_lang()));
                 txt_DriveMotor.setText(String.valueOf(Pit_Data.getPit_motor()));
+
+                String CG ="";
+                if (Pit_Data.isPit_climberL1()) {
+                    CG=CG+"L1 ";
+                }
+                if (Pit_Data.isPit_climberL2()) {
+                    CG=CG+"L2 ";
+                }
+                if (Pit_Data.isPit_climberL3()) {
+                    CG=CG+"L3 ";
+                }
+                if (Pit_Data.isPit_climberM1()) {
+                    CG=CG+"M1 ";
+                }
+                if (Pit_Data.isPit_climberM2()) {
+                    CG=CG+"M2 ";
+                }
+                if (Pit_Data.isPit_climberM3()) {
+                    CG=CG+"M3 ";
+                }
+                if (Pit_Data.isPit_climberR1()) {
+                    CG=CG+"R1 ";
+                }
+                if (Pit_Data.isPit_climberR2()) {
+                    CG=CG+"R2 ";
+                }
+                if (Pit_Data.isPit_climberR3()) {
+                    CG=CG+"R3 ";
+                }
+                txt_CG.setText(CG);
 
                 chkBox_Climb.setChecked(Pit_Data.isPit_climber());
                 chkBox_Vision.setChecked(Pit_Data.isPit_vision());
