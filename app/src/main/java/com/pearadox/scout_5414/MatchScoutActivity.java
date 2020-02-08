@@ -10,6 +10,8 @@ import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -57,6 +59,7 @@ public class MatchScoutActivity extends AppCompatActivity {
     long[] twice = { 0, 100, 400, 100 };
     long[] thrice = { 0, 100, 400, 100, 400, 100 };
     public static final int ZERO = 0;
+    boolean NoShow = false;
     public static String device = " ";
     private Button button_GoToTeleopActivity, button_GoToArenaLayoutActivity, button_dropMinus, button_dropPlus;
     String team_num, team_name, team_loc;
@@ -171,6 +174,7 @@ public class MatchScoutActivity extends AppCompatActivity {
         txt_TeamName = (TextView) findViewById(R.id.txt_TeamName);
         editTxt_Match = (EditText) findViewById(R.id.editTxt_Match);
         editTxt_Team = (EditText) findViewById(R.id.editTxt_Team);
+        editText_autoComment = (EditText) findViewById(R.id.editText_autoComment);
         ImageView imgScoutLogo = (ImageView) findViewById(R.id.imageView_MS);
         txt_dev.setText(device);
         txt_stud.setText(studID);
@@ -300,17 +304,19 @@ public class MatchScoutActivity extends AppCompatActivity {
                      //checked
                      Log.w(TAG, "No Auto is checked.");
                      noAuto = true;
-                    // ToDo - turn ON/OFF correct widgets
+                     // ToDo - turn ON/OFF correct widgets
                      checkbox_leftSectLine.setChecked(false);
                      checkbox_leftSectLine.setEnabled(false);
                      checkbox_Dump.setChecked(false);
                      checkbox_Dump.setEnabled(false);
-                     editText_autoComment.setText("No Autonomous activity - didn't move");
-                     autoComment = "No Autonomous activity - didn't move";
+                     if (!NoShow) {         // Leave message as is if No Show
+                        editText_autoComment.setText("No Autonomous activity - didn't move");
+                        autoComment = "No Autonomous activity - didn't move";
+                     }
 
                  } else {
                      //not checked
-                     Log.w(TAG, "No SS is unchecked.");
+                     Log.w(TAG, "No Auto is unchecked.");
                      noAuto = false;
 
                      checkbox_leftSectLine.setEnabled(true);
@@ -563,22 +569,23 @@ public class MatchScoutActivity extends AppCompatActivity {
 
         // *******************************************************************
 
-//        btn_DropPlus.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                num_Dropped++;
-//                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
-//                txt_Num_Dropped.setText(Integer.toString(num_Dropped));
-//            }
-//        });
-//        btn_DropMinus.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                if (num_Dropped >= 1) {     // Don't go below ZERO
-//                    num_Dropped--;
-//                }
-//                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
-//                txt_Num_Dropped.setText(Integer.toString(num_Dropped));
-//            }
-//        });
+        editText_autoComment.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.w(TAG, "******  onTextChanged TextWatcher  ******" + s);
+                autoComment = String.valueOf(s);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.w(TAG, "******  beforeTextChanged TextWatcher  ******");
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.w(TAG, "******  onTextChanged TextWatcher  ******" + s );
+                autoComment = String.valueOf(s);
+            }
+        });
 
 
         // === End of OnCreate ===
@@ -777,18 +784,23 @@ public class MatchScoutActivity extends AppCompatActivity {
             startPos = parent.getItemAtPosition(pos).toString();
             Log.d(TAG, ">>>>>  '" + startPos + "'");
             checkbox_noAUTO = (CheckBox) findViewById(R.id.checkbox_noAUTO);
+            editText_autoComment = (EditText) findViewById(R.id.editText_autoComment);
             final Spinner spinner_startPos = (Spinner) findViewById(R.id.spinner_startPos);
             if (spinner_startPos.getSelectedItemPosition() == 6) {  //  No Show?
                 Log.e(TAG, "### Team/robot is a No Show ###" );
+                NoShow = true;
                 editText_autoComment.setText(R.string.NoShowMsg);
+                autoComment = String.valueOf((R.string.NoShowMsg));
                 checkbox_noAUTO.setChecked(true);
                 // ????? - Do we want to turn off all other widgets?
             }
-            if (spinner_startPos.getSelectedItemPosition() == 1 || spinner_startPos.getSelectedItemPosition() == 2 ) {
+            if (spinner_startPos.getSelectedItemPosition() >= 1 && spinner_startPos.getSelectedItemPosition() <= 5 ) {
                 checkbox_noAUTO.setChecked(false);                            // un-check if old value was NoShow
+                NoShow = false;
             }
             if (spinner_startPos.getSelectedItemPosition() == 0) {          // reset to start
                 checkbox_noAUTO.setChecked(false);                            // un-check if old value was NoShow
+                NoShow = false;
             }
         }
         public void onNothingSelected(AdapterView<?> parent) {

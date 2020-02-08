@@ -44,7 +44,7 @@ public class FinalActivity extends Activity {
     String TAG = "FinalActivity";      // This CLASS name
     TextView txt_dev, txt_stud, txt_match, txt_MyTeam, txt_robotnum;
     EditText editText_Comments;
-    CheckBox chk_lostPart, chk_lostComm, chk_block, chkBox_final_int_Trench, chk_defense30,chk_PowerCellDefense;
+    CheckBox chk_lostPart, chk_lostComm, chk_block, chkBox_final_int_Trench;
     Button button_Saved;
     RadioGroup radioGroup_defense;
     RadioButton rdBtn_def_good, radioButton_def_bad;
@@ -106,8 +106,6 @@ public class FinalActivity extends Activity {
         chk_lostComm = (CheckBox) findViewById(R.id.chk_lostComm);
         chk_block = (CheckBox) findViewById(R.id.chk_block);
         chkBox_final_int_Trench = (CheckBox) findViewById(R.id.chkBox_final_int_Trench);
-        chk_PowerCellDefense = (CheckBox) findViewById(R.id.chk_PowerCellDefense);
-        chk_defense30 = (CheckBox) findViewById(R.id.chk_defense30);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
         editText_Comments.setClickable(true);
         button_Saved = (Button) findViewById(R.id.button_Saved);
@@ -181,44 +179,6 @@ public class FinalActivity extends Activity {
                 }
             }
         }
-        );
-        chk_defense30.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.i(TAG, "chk_defense30 Listener");
-                if (buttonView.isChecked()) {
-                    //checked
-                    Log.i(TAG, "TextBox is checked.");
-                    final_endDefense = true;
-
-                } else {
-                    //not checked
-                    Log.i(TAG, "TextBox is unchecked.");
-                    final_endDefense = false;
-
-                }
-            }
-        }
-        );
-        chk_PowerCellDefense.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-             @Override
-             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                 Log.i(TAG, "chk_PowerCellDefense Listener");
-                 if (buttonView.isChecked()) {
-                     //checked
-                     Log.i(TAG, "PowerCellDef is checked.");
-                     final_PowerCellDefense = true;
-
-                 } else {
-                     //not checked
-                     Log.i(TAG, "PowerCellDef is unchecked.");
-                     final_PowerCellDefense = false;
-
-                 }
-             }
-         }
         );
     chk_block.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
          @Override
@@ -427,6 +387,5 @@ public class FinalActivity extends Activity {
         Log.v(TAG, "OnDestroy");
 
     }
-
 }
 
