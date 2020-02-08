@@ -102,23 +102,6 @@
             tools:text="00" />
 
         <TextView
-            android:id="@+id/lbl_leftSectorLine2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Left Hab2"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_Ss_leftSectorLine2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10sp"
-            android:textColor="@color/red"
-            tools:text="00" />
-
-
-        <TextView
             android:id="@+id/lbl_NoSand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -127,7 +110,7 @@
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/txt_noSand"
+            android:id="@+id/txt_noAuton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -138,7 +121,7 @@
             android:id="@+id/lbl_StartPos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="45dp"
             android:text="Start Position"
             android:textColor="@color/white" />
 
@@ -146,7 +129,7 @@
             android:id="@+id/lbl_DriverStation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="55dp"
             android:text="Player Station"
             android:textColor="@color/white" />
         </LinearLayout>
@@ -179,15 +162,60 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textColor="@color/red"
-            tools:text=" ¹00  ²00 ³00" />
+            tools:text=" ᵁ00  ᴸ00  ᶠ00" />
 
         <TextView
-            android:id="@+id/lbl_Lvl1_Lvl2_NS"
+            android:id="@+id/lbl_StartPosL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="215dp"
+            android:layout_marginStart="125dp"
             android:layout_marginTop="7dp"
-            android:text=" L1  L2  NS"
+            android:text=" L"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/lbl_StartPosLm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:text=" Lm"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/lbl_StartPosM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:text=" M"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/lbl_StartPosRm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:text=" Rm"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/lbl_StartPosR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:text=" R"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/lbl_StartPosNoShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:text=" NS"
             android:textColor="@color/white" />
 
         <TextView
@@ -245,16 +273,46 @@
             tools:text=" 00 " />
 
         <TextView
-            android:id="@+id/txt_Lvl1"
+            android:id="@+id/txt_StartPosL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="-5dp"
             android:text="11"
-            android:textColor="@color/red" />p
+            android:layout_weight= "1"
+            android:textColor="@color/red"
+            android:layout_marginStart="53dp"
+            android:layout_marginTop="-5dp"/>
 
         <TextView
-            android:id="@+id/txt_Lvl2"
+            android:id="@+id/txt_StartPosLm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="22"
+            android:layout_weight= "1"
+            android:textColor="@color/red"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="-5dp"/>
+
+        <TextView
+            android:id="@+id/txt_StartPosM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="-5dp"
+            android:text="22"
+            android:layout_weight= "1"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:id="@+id/txt_StartPosRm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="-5dp"
+            android:text="22"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:id="@+id/txt_StartPosR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -266,7 +324,7 @@
             android:id="@+id/txt_NoShow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="13dp"
             android:layout_marginTop="-5dp"
             android:text="33"
             android:textColor="@color/red" />
@@ -275,7 +333,7 @@
             android:id="@+id/txt_Pos1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="42dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="-5dp"
             android:text="11"
             android:textColor="@color/red" />
@@ -284,7 +342,7 @@
             android:id="@+id/txt_Pos2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="-5dp"
             android:text="22"
             android:textColor="@color/red" />
@@ -293,7 +351,7 @@
             android:id="@+id/txt_Pos3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="-5dp"
             android:text="33"
             android:textColor="@color/red" />

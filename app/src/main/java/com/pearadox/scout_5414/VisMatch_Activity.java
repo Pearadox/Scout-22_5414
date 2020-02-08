@@ -37,21 +37,21 @@ public class VisMatch_Activity extends AppCompatActivity {
     String underScore = new String(new char[60]).replace("\0", "_");  // string of 'x' underscores
     String matches = "";  String match_id = "";
     TextView txt_team, txt_teamName, txt_NumMatches, txt_Matches;
-    TextView txt_auto_leftSectorLine, txt_noSand, txt_Ss_PowerCellScored, txt_Ss_hatchScored, txt_Ss_droppedHatch;
+    TextView txt_auto_leftSectorLine, txt_noAuton, txt_Ss_PowerCellScored, txt_Ss_hatchScored, txt_Ss_droppedHatch;
     TextView txt_Tele_PowerCellScored, txt_Tele_hatchScored, txt_Tele_droppedHatch;
     TextView txt_HabLvl, txt_Lift1NUM, txt_Lift2NUM, txt_WasLiftedNUM;
     TextView txt_2ndCargFloor, txt_2ndCargPlaSta, txt_2ndCargCorral, txt_2ndPanFloor, txt_2ndPanPlaSta , txt_3rdCargFloor, txt_3rdCargPlasta, txt_3rdCargCorral, txt_3rdPanFloor, txt_3rdPanPlaSta;;
     TextView txt_TeleCargFloor, txt_TeleCargPlaSta, txt_TeleCargCorral, txt_TelePanFloor, txt_TelePanPlaSta; 
     // ToDo - TextViews for PowerCell/Panels 2nd & 3rd
     /* Comment Boxes */     TextView txt_AutoComments, txt_TeleComments, txt_FinalComments;
-    TextView txt_Lvl1, txt_Lvl2, txt_NoShow;
+    TextView txt_StartPosL, txt_StartPosLm, txt_NoShow;
     TextView txt_Pos1, txt_Pos2, txt_Pos3;
     public static String[] numMatch = new String[]             // Num. of Matches to process
             {"ALL","Last","Last 2","Last 3","Last 4","Last 5"};
     BarChart mBarChart;
     int BarPowerCell = 0;  int BarPanels = 0;  int LastPowerCell = 0;  int LastPanels = 0;
     //----------------------------------
-    int numleftSectorLine = 0; int numleftSectorLine2 = 0; int noSand = 0;
+    int numleftSectorLine = 0; int numleftSectorLine2 = 0; int noAuton = 0;
     int auto_B1 = 0; int auto_B2 = 0; int auto_B3 = 0;
     // NOTE: _ALL_ external mentions of Playere Sta. (PS) were changed to Loading Sta. (LS) so as to NOT be confused with Player Control Sta. (Driver)
     int auto_Ps1 = 0; int auto_Ps2 = 0; int auto_Ps3 = 0;
@@ -59,7 +59,7 @@ public class VisMatch_Activity extends AppCompatActivity {
     int sand_PowerCellFloor3 = 0; int sand_PowerCellPlasta3 = 0; int sand_PowerCellCorral3 = 0; int sand_PanFloor3 = 0; int sand_PanPlasta3 = 0;
     int tele_PowerCellFloor = 0; int tele_PowerCellPlasta = 0; int tele_PowerCellCorral = 0; int tele_PanFloor = 0; int tele_PanPlasta = 0;
     int climbH0= 0; int climbH1 = 0; int climbH2 = 0; int climbH3 = 0; int lift1Num = 0; int liftedNum = 0;
-    int cargL1 = 0; int cargL2 = 0; int cargL3 =0; int TcargL1 = 0; int TcargL2 = 0; int TcargL3 = 0; int TpanL1 = 0; int TpanL2 = 0; int TpanL3 = 0;
+    int auto_Low = 0; int auto_HighClose = 0; int auto_HighLine = 0; int auto_HighFrontCP =0; int Tauto_Low = 0; int Tauto_HighClose = 0; int Tauto_HighLine = 0; int Tauto_HighFrontCP = 0; int TpanL1 = 0; int TpanL2 = 0; int TpanL3 = 0;
     int numMatches = 0; int panL1 = 0; int panL2 = 0; int panL3 = 0; int dropped=0; int Tdropped = 0;
     String auto_Comments = "";
     //----------------------------------
@@ -101,7 +101,7 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_auto_leftSectorLine = (TextView) findViewById(R.id.txt_auto_leftSectorLine);
 //        txt_Ss_leftSectorLine2 = (TextView) findViewById(R.id.txt_Ss_leftSectorLine2);
         txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
-        txt_noSand = (TextView) findViewById(R.id.txt_noSand);
+        txt_noAuton = (TextView) findViewById(R.id.txt_noAuton);
         txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
         txt_Ss_hatchScored  = (TextView) findViewById(R.id.txt_Ss_hatchScored);
         txt_Ss_droppedHatch = (TextView) findViewById(R.id.txt_Ss_droppedHatch);
@@ -122,8 +122,8 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_TelePanFloor = (TextView) findViewById(R.id.txt_TelePanFloor);
         txt_TelePanPlaSta = (TextView) findViewById(R.id.txt_TelePanPlaSta);
         txt_Tele_droppedHatch = (TextView) findViewById(R.id.txt_Tele_droppedHatch);
-        txt_Lvl1 = (TextView) findViewById(R.id.txt_Lvl1);
-        txt_Lvl2 = (TextView) findViewById(R.id.txt_Lvl2);
+        txt_StartPosL = (TextView) findViewById(R.id.txt_StartPosL);
+        txt_StartPosLm = (TextView) findViewById(R.id.txt_StartPosLm);
         txt_NoShow = (TextView) findViewById(R.id.txt_NoShow);
         txt_Pos1 = (TextView) findViewById(R.id.txt_Pos1);
         txt_Pos2 = (TextView) findViewById(R.id.txt_Pos2);
@@ -175,7 +175,7 @@ public class VisMatch_Activity extends AppCompatActivity {
             matches = matches + match_inst.getMatch() + "  ";   // cumulative list of matches
 
             if (match_inst.isAuto_mode()) {
-                noSand++;
+                noAuton++;
             }
             if (match_inst.isAuto_leftSectorLine()) {
                 numleftSectorLine++;
@@ -258,11 +258,11 @@ public class VisMatch_Activity extends AppCompatActivity {
             }
 
             // ToDo - figure out why bar chart is accumulating??????
-            BarPowerCell = (cargL1 + cargL2 + cargL3 + TcargL1 + TcargL2 + TcargL3) - LastPowerCell;
+            BarPowerCell = (auto_Low + auto_HighClose + auto_HighLine + auto_HighFrontCP + Tauto_Low + Tauto_HighLine + Tauto_HighFrontCP) - LastPowerCell;
             BarPanels = (panL1 + panL2 + panL3 + TpanL1 + TpanL2 + TpanL3) - LastPanels;
             mBarChart.addBar(new BarModel(BarPowerCell, 0xffff0000));       // PowerCell
 //            Log.w(TAG, i + " @@@@@@@@ PowerCell=" + BarPowerCell + "   Panels=" + BarPanels + "  " + match_id);
-//            Log.e(TAG, "    CL1=" + cargL1 + " CL2=" + cargL2 + " CL3=" + cargL3 + "    TcL1=" + TcargL1 + " TcL2=" + TcargL2 + " TcL3=" + TcargL3 + "  Last=" + LastPowerCell);
+//            Log.e(TAG, "    CL1=" + auto_Low + " CL2=" + auto_HighLine + " CL3=" + auto_HighFrontCP + "    TcL1=" + Tauto_Low + " TcL2=" + Tauto_HighLine + " TcL3=" + Tauto_HighFrontCP + "  Last=" + LastPowerCell);
 //            Log.e(TAG, "    PL1=" + panL1 + " PL2=" + panL2 + " PL3=" + panL3 + "    TpL1=" + TpanL1 + " TpL2=" + TpanL2 + " TpL3=" + TpanL3 + "  Last=" + LastPanels +"\n");
 
             mBarChart.addBar(new BarModel( BarPanels,  0xff08457e));       // Panels
@@ -306,7 +306,7 @@ public class VisMatch_Activity extends AppCompatActivity {
 // ================================================================
         txt_auto_leftSectorLine = (TextView) findViewById(R.id.txt_auto_leftSectorLine);
          txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
-        txt_noSand = (TextView) findViewById(R.id.txt_noSand);
+        txt_noAuton = (TextView) findViewById(R.id.txt_noAuton);
         txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
         txt_Ss_hatchScored  = (TextView) findViewById(R.id.txt_Ss_hatchScored);
         txt_Ss_droppedHatch = (TextView) findViewById(R.id.txt_Ss_droppedHatch);
@@ -328,8 +328,8 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_TeleCargCorral = (TextView) findViewById(R.id.txt_TeleCargCorral);
         txt_TelePanFloor = (TextView) findViewById(R.id.txt_TelePanFloor);
         txt_TelePanPlaSta = (TextView) findViewById(R.id.txt_TelePanPlaSta);
-        txt_Lvl1 = (TextView) findViewById(R.id.txt_Lvl1);
-        txt_Lvl2 = (TextView) findViewById(R.id.txt_Lvl2);
+        txt_StartPosL = (TextView) findViewById(R.id.txt_StartPosL);
+        txt_StartPosLm = (TextView) findViewById(R.id.txt_StartPosLm);
         txt_NoShow = (TextView) findViewById(R.id.txt_NoShow);
         txt_Pos1 = (TextView) findViewById(R.id.txt_Pos1);
         txt_Pos2 = (TextView) findViewById(R.id.txt_Pos2);
@@ -337,14 +337,14 @@ public class VisMatch_Activity extends AppCompatActivity {
 
         txt_Matches.setText(matches);
         txt_auto_leftSectorLine.setText(String.valueOf(numleftSectorLine));
-        txt_noSand.setText(String.valueOf(noSand));
+        txt_noAuton.setText(String.valueOf(noAuton));
 //        Log.w(TAG, "Ratio of Placed to Attempted Gears in Auto = " + auto_SwCubesPlaced + "/" + auto_SwCubesAttempted);
-        String carScored = "¹" + String.valueOf(cargL1) + " ²" + String.valueOf(cargL2) + " ³" + String.valueOf(cargL3);
+        String carScored = "ᵁ" + String.valueOf(auto_Low + auto_HighClose) + " ᴸ" + String.valueOf(auto_HighLine) + " ᶠ" + String.valueOf(auto_HighFrontCP);
         txt_Ss_PowerCellScored.setText(carScored);
         String hatScored = "¹" + String.valueOf(panL1) + " ²" + String.valueOf(panL2) + " ³" + String.valueOf(panL3);
         txt_Ss_hatchScored.setText(String.valueOf(hatScored));
         txt_Ss_droppedHatch.setText(String.valueOf(dropped));
-        String telePowerCell = "¹" + String.valueOf(TcargL1) + " ²" + String.valueOf(TcargL2) + " ³" + String.valueOf(TcargL3);
+        String telePowerCell = "¹" + String.valueOf(Tauto_Low) + " ²" + String.valueOf(Tauto_HighLine) + " ³" + String.valueOf(Tauto_HighFrontCP);
         txt_Tele_PowerCellScored.setText(telePowerCell);
         String teleHatchPanel = "¹" + String.valueOf(TpanL1) + " ²" + String.valueOf(TpanL2) + " ³" + String.valueOf(TpanL3);
         txt_Tele_hatchScored.setText(teleHatchPanel);
@@ -366,8 +366,8 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_TelePanFloor.setText(String.valueOf(tele_PanFloor));
         txt_TelePanPlaSta.setText(String.valueOf(tele_PanPlasta));
         txt_HabLvl.setText(HabEnd);
-        txt_Lvl1.setText(String.valueOf(auto_B1));
-        txt_Lvl2.setText(String.valueOf(auto_B2));
+        txt_StartPosL.setText(String.valueOf(auto_B1));
+        txt_StartPosLm.setText(String.valueOf(auto_B2));
         txt_NoShow.setText(String.valueOf(auto_B3));
         txt_Pos1.setText(String.valueOf(auto_Ps1));
         txt_Pos2.setText(String.valueOf(auto_Ps2));
@@ -401,13 +401,13 @@ public class VisMatch_Activity extends AppCompatActivity {
 
 //******************************
     private void init_Values() {
-        noSand = 0;
+        noAuton = 0;
         numleftSectorLine = 0;
         numleftSectorLine2 = 0;
         auto_Ps1 = 0;
         auto_Ps2 = 0;
         auto_Ps3 = 0;
-        cargL1 = 0; cargL2 = 0; cargL3 = 0; TcargL1 = 0; TcargL2 = 0; TcargL3 = 0;
+        auto_Low = 0; auto_HighClose = 0; auto_HighLine = 0; auto_HighFrontCP = 0; Tauto_Low = 0; Tauto_HighLine = 0; Tauto_HighFrontCP = 0;
         panL1 = 0; panL2 = 0; panL3 = 0; TpanL1 = 0; TpanL2 = 0; TpanL3 = 0;
         sand_PowerCellFloor2= 0; sand_PowerCellPlasta2= 0; sand_PowerCellCorral2 = 0; sand_PanFloor2 = 0; sand_PanPlasta2 = 0;
         sand_PowerCellFloor3 = 0; sand_PowerCellPlasta3 = 0; sand_PowerCellCorral3 = 0; sand_PanFloor3 = 0; sand_PanPlasta3 = 0;
@@ -596,3 +596,4 @@ public class VisMatch_Activity extends AppCompatActivity {
     }
 
 }
+// This is a test 2
