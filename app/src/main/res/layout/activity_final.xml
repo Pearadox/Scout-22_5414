@@ -36,23 +36,6 @@
         android:layout_alignBottom="@+id/chk_lostPart"
         android:layout_toEndOf="@+id/chk_lostPart" />
 
-    <CheckBox
-        android:id="@+id/chk_PowerCellDefense"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/chk_lostPart"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="1dp"
-        android:text="P/U PowerCell on Defense" />
-
-    <CheckBox
-        android:id="@+id/chk_defense30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/chk_lostPart"
-        android:layout_marginStart="210dp"
-        android:layout_marginTop="1dp"
-        android:text="last 30sec. Defense" />
 
 
     //============ DEFENSE==============
@@ -75,14 +58,6 @@
         android:layout_below="@+id/lbl_Defense"
         android:text="Trench Interference" />
 
-    <CheckBox
-        android:id="@+id/chk_block"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/chk_defense30"
-        android:layout_alignBottom="@+id/chkBox_final_int_Trench"
-        android:text="Blocking" />
-
     <!--<CheckBox-->
         <!--android:id="@+id/chk_starve"-->
         <!--android:text="Lane Starvation"-->
@@ -91,6 +66,15 @@
         <!--android:layout_below="@+id/lbl_Defense"-->
         <!--android:layout_alignStart="@+id/lbl_Defense"-->
         <!--android:layout_marginTop="21dp" />-->
+
+    <CheckBox
+        android:id="@+id/chk_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/chk_lostComm"
+        android:layout_alignBottom="@+id/chkBox_final_int_Trench"
+        android:layout_marginBottom="3dp"
+        android:text="Blocking" />
 
     <CheckBox
         android:id="@+id/chk_whatever"
