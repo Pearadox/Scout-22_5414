@@ -387,6 +387,5 @@ public class FinalActivity extends Activity {
         Log.v(TAG, "OnDestroy");
 
     }
-
 }
 
