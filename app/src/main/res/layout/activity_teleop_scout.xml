@@ -573,18 +573,22 @@
             android:text="0"
             android:textColor="@color/yellow"
             android:textSize="16dp" />
-        <Button
-            android:id="@+id/button_Number_PenaltiesPlus"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="14dp"
-            android:text="+" />
+
         <Button
             android:id="@+id/button_Number_PenaltiesUndo"
             android:layout_width="30dp"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
             android:text="-" />
+
+        <Button
+            android:id="@+id/button_Number_PenaltiesPlus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:text="+" />
 
     </LinearLayout>
 
