@@ -58,14 +58,6 @@
         android:layout_below="@+id/lbl_Defense"
         android:text="Trench Interference" />
 
-    <!--<CheckBox-->
-        <!--android:id="@+id/chk_starve"-->
-        <!--android:text="Lane Starvation"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/lbl_Defense"-->
-        <!--android:layout_alignStart="@+id/lbl_Defense"-->
-        <!--android:layout_marginTop="21dp" />-->
 
     <CheckBox
         android:id="@+id/chk_block"
