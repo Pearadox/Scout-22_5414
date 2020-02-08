@@ -58,7 +58,6 @@
         android:layout_below="@+id/lbl_Defense"
         android:text="Trench Interference" />
 
-
     <CheckBox
         android:id="@+id/chk_block"
         android:layout_width="wrap_content"
