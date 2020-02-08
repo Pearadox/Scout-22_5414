@@ -10,6 +10,8 @@ import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -567,22 +569,23 @@ public class MatchScoutActivity extends AppCompatActivity {
 
         // *******************************************************************
 
-//        btn_DropPlus.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                num_Dropped++;
-//                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
-//                txt_Num_Dropped.setText(Integer.toString(num_Dropped));
-//            }
-//        });
-//        btn_DropMinus.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                if (num_Dropped >= 1) {     // Don't go below ZERO
-//                    num_Dropped--;
-//                }
-//                Log.w(TAG, "Dropped = " + Integer.toString(num_Dropped));      // ** DEBUG **
-//                txt_Num_Dropped.setText(Integer.toString(num_Dropped));
-//            }
-//        });
+        editText_autoComment.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.w(TAG, "******  onTextChanged TextWatcher  ******" + s);
+                autoComment = String.valueOf(s);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.w(TAG, "******  beforeTextChanged TextWatcher  ******");
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.w(TAG, "******  onTextChanged TextWatcher  ******" + s );
+                autoComment = String.valueOf(s);
+            }
+        });
 
 
         // === End of OnCreate ===
