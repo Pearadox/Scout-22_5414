@@ -89,7 +89,7 @@ public class TeleopScoutActivity extends Activity {
     public int     Hang_Num             = 99;       // End - How many on Bar (0-3)
     public boolean Balanced             = false;    // SG is Balanced
     public boolean got_lift             = false;    // Got Lifted by another robot
-    public boolean lifted               = false;    // Got Lifted by another robot
+    public boolean lifted               = false;    // Did they lift a robot
     public int num_Penalties            = 0;        // How many penalties received?
     /* */
     public String  teleComment          = " ";    // Tele Comment
@@ -502,7 +502,7 @@ public class TeleopScoutActivity extends Activity {
                 Log.w(TAG,"LiftedBy is checked.");
                 got_lift = true;
                 chk_Lifted.setChecked(false);       // Can't be both!!
-                lifted = false;
+                got_lift = false;
             }
             else {
                 //not checked
@@ -519,7 +519,7 @@ public class TeleopScoutActivity extends Activity {
             if (chk_Lifted.isChecked()) {
                 //checked
                 Log.w(TAG,"Lifted is checked.");
-                got_lift = true;
+                lifted = true;
                 chk_LiftedBy.setChecked(false);       // Can't be both!!
                 spinner_numRobots.setVisibility(VISIBLE);
                 lifted = false;

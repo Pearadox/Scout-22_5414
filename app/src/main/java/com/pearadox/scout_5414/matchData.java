@@ -46,7 +46,7 @@ public class matchData implements Serializable {
     private boolean tele_conInnerClose;     // Consistent Inner Goal scored Close?
     private boolean tele_conInnerLine;      // Consistent Inner Goal scored Con Line?
     private boolean tele_conInnerFrontCP;   // Consistent Inner Goal scored in Front of CP?
-    private boolean tele_conInnerBackCP;   // Consistent Inner Goal scored in Back of CP?
+    private boolean tele_conInnerBackCP;    // Consistent Inner Goal scored in Back of CP?
     private boolean tele_CPspin;            // Control Panel Spin
     private boolean tele_CPcolor;           // Control Panel Color
 
