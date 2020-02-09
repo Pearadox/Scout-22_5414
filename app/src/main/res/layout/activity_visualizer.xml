@@ -566,14 +566,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1R1"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/orange" />
+                        android:textColor="@color/orange"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1R1"
@@ -595,14 +595,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2R1"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/red"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2R1"
@@ -712,14 +712,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1R2"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/orange" />
+                        android:textColor="@color/orange"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1R2"
@@ -741,14 +741,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2R2"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/red"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2R2"
@@ -859,14 +859,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1R3"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/orange" />
+                        android:textColor="@color/orange"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1R3"
@@ -888,14 +888,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2R3"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/red"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2R3"
@@ -1008,14 +1008,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1B1"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/brightblue" />
+                        android:textColor="@color/brightblue"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1B1"
@@ -1037,14 +1037,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2B1"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/cyan" />
+                        android:textColor="@color/cyan"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2B1"
@@ -1157,14 +1157,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1B2"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/brightblue" />
+                        android:textColor="@color/brightblue"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1B2"
@@ -1186,14 +1186,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2B2"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/cyan" />
+                        android:textColor="@color/cyan"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2B2"
@@ -1306,14 +1306,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1B3"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/brightblue" />
+                        android:textColor="@color/brightblue"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1B3"
@@ -1335,14 +1335,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2B3"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:textStyle="bold"
                         android:text="Auto \nTele"
-                        android:textColor="@color/cyan" />
+                        android:textColor="@color/cyan"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2B3"
