@@ -10,6 +10,7 @@
             android:key="prefPowerCell_Dump"
             android:summary="Multiplier for PowerCells transferred to Partner"
             android:title="Dump" />
+
         <EditTextPreference
             android:id="@+id/txt_PowerCellL0"
             android:inputType="numberDecimal"
@@ -42,9 +43,52 @@
             android:id="@+id/txt_PowerCellL4"
             android:inputType="numberDecimal"
             android:defaultValue="3.0"
-            android:key="prefPowerCell_L3"
+            android:key="prefPowerCell_L4"
             android:summary="Multiplier for PowerCell scored in Outside Goal from Back of CP"
             android:title="Back CP" />
+
+        <EditTextPreference
+            android:id="@+id/txt_PowerCellC0"
+            android:inputType="numberDecimal"
+            android:defaultValue="1.0"
+            android:key="prefPowerCell_C0"
+            android:summary="Multiplier for PowerCell collected from Floor"
+            android:title="Floor" />
+        <EditTextPreference
+            android:id="@+id/txt_PowerCellC1"
+            android:inputType="numberDecimal"
+            android:defaultValue="2.0"
+            android:key="prefPowerCell_C1"
+            android:summary="Multiplier for PowerCell collected From Robot"
+            android:title="Robot" />
+        <EditTextPreference
+            android:id="@+id/txt_PowerCellC2"
+            android:inputType="numberDecimal"
+            android:defaultValue="1.5"
+            android:key="prefPowerCell_C2"
+            android:summary="Multiplier for PowerCell collected from Control Panel"
+            android:title="C.P." />
+        <EditTextPreference
+            android:id="@+id/txt_PowerCellC3"
+            android:inputType="numberDecimal"
+            android:defaultValue="1.5"
+            android:key="prefPowerCell_C3"
+            android:summary="Multiplier for PowerCell collected from Trench"
+            android:title="Trench" />
+        <EditTextPreference
+            android:id="@+id/txt_PowerCellC4"
+            android:inputType="numberDecimal"
+            android:defaultValue="1.5"
+            android:key="prefPowerCell_C4"
+            android:summary="Multiplier for PowerCell collected from Boundary"
+            android:title="Boundary" />
+        <EditTextPreference
+            android:id="@+id/txt_PowerCellC5"
+            android:inputType="numberDecimal"
+            android:defaultValue="1.0"
+            android:key="prefPowerCell_C5"
+            android:summary="Multiplier for PowerCell collected from Loading Station"
+            android:title="Loading Station" />
 
 
     </PreferenceCategory>
@@ -88,7 +132,7 @@
             android:inputType="numberDecimal"
             android:defaultValue="2.5"
             android:key="prefClimb_Balanced"
-            android:summary="Multiplier for being Balanced"
+            android:summary="Multiplier for Alliance being Balanced"
             android:title="Balanced" />
         <EditTextPreference
             android:id="@+id/txt_Lift1"
@@ -140,7 +184,7 @@
             android:inputType="numberDecimal"
             android:defaultValue="5.0"
             android:key="prefClimb_Hang3"
-            android:summary="Multiplier for Alliance Hang 2"
+            android:summary="Multiplier for Alliance Hang 3"
             android:title="Hang 3" />
 
     </PreferenceCategory>
