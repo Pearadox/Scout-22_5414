@@ -5,127 +5,111 @@
  <title>Scout-5414  &copy; HELP!</title>
 </head>
 <body>
-Draft Scout tries to evaluate the data (all matches so far) saved by scouting and produce a "ranking" of teams for Draft Alliance selection using the following calculations.  You can vary/change the calculation by changing the modifiers for each item by using the 'Settings" feature in the Options Menu ( &#8285; ) in the Tool Bar at the top right.
+Draft Scout tries to evaluate the data (all matches so far) saved by scouting and produce a "ranking" of teams for Draft Alliance selection using the following calculations. &nbsp;
+You can vary/change the calculation by changing the modifiers for each item by using the <B>'Settings'</B> feature in the Options Menu ( &#8285; ) in the Tool Bar at the top right. &nbsp;
+These multipliers are represented by UPPER case letters (or Greek symbols) in the formulas below.
 
-<h4>Cubes </h4>
-<FONT color="magenta" face="courier" size=2>
- Scored <BR/>
- <B>(A*((autoCubeSwitch + #Aextra + Xover(*.5))) + B*((autoCubeScale + #Textra + Xover(*.5))) + C*(teleCubeSwitch) +&nbsp;D*(teleCubeScale) + E*(teleOthr) + F*(teleExchange)) / # Matches  </B>
+<h2>Power Cells </h2>
+<FONT color="magenta" face="courier" size=3>
+ <B>Scored</B> <BR/>
+ ((B*(autoCellLow) + C*(autoCellUnder)) +D*(autoCellUnder) +&nbsp;E*(autoCellLine) +&nbsp;F*(autoCellFront)  +
+ (G*(teleCellLow) +&nbsp;H*(teleCellUnder)) +&nbsp;I*(teleCellUnder) + J*(teleCellLine) +&nbsp;K*(teleCellFront)+ L*(teleCellBack)) /&nbsp;#&nbsp;Matches
 </FONT>
 <BR/>
 
 <UL>
  <LI>A - Multiplier</LI>
- <LI>autoCubeSwitch - number of cubes scored in Switch during Autonomous</LI>
- <LI>Aextra - Multiple cube(s) scored during Autonomous </LI>
- <LI>Xover - Cross-Over to other side to Score</LI>
+ <LI>dump - number of time Cells dumped to another robots during Autonomous</LI>
  <LI>B - Multiplier</LI>
- <LI>autoCubeScale - number of cubes scored in Scale during Autonomous</LI>
- <LI>Textra - Multiple cube(s) scored during TeleOps </LI>
+ <LI>autoCellLow - number of Cells scored in Power Port (PP) Low goal during Autonomous</LI>
  <LI>C - Multiplier</LI>
- <LI>teleCubeSwitch - number of cubes scored in Switch during TeleOps </LI>
+ <LI>autoCellUnder - number of Cells scored on Sector Line during Autonomous </LI>
  <LI>D - Multiplier</LI>
- <LI>teleCubeScale - number of cubes scored in Scale during TeleOps </LI>
+ <LI>autoCellLine - number of Cells scored on Sector Line during Autonomous </LI>
  <LI>E - Multiplier</LI>
- <LI>teleOthr - number of cubes scored in the the Other Alliance Switch</LI>
+ <LI>autoCellFront - number of Cells scored from in front of Control Panel (C.P.) during Autonomous</LI>
  <LI>F - Multiplier</LI>
- <LI>teleExchange- number of cubes put into the the Exchange</LI>
+ <LI>autoCellFront - number of Cells scored from in front of C.P. during Autonomous</LI>
+ <LI>G - Multiplier</LI>
+ <LI>teleCellLow - number of Cells scored in Power Port (PP) Low goal during TeleOps</LI>
+ <LI>H - Multiplier</LI>
+ <LI>teleCellUnder - number of Cells scored on Sector Line during TeleOps </LI>
+ <LI>I - Multiplier</LI>
+ <LI>teleCellLine - number of Cells scored on Sector Line during TeleOps </LI>
+ <LI>J - Multiplier</LI>
+ <LI>teleCellFront - number of Cells scored from in front of C.P. during TeleOps</LI>
+ <LI>K - Multiplier</LI>
+ <LI>teleCellBack - number of Cells scored from in back of C.P. during TeleOps</LI>
 </UL>
 
 
-<FONT color="darkgreen" face="courier" size=2>
- Collected <BR/>
- <B>( G*(telePortal) + H*(telePwrZone) + I*(teleFloor) + J*(teleOthrFloor) + K*(teleRandomFloor) ) / # Matches </B>
+<FONT color="brown" face="courier" size=3>
+ <B>Collected </B> <BR/>
+ ( M*(autoFloor) + N*(autoCP) + O*(autoTrench) +&nbsp;P*(autoBoundary) + Q*(autoRobot) +
+ ( R*(teleFloor) +&nbsp;S*(teleCP) + T*(teleTrench) + U*(teleBoundary) +&nbsp;V*(teleRobot) + W*(teleLoadSta)) /&nbsp;#&nbsp;Matches
 </FONT>
 <BR/>
 <UL>
- <LI>telePortal - number of cubes retrieved from Portal</LI>
- <LI>telePwrZone - number of cubes retrieved from Power Cube Zone</LI>
- <LI>teleFloor - number of cubes retrieved from our Platform Floor </LI>
- <LI>teleOthrFloor - number of cubes retrieved from their Platform Floor </LI>
- <LI>teleRandomFloor - number of random cubes retrieved from Floor </LI>
+ <LI>autoFloor - collected  Cells retrieved from Floor during Autonomous</LI>
+ <LI>autoCP - collected Cells retrieved from C.P. during Autonomous</LI>
+ <LI>autoTrench - collected Cells retrieved from Trench during Autonomous</LI>
+ <LI>autoBoundary - collected Cells retrieved from SG Boundary during Autonomous </LI>
+ <LI>autoRobot - collected Cells retrieved from another Robot during Autonomous </LI>
+ <LI>teleFloor - collected  Cells retrieved from Floor during TeleOps</LI>
+ <LI>teleCP - collected Cells retrieved from C.P. during TeleOps</LI>
+ <LI>teleTrench - collected Cells retrieved from Trench during TeleOps</LI>
+ <LI>teleBoundary - collected Cells retrieved from SG Boundary during TeleOps </LI>
+ <LI>teleRobot - collected Cells retrieved from another Robot during TeleOps </LI>
+ <LI>teleLoadSta - collected Cells retrieved from another Robot during TeleOps </LI>
 </UL>
+
+<B>Cell Score</B> is the <U>sum</U> of of <FONT color="magenta"><B>Scored</B></FONT> and <FONT color="brown"><B>Collected</B></FONT>
 <BR/>
-<B>Cube Score</B> is the <U>sum</U> of of <FONT color="magenta">Scored</FONT> and <FONT color="green">Collected</FONT>
+
+<!--  ================================================  -->
+<HR></HR>
+<h2>Control Panel (C.P.)</h2>
+
+<FONT color="darkgreen" face="courier" size=2>
+ <B>((X*(CPspin) + Y*(CPcolor)) /&nbsp;#&nbsp;Matches  </B>
+</FONT>
 <BR/>
+
+<UL>
+ <LI>CPspin - Spin C.P. number of revolutions </LI>
+ <LI>CPcolor - Spin & Stop C.P. on correct color</LI>
+</UL>
 
 
 <!--  ================================================  -->
 <HR></HR>
-<h4>Climbing</h4>
+<h2>Climb</h2>
 <FONT color="blue" face="courier" size=2>
- <B>(L*(climbs) + (Lift1 *M) + (Lift2 *N) + (onPlatform *P) + (WasLifted *Q)) / # Matches </B>
+ <B>(α*(climbs) + β*(Lift1) + γ*(Lift2) + δ*(undSG) + ε*(WasLifted)) /&nbsp;#&nbsp;Matches </B>
 </FONT>
 <BR/>
 <UL>
  <LI>climbs - number of successful climbs by this robot</LI>
- <LI>Lift1 - number of times this robot lifted one robot</LI>
- <LI>Lift2 - number of times this robot lifted two robots </LI>
- <LI>onPlatform - number of times this robot was on the platform in the last 30 seconds </LI>
- <LI>WasLifted - number of times this robot was lifted by another team </LI>
+ <LI>Lift1 - number of times <U>this</U> robot lifted one robot</LI>
+ <LI>Lift2 - number of times <U>this</U> robot lifted two robots </LI>
+ <LI>undSG - number of times this robot was under the Shield Generator at end </LI>
+ <LI>WasLifted - number of times this robot was <U>lifted by</U> another team </LI>
 </UL>
 
 <!--  ================================================  -->
 <HR></HR>
-<h4>Combined</h4>
+<h2>Combined</h2>
 
 <FONT color="red" face="courier" size=2>
- <B>( R*(climbScore) + S*(cubesScored)  + T*(cubesCollected)) / # Matches  </B>
+ <B>( ζ*(climbScore) + η*(CellsScored)  + θ*(CP)) / # Matches  </B>
 </FONT>
 <BR/>
 <UL>
  <LI>climbScore - total from the Climb score</LI>
- <LI>cubesScored - total from the Cubes Scored score</LI>
- <LI>cubesCollected - total from the Cubes Collected score</LI>
+ <LI>CellsScore - total from the Cells score</LI>
+ <LI>CP - total from the C.P. score</LI>
 </UL>
 
-
-<!--  ================================================  -->
-<HR></HR>
-<h4>Switch</h4>
-
-<FONT color="lime" face="courier" size=2>
- <B>((A*((autoCubeSwitch + #Aextra + Xover(*.5))) + C*(teleCubeSwitch) + E*(teleOthr)) / # Matches  </B>
-</FONT>
-<BR/>
-
-<UL>
- <LI>autoCubeSwitch </LI>
- <LI>Aextra - Multiple cube(s) scored during Autonomous </LI>
- <LI>Xover - Cross-Over to other side to Score</LI>
- <LI>teleCubeSwitch </LI>
- <LI>teleOthr </LI>
-</UL>
-
-<!--  ================================================  -->
-<HR></HR>
-<h4>Scale</h4>
-
-<FONT color="TURQUOISE" face="courier" size=2>
- <B>((A*((autoCubeScale + #Textra + Xover(*.5))) + C*(teleCubeScale) / # Matches  </B>
-</FONT>
-<BR/>
-
-<UL>
- <LI>autoCubeScale </LI>
- <LI>Textra - Multiple cube(s) scored during Autonomous </LI>
- <LI>Xover - Cross-Over to other side to Score</LI>
- <LI>teleCubeScale </LI>
-</UL>
-
-
-<!--  ================================================  -->
-<HR></HR>
-<h4>Exchange</h4>
-
-<FONT color="orangered" face="courier" size=2>
- <B>F*(teleExchange) / # Matches  </B>
-</FONT>
-<BR/>
-
-<UL>
- <LI>teleExchange
-</UL>
 
 
 <BR/><BR/><BR/>
