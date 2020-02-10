@@ -68,7 +68,8 @@ public class DraftScout_Activity extends AppCompatActivity {
     int minMatches = 99;         // minimum # of matches collected
     int numPicks = 24;              // # of picks to show for Alliance Picks (actually get from Preferences)
     /*Shared Prefs-Scored Power-Cell*/ public String Cell_Dump  = ""; public String PowerCell_L0  = ""; public String PowerCell_L1  = ""; public String PowerCell_L2  = ""; public String PowerCell_L3  = ""; public String PowerCell_L4  = "";
-    /*Shared Prefs-C.P.*/ public String panels_L1 = ""; public String panels_L2  = "";
+                                    public String PowerCell_C0  = ""; public String PowerCell_C1  = ""; public String PowerCell_C2  = ""; public String PowerCell_C3  = ""; public String PowerCell_C4  = ""; public String PowerCell_C5  = "";
+    /*Shared Prefs-C.P.*/ public String panel_L1 = ""; public String panel_L2  = "";
     /*Shared Prefs-Climbing*/  public String climbSG = ""; public String parkSG = ""; public String Balanced = ""; public String climbLift1 = ""; public String climbLift2 = "";  public String climbLifted = ""; public String climbHang0 = ""; public String climbHang1 = ""; public String climbHang2 = ""; public String climbHang3 = "";
     /*Weight factors*/ public String wtClimb = ""; public String wtPowerCell = ""; public String wtCP = "";
     ImageView imgStat_Load;
@@ -113,6 +114,17 @@ public class DraftScout_Activity extends AppCompatActivity {
     String telePowerCellL2 = "";
     String telePowerCellL3 = "";
     String telePowerCellL4 = "";
+    String autoCollectFloor = "";
+    String autoCollectRobot = "";
+    String autoCollectCP = "";
+    String autoCollectTrench = "";
+    String autoCollectBoundary = "";
+    String teleCollectFloor = "";
+    String teleCollectRobot = "";
+    String teleCollectCP = "";
+    String teleCollectTrench = "";
+    String teleCollectBoundary = "";
+    String teleCollectLoadSta = "";
     String TconUnderNum = "";
     String TconLineNum = "";
     String TconFrontNum = "";
@@ -450,15 +462,21 @@ public class DraftScout_Activity extends AppCompatActivity {
         SharedPreferences sharedPref =
                 PreferenceManager.getDefaultSharedPreferences(this);
 
-        Cell_Dump    = sharedPref.getString("prefPowerCell_Dump", "0.5");     // Low
+        Cell_Dump    = sharedPref.getString("prefPowerCell_Dump", "0.5");   // Dump
         PowerCell_L0 = sharedPref.getString("prefPowerCell_L0", "1.0");     // Low
         PowerCell_L1 = sharedPref.getString("prefPowerCell_L1", "2.0");     // Under
         PowerCell_L2 = sharedPref.getString("prefPowerCell_L2", "3.0");     // Line
         PowerCell_L3 = sharedPref.getString("prefPowerCell_L3", "3.0");     // CP Front
         PowerCell_L4 = sharedPref.getString("prefPowerCell_L4", "3.0");     // CP Back
+        PowerCell_C0 = sharedPref.getString("prefPowerCell_C0", "1.0");     // Floor
+        PowerCell_C1 = sharedPref.getString("prefPowerCell_C1", "2.0");     // Robot
+        PowerCell_C2 = sharedPref.getString("prefPowerCell_C2", "1.5");     // C.P.
+        PowerCell_C3 = sharedPref.getString("prefPowerCell_C3", "1.5");     // Trench
+        PowerCell_C4 = sharedPref.getString("prefPowerCell_C4", "1.5");     // Boundary
+        PowerCell_C5 = sharedPref.getString("prefPowerCell_C5", "1.0");     // LoadSta
 
-        panels_L1 = sharedPref.getString("prefPanel_L1", "1.0");            // Spin
-        panels_L2 = sharedPref.getString("prefPanel_L2", "2.0");            // Color
+        panel_L1 = sharedPref.getString("prefPanel_L1", "1.0");            // C.P. Spin
+        panel_L2 = sharedPref.getString("prefPanel_L2", "2.0");            // C.P. Color
 
         climbSG     = sharedPref.getString("prefClimb_climb", "1.5");
         parkSG      = sharedPref.getString("prefClimb_park", "0.5");
@@ -496,7 +514,7 @@ public class DraftScout_Activity extends AppCompatActivity {
                 txt_Formula.setText(form);
                 break;
             case "C.P.":
-                form = "((" + panels_L1 +"* spinCP) + (" + panels_L2 + "* colorCP)) " + "/# matches";
+                form = "((" + panel_L1 +"* spinCP) + (" + panel_L2 + "* colorCP)) " + "/# matches";
                 lbl_Formula.setTextColor(Color.parseColor("#a8a8a8"));      /// grey
                 txt_Formula.setText(form);
                 break;
@@ -782,7 +800,7 @@ public void Toast_Msg(String choice, Integer minimum) {
             temp.put("team", tn + "-" + score_inst.getTeamName() + "  (" + mdNumMatches + ")  " +  totalScore);
 //            temp.put("BA", "Rank=" + teams[i].rank + "  " + teams[i].record + "   OPR=" + String.format("%3.1f", (teams[i].opr)) + "    ↑ " + String.format("%3.1f", (teams[i].touchpad)) + "   kPa=" + String.format("%3.1f", (teams[i].pressure)));
             temp.put("BA","Rank=" + tmRank + "   Score=" + tmRScore + "   WLT=" + tmWLT + "   OPR=" + tmOPR);
-                    temp.put("Stats", "Auto ≠"  + SectLin + " ▼" + Dumped + "   ⚫ " + autoCellLow + " U" + autoCellUnder + " L" + autoCellLine + " F" + autoCellFrontCP + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum  + "    Tele ⚫ " + telePowerCellL0 + " U" + telePowerCellL1 + " L" + telePowerCellL2 + "  F" + telePowerCellL3 + "  B" + telePowerCellL4 + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum);
+                    temp.put("Stats", "Auto ≠"  + SectLin + " ▼" + Dumped + "   ◯◉ " + autoCellLow + " U" + autoCellUnder + " L" + autoCellLine + " F" + autoCellFrontCP + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum + "   ◯↑ F" + autoCollectFloor + " R" + autoCollectRobot + " C" + autoCollectCP + " T" + autoCollectTrench + " B" + autoCollectBoundary  + "\nTele ◯◉ " + telePowerCellL0 + " U" + telePowerCellL1 + " L" + telePowerCellL2 + "  F" + telePowerCellL3 + "  B" + telePowerCellL4 + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum + "   ◯↑ F" + teleCollectFloor + " R" + teleCollectRobot + " C" + teleCollectCP + " T" + teleCollectTrench + " B" + teleCollectBoundary + " L" + teleCollectLoadSta);
             temp.put("Stats2",  "☢ ¹" + CPspinNum + " ²"  + CPcolorNum + "  Climb ♺" + climb + " 円" + park  + " ⚖" + level + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + "    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted);
             draftList.add(temp);
         } // End For
@@ -946,7 +964,7 @@ public void Toast_Msg(String choice, Integer minimum) {
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_PowerCellScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
                 bW.write(String.format("%2d", i+1) + ") " + tNumb + "-" + tName  + "\t (" + String.format("%2d",(Integer.parseInt(mdNumMatches))) + ") " +  totalScore + "\t");
-                bW.write("⚫Auto ₁" + autoCellUnder + " ₂" + autoCellLine + " ₃" + autoCellFrontCP + "  Tele ₁" + telePowerCellL1 + " ₂" + telePowerCellL2+ " ₃" + telePowerCellL3 + "\n" + DS);
+                bW.write("TcellBackCPAuto ₁" + autoCellUnder + " ₂" + autoCellLine + " ₃" + autoCellFrontCP + "  Tele ₁" + telePowerCellL1 + " ₂" + telePowerCellL2+ " ₃" + telePowerCellL3 + "\n" + DS);
             } // end For # teams
             bW.write(" \n" + "\n" + (char)12);        // NL & FF
             //=====================================================================
@@ -1063,7 +1081,9 @@ public void Toast_Msg(String choice, Integer minimum) {
     private void teamData(String team) {
 //        Log.i(TAG, "$$$$  teamData  $$$$ " + team);
         int base = 0; int dump = 0; int spinCP = 0; int colorCP = 0;
-        int cellL0 = 0;int cellUnder = 0; int cellLine = 0; int cellFrontCP =0; int TcellL0 = 0; int TcellUnder = 0; int TcellLine = 0; int TcellFrontCP = 0; int TcellL4 = 0; int TpanL1 = 0; int TpanL2 = 0; int TpanL3 = 0;
+        int colFloor = 0; int colRobot = 0; int colCP = 0; int colTrench = 0; int colBoundary = 0;
+        int TcolFloor = 0; int TcolRobot = 0; int TcolCP = 0; int TcolTrench = 0; int TcolBoundary = 0; int TcolLoadSta = 0;
+        int cellL0 = 0;int cellUnder = 0; int cellLine = 0; int cellFrontCP =0; int TcellL0 = 0; int TcellUnder = 0; int TcellLine = 0; int TcellFrontCP = 0; int TcellBackCP = 0; int TpanL1 = 0; int TpanL2 = 0; int TpanL3 = 0;
         int climbed=0,parked=0, bal=0, climbH0= 0; int climbH1 = 0; int climbH2 = 0; int climbH3 = 0; int lift1Num = 0; int lift2Num = 0; int liftedNum = 0;
         int conUnder = 0; int conLine = 0; int conFront = 0;   int TconUnder = 0; int TconLine = 0; int TconFront = 0; int TconBack = 0;
         int numMatches = 0;
@@ -1097,6 +1117,21 @@ public void Toast_Msg(String choice, Integer minimum) {
                     conFront++;
                 }
 
+                if (match_inst.isAuto_CollectFloor()) {         //**  Collect Auto
+                    colFloor++;                                 //**
+                }                                               //**
+                if (match_inst.isAuto_CollectRobot()) {         //**
+                    colRobot++;                                 //**
+                }                                               //**
+                if (match_inst.isAuto_CollectCP()) {            //**
+                    colCP++;                                    //**
+                }                                               //**
+                if (match_inst.isAuto_CollectTrench()) {        //**
+                    colTrench++;                                //**
+                }                                               //**
+                if (match_inst.isAuto_CollectSGboundary()) {    //**
+                    colBoundary++;                              //**
+                }                                               //*********
 
                 // *************************************************
                 // ******************** TeleOps ********************
@@ -1105,7 +1140,7 @@ public void Toast_Msg(String choice, Integer minimum) {
                 TcellUnder = TcellUnder + match_inst.getTele_HighClose();
                 TcellLine = TcellLine + match_inst.getTele_HighLine();
                 TcellFrontCP = TcellFrontCP + match_inst.getTele_HighFrontCP();
-                TcellL4 = TcellL4 + match_inst.getTele_HighBackCP();
+                TcellBackCP = TcellBackCP + match_inst.getTele_HighBackCP();
                 if (match_inst.isTele_conInnerClose()) {
                     TconUnder++;
                 }
@@ -1118,6 +1153,26 @@ public void Toast_Msg(String choice, Integer minimum) {
                 if (match_inst.isTele_conInnerBackCP()) {
                     TconBack++;
                 }
+
+                if (match_inst.isTele_PowerCell_floor()) {      //**  Collect Tele
+                    TcolFloor++;                                //**
+                }                                               //**
+                if (match_inst.isTele_PowerCell_Robot()) {      //**
+                    TcolRobot++;                                //**
+                }                                               //**
+                if (match_inst.isTele_PowerCell_CP()) {         //**
+                    TcolCP++;                                   //**
+                }                                               //**
+                if (match_inst.isTele_PowerCell_Trench()) {     //**
+                    TcolTrench++;                               //**
+                }                                               //**
+                if (match_inst.isTele_PowerCell_Boundary()) {   //**
+                    TcolBoundary++;                             //**
+                }                                               //**
+                if (match_inst.isTele_PowerCell_LoadSta()) {    //**
+                    TcolLoadSta++;                              //**
+                }                                               //*********
+
                 if (match_inst.isTele_CPspin()) {
                     spinCP++;
                 }
@@ -1150,7 +1205,7 @@ public void Toast_Msg(String choice, Integer minimum) {
                         climbH3++;
                         break;
                     default:                // ????
-                        e(TAG, "*** Error - bad HAB Level indicator  ***");
+                        e(TAG, "*** Error - bad Hang Level indicator  ***");
                 }
 
                 if (match_inst.isTele_lifted()) {
@@ -1175,7 +1230,7 @@ public void Toast_Msg(String choice, Integer minimum) {
         }
         if (numMatches > 0) {
             SectLin = String.valueOf(base);
-            Dumped = String.valueOf(dump);
+            Dumped = String.valueOf(dump); 
             autoCellLow = String.valueOf(cellL0);
             autoCellUnder = String.valueOf(cellUnder);
             autoCellLine = String.valueOf(cellLine);
@@ -1183,15 +1238,26 @@ public void Toast_Msg(String choice, Integer minimum) {
             AconUnderNum = String.valueOf(conUnder);
             AconLineNum = String.valueOf(conLine);
             AconFrontNum = String.valueOf(conFront);
-            telePowerCellL0 = String.valueOf(TcellL0);
-            telePowerCellL1 = String.valueOf(TcellUnder);
-            telePowerCellL2 = String.valueOf(TcellLine);
-            telePowerCellL3 = String.valueOf(TcellFrontCP);
-            telePowerCellL4 = String.valueOf(TcellL4);
             TconUnderNum = String.valueOf(TconUnder);
             TconLineNum = String.valueOf(TconLine);
             TconFrontNum = String.valueOf(TconFront);
             TconBackNum = String.valueOf(TconBack);
+            telePowerCellL0 = String.valueOf(TcellL0);
+            telePowerCellL1 = String.valueOf(TcellUnder);
+            telePowerCellL2 = String.valueOf(TcellLine);
+            telePowerCellL3 = String.valueOf(TcellFrontCP);
+            telePowerCellL4 = String.valueOf(TcellBackCP);
+            autoCollectFloor = String.valueOf(colFloor);
+            autoCollectRobot = String.valueOf(colRobot);
+            autoCollectCP = String.valueOf(colCP);
+            autoCollectTrench = String.valueOf(colTrench);
+            autoCollectBoundary = String.valueOf(colBoundary);
+            teleCollectFloor = String.valueOf(TcolFloor);
+            teleCollectRobot = String.valueOf(TcolRobot);
+            teleCollectCP = String.valueOf(TcolCP);
+            teleCollectTrench = String.valueOf(TcolTrench);
+            teleCollectBoundary = String.valueOf(TcolBoundary);
+            teleCollectLoadSta = String.valueOf(TcolLoadSta);
             CPspinNum = String.valueOf(spinCP);
             CPcolorNum = String.valueOf(colorCP);
             climb = String.valueOf(climbed);
@@ -1214,15 +1280,26 @@ public void Toast_Msg(String choice, Integer minimum) {
             AconUnderNum = "0";
             AconLineNum = "0";
             AconFrontNum = "0";
+            TconUnderNum = "0";
+            TconLineNum = "0";
+            TconFrontNum = "0";
+            TconBackNum = "0";
             telePowerCellL0 = "0";
             telePowerCellL1 = "0";
             telePowerCellL2 = "0";
             telePowerCellL3 = "0";
             telePowerCellL4 = "0";
-            TconUnderNum = "0";
-            TconLineNum = "0";
-            TconFrontNum = "0";
-            TconBackNum = "0";
+            autoCollectFloor = "0";
+            autoCollectRobot = "0";
+            autoCollectCP = "0";
+            autoCollectTrench = "0";
+            autoCollectBoundary = "0";
+            teleCollectFloor = "0";
+            teleCollectRobot = "0";
+            teleCollectCP = "0";
+            teleCollectTrench = "0";
+            teleCollectBoundary = "0";
+            teleCollectLoadSta = "0";
             CPspinNum = "0";
             CPcolorNum = "0";
             climb = "0";
@@ -1234,12 +1311,15 @@ public void Toast_Msg(String choice, Integer minimum) {
             gotLifted = "0";
         }
         //============================
-        float climbScore = 0; float cubeScored = 0; float cubeCollect = 0; float PowerCellScore = 0; float combinedScore = 0; float ControlPanelScore = 0;
+        float climbScore = 0; float cellScored = 0; float cellCollect = 0; float PowerCellScore = 0; float combinedScore = 0; float ControlPanelScore = 0;
 //        Log.e(TAG, team + " "+ climbs + " "+ lift1Num + " "+ lift2Num + " " + platNum +  " " + liftedNum + " / " + numMatches);
         if (numMatches > 0) {
             climbScore = (float) ((climbed * Float.parseFloat(climbSG) + (parked * Float.parseFloat(parkSG)) + (bal * Float.parseFloat(Balanced))) + ((climbH0 * Float.parseFloat(climbHang0)) + (climbH1 * Float.parseFloat(climbHang1)) + (climbH2 * Float.parseFloat(climbHang2)) + (climbH3 * Float.parseFloat(climbHang3)) + (lift1Num * Float.parseFloat(climbLift1)) + (lift2Num * Float.parseFloat(climbLift2)) + (liftedNum * Float.parseFloat(climbLifted))) / numMatches);
 
-            PowerCellScore = ((dump * Float.parseFloat(Cell_Dump)) + ((cellL0+TcellL0) * Float.parseFloat(PowerCell_L0)) + ((cellUnder+TcellUnder) * Float.parseFloat(PowerCell_L1)) + ((cellLine+TcellLine) * Float.parseFloat(PowerCell_L2)) + ((cellFrontCP+TcellFrontCP) * Float.parseFloat(PowerCell_L3)))  / numMatches;
+            cellScored = ((dump * Float.parseFloat(Cell_Dump)) + ((cellL0+TcellL0) * Float.parseFloat(PowerCell_L0)) + ((cellUnder+TcellUnder) * Float.parseFloat(PowerCell_L1)) + ((cellLine+TcellLine) * Float.parseFloat(PowerCell_L2)) + ((cellFrontCP+TcellFrontCP) * Float.parseFloat(PowerCell_L3)) + ((TcellBackCP) * Float.parseFloat(PowerCell_L4)))  / numMatches;
+            cellCollect = ( (colFloor * Float.parseFloat(PowerCell_C0))  + (colRobot * Float.parseFloat(PowerCell_C1))  + (colCP * Float.parseFloat(PowerCell_C2)) + (colTrench * Float.parseFloat(PowerCell_C3)) + (colBoundary * Float.parseFloat(PowerCell_C4)) + (TcolLoadSta * Float.parseFloat(PowerCell_C4)));
+            // ToDo -  add Tele & Collect
+            PowerCellScore = cellScored + cellCollect;
 
             ControlPanelScore = (float) (((spinCP * 1.0) + (colorCP * 2.0) ) / numMatches);
 
