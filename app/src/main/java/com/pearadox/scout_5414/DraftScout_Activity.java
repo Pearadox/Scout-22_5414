@@ -504,7 +504,7 @@ public class DraftScout_Activity extends AppCompatActivity {
         getprefs();         // make sure Prefs are up to date
         switch (typ) {
             case "Climb":
-                form = "(" + climbSG+ "*Climbed + " + parkSG +" *Parked" + Balanced + "*Balanced) +(" + climbHang0 + "*Hang0) + " + climbHang1 + "*Hang1) + (" + climbHang2 + "*Hang2) + (" + climbHang3 + "*Hang3)) ✚ " +"((Lift1*" + climbLift1 + ") + " +"(Lift2*" + climbLift2 + ") + (WasLifted*" + climbLifted + ")) / # matches";
+                form = "(" + climbSG+ "*Climbed + " + parkSG +" *Parked" + Balanced + "*Balanced) +((" + climbHang0 + "*Hang0) + " + climbHang1 + "*Hang1) + (" + climbHang2 + "*Hang2) + (" + climbHang3 + "*Hang3)) ✚ " +"((Lift1*" + climbLift1 + ") + " +"(Lift2*" + climbLift2 + ") + (WasLifted*" + climbLifted + ")) / # matches";
                 lbl_Formula.setTextColor(Color.parseColor("#4169e1"));      // blue
                 txt_Formula.setText(form);
                 break;
@@ -515,7 +515,7 @@ public class DraftScout_Activity extends AppCompatActivity {
                 break;
             case "C.P.":
                 form = "((" + panel_L1 +"* spinCP) + (" + panel_L2 + "* colorCP)) " + "/# matches";
-                lbl_Formula.setTextColor(Color.parseColor("#a8a8a8"));      /// grey
+                lbl_Formula.setTextColor(Color.parseColor("#00ff00"));      /// green
                 txt_Formula.setText(form);
                 break;
             case "Combined":
@@ -1318,7 +1318,6 @@ public void Toast_Msg(String choice, Integer minimum) {
 
             cellScored = ((dump * Float.parseFloat(Cell_Dump)) + ((cellL0+TcellL0) * Float.parseFloat(PowerCell_L0)) + ((cellUnder+TcellUnder) * Float.parseFloat(PowerCell_L1)) + ((cellLine+TcellLine) * Float.parseFloat(PowerCell_L2)) + ((cellFrontCP+TcellFrontCP) * Float.parseFloat(PowerCell_L3)) + ((TcellBackCP) * Float.parseFloat(PowerCell_L4)))  / numMatches;
             cellCollect = ( (colFloor * Float.parseFloat(PowerCell_C0))  + (colRobot * Float.parseFloat(PowerCell_C1))  + (colCP * Float.parseFloat(PowerCell_C2)) + (colTrench * Float.parseFloat(PowerCell_C3)) + (colBoundary * Float.parseFloat(PowerCell_C4)) + (TcolLoadSta * Float.parseFloat(PowerCell_C4)));
-            // ToDo -  add Tele & Collect
             PowerCellScore = cellScored + cellCollect;
 
             ControlPanelScore = (float) (((spinCP * 1.0) + (colorCP * 2.0) ) / numMatches);
@@ -1454,6 +1453,7 @@ public void Toast_Msg(String choice, Integer minimum) {
 public void onStart() {
     super.onStart();
     Log.v(TAG, "onStart");
+    sortType = "Team#";     // Make 'Team#' the default
     initScores();
     addMD_VE_Listener(pfMatchData_DBReference);        // Load _ALL_ Matches
     }
@@ -1467,7 +1467,7 @@ public void onResume() {
     SharedPreferences prefs = getPreferences(MODE_PRIVATE);
     String sortType = prefs.getString("Sort", "");
     Log.d(TAG, "Resume Prefs >> " + sortType);
-//    initScores();           // make sure it sorts by _LAST_ radio button
+    initScores();           // make sure it sorts by _LAST_ radio button
     }
 
 
@@ -1477,7 +1477,6 @@ public void onResume() {
         Log.v(TAG, "onPause  "  + sortType);
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-
         editor.putString("Sort", sortType);
         editor.commit();        // keep sort type
     }

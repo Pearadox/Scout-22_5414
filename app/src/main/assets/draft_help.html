@@ -45,8 +45,7 @@ These multipliers are represented by UPPER case letters (or Greek symbols) in th
 
 <FONT color="brown" face="courier" size=3>
  <B>Collected </B> <BR/>
- ( M*(autoFloor) + N*(autoCP) + O*(autoTrench) +&nbsp;P*(autoBoundary) + Q*(autoRobot) +
- ( R*(teleFloor) +&nbsp;S*(teleCP) + T*(teleTrench) + U*(teleBoundary) +&nbsp;V*(teleRobot) + W*(teleLoadSta)) /&nbsp;#&nbsp;Matches
+ ( M*(autoFloor+teleFloor) + N*(autoCP+teleCP) + O*(autoTrench+teleTrench) +&nbsp;P*(autoBoundary+teleBoundary) + Q*(autoRobot+teleRobot) + R*(teleLoadSta)) /&nbsp;#&nbsp;Matches
 </FONT>
 <BR/>
 <UL>
@@ -71,7 +70,7 @@ These multipliers are represented by UPPER case letters (or Greek symbols) in th
 <h2>Control Panel (C.P.)</h2>
 
 <FONT color="darkgreen" face="courier" size=2>
- <B>((X*(CPspin) + Y*(CPcolor)) /&nbsp;#&nbsp;Matches  </B>
+ <B>((S*(CPspin) + T*(CPcolor)) /&nbsp;#&nbsp;Matches  </B>
 </FONT>
 <BR/>
 
@@ -85,14 +84,19 @@ These multipliers are represented by UPPER case letters (or Greek symbols) in th
 <HR></HR>
 <h2>Climb</h2>
 <FONT color="blue" face="courier" size=2>
- <B>(α*(climbs) + β*(Lift1) + γ*(Lift2) + δ*(undSG) + ε*(WasLifted)) /&nbsp;#&nbsp;Matches </B>
+ <B>(α*(climbs) + β*(undSG) + γ*(balanced) + (δ*(Hang0) + ε*(Hang1) + ζ*(Hang2) + η*(Hang3)) θ*(Lift1) + λ*(Lift2) + μ*(WasLifted)) /&nbsp;#&nbsp;Matches </B>
 </FONT>
 <BR/>
 <UL>
  <LI>climbs - number of successful climbs by this robot</LI>
+ <LI>undSG - number of times this robot was parked under the Shield Generator at end </LI>
+ <LI>balanced - number of times this robot was on an alliance that was balanced </LI>
+ <LI>Hang0 - number of times this robot was on an alliance that had '0' robots hanging at end </LI>
+ <LI>Hang1 - number of times this robot was on an alliance that had '1' robots hanging at end </LI>
+ <LI>Hang2 - number of times this robot was on an alliance that had '2' robots hanging at end </LI>
+ <LI>Hang3 - number of times this robot was on an alliance that had '3' robots hanging at end </LI>
  <LI>Lift1 - number of times <U>this</U> robot lifted one robot</LI>
  <LI>Lift2 - number of times <U>this</U> robot lifted two robots </LI>
- <LI>undSG - number of times this robot was under the Shield Generator at end </LI>
  <LI>WasLifted - number of times this robot was <U>lifted by</U> another team </LI>
 </UL>
 
@@ -101,12 +105,12 @@ These multipliers are represented by UPPER case letters (or Greek symbols) in th
 <h2>Combined</h2>
 
 <FONT color="red" face="courier" size=2>
- <B>( ζ*(climbScore) + η*(CellsScored)  + θ*(CP)) / # Matches  </B>
+ <B>( X*(climbScore) + Y*(CellScored)  + Z*(CP)) / # Matches  </B>
 </FONT>
 <BR/>
 <UL>
  <LI>climbScore - total from the Climb score</LI>
- <LI>CellsScore - total from the Cells score</LI>
+ <LI>CellScore - total from the Cell score</LI>
  <LI>CP - total from the C.P. score</LI>
 </UL>
 
