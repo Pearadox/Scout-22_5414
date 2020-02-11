@@ -791,8 +791,9 @@ public class MatchScoutActivity extends AppCompatActivity {
             if (spinner_startPos.getSelectedItemPosition() == 6) {  //  No Show?
                 Log.e(TAG, "### Team/robot is a No Show ###" );
                 NoShow = true;
-                editText_autoComment.setText(R.string.NoShowMsg);
-                autoComment = String.valueOf(R.string.NoShowMsg);
+                editText_autoComment.setText("### Team/robot is a No Show ###");
+                autoComment = "### Team/robot is a No Show ###";
+                cells_carried = 0;      //
                 Log.d(TAG, "No Show" + editText_autoComment.getText() + " " + autoComment);
                 ;
                 checkbox_noAUTO.setChecked(true);
