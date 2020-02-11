@@ -509,7 +509,8 @@ public class DraftScout_Activity extends AppCompatActivity {
                 txt_Formula.setText(form);
                 break;
             case "Cell":
-                form = "((" + Cell_Dump +"* Dump) + (" + PowerCell_L0 +"* Low) + (" + PowerCell_L1 +"* cellUnder) + (" + PowerCell_L2 + "* cellLine) + (" + PowerCell_L3 + "* cellFrontCP)) /# matches";
+                form = "((" + Cell_Dump +"* Dump) + (" + PowerCell_L0 +"* (aLow + tLow) + (" + PowerCell_L1 +"* (AcellUnder + TcellUnder) + (" + PowerCell_L2 + "* (AcellLine+ TcellLine) + (" + PowerCell_L3 + "* (AcellFrontCP + TcellFrontCP) + " + PowerCell_L4 + "* TcellBackCP)  ✚ ";
+                form = form + "(( " + PowerCell_C0 + "*(aFloor + tFloor)" + PowerCell_C1 + "*(aCP + tCP) " + PowerCell_C2 + "*(aTrench + tTrench)" + PowerCell_C3 + "*(aBoundary + tBoundary)" + PowerCell_C4 + "*(aRobot + tRoobot)" + PowerCell_C5 + "*(tLoadSta) ) /# matches";
                 lbl_Formula.setTextColor(Color.parseColor("#ee00ee"));      // magenta
                 txt_Formula.setText(form);
                 break;
