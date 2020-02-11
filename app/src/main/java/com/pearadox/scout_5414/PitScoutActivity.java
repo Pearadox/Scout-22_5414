@@ -86,6 +86,7 @@ public class PitScoutActivity extends AppCompatActivity {
     Uri currentImageUri;
     String currentImagePath;
     String picname;
+    AlertDialog alertbox;
     int REQUEST_IMAGE_CAPTURE = 2;
     int MAX_ROBOT_WEIGHT =125;      // 2020 maximum weight
     public static String[] teams = new String[Pearadox.numTeams+1];  // Team list (array of just Team Names)
@@ -103,6 +104,7 @@ public class PitScoutActivity extends AppCompatActivity {
     String pitPlace = "";  Boolean pitSD = false;   Boolean pitFB = false;
     String URL = "";
     public static String timeStamp = " ";
+    boolean CG = false;             // Has CG been specified
     Boolean imageOnFB = false;      // Does image already exist in Firebase
     boolean dataSaved = false;      // Make sure they save before exiting
     public Boolean Wt_entered = false;      // Weight entered
@@ -573,9 +575,11 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"ClimberL1 is checked.");
                     climberL1 = true;
+                    CG = true;
                 } else {
                     Log.w(TAG,"ClimberL1 is unchecked.");
                     climberL1 = false;
+                    CG = false;
                 }
             }
         });
@@ -585,9 +589,11 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"ClimberL2 is checked.");
                     climberL2 = true;
+                    CG = true;
                 } else {
                     Log.w(TAG,"ClimberL2 is unchecked.");
                     climberL2 = false;
+                    CG = false;
                 }
             }
         });
@@ -597,9 +603,11 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"ClimberL3 is checked.");
                     climberL3 = true;
+                    CG = true;
                 } else {
                     Log.w(TAG,"ClimberL3 is unchecked.");
                     climberL3 = false;
+                    CG = false;
                 }
             }
         });
@@ -609,9 +617,11 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"ClimberM1 is checked.");
                     climberM1 = true;
+                    CG = true;
                 } else {
                     Log.w(TAG,"ClimberM1 is unchecked.");
                     climberM1 = false;
+                    CG = false;
                 }
             }
         });
@@ -621,9 +631,11 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"ClimberM2 is checked.");
                     climberM2 = true;
+                    CG = true;
                 } else {
                     Log.w(TAG,"ClimberM2 is unchecked.");
                     climberM2 = false;
+                    CG = false;
                 }
             }
         });
@@ -633,9 +645,11 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"ClimberM3 is checked.");
                     climberM3 = true;
+                    CG = true;
                 } else {
                     Log.w(TAG,"ClimberM3 is unchecked.");
                     climberM3 = false;
+                    CG = false;
                 }
             }
         });
@@ -645,9 +659,11 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"ClimberR1 is checked.");
                     climberR1 = true;
+                    CG = true;
                 } else {
                     Log.w(TAG,"ClimberR1 is unchecked.");
                     climberR1 = false;
+                    CG = false;
                 }
             }
         });
@@ -657,9 +673,11 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"ClimberR2 is checked.");
                     climberR2 = true;
+                    CG = true;
                 } else {
                     Log.w(TAG,"ClimberR2 is unchecked.");
                     climberR2 = false;
+                    CG = false;
                 }
             }
         });
@@ -669,9 +687,11 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"ClimberR3 is checked.");
                     climberR3 = true;
+                    CG = true;
                 } else {
                     Log.w(TAG,"ClimberR3 is unchecked.");
                     climberR3 = false;
+                    CG = false;
                 }
             }
         });
@@ -707,7 +727,8 @@ pitData Pit_Data = new pitData();
                     if (txtEd_Weight.getText().length() > 0) {
                         weight = Integer.valueOf(String.valueOf(txtEd_Weight.getText()));
                         if (weight > MAX_ROBOT_WEIGHT) {
-                            txtEd_Weight.setText("");   // Reset 'BAD" weight
+                            txtEd_Weight.setText("");   // Reset 'BAD" weights
+                            weight = 0;
                             final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
                             tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
                             Toast toast = Toast.makeText(getBaseContext(), " \n*****  Maximum Robot Weight is " + MAX_ROBOT_WEIGHT + "!  *****\n ", Toast.LENGTH_LONG);
@@ -715,12 +736,12 @@ pitData Pit_Data = new pitData();
                             toast.show();
 
                         } else {
+                            Wt_entered = true;
+                            Log.w(TAG, "### Used the right key!!  ### " + Wt_entered);
+                            editText_Comments.setFocusable(true);
+                            editText_Comments.setClickable(true);
+                            return true;
                         }
-                        Wt_entered = true;
-                        Log.w(TAG, "### Used the right key!!  ### " + Wt_entered);
-                        editText_Comments.setFocusable(true);
-                        editText_Comments.setClickable(true);
-                        return true;
                     } else {
                         final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
                         tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
@@ -740,7 +761,9 @@ pitData Pit_Data = new pitData();
                 if (!hasFocus) {
                     // code to execute when EditText loses focus
                     if (!Wt_entered) {
-                        Toast toast = Toast.makeText(getBaseContext(), "\n*** Please use the > key and NOT the ▽ key ***\n                Please re-enter Weight", Toast.LENGTH_LONG);
+                        final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                        tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
+                        Toast toast = Toast.makeText(getBaseContext(), "\n*** Please use the ➺| key and NOT the ▽ key ***\n                Please re-enter Weight", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                         toast.show();
                     }
@@ -755,7 +778,13 @@ pitData Pit_Data = new pitData();
         btn_Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.w(TAG, "Save Button Listener");
-                if ((txtEd_Weight.length() > 0 && (weight <= MAX_ROBOT_WEIGHT) && totalWheels >= 4) && (spinner_autoMode.getSelectedItemPosition() > 0) && (spinner_Lang.getSelectedItemPosition() > 0)) {        // required
+                // Check for required fields
+                if ((txtEd_Weight.length() > 0 &&                               // weight field length >0
+                    (weight > 0) &&(weight <= MAX_ROBOT_WEIGHT) &&              // weight >0 & <_ Max
+                        (CG = true) &&                                          // at least one CG checkbox ☑
+                        (totalWheels >= 4) &&                                   // at least 4 wheels
+                        (spinner_autoMode.getSelectedItemPosition() > 0) &&     // Autonomous mode specified
+                        (spinner_Lang.getSelectedItemPosition() > 0))) {        // Robot Prog. Language set
 
                     Spinner spinner_Team = (Spinner) findViewById(R.id.spinner_Team);
                     storePitData();           // Put all the Pit data collected in Pit object
@@ -768,7 +797,7 @@ pitData Pit_Data = new pitData();
                 } else {
                     final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
                     tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
-                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels & Auto Mode) before saving ***", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels, CG & Auto Mode) before saving ***", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     toast.show();
                 }
@@ -811,18 +840,6 @@ pitData Pit_Data = new pitData();
             Intent intent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, currentImageUri); // set the image file name
             startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-//            String picname = "robot_" + teamSelected.trim() + ".png";
-//            File dirPhotos = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/pit/" + Pearadox.FRC_Event + "/");
-//            Log.w(TAG, "SD card Path = " + dirPhotos);
-//            dirPhotos = new File(dirPhotos, picname);
-//            Log.w(TAG, "File = " + dirPhotos);
-//            Uri outputFileUri = Uri.fromFile(dirPhotos);
-//
-//            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            takePictureIntent.PutExtra (MediaStore.ExtraOutput, outputFileUri);
-//            Intent takePictureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             Log.w(TAG, "Photo taken");
         }
     }
@@ -1478,6 +1495,9 @@ pitData Pit_Data = new pitData();
     public void onDestroy() {
         super.onDestroy();
         Log.v(TAG, "OnDestroy");
+        if (alertbox != null) {
+            alertbox.dismiss();
+            alertbox = null;
+        }
     }
-
 }

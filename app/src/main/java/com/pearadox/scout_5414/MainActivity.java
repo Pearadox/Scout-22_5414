@@ -715,7 +715,7 @@ private void preReqs() {
                         }        //directory is created;
                     }
                 } else {
-                    Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_imgEvent);
+//                    Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_imgEvent);
                 }        //directory is created;
             }
             File direct_matchEvent = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/match/" + ev_code);
@@ -728,7 +728,7 @@ private void preReqs() {
                         }        //directory is created;
                     }
                 } else {
-                    Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_imgEvent);
+//                    Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_imgEvent);
                 }        //directory is created;
             }
             File direct_pitEvent = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/pit/" + ev_code);
@@ -742,7 +742,7 @@ private void preReqs() {
                 }
             }
             } else {
-                Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_pitEvent);
+//                Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_pitEvent);
             }        //directory is created;
         }  //End FOR
 
