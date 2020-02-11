@@ -1346,6 +1346,8 @@ pitData Pit_Data = new pitData();
         Pit_Data.setPit_PowerCellFloor(PowerCellFloor);
         Pit_Data.setPit_PowerCellLoad(PowerCellLoad);
         Pit_Data.setPit_undTrench(undTrench);
+        Pit_Data.setPit_spin(spin);
+        Pit_Data.setPit_color(cpcolor);
         Pit_Data.setPit_canLift(canLift);
         Pit_Data.setPit_numLifted (numLifted );
         Pit_Data.setPit_liftRamp(liftRamp);
