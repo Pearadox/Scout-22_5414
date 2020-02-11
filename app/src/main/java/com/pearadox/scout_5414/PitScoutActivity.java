@@ -87,6 +87,7 @@ public class PitScoutActivity extends AppCompatActivity {
     String currentImagePath;
     String picname;
     int REQUEST_IMAGE_CAPTURE = 2;
+    int MAX_ROBOT_WEIGHT =125;      // 2020 maximum weight
     public static String[] teams = new String[Pearadox.numTeams+1];  // Team list (array of just Team Names)
     public static String[] wheels = new String[]
             {"0","1","2","3","4","5","6", "7", "8"};
@@ -705,6 +706,16 @@ pitData Pit_Data = new pitData();
 
                     if (txtEd_Weight.getText().length() > 0) {
                         weight = Integer.valueOf(String.valueOf(txtEd_Weight.getText()));
+                        if (weight > MAX_ROBOT_WEIGHT) {
+                            txtEd_Weight.setText("");   // Reset 'BAD" weight
+                            final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                            tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
+                            Toast toast = Toast.makeText(getBaseContext(), " \n*****  Maximum Robot Weight is " + MAX_ROBOT_WEIGHT + "!  *****\n ", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                            toast.show();
+
+                        } else {
+                        }
                         Wt_entered = true;
                         Log.w(TAG, "### Used the right key!!  ### " + Wt_entered);
                         editText_Comments.setFocusable(true);
@@ -744,7 +755,7 @@ pitData Pit_Data = new pitData();
         btn_Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.w(TAG, "Save Button Listener");
-                if ((txtEd_Weight.length() > 0 && totalWheels >= 4) && (spinner_autoMode.getSelectedItemPosition() > 0) && (spinner_Lang.getSelectedItemPosition() > 0)) {        // required
+                if ((txtEd_Weight.length() > 0 && (weight <= MAX_ROBOT_WEIGHT) && totalWheels >= 4) && (spinner_autoMode.getSelectedItemPosition() > 0) && (spinner_Lang.getSelectedItemPosition() > 0)) {        // required
 
                     Spinner spinner_Team = (Spinner) findViewById(R.id.spinner_Team);
                     storePitData();           // Put all the Pit data collected in Pit object
@@ -757,7 +768,7 @@ pitData Pit_Data = new pitData();
                 } else {
                     final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
                     tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
-                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (Weight, Wheels & Auto Mode) before saving ***", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels & Auto Mode) before saving ***", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     toast.show();
                 }
