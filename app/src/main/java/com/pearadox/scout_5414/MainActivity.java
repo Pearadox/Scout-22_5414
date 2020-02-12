@@ -1069,11 +1069,11 @@ private void preReqs() {
                 pw = pw.substring(0, pw.length()-1);    //Remove CR/LF
             Log.e(TAG, "Pearadox = '" + pw + "'");
             } catch (IOException e) {
-                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
-                Toast toast = Toast.makeText(getBaseContext(), "Firebase authentication - Password required", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.show();
+//                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+//                tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
+//                Toast toast = Toast.makeText(getBaseContext(), "Firebase authentication - Password required", Toast.LENGTH_LONG);
+//                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+//                toast.show();
                 e.printStackTrace();
             }
             Log.w(TAG, "****  Found P/W file - about to Authorize  ****   FB=" + FB_logon);
@@ -1123,10 +1123,10 @@ private void preReqs() {
         FirebaseApp.initializeApp(this);
 //    FirebaseDatabase.getInstance().setPersistenceEnabled(true);     // Enable 'Offline' Database
         mAuth = FirebaseAuth.getInstance();
-//    if (FB_logon) {
 
+    if (!is_resumed) {
         Fb_Auth();      // Authenticate with Firebase
-//    }
+    }
 //    loadEvents();
     }
 @Override
