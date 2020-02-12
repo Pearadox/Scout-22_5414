@@ -64,22 +64,21 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/chk_lostComm"
         android:layout_alignBottom="@+id/chkBox_final_int_Trench"
-        android:layout_marginBottom="3dp"
-        android:text="Blocking" />
+        android:text="Blocking under SG" />
 
 
-    <CheckBox
-        android:id="@+id/chk_whatever"
-        android:text=" XX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_alignBaseline="@+id/chk_lostComm"
-        android:layout_alignBottom="@+id/chk_lostComm"
-        android:layout_toEndOf="@+id/chk_lostComm"
-        android:focusable="false"
-        android:clickable="false"
-        android:visibility="invisible" />
+<!--    <CheckBox-->
+<!--        android:id="@+id/chk_whatever"-->
+<!--        android:text=" XX"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="68dp"-->
+<!--        android:layout_alignBaseline="@+id/chk_lostComm"-->
+<!--        android:layout_alignBottom="@+id/chk_lostComm"-->
+<!--        android:layout_toEndOf="@+id/chk_lostComm"-->
+<!--        android:focusable="false"-->
+<!--        android:clickable="false"-->
+<!--        android:visibility="invisible" />-->
 
     <Button
         android:text="SAVE"

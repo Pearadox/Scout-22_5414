@@ -12,8 +12,7 @@ These multipliers are represented by UPPER case letters (or Greek symbols) in th
 <h2>Power Cells </h2>
 <FONT color="magenta" face="courier" size=3>
  <B>Scored</B> <BR/>
- (A*(dump) + B*(autoCellLow) + C*(autoCellUnder)) +D*(autoCellUnder) +&nbsp;E*(autoCellLine) +&nbsp;F*(autoCellFront) +
- (G*(teleCellLow) +&nbsp;H*(teleCellUnder)) +&nbsp;I*(teleCellUnder) + J*(teleCellLine) +&nbsp;K*(teleCellFront)+ L*(teleCellBack)) /&nbsp;#&nbsp;Matches
+ (A*(dump) + B*(autoCellLow+teleCellLow) + C*(autoCellUnder+teleCellUnder)) +D*(autoCellLine+teleCellLine) +&nbsp;E*(autoCellFront+teleCellFront) +&nbsp;F*(teleCellBack)) /&nbsp;#&nbsp;Matches
 </FONT>
 <BR/>
 
@@ -45,7 +44,7 @@ These multipliers are represented by UPPER case letters (or Greek symbols) in th
 
 <FONT color="brown" face="courier" size=3>
  <B>Collected </B> <BR/>
- ( M*(autoFloor+teleFloor) + N*(autoCP+teleCP) + O*(autoTrench+teleTrench) +&nbsp;P*(autoBoundary+teleBoundary) + Q*(autoRobot+teleRobot) + R*(teleLoadSta)) /&nbsp;#&nbsp;Matches
+ ( G*(autoFloor+teleFloor) + H*(autoCP+teleCP) + I*(autoTrench+teleTrench) +&nbsp;J*(autoBoundary+teleBoundary) + K*(autoRobot+teleRobot) + L*(teleLoadSta)) /&nbsp;#&nbsp;Matches
 </FONT>
 <BR/>
 <UL>
@@ -70,7 +69,7 @@ These multipliers are represented by UPPER case letters (or Greek symbols) in th
 <h2>Control Panel (C.P.)</h2>
 
 <FONT color="darkgreen" face="courier" size=2>
- <B>((S*(CPspin) + T*(CPcolor)) /&nbsp;#&nbsp;Matches  </B>
+ <B>((M*(CPspin) + N*(CPcolor)) /&nbsp;#&nbsp;Matches  </B>
 </FONT>
 <BR/>
 

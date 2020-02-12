@@ -484,7 +484,7 @@ public class DraftScout_Activity extends AppCompatActivity {
         climbLift1  = sharedPref.getString("prefClimb_lift1", "1.5");
         climbLift2  = sharedPref.getString("prefClimb_lift2", "2.0");
         climbLifted = sharedPref.getString("prefClimb_lifted", "0.3");
-        climbHang0  = sharedPref.getString("prefClimb_Hang0", "-1.0");
+        climbHang0  = sharedPref.getString("prefClimb_Hang0", "-1.5");
         climbHang1  = sharedPref.getString("prefClimb_Hang1", "1.0");
         climbHang2  = sharedPref.getString("prefClimb_Hang2", "2.5");
         climbHang3  = sharedPref.getString("prefClimb_Hang3", "5.0");
@@ -504,13 +504,13 @@ public class DraftScout_Activity extends AppCompatActivity {
         getprefs();         // make sure Prefs are up to date
         switch (typ) {
             case "Climb":
-                form = "(" + climbSG+ "*Climbed + " + parkSG +" *Parked" + Balanced + "*Balanced) +((" + climbHang0 + "*Hang0) + " + climbHang1 + "*Hang1) + (" + climbHang2 + "*Hang2) + (" + climbHang3 + "*Hang3)) ✚ " +"((Lift1*" + climbLift1 + ") + " +"(Lift2*" + climbLift2 + ") + (WasLifted*" + climbLifted + ")) / # matches";
+                form = "((" + climbSG + " * Climbed) + (" + parkSG +" * Parked + (" + Balanced + "*Balanced))  ✚  ((" + climbHang0 + " * Hang0) + (" + climbHang1 + "*Hang1) + (" + climbHang2 + " * Hang2) + \n(" + climbHang3 + " * Hang3))  ✚  " +"((Lift1 * " + climbLift1 + ") + " +"(Lift2 * " + climbLift2 + ") + (WasLifted * " + climbLifted + ")) / # matches";
                 lbl_Formula.setTextColor(Color.parseColor("#4169e1"));      // blue
                 txt_Formula.setText(form);
                 break;
             case "Cell":
-                form = "((" + Cell_Dump +"* Dump) + (" + PowerCell_L0 +"* (aLow + tLow) + (" + PowerCell_L1 +"* (AcellUnder + TcellUnder) + (" + PowerCell_L2 + "* (AcellLine+ TcellLine) + (" + PowerCell_L3 + "* (AcellFrontCP + TcellFrontCP) + " + PowerCell_L4 + "* TcellBackCP)  ✚ ";
-                form = form + "(( " + PowerCell_C0 + "*(aFloor + tFloor)" + PowerCell_C1 + "*(aCP + tCP) " + PowerCell_C2 + "*(aTrench + tTrench)" + PowerCell_C3 + "*(aBoundary + tBoundary)" + PowerCell_C4 + "*(aRobot + tRoobot)" + PowerCell_C5 + "*(tLoadSta) ) /# matches";
+                form = "( (" + Cell_Dump +"* Dump) + (" + PowerCell_L0 +"* (aLow + tLow)) + (" + PowerCell_L1 +"* (AcellUnder + TcellUnder)} + (" + PowerCell_L2 + "* (AcellLine+ TcellLine)} + (" + PowerCell_L3 + "* (AcellFrontCP + TcellFrontCP)) + (" + PowerCell_L4 + "* TcellBackCP))  ✚  ";
+                form = form + " ( " + PowerCell_C0 + "*(aFloor + tFloor) + " + PowerCell_C1 + "*(aCP + tCP) + " + PowerCell_C2 + "*(aTrench + tTrench) + " + PowerCell_C3 + "*(aBoundary + tBoundary) + " + PowerCell_C4 + "*(aRobot + tRobot) + " + PowerCell_C5 + "*(tLoadSta) ) /#M matches";
                 lbl_Formula.setTextColor(Color.parseColor("#ee00ee"));      // magenta
                 txt_Formula.setText(form);
                 break;
@@ -520,7 +520,7 @@ public class DraftScout_Activity extends AppCompatActivity {
                 txt_Formula.setText(form);
                 break;
             case "Combined":
-                form = "((" + wtClimb + "*climbScore) + (" + wtPowerCell + "*PowerCellScore) + (" + wtCP + "*panelScore)) / #matches";
+                form = "((" + wtClimb + " * climbScore) + (" + wtPowerCell + " * PowerCellScore) + (" + wtCP + " * CPScore)) / #matches";
                 lbl_Formula.setTextColor(Color.parseColor("#ff0000"));      // red
                 txt_Formula.setText(form);
                 break;
@@ -1321,7 +1321,7 @@ public void Toast_Msg(String choice, Integer minimum) {
             cellCollect = ( (colFloor * Float.parseFloat(PowerCell_C0))  + (colRobot * Float.parseFloat(PowerCell_C1))  + (colCP * Float.parseFloat(PowerCell_C2)) + (colTrench * Float.parseFloat(PowerCell_C3)) + (colBoundary * Float.parseFloat(PowerCell_C4)) + (TcolLoadSta * Float.parseFloat(PowerCell_C4)));
             PowerCellScore = cellScored + cellCollect;
 
-            ControlPanelScore = (float) (((spinCP * 1.0) + (colorCP * 2.0) ) / numMatches);
+            ControlPanelScore = (float) ((spinCP * Float.parseFloat(panel_L1)) + (colorCP * Float.parseFloat(panel_L2))  / numMatches);
 
             combinedScore = (((climbScore * Float.parseFloat(wtClimb) + (PowerCellScore * Float.parseFloat(wtPowerCell)) + (ControlPanelScore * Float.parseFloat(wtCP)))) / numMatches);
         } else {

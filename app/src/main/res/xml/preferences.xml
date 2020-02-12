@@ -161,7 +161,7 @@
         <EditTextPreference
             android:id="@+id/txt_Hang0"
             android:inputType="numberDecimal"
-            android:defaultValue="-1.0"
+            android:defaultValue="-1.5"
             android:key="prefClimb_Hang0"
             android:summary="Multiplier for Alliance Hang 0"
             android:title="Hang 0" />
