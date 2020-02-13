@@ -236,7 +236,7 @@
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     <LinearLayout
-        android:id="@+id/lin_ExtraPieces"
+        android:id="@+id/lin_PickUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lin_AutoScale"
@@ -265,23 +265,11 @@
         <!--android:layout_marginStart="10dp"-->
         <!--android:text="⚫        ☢"-->
         <!--android:textColor="@color/magenta" />-->
-    </LinearLayout>
-
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-    <LinearLayout
-        android:id="@+id/lin_ExtraValues"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lin_ExtraPieces"
-        android:layout_marginTop="1sp"
-        android:orientation="horizontal">
-
         <TextView
             android:id="@+id/lbl_AutonFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="00dp"
+            android:layout_marginStart="10dp"
             android:text="⚫Fl="
             android:textColor="@color/cyan" />
 
@@ -356,6 +344,18 @@
             android:layout_marginStart="5dp"
             android:text="0"
             android:textColor="@color/red" />
+
+    </LinearLayout>
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    <LinearLayout
+        android:id="@+id/lin_ExtraValues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lin_PickUp"
+        android:layout_marginTop="1sp"
+        android:orientation="horizontal">
 
 
     </LinearLayout>
