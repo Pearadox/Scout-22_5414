@@ -357,7 +357,7 @@ public class VisMatch_Activity extends AppCompatActivity {
 //        Log.w(TAG, "Ratio of Placed to Attempted Gears in Auto = " + auto_SwCubesPlaced + "/" + auto_SwCubesAttempted);
         String carScored = "⚫" + String.format("%-3s", auto_Low) + " U" + String.format("%-3s", auto_HighClose) + " L" + String.format("%-3s", auto_HighLine) + " F" + String.format("%-3s", auto_HighFrontCP);
         txt_Ss_PowerCellScored.setText(carScored);
-        String startingBalls = "⁰" + String.format("%-3s", auto_Low) + " ¹" + String.format("%-3s", auto_Low) + " ²" + String.format("%-3s", auto_Low) + " ³" + String.format("%-3s", auto_Low);
+        String startingBalls = "⁰" + String.format("%-3s", precell_0) + " ¹" + String.format("%-3s", precell_1) + " ²" + String.format("%-3s", precell_2) + " ³" + String.format("%-3s", precell_3);
         txt_StartingBalls.setText(startingBalls);
         String telePowerCell = "¹" + String.valueOf(Tauto_Low) + " ²" + String.valueOf(Tauto_HighLine) + " ³" + String.valueOf(Tauto_HighFrontCP);
         txt_Tele_PowerCellScored.setText(telePowerCell);

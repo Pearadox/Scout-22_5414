@@ -459,7 +459,7 @@
         android:layout_below="@+id/txt_AutoComments"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:text="________________________________TeleOps______________________________"
         android:textColor="@color/yellow" />
     // ==============================================================================
@@ -628,7 +628,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/lin_Graph2"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="0"
+        android:layout_marginTop="0dp"
         android:background="@drawable/border"
         android:ems="12"
         android:lines="3"
