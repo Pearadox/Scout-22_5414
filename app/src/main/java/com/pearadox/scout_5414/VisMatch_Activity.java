@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import org.eazegraph.lib.charts.BarChart;
 import org.eazegraph.lib.models.BarModel;
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,7 +37,7 @@ public class VisMatch_Activity extends AppCompatActivity {
     String underScore = new String(new char[60]).replace("\0", "_");  // string of 'x' underscores
     String matches = "";  String match_id = "";
     TextView txt_team, txt_teamName, txt_NumMatches, txt_Matches;
-    TextView txt_auto_leftSectorLine, txt_noAuton, txt_Ss_PowerCellScored, txt_Ss_hatchScored, txt_Ss_droppedHatch;
+    TextView txt_auto_leftSectorLine, txt_StartingBalls, txt_noAuton, txt_Ss_PowerCellScored;
     TextView txt_Tele_PowerCellScored, txt_Tele_hatchScored, txt_Tele_droppedHatch;
     TextView txt_HabLvl, txt_Lift1NUM, txt_Lift2NUM, txt_WasLiftedNUM;
     TextView txt_AutonFloor, txt_AutonTrench, txt_AutonControlP, txt_AutonBoundary , txtAutonURobot;
@@ -52,7 +51,7 @@ public class VisMatch_Activity extends AppCompatActivity {
     BarChart mBarChart;
     int BarPowerCell = 0;  int BarPanels = 0;  int LastPowerCell = 0;  int LastPanels = 0;
     //----------------------------------
-    int numleftSectorLine = 0; int numleftSectorLine2 = 0; int noAuton = 0;
+    int numleftSectorLine = 0; int numleftSectorLine2 = 0; int noAuton = 0; int precellsCarried = 0; int precell_0 = 0; int precell_1 = 0; int precell_2 = 0; int precell_3 = 0;
     int auto_B1 = 0; int auto_B2 = 0; int auto_B3 = 0; int auto_B4 = 0; int auto_B5 = 0; int auto_B6 = 0;
     // NOTE: _ALL_ external mentions of Playere Sta. (PS) were changed to Loading Sta. (LS) so as to NOT be confused with Player Control Sta. (Driver)
     int auto_Ps1 = 0; int auto_Ps2 = 0; int auto_Ps3 = 0;
@@ -66,7 +65,7 @@ public class VisMatch_Activity extends AppCompatActivity {
     int numTeleClimbSuccess = 0; int LiftNm = 0; int WasLifted = 0;
     String tele_Comments = "";
     //----------------------------------
-    int final_LostComm = 0; int final_LostParts = 0; int final_DefGood = 0; int final_DefBlock = 0;  int final_DefSwitch = 0; int final_DefLast30 = 0; int final_NumPen = 0;
+    int final_LostComm = 0; int final_LostParts = 0; int final_DefGood = 0; int final_DefBlock = 0;  int final_DefSwitch = 0; int final_NumPen = 0;
     TextView txt_final_LostComm, txt_final_LostParts, txt_final_DefGood, txt_final_DefBlock, txt_final_BlkSwtch, txt_final_NumPen, txt_final_DefLast30;
     String final_Comments = "";
     //----------------------------------
@@ -102,6 +101,7 @@ public class VisMatch_Activity extends AppCompatActivity {
 //        txt_Ss_leftSectorLine2 = (TextView) findViewById(R.id.txt_Ss_leftSectorLine2);
         txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
         txt_noAuton = (TextView) findViewById(R.id.txt_noAuton);
+        txt_StartingBalls = (TextView) findViewById(R.id.txt_StartingBalls);
         txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
 // ToDo -  findViews PowerCell/Panels 2nd & 3rd
         txt_AutonFloor = (TextView) findViewById(R.id.txt_AutonFloor);
@@ -126,7 +126,7 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_Lift1NUM = (TextView) findViewById(R.id.txt_Lift1NUM);
         txt_Lift2NUM = (TextView) findViewById(R.id.txt_Lift2NUM);
         txt_WasLiftedNUM = (TextView) findViewById(R.id.txt_WasLiftedNUM);
-        mBarChart = (BarChart) findViewById(R.id.barchart);
+//        mBarChart = (BarChart) findViewById(R.id.teleBarChart);
         txt_TeleComments = (TextView) findViewById(R.id.txt_TeleComments);
         txt_TeleComments.setMovementMethod(new ScrollingMovementMethod());
 
@@ -140,7 +140,6 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_final_DefBlock = (TextView) findViewById(R.id.txt_final_DefBlock);
         txt_final_BlkSwtch = (TextView) findViewById(R.id.txt_final_BlkSwtch);
         txt_final_NumPen = (TextView) findViewById(R.id.txt_final_NumPen);
-        txt_final_DefLast30 = (TextView) findViewById(R.id.txt_final_DefLast30);
 
         txt_team.setText(tnum);
         txt_teamName.setText(tname);    // Get real
@@ -216,6 +215,20 @@ public class VisMatch_Activity extends AppCompatActivity {
                 default:                //
                     Log.e(TAG, "***  Invalid Player Station!!!  ***" );
             }
+
+            int BallStart = match_inst.getPre_cells_carried();
+//            Log.w(TAG, "Pre-Cells." + BallStart);
+             switch (BallStart) {
+                 case 0:
+                     precell_0++;
+                 case 1:
+                     precell_1++;
+                 case 2:
+                     precell_2++;
+                 case 3:
+                     precell_3++;
+             }
+
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             //@@@@@@@@@@@@@@@@@@@@@@  Autonomous  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -277,12 +290,12 @@ public class VisMatch_Activity extends AppCompatActivity {
             // ToDo - figure out why bar chart is accumulating??????
             BarPowerCell = (auto_Low + auto_HighClose + auto_HighLine + auto_HighFrontCP + Tauto_Low + Tauto_HighLine + Tauto_HighFrontCP) - LastPowerCell;
             BarPanels = (panL1 + panL2 + panL3 + TpanL1 + TpanL2 + TpanL3) - LastPanels;
-            mBarChart.addBar(new BarModel(BarPowerCell, 0xffff0000));       // PowerCell
+//            mBarChart.addBar(new BarModel(BarPowerCell, 0xffff0000));       // PowerCell
 //            Log.w(TAG, i + " @@@@@@@@ PowerCell=" + BarPowerCell + "   Panels=" + BarPanels + "  " + match_id);
 //            Log.e(TAG, "    CL1=" + auto_Low + " CL2=" + auto_HighLine + " CL3=" + auto_HighFrontCP + "    TcL1=" + Tauto_Low + " TcL2=" + Tauto_HighLine + " TcL3=" + Tauto_HighFrontCP + "  Last=" + LastPowerCell);
 //            Log.e(TAG, "    PL1=" + panL1 + " PL2=" + panL2 + " PL3=" + panL3 + "    TpL1=" + TpanL1 + " TpL2=" + TpanL2 + " TpL3=" + TpanL3 + "  Last=" + LastPanels +"\n");
 
-            mBarChart.addBar(new BarModel( BarPanels,  0xff08457e));       // Panels
+//            mBarChart.addBar(new BarModel( BarPanels,  0xff08457e));       // Panels
             LastPowerCell = LastPowerCell + BarPowerCell;
             LastPanels = LastPanels + BarPanels;
             if (match_inst.getTele_comment().length() > 1) {
@@ -301,9 +314,6 @@ public class VisMatch_Activity extends AppCompatActivity {
                 final_DefGood++;
             }
             // Todo Rocket Int.
-            if (match_inst.isFinal_defLast30()) {
-                final_DefLast30++;
-            }
             if (match_inst.isFinal_def_Block()) {
                 final_DefBlock++;
             }
@@ -322,8 +332,9 @@ public class VisMatch_Activity extends AppCompatActivity {
 // ======  Now start displaying all the data we collected  ========
 // ================================================================
         txt_auto_leftSectorLine = (TextView) findViewById(R.id.txt_auto_leftSectorLine);
-         txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
+        txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
         txt_noAuton = (TextView) findViewById(R.id.txt_noAuton);
+        txt_StartingBalls = (TextView) findViewById(R.id.txt_StartingBalls);
         txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
         txt_Tele_PowerCellScored = (TextView) findViewById(R.id.txt_Tele_PowerCellScored);
         txt_Tele_hatchScored = (TextView) findViewById(R.id.txt_Tele_hatchScored);
@@ -344,8 +355,10 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_auto_leftSectorLine.setText(String.valueOf(numleftSectorLine));
         txt_noAuton.setText(String.valueOf(noAuton));
 //        Log.w(TAG, "Ratio of Placed to Attempted Gears in Auto = " + auto_SwCubesPlaced + "/" + auto_SwCubesAttempted);
-        String carScored = "C" + String.format("%-3s", auto_Low) + "U" + String.format("%-3s", auto_HighClose) + " L" + String.format("%-3s", auto_HighLine) + " F" + String.format("%-3s", auto_HighFrontCP);
+        String carScored = "⚫" + String.format("%-3s", auto_Low) + " U" + String.format("%-3s", auto_HighClose) + " L" + String.format("%-3s", auto_HighLine) + " F" + String.format("%-3s", auto_HighFrontCP);
         txt_Ss_PowerCellScored.setText(carScored);
+        String startingBalls = "⁰" + String.format("%-3s", precell_0) + " ¹" + String.format("%-3s", precell_1) + " ²" + String.format("%-3s", precell_2) + " ³" + String.format("%-3s", precell_3);
+        txt_StartingBalls.setText(startingBalls);
         String telePowerCell = "¹" + String.valueOf(Tauto_Low) + " ²" + String.valueOf(Tauto_HighLine) + " ³" + String.valueOf(Tauto_HighFrontCP);
         txt_Tele_PowerCellScored.setText(telePowerCell);
         String teleHatchPanel = "¹" + String.valueOf(TpanL1) + " ²" + String.valueOf(TpanL2) + " ³" + String.valueOf(TpanL3);
@@ -383,13 +396,12 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_final_DefGood.setText(String.valueOf(final_DefGood));
         txt_final_BlkSwtch.setText(String.valueOf(final_DefSwitch));
         txt_final_DefBlock.setText(String.valueOf(final_DefBlock));
-        txt_final_DefLast30.setText(String.valueOf(final_DefLast30));
         txt_final_NumPen.setText(String.valueOf(final_NumPen));
 
         txt_FinalComments.setText(final_Comments);
 
 
-        mBarChart.startAnimation();
+//        mBarChart.startAnimation();
 
     }
 
@@ -398,12 +410,13 @@ public class VisMatch_Activity extends AppCompatActivity {
         noAuton = 0;
         numleftSectorLine = 0;
         numleftSectorLine2 = 0;
+        precell_0 = 0; precell_1 = 0; precell_2 = 0; precell_3 = 0;
         auto_Ps1 = 0;
         auto_Ps2 = 0;
         auto_Ps3 = 0;
         auto_Low = 0; auto_HighClose = 0; auto_HighLine = 0; auto_HighFrontCP = 0; Tauto_Low = 0; Tauto_HighLine = 0; Tauto_HighFrontCP = 0;
         panL1 = 0; panL2 = 0; panL3 = 0; TpanL1 = 0; TpanL2 = 0; TpanL3 = 0;
-        auton_Floor= 0; auton_Trench = 0; auton_ControlP = 0; auton_Boundary = 0; int auton_Robot = 0;
+        auton_Floor= 0; auton_Trench = 0; auton_ControlP = 0; auton_Boundary = 0; auton_Robot = 0;
         tele_PowerCellFloor = 0; tele_PowerCellPlasta = 0; tele_PowerCellCorral = 0; tele_PanFloor = 0; tele_PanPlasta = 0;
         numTeleClimbSuccess = 0;
         lift1Num = 0;
@@ -421,11 +434,10 @@ public class VisMatch_Activity extends AppCompatActivity {
         final_LostComm = 0;
         final_LostParts = 0;
         final_DefGood = 0;
-        final_DefLast30 = 0;
         final_DefBlock = 0;
         final_NumPen = 0;
         BarPowerCell = 0; BarPanels = 0; LastPowerCell = 0;  LastPanels = 0;
-        mBarChart.clearChart();
+//        mBarChart.clearChart();
     }
 
 
