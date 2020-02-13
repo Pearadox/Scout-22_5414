@@ -411,8 +411,8 @@
                     android:id="@+id/chkBox_Climb"
                     android:layout_width="120sp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:text="Can Climb" />
+                    android:layout_marginLeft="10dp"
+                    android:text="Has Climber" />
             </LinearLayout>
 
             <CheckBox
@@ -820,9 +820,9 @@
     <ImageView
         android:id="@+id/img_Photo"
         android:layout_width="450sp"
-        android:layout_height="270dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="260dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/border"
         android:visibility="visible"
         app:srcCompat="@drawable/photo_missing" />

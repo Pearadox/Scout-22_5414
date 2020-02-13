@@ -83,6 +83,7 @@ public class PitScoutActivity extends AppCompatActivity {
     CheckBox chkBox_ShootLow, chkBox_ShootUnder, chkBox_ShootLine, chkBox_ShootFront, chkBox_ShootBack;
 
     Button btn_Save;
+    Boolean OnOff= false;
     Uri currentImageUri;
     String currentImagePath;
     String picname;
@@ -307,6 +308,8 @@ pitData Pit_Data = new pitData();
         chkBox_ClimberR2 = (CheckBox) findViewById(R.id.chkBox_ClimberR2);
         chkBox_ClimberR3 = (CheckBox) findViewById(R.id.chkBox_ClimberR3);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
+        setClimbers(false);     // Turn off CG ☑
+
 //        editText_Comments.setFocusable(true);
 //        editText_Comments.setClickable(true);
 
@@ -469,9 +472,11 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"Climb is checked.");
                     climb = true;
+                    setClimbers(true);     // Turn off CG ☑
                 } else {
                     Log.w(TAG,"Climb is unchecked.");
                     climb = false;
+                    setClimbers(false);     // Turn off CG ☑
                 }
             }
         });
@@ -781,7 +786,7 @@ pitData Pit_Data = new pitData();
                 // Check for required fields
                 if ((txtEd_Weight.length() > 0 &&                               // weight field length >0
                     (weight > 0) &&(weight <= MAX_ROBOT_WEIGHT) &&              // weight >0 & <_ Max
-                        (CG = true) &&                                          // at least one CG checkbox ☑
+                        ((chkBox_Climb.isChecked()) && (CG = false)) &&                       // at least one CG checkbox ☑ if Climb is True
                         (totalWheels >= 4) &&                                   // at least 4 wheels
                         (spinner_autoMode.getSelectedItemPosition() > 0) &&     // Autonomous mode specified
                         (spinner_Lang.getSelectedItemPosition() > 0))) {        // Robot Prog. Language set
@@ -797,12 +802,36 @@ pitData Pit_Data = new pitData();
                 } else {
                     final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
                     tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
-                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels, CG & Auto Mode) before saving ***", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels, CG & Auto Mode) before saving *** \n Wt=" + weight+ "  ☸=" + totalWheels + " " + chkBox_Climb.isChecked() + " " + CG, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     toast.show();
                 }
             }
         });
+    }
+
+    private void setClimbers(Boolean onOff) {       // pass in T/F
+        chkBox_ClimberL1.setEnabled(onOff);
+        chkBox_ClimberL2.setEnabled(onOff);
+        chkBox_ClimberL3.setEnabled(onOff);
+        chkBox_ClimberM1.setEnabled(onOff);
+        chkBox_ClimberM2.setEnabled(onOff);
+        chkBox_ClimberM3.setEnabled(onOff);
+        chkBox_ClimberR1.setEnabled(onOff);
+        chkBox_ClimberR2.setEnabled(onOff);
+        chkBox_ClimberR3.setEnabled(onOff);
+        if (!onOff) {
+            chkBox_ClimberL1.setChecked(false);
+            chkBox_ClimberL2.setChecked(false);
+            chkBox_ClimberL3.setChecked(false);
+            chkBox_ClimberM1.setChecked(false);
+            chkBox_ClimberM2.setChecked(false);
+            chkBox_ClimberM3.setChecked(false);
+            chkBox_ClimberR1.setChecked(false);
+            chkBox_ClimberR2.setChecked(false);
+            chkBox_ClimberR3.setChecked(false);
+        }
+
     }
 
 
