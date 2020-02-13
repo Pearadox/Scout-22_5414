@@ -783,26 +783,27 @@ pitData Pit_Data = new pitData();
         btn_Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.w(TAG, "Save Button Listener");
+                Log.e(TAG, "REQ'D  >>>>>   Wt=" + weight+ "  ☸=" + totalWheels + " ↑" + chkBox_Climb.isChecked() + " " + CG +"  Lang='"+ lang+ "'   Mode=" + autoMode);
                 // Check for required fields
-                if ((txtEd_Weight.length() > 0 &&                               // weight field length >0
-                    (weight > 0) &&(weight <= MAX_ROBOT_WEIGHT) &&              // weight >0 & <_ Max
-                        ((chkBox_Climb.isChecked()) && (CG = false)) &&                       // at least one CG checkbox ☑ if Climb is True
+                if ((txtEd_Weight.length() > 0) &&                               // weight field length >0
+                        ((weight > 0) &&(weight <= MAX_ROBOT_WEIGHT)) &&        // weight >0 & <_ Max
+                        ((!chkBox_Climb.isChecked()) |(chkBox_Climb.isChecked() && (CG))) &&   // at least one CG checkbox ☑ if Climb is True
                         (totalWheels >= 4) &&                                   // at least 4 wheels
                         (spinner_autoMode.getSelectedItemPosition() > 0) &&     // Autonomous mode specified
-                        (spinner_Lang.getSelectedItemPosition() > 0))) {        // Robot Prog. Language set
+                        (spinner_Lang.getSelectedItemPosition() > 0)) {        // Robot Prog. Language set
 
                     Spinner spinner_Team = (Spinner) findViewById(R.id.spinner_Team);
                     storePitData();           // Put all the Pit data collected in Pit object
                     dataSaved = true;
-                    if (Pearadox.is_Network) {      // is Internet available?
-                        spinner_Team.setSelection(0);       //Reset to NO selection
-                        txt_TeamName.setText(" ");
-                    }
+//                    if (Pearadox.is_Network) {      // is Internet available?
+//                        spinner_Team.setSelection(0);       //Reset to NO selection
+//                        txt_TeamName.setText(" ");
+//                    }
                     finish();       // Exit  <<<<<<<<
                 } else {
                     final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
                     tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
-                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels, CG & Auto Mode) before saving *** \n Wt=" + weight+ "  ☸=" + totalWheels + " " + chkBox_Climb.isChecked() + " " + CG, Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels, CG, Lang. & Auto Mode) before saving *** \n Wt=" + weight+ "  ☸=" + totalWheels + " ↑" + chkBox_Climb.isChecked() + " " + CG +"  Lang='"+ lang+ "'   Mode=" + autoMode, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     toast.show();
                 }
@@ -811,6 +812,7 @@ pitData Pit_Data = new pitData();
     }
 
     private void setClimbers(Boolean onOff) {       // pass in T/F
+        Log.w(TAG, "@@@ setClimbers  " + onOff + "  CG=" + CG);
         chkBox_ClimberL1.setEnabled(onOff);
         chkBox_ClimberL2.setEnabled(onOff);
         chkBox_ClimberL3.setEnabled(onOff);
@@ -820,7 +822,8 @@ pitData Pit_Data = new pitData();
         chkBox_ClimberR1.setEnabled(onOff);
         chkBox_ClimberR2.setEnabled(onOff);
         chkBox_ClimberR3.setEnabled(onOff);
-        if (!onOff) {
+        if (!onOff) {                           // turn them all off
+            Log.d(TAG, "@@@ setClimbers UN-checked B4 " + onOff + "  CG=" + CG);
             chkBox_ClimberL1.setChecked(false);
             chkBox_ClimberL2.setChecked(false);
             chkBox_ClimberL3.setChecked(false);
@@ -830,6 +833,8 @@ pitData Pit_Data = new pitData();
             chkBox_ClimberR1.setChecked(false);
             chkBox_ClimberR2.setChecked(false);
             chkBox_ClimberR3.setChecked(false);
+            CG = false;
+            Log.d(TAG, "@@@ setClimbers UN-checked After " + onOff + "  CG=" + CG);
         }
 
     }
@@ -1455,10 +1460,10 @@ pitData Pit_Data = new pitData();
         File directMatch = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/pit/" + Pearadox.FRC_Event + "/" + filename);
         Log.w(TAG, "SD card Path = " + directMatch);
         if(directMatch.exists())  {
-            // Todo - Replace TOAST with Dialog Box  - "Do you really ..."   _LOW_ priority
-            Toast toast = Toast.makeText(getBaseContext(), "Data for " + filename + " already exists!!", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.show();
+            Log.w(TAG, "WARNING - Data for " + filename + " already exists!!");
+//            Toast toast = Toast.makeText(getBaseContext(), "Data for " + filename + " already exists!!", Toast.LENGTH_LONG);
+//            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+//            toast.show();
         }
 
         try {
