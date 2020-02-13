@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/lbl_team"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:includeFontPadding="true"
         android:text="______________________________Autonomous_____________________________"
         android:textColor="@color/red" />
@@ -81,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="20sp"
         android:layout_below="@+id/lbl_Autonomous"
-        android:layout_marginTop="12sp"
+        android:layout_marginTop="5sp"
         android:orientation="horizontal">
 
         <TextView
@@ -159,18 +159,18 @@
             android:src="@drawable/power_cell" />
 
         <TextView
-            android:id="@+id/txt_Ss_PowerCellScored"
+            android:id="@+id/txt_StartingBalls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textColor="@color/red"
-            tools:text=" ⚫00  U00  L00  F00" />
+            tools:text=" ⁰00  ¹00  ²00  ³00" />
 
         <TextView
             android:id="@+id/lbl_L_Lm_M_Rm_R_NS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="125dp"
+            android:layout_marginStart="130dp"
             android:layout_marginTop="7dp"
             android:text=" L   Lm  M   Rm  R   NS"
             android:textColor="@color/white" />
@@ -187,14 +187,15 @@
     </LinearLayout>
 
     // ==============================================================================
-    // Hatch
+    //
 
     <LinearLayout
         android:id="@+id/lin_AutoScale"
         android:layout_width="match_parent"
-        android:layout_height="30sp"
+        android:layout_height="30dp"
         android:layout_below="@+id/lin_AutoSwitch"
         android:layout_marginTop="1sp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <!--        <ImageView-->
@@ -206,10 +207,17 @@
         <!--            android:src="@drawable/hatch_panel" />-->
 
         <TextView
+            android:id="@+id/txt_Ss_PowerCellScored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            tools:text=" ⚫00   U00  L00  F00" />
+
+        <TextView
             android:id="@+id/txt_StartPositions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="274dp"
+            android:layout_marginStart="165dp"
             android:layout_marginTop="-5dp"
             android:text="11  22  33   44   55  66"
             android:textColor="@color/red" />
@@ -354,15 +362,86 @@
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+    <LinearLayout
+        android:id="@+id/lin_autonLegend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lin_ExtraValues"
+        android:layout_marginTop="0sp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lbl_Low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="█ = Low"
+            android:textColor="@color/red"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/lbl_Under"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="█ = Under"
+            android:textColor="@color/blue"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lbl_Line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="█ = Line"
+            android:textColor="@color/green"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/lbl_Front"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="█ = Front"
+            android:textColor="@color/yellow"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/lbl_Back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="█ = Back"
+            android:textColor="@color/orange"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_autonGraph"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@+id/lin_autonLegend"
+        android:orientation="horizontal">
+
+        <org.eazegraph.lib.charts.StackedBarChart
+            android:id="@+id/autonBarChart"
+            android:layout_width="500dp"
+            android:layout_height="120dp"
+            android:padding="2dp"
+            app:egBarTextSize="10sp"
+            app:egBarWidth="5dp"
+            app:egEnableScroll="true"
+            app:egFixedBarWidth="false"
+            app:egLegendHeight="36dp"
+            app:egLegendTextSize="9sp"
+            app:egShowDecimal="false"
+            app:egShowValues="true" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txt_AutoComments"
         android:layout_width="500dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/lin_ExtraValues"
-        android:layout_alignStart="@+id/lbl_team"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="220dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/lin_autonGraph"
+        android:layout_marginTop="0dp"
         android:background="@drawable/border"
         android:ems="12"
         android:lines="4"
@@ -547,9 +626,9 @@
         android:id="@+id/txt_TeleComments"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lin_Graph"
+        android:layout_below="@+id/lin_Graph2"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0"
         android:background="@drawable/border"
         android:ems="12"
         android:lines="3"
@@ -631,88 +710,31 @@
             android:textColor="@color/yellow" />
 
     </LinearLayout>
-    //________________________________________________________
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     <LinearLayout
-        android:id="@+id/lin_Cubes"
+        android:id="@+id/lin_Graph2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:layout_below="@+id/lin_Climb"
-        android:layout_marginTop="4sp"
         android:orientation="horizontal">
 
-
-    </LinearLayout>
-
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-    <LinearLayout
-        android:id="@+id/lin_Legend"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lin_Cubes"
-        android:layout_marginTop="12sp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/lbl_Low"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="█ = Low"
-            android:textColor="@color/red"
-            android:textSize="16sp" />
-        <TextView
-            android:id="@+id/lbl_Under"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="█ = Under"
-            android:textColor="@color/blue"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/lbl_Line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="█ = Line"
-            android:textColor="@color/green"
-            android:textSize="16sp" />
-        <TextView
-            android:id="@+id/lbl_Front"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="█ = Front"
-            android:textColor="@color/yellow"
-            android:textSize="16sp" />
-        <TextView
-            android:id="@+id/lbl_Back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="█ = Back"
-            android:textColor="@color/orange"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-    <LinearLayout
-        android:id="@+id/lin_Graph"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/lin_Legend"
-        android:orientation="horizontal">
-
-        <org.eazegraph.lib.charts.BarChart
-            android:id="@+id/barchart"
+        <org.eazegraph.lib.charts.StackedBarChart
+            android:id="@+id/teleBarChart"
             android:layout_width="500dp"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             android:padding="2dp"
+            app:egBarTextSize="10sp"
             app:egBarWidth="5dp"
             app:egEnableScroll="true"
             app:egFixedBarWidth="false"
-            app:egLegendHeight="0dp"
+            app:egLegendHeight="36dp"
+            app:egLegendTextSize="9sp"
             app:egShowDecimal="false"
             app:egShowValues="true" />
 
@@ -724,9 +746,9 @@
         android:id="@+id/lbl_Final"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/txt_FinalComments"
+        android:layout_below="@+id/txt_TeleComments"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="78dp"
+        android:layout_marginStart="10dp"
         android:text="_________________________________Final________________________________"
         android:textColor="@color/green" />
 
@@ -755,9 +777,9 @@
         android:id="@+id/lbl_final_LostParts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_TeleComments"
+        android:layout_below="@+id/lbl_Final"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="4dp"
         android:text="Lost Parts"
         android:textColor="@color/white" />
 
@@ -831,29 +853,10 @@
         android:textColor="@color/green" />
 
     <TextView
-        android:id="@+id/lbl_final_DefStarve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lbl_final_DefGood"
-        android:layout_alignParentStart="true"
-        android:text="Def. last 30 sec."
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/txt_final_DefLast30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/lbl_final_DefStarve"
-        android:layout_alignStart="@+id/txt_final_DefGood"
-        android:layout_alignBottom="@+id/lbl_final_DefStarve"
-        android:text="3"
-        android:textColor="@color/green" />
-
-    <TextView
         android:id="@+id/lbl_final_NumPen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lbl_final_DefStarve"
+        android:layout_below="@+id/txt_final_DefGood"
         android:layout_marginTop="2dp"
         android:text="# Penalties"
         android:textColor="@color/white" />
