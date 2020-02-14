@@ -392,7 +392,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="█ = Line"
-            android:textColor="@color/green"
+            android:textColor="@color/darkgreen"
             android:textSize="16sp" />
         <TextView
             android:id="@+id/lbl_Front"
@@ -400,7 +400,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="█ = Front"
-            android:textColor="@color/yellow"
+            android:textColor="@color/purple"
             android:textSize="16sp" />
         <TextView
             android:id="@+id/lbl_Back"
@@ -431,6 +431,7 @@
             app:egFixedBarWidth="false"
             app:egLegendHeight="36dp"
             app:egLegendTextSize="9sp"
+            app:egLegendColor="@color/white"
             app:egShowDecimal="false"
             app:egShowValues="true" />
 
@@ -648,10 +649,10 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/lbl_HAB_End"
+            android:id="@+id/lbl_Hang_End"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="End Hab"
+            android:text="End Hang"
             android:textColor="@color/white" />
 
         <TextView
@@ -735,6 +736,7 @@
             app:egFixedBarWidth="false"
             app:egLegendHeight="36dp"
             app:egLegendTextSize="9sp"
+            app:egLegendColor="@color/white"
             app:egShowDecimal="false"
             app:egShowValues="true" />
 
