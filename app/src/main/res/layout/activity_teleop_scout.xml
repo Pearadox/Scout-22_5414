@@ -544,7 +544,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0sp"
                 android:textColor="@color/brightblue"
-                android:text="Under SG (Perked)" />
+                android:text="Under SG (Parked)" />
         </LinearLayout>
 
 
