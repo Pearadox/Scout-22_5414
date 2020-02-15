@@ -499,16 +499,15 @@ public class TeleopScoutActivity extends Activity {
             Log.w(TAG, "chk_LiftedBy Listener");
                 if (chk_LiftedBy.isChecked()) {
                     //checked
-                Log.w(TAG,"LiftedBy is checked.");
-                got_lift = true;
-                chk_Lifted.setChecked(false);       // Can't be both!!
-                got_lift = false;
-            }
-            else {
-                //not checked
-                Log.w(TAG,"LiftedBy is unchecked.");
-                got_lift = false;
-            }
+                    Log.w(TAG,"LiftedBy is checked.");
+                    got_lift = true;
+                    chk_Lifted.setChecked(false);       // Can't be both!!
+                    got_lift = false;
+                } else {
+                    //not checked
+                    Log.w(TAG,"LiftedBy is unchecked.");
+                    got_lift = false;
+                }
         }
     });
 
@@ -522,12 +521,11 @@ public class TeleopScoutActivity extends Activity {
                 lifted = true;
                 chk_LiftedBy.setChecked(false);       // Can't be both!!
                 spinner_numRobots.setVisibility(VISIBLE);
-                lifted = false;
-            }
-            else {
+                got_lift = false;
+            } else {
                 //not checked
                 Log.w(TAG,"Lifted is unchecked.");
-                got_lift = false;
+                lifted = false;
                 spinner_numRobots.setVisibility(View.GONE);
             }
         }
@@ -636,6 +634,7 @@ public class TeleopScoutActivity extends Activity {
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private void storeTeleData() {
         Log.w(TAG, ">>>>  storeTeleData  <<<<");
+        Log.w(TAG, "chk_LiftedBy is " + got_lift);
         // New Match Data Object *** GLF 1/26/20
         Pearadox.Match_Data.setTele_PowerCell_LoadSta(PowerCell_LoadSta);
         Pearadox.Match_Data.setTele_PowerCell_floor(PowerCell_floor);
