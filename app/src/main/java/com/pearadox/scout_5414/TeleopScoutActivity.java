@@ -151,7 +151,7 @@ public class TeleopScoutActivity extends Activity {
         button_Number_PenaltiesUndo = (Button) findViewById(R.id.button_Number_PenaltiesUndo);
         button_GoToFinalActivity  = (Button)   findViewById(R.id.button_GoToFinalActivity);
         txt_Number_Penalties    = (TextView) findViewById(R.id.txt_Number_Penalties);
-        final Spinner spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
+        spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
         ArrayAdapter adapter_Robs = new ArrayAdapter<String>(this, R.layout.robonum_list_layout, carry);
         adapter_Robs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_numRobots.setAdapter(adapter_Robs);
@@ -453,12 +453,14 @@ public class TeleopScoutActivity extends Activity {
             UnderSG = false;
             chk_LiftedBy.setChecked(false);       // Can't be both!!
             chk_LiftedBy.setEnabled(false);
+            radio_Zero.setEnabled(false);
             got_lift = false;
         } else {  //not checked
             Log.w(TAG,"Climbed is unchecked.");
             Climbed = false;
             chk_UnderSG.setEnabled(true);
             chk_LiftedBy.setEnabled(true);
+            radio_Zero.setEnabled(true);
         }
         }
     });
@@ -601,10 +603,10 @@ public class TeleopScoutActivity extends Activity {
     /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
     /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
     public void RadioClick_Hanging(View view) {
-        Log.w(TAG, "@@ RadioClick_Hanging @@");
+        Log.w(TAG, "@@ RadioClick_Hanging @@" );
         radgrp_END = (RadioGroup) findViewById(R.id.radgrp_END);
         int selectedId = radgrp_END.getCheckedRadioButtonId();
-//        Log.w(TAG, "*** Selected=" + selectedId);
+        Log.d(TAG, "*** Selected=" + selectedId + " Lift="+ liftedNum);
         radio_Lift = (RadioButton) findViewById(selectedId);
         String value = radio_Lift.getText().toString();
         if (value.equals("None")) {             // Not On?
@@ -613,12 +615,24 @@ public class TeleopScoutActivity extends Activity {
             chk_UnderSG.setEnabled(true);
         } else if (value.equals("One")){        // One?
             Log.w(TAG, "One");
-            Hang_Num = 1;
-            chk_UnderSG.setEnabled(true);
+            if (liftedNum > 0) {
+                Toast toast = Toast.makeText(getBaseContext(), "Lifted robots='" + liftedNum + "' Please correct # Hanging.", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+            } else {
+                Hang_Num = 1;
+            }
+            chk_UnderSG.setEnabled(false);
         } else if (value.equals("Two")){        // Two
             Log.w(TAG, "Two");
-            Hang_Num = 2;
-            chk_UnderSG.setEnabled(true);
+            if (liftedNum > 1) {
+                Toast toast = Toast.makeText(getBaseContext(), "Lifted robots='" + liftedNum + "' Please correct # Hanging.", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+            } else {
+                Hang_Num = 2;
+            }
+            chk_UnderSG.setEnabled(false);
         } else {                                // Three
             Log.w(TAG, "Three");
             if (!UnderSG) {
@@ -640,10 +654,31 @@ public class TeleopScoutActivity extends Activity {
     public class numRobots_OnItemSelectedListener implements AdapterView.OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> parent,
                                    View view, int pos, long id) {
+            Log.w(TAG, "###  numRobots_OnItemSelectedListener  ###");
             String num = " ";
             num = parent.getItemAtPosition(pos).toString();
             if (pos > 0) {
                 liftedNum = Integer.parseInt(num);
+                spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
+                switch (liftedNum) {
+                    case 1:
+                        Log.w(TAG, "** 1 ** Robots Lifted '" + liftedNum + "'  Hang=" + Hang_Num);
+                        if ((Hang_Num == 99) || (Hang_Num < 2)) {
+                            Toast toast = Toast.makeText(getBaseContext(), "'# Hanging less than 2!  Please correct.", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                            toast.show();
+                        }
+                        break;
+                    case 2:
+                        Log.w(TAG, "** 2 ** Robots Lifted '" + liftedNum + "' Hang=" + Hang_Num);
+                        if ((Hang_Num == 99) || (Hang_Num < 3)) {
+//                            spinner_numRobots.setSelection(3, false);
+                            Toast toast = Toast.makeText(getBaseContext(), "'# Hanging less than 3!  Please correct.", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                            toast.show();
+                        }
+                        break;
+                }
             } else {
                 Toast toast = Toast.makeText(getBaseContext(), "Must specify # robots lifted!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
@@ -664,7 +699,6 @@ public class TeleopScoutActivity extends Activity {
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private void storeTeleData() {
         Log.w(TAG, ">>>>  storeTeleData  <<<<");
-        Log.w(TAG, "chk_LiftedBy is " + got_lift);
         // New Match Data Object *** GLF 1/26/20
         Pearadox.Match_Data.setTele_PowerCell_LoadSta(PowerCell_LoadSta);
         Pearadox.Match_Data.setTele_PowerCell_floor(PowerCell_floor);
