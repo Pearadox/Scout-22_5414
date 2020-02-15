@@ -449,10 +449,16 @@ public class TeleopScoutActivity extends Activity {
             Log.w(TAG,"Climbed is checked.");
             Climbed = true;
             chk_UnderSG.setEnabled(false);
+            chk_UnderSG.setChecked(false);
+            UnderSG = false;
+            chk_LiftedBy.setChecked(false);       // Can't be both!!
+            chk_LiftedBy.setEnabled(false);
+            got_lift = false;
         } else {  //not checked
             Log.w(TAG,"Climbed is unchecked.");
             Climbed = false;
             chk_UnderSG.setEnabled(true);
+            chk_LiftedBy.setEnabled(true);
         }
         }
     });
@@ -484,11 +490,17 @@ public class TeleopScoutActivity extends Activity {
                         tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
                     } else {
                         UnderSG = true;
-                        chk_Climbed.setEnabled(false);                   }
+                        chk_Climbed.setEnabled(false);
+                        Climbed = false;
+                        chk_LiftedBy.setEnabled(false);
+                        chk_Lifted.setEnabled(false);
+                    }
                 } else {  //not checked
                     Log.w(TAG,"UnderSG is unchecked.");
                     UnderSG = false;
                     chk_Climbed.setEnabled(true);
+                    chk_LiftedBy.setEnabled(true);
+                    chk_Lifted.setEnabled(true);
                 }
             }
         });
@@ -502,11 +514,20 @@ public class TeleopScoutActivity extends Activity {
                     Log.w(TAG,"LiftedBy is checked.");
                     got_lift = true;
                     chk_Lifted.setChecked(false);       // Can't be both!!
-                    got_lift = false;
+                    lifted = false;
+                    chk_UnderSG.setChecked(false);
+                    chk_UnderSG.setEnabled(false);      // Can't also be 'Parked'
+                    UnderSG = false;
+                    chk_Climbed.setEnabled(false);
+                    Climbed = false;
                 } else {
                     //not checked
                     Log.w(TAG,"LiftedBy is unchecked.");
-                    got_lift = false;
+                    if (!chk_Climbed.isChecked()) {
+                        got_lift = false;
+                        chk_UnderSG.setEnabled(true);
+                        chk_Climbed.setEnabled(true);
+                    }
                 }
         }
     });
@@ -522,11 +543,13 @@ public class TeleopScoutActivity extends Activity {
                 chk_LiftedBy.setChecked(false);       // Can't be both!!
                 spinner_numRobots.setVisibility(VISIBLE);
                 got_lift = false;
+                chk_UnderSG.setEnabled(false);      // Can't also be 'Parked'
             } else {
                 //not checked
                 Log.w(TAG,"Lifted is unchecked.");
                 lifted = false;
                 spinner_numRobots.setVisibility(View.GONE);
+                chk_UnderSG.setEnabled(true);
             }
         }
     });
@@ -587,18 +610,25 @@ public class TeleopScoutActivity extends Activity {
         if (value.equals("None")) {             // Not On?
             Log.w(TAG, "None");
             Hang_Num = 0;
+            chk_UnderSG.setEnabled(true);
         } else if (value.equals("One")){        // One?
             Log.w(TAG, "One");
             Hang_Num = 1;
+            chk_UnderSG.setEnabled(true);
         } else if (value.equals("Two")){        // Two
             Log.w(TAG, "Two");
             Hang_Num = 2;
+            chk_UnderSG.setEnabled(true);
         } else {                                // Three
             Log.w(TAG, "Three");
             if (!UnderSG) {
+                Log.d(TAG, "Hanging=3");
                 Hang_Num = 3;
+                UnderSG = false;
+                chk_UnderSG.setChecked(false);
+                chk_UnderSG.setEnabled(false);
             } else {
-                Toast toast = Toast.makeText(getBaseContext(), "'Under SG' is checked; pick  # Hanging less than 3!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getBaseContext(), "'Under SG' is checked;  pick # Hanging less than 3!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 toast.show();
                 final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
