@@ -906,7 +906,7 @@ public void Toast_Msg(String choice, Integer minimum) {
 //            Log.w(TAG, "******>> numPick changed to: " + team_Scores.size());
             numPicks = team_Scores.size();      // Use max (prevent Error when # teams < 'numPicks')
         }
-        if (numPicks > 24) {
+        if (numPicks > 24) {            //**** Try to keep on one page!
             DS = "";                    // Use Single Space
         }else {
             DS = "\n";                  // Use Double Space on anything less than 24
@@ -936,7 +936,7 @@ public void Toast_Msg(String choice, Integer minimum) {
                 tNumb = score_inst.getTeamNum();
                 tName = score_inst.getTeamName();
                 tName = tName + blanks.substring(0, (36 - tName.length()));     // Pad the name to line up Tabs (\t)
-                Log.e(TAG, ">>>>  teamName '" + tName + "' ");
+//                Log.e(TAG, ">>>>  teamName '" + tName + "' ");
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_combinedScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
                 bW.write(String.format("%2d", i+1) +") " + tNumb + "-" + tName + "\t  (" + String.format("%2d",(Integer.parseInt(mdNumMatches))) + ")   " +  totalScore + " \t");
@@ -946,7 +946,7 @@ public void Toast_Msg(String choice, Integer minimum) {
             //=====================================================================
 
             bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName +  "\n");
-            bW.write(underScore + "  Cell  " + underScore +  "\n \n");
+            bW.write(underScore + "  CELLS  " + underScore +  "\n \n");
             //  Switch sort
             sortType = "Cell";
             Collections.sort(team_Scores, new Comparator<Scores>() {
@@ -965,13 +965,13 @@ public void Toast_Msg(String choice, Integer minimum) {
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_PowerCellScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
                 bW.write(String.format("%2d", i+1) + ") " + tNumb + "-" + tName  + "\t (" + String.format("%2d",(Integer.parseInt(mdNumMatches))) + ") " +  totalScore + "\t");
-                bW.write("TcellBackCPAuto ₁" + autoCellUnder + " ₂" + autoCellLine + " ₃" + autoCellFrontCP + "  Tele ₁" + telePowerCellL1 + " ₂" + telePowerCellL2+ " ₃" + telePowerCellL3 + "\n" + DS);
+                bW.write("Auto◯" + autoCellLow + " ₁" + autoCellUnder + " ₂" + autoCellLine + " ₃" + autoCellFrontCP + "  Tele" +"◯" + telePowerCellL0 + " ₁" + telePowerCellL1 + " ₂" + telePowerCellL2 + " ₃" + telePowerCellL3+ " ₄" + telePowerCellL4 + "\n" + DS);
             } // end For # teams
             bW.write(" \n" + "\n" + (char)12);        // NL & FF
             //=====================================================================
 
             bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName +  "\n");
-            bW.write(underScore + "  PANELS  " + underScore +  "\n" + DS);
+            bW.write(underScore + "  CONTROL PANEL  " + underScore +  "\n" + DS);
             //  C.P. sort
             sortType = "C.P.";
             Collections.sort(team_Scores, new Comparator<Scores>() {
@@ -990,7 +990,7 @@ public void Toast_Msg(String choice, Integer minimum) {
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_panelsScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
                 bW.write(String.format("%2d", i+1) +") " + tNumb + "-" + tName + "\t  (" + String.format("%2d",(Integer.parseInt(mdNumMatches))) + ")  " +  totalScore);
-//                bW.write( "☢ Auto  ₁" + sandPanelL1 + " ₂" + sandPanelL2 + " ₃" + sandPanelL3 + "  Tele  ₁" + telePanL1 + " ₂" + telePanL2 + " ₃" + telePanL3 + "  ▼ " + panDropped + "\n" + DS);
+                bW.write( "  ☢  ₁" + CPspinNum + " ₂" + CPcolorNum  + "\n" + DS);
             } // end For # teams
             bW.write(" \n" + "\n" + (char)12);        // NL & FF
             //=====================================================================
@@ -1015,7 +1015,9 @@ public void Toast_Msg(String choice, Integer minimum) {
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_climbScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
                 bW.write(String.format("%2d", i+1) +") " + tNumb + " - " + tName + "\t  (" + String.format("%2d",(Integer.parseInt(mdNumMatches))) + ") " +  totalScore + " \t");
-                bW.write(" HAB ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2  + " ₃" + climb_Hang3 + "\n" + DS);
+                bW.write("♺" + climb + " 円" + park + " ⚖" + level);
+                bW.write("  Hang ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2  + " ₃" + climb_Hang3);
+                bW.write( "    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted + "\n" + DS);
             } // end For # teams
 //            bW.write(" \n" + "\n" + (char)12);        // NL & FF
             //=====================================================================
@@ -1034,7 +1036,7 @@ public void Toast_Msg(String choice, Integer minimum) {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        pickList();     // generate Picklist for app
+        pickList();     // generate Picklist for PickList app
     }
 
     private void pickList() {
@@ -1227,7 +1229,7 @@ public void Toast_Msg(String choice, Integer minimum) {
         mdNumMatches = String.valueOf(numMatches);
         if (numMatches < minMatches) {
             minMatches = numMatches;
-            Log.e(TAG, team + " >>>>>>>>>>  Min. matches changed = " + minMatches);
+//            Log.e(TAG, team + " >>>>>>>>>>  Min. matches changed = " + minMatches);
         }
         if (numMatches > 0) {
             SectLin = String.valueOf(base);
