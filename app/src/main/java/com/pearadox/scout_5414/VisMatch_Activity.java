@@ -110,7 +110,6 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_noAuton = (TextView) findViewById(R.id.txt_noAuton);
         txt_StartingBalls = (TextView) findViewById(R.id.txt_StartingBalls);
         txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
-// ToDo -  findViews PowerCell/Panels 2nd & 3rd
         txt_AutonFloor = (TextView) findViewById(R.id.txt_AutonFloor);
         txt_AutonTrench = (TextView) findViewById(R.id.txt_AutonTrench);
         txt_AutonControlP = (TextView) findViewById(R.id.txt_AutonControlP);
@@ -414,11 +413,11 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_auto_leftSectorLine.setText(String.valueOf(numleftSectorLine));
         txt_noAuton.setText(String.valueOf(noAuton));
 //        Log.w(TAG, "Ratio of Placed to Attempted Gears in Auto = " + auto_SwCubesPlaced + "/" + auto_SwCubesAttempted);
-        String carScored = "⚫" + String.format("%-3s", auto_Low) + " U" + String.format("%-3s", auto_HighClose) + " L" + String.format("%-3s", auto_HighLine) + " F" + String.format("%-3s", auto_HighFrontCP);
+        String carScored = "⚪" + String.format("%-3s", auto_Low) + " U" + String.format("%-3s", auto_HighClose) + " L" + String.format("%-3s", auto_HighLine) + " F" + String.format("%-3s", auto_HighFrontCP);
         txt_Ss_PowerCellScored.setText(carScored);
         String startingBalls = "⁰" + String.format("%-3s", precell_0) + " ¹" + String.format("%-3s", precell_1) + " ²" + String.format("%-3s", precell_2) + " ³" + String.format("%-3s", precell_3);
         txt_StartingBalls.setText(startingBalls);
-        String telePowerCell = "⚫" + String.format("%-3s", Tele_Low) + " U" + String.format("%-3s", Tele_HighClose) + " L" + String.format("%-3s", Tele_HighLine) + " F" + String.format("%-3s", Tele_HighFrontCP) + " B" + String.format("%-3s", Tele_HighBackCP);
+        String telePowerCell = "⚪" + String.format("%-3s", Tele_Low) + " U" + String.format("%-3s", Tele_HighClose) + " L" + String.format("%-3s", Tele_HighLine) + " F" + String.format("%-3s", Tele_HighFrontCP) + " B" + String.format("%-3s", Tele_HighBackCP);
         txt_Tele_PowerCellScored.setText(telePowerCell);
         String teleHatchPanel = "¹" + String.valueOf(TpanL1) + " ²" + String.valueOf(TpanL2) + " ³" + String.valueOf(TpanL3);
         String HabEnd = "⁰"+ String.valueOf(climbH0) + " ¹" + String.valueOf(climbH1) + " ²" + String.valueOf(climbH2) + " ³" + String.valueOf(climbH3);

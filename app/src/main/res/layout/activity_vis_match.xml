@@ -217,7 +217,7 @@
             android:layout_marginStart="-46dp"
             android:layout_marginTop="-5dp"
             android:textColor="@color/red"
-            tools:text=" ⚫00   U00  L00  F00" />
+            tools:text=" ⚪00   U00  L00  F00" />
 
         <TextView
             android:id="@+id/txt_StartPositions"
@@ -256,27 +256,12 @@
             android:layout_marginStart="00dp"
             android:text="P/U From:"
             android:textColor="@color/cyan" />
-        <!--<TextView-->
-        <!--android:id="@+id/lbl_2ndCarPan"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="10dp"-->
-        <!--android:text="⚫        ☢"-->
-        <!--android:textColor="@color/cyan" />-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/lbl_3rdCarPan"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="10dp"-->
-        <!--android:text="⚫        ☢"-->
-        <!--android:textColor="@color/magenta" />-->
         <TextView
             android:id="@+id/lbl_AutonFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="⚫Fl="
+            android:text="⚪Fl="
             android:textColor="@color/cyan" />
 
         <TextView
@@ -498,14 +483,14 @@
             android:layout_height="46dp"
             android:layout_marginStart="10dp"
             android:textColor="@color/yellow"
-            tools:text=" ⚫00  U00  L00  F00  B00" />
+            tools:text=" ⚪00  U00  L00  F00  B00" />
 
         <TextView
             android:id="@+id/lbl_TeleFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:text="P/U⚫ Fl="
+            android:text="P/U⚪ Fl="
             android:textColor="@color/white" />
 
         <TextView
