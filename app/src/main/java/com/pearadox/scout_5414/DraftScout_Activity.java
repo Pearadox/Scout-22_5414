@@ -759,8 +759,8 @@ public void Toast_Msg(String choice, Integer minimum) {
                 this,
                 draftList,
                 R.layout.draft_list_layout,
-                new String[] {"team","BA","Stats","Stats2"},
-                new int[] {R.id.TeamData,R.id.BA, R.id.Stats, R.id.Stats2}
+                new String[] {"team","BA","Stats","Stats2","Stats3"},
+                new int[] {R.id.TeamData,R.id.BA, R.id.Stats, R.id.Stats2, R.id.Stats3}
         );
 
         draftList.clear();
@@ -798,11 +798,11 @@ public void Toast_Msg(String choice, Integer minimum) {
                     Log.e(TAG, "Invalid Sort - " + sortType);
             }
 
+            temp.put("Stats3", "☢ ¹" + CPspinNum + " ²"  + CPcolorNum + "  Climb ♺" + climb + " 円" + park  + " ⚖" + level + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + "    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted);
+            temp.put("Stats2", "Tele ◯◉ " + telePowerCellL0 + " U" + telePowerCellL1 + " L" + telePowerCellL2 + "  F" + telePowerCellL3 + "  B" + telePowerCellL4 + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum + "   ◯↑ F" + teleCollectFloor + " R" + teleCollectRobot + " C" + teleCollectCP + " T" + teleCollectTrench + " B" + teleCollectBoundary + " L" + teleCollectLoadSta);
+            temp.put("Stats",  "Auto ≠"  + SectLin + " ▼" + Dumped + "   ◯◉ " + autoCellLow + " U" + autoCellUnder + " L" + autoCellLine + " F" + autoCellFrontCP + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum + "   ◯↑ F" + autoCollectFloor + " R" + autoCollectRobot + " C" + autoCollectCP + " T" + autoCollectTrench + " B" + autoCollectBoundary  );
             temp.put("team", tn + "-" + score_inst.getTeamName() + "  (" + mdNumMatches + ")  " +  totalScore);
-//            temp.put("BA", "Rank=" + teams[i].rank + "  " + teams[i].record + "   OPR=" + String.format("%3.1f", (teams[i].opr)) + "    ↑ " + String.format("%3.1f", (teams[i].touchpad)) + "   kPa=" + String.format("%3.1f", (teams[i].pressure)));
             temp.put("BA","Rank=" + tmRank + "   Score=" + tmRScore + "   WLT=" + tmWLT + "   OPR=" + tmOPR);
-                    temp.put("Stats", "Auto ≠"  + SectLin + " ▼" + Dumped + "   ◯◉ " + autoCellLow + " U" + autoCellUnder + " L" + autoCellLine + " F" + autoCellFrontCP + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum + "   ◯↑ F" + autoCollectFloor + " R" + autoCollectRobot + " C" + autoCollectCP + " T" + autoCollectTrench + " B" + autoCollectBoundary  + "\nTele ◯◉ " + telePowerCellL0 + " U" + telePowerCellL1 + " L" + telePowerCellL2 + "  F" + telePowerCellL3 + "  B" + telePowerCellL4 + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum + "   ◯↑ F" + teleCollectFloor + " R" + teleCollectRobot + " C" + teleCollectCP + " T" + teleCollectTrench + " B" + teleCollectBoundary + " L" + teleCollectLoadSta);
-            temp.put("Stats2",  "☢ ¹" + CPspinNum + " ²"  + CPcolorNum + "  Climb ♺" + climb + " 円" + park  + " ⚖" + level + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + "    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted);
             draftList.add(temp);
         } // End For
         Log.w(TAG, "### Teams ###  : " + draftList.size());
