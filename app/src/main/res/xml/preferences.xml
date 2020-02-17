@@ -116,7 +116,7 @@
         <EditTextPreference
             android:id="@+id/txt_climbSG"
             android:inputType="numberDecimal"
-            android:defaultValue="1.5"
+            android:defaultValue="2.5"
             android:key="prefClimb_climb"
             android:summary="Multiplier for Climbing successfully"
             android:title="Climb" />
@@ -130,7 +130,7 @@
         <EditTextPreference
             android:id="@+id/txt_Balanced"
             android:inputType="numberDecimal"
-            android:defaultValue="2.5"
+            android:defaultValue="1.5"
             android:key="prefClimb_Balanced"
             android:summary="Multiplier for Alliance being Balanced"
             android:title="Balanced" />
@@ -145,7 +145,7 @@
         <EditTextPreference
             android:id="@+id/txt_Lift2"
             android:inputType="numberDecimal"
-            android:defaultValue="2.0"
+            android:defaultValue="2.5"
             android:key="prefClimb_lift2"
             android:summary="Multiplier for Lifting two robots"
             android:title="Lift 2" />

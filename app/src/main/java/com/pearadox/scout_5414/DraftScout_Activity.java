@@ -64,14 +64,37 @@ public class DraftScout_Activity extends AppCompatActivity {
     String TAG = "DraftScout_Activity";        // This CLASS name
     Boolean is_Resumed = false;
     int start = 0;          // Start Position for matches (0=ALL)
-    int numObjects = 0; int numProcessed = 0;
+    int numObjects = 0;
+    int numProcessed = 0;
     int minMatches = 99;         // minimum # of matches collected
     int numPicks = 24;              // # of picks to show for Alliance Picks (actually get from Preferences)
-    /*Shared Prefs-Scored Power-Cell*/ public String Cell_Dump  = ""; public String PowerCell_L0  = ""; public String PowerCell_L1  = ""; public String PowerCell_L2  = ""; public String PowerCell_L3  = ""; public String PowerCell_L4  = "";
-                                    public String PowerCell_C0  = ""; public String PowerCell_C1  = ""; public String PowerCell_C2  = ""; public String PowerCell_C3  = ""; public String PowerCell_C4  = ""; public String PowerCell_C5  = "";
-    /*Shared Prefs-C.P.*/ public String panel_L1 = ""; public String panel_L2  = "";
-    /*Shared Prefs-Climbing*/  public String climbSG = ""; public String parkSG = ""; public String Balanced = ""; public String climbLift1 = ""; public String climbLift2 = "";  public String climbLifted = ""; public String climbHang0 = ""; public String climbHang1 = ""; public String climbHang2 = ""; public String climbHang3 = "";
-    /*Weight factors*/ public String wtClimb = ""; public String wtPowerCell = ""; public String wtCP = "";
+    /*Shared Prefs-Scored Power-Cell*/ public String Cell_Dump = "";
+    public String PowerCell_L0 = "";
+    public String PowerCell_L1 = "";
+    public String PowerCell_L2 = "";
+    public String PowerCell_L3 = "";
+    public String PowerCell_L4 = "";
+    public String PowerCell_C0 = "";
+    public String PowerCell_C1 = "";
+    public String PowerCell_C2 = "";
+    public String PowerCell_C3 = "";
+    public String PowerCell_C4 = "";
+    public String PowerCell_C5 = "";
+    /*Shared Prefs-C.P.*/ public String panel_L1 = "";
+    public String panel_L2 = "";
+    /*Shared Prefs-Climbing*/  public String climbSG = "";
+    public String parkSG = "";
+    public String Balanced = "";
+    public String climbLift1 = "";
+    public String climbLift2 = "";
+    public String climbLifted = "";
+    public String climbHang0 = "";
+    public String climbHang1 = "";
+    public String climbHang2 = "";
+    public String climbHang3 = "";
+    /*Weight factors*/ public String wtClimb = "";
+    public String wtPowerCell = "";
+    public String wtCP = "";
     ImageView imgStat_Load;
     TextView txt_EventName, txt_NumTeams, txt_Formula, lbl_Formula, txt_LoadStatus, txt_SelNum;
     Spinner spinner_numMatches;
@@ -84,7 +107,7 @@ public class DraftScout_Activity extends AppCompatActivity {
     //    Button btn_Up, btn_Down, btn_Delete;
     public ArrayAdapter<String> adaptTeams;
     public static String[] numMatch = new String[]             // Num. of Matches to process
-            {"ALL","Last","Last 2","Last 3","Last 4"};
+            {"ALL", "Last", "Last 2", "Last 3", "Last 4"};
     //    ArrayList<String> draftList = new ArrayList<String>();
     static final ArrayList<HashMap<String, String>> draftList = new ArrayList<HashMap<String, String>>();
     public int teamSelected = -1;
@@ -93,7 +116,8 @@ public class DraftScout_Activity extends AppCompatActivity {
     String tNumb = "";
     String tn = "";
     String Viz_URL = "";
-    String teamNum=""; String teamName = "";
+    String teamNum = "";
+    String teamName = "";
     String tmRank = "";
     String tmRScore = "";
     String tmWLT = "";
@@ -134,7 +158,10 @@ public class DraftScout_Activity extends AppCompatActivity {
     String climb = "";
     String park = "";
     String level = "";
-    String climb_Hang0 = ""; String climb_Hang1 = ""; String climb_Hang2 = ""; String climb_Hang3 = "";
+    String climb_Hang0 = "";
+    String climb_Hang1 = "";
+    String climb_Hang2 = "";
+    String climb_Hang3 = "";
     String liftOne = "";
     String liftTwo = "";
     String gotLifted = "";
@@ -295,24 +322,25 @@ public class DraftScout_Activity extends AppCompatActivity {
             public int compare(Scores s1, Scores s2) {
                 float climbNum1 = s1.getSCORE_climbScore();
                 float climbNum2 = s2.getSCORE_climbScore();
-	            /*For ascending order*/
+                /*For ascending order*/
                 //return climbNum1-climbNum2;
-	            /*For descending order*/
+                /*For descending order*/
                 return (int) (climbNum2 - climbNum1);
             }
         };
 
     }
+
     //==========================
     public ArrayList<Scores> team_Scores = new ArrayList<Scores>();
     Scores score_inst = new Scores();
 
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-   @Override
-   protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_draft_scout);
@@ -323,7 +351,7 @@ public class DraftScout_Activity extends AppCompatActivity {
             SharedPreferences prefs = getPreferences(MODE_PRIVATE);
             String sortType = prefs.getString("Sort", "");
         } else {
-    //            sortType = "Team#";
+            //            sortType = "Team#";
         }
         Log.e(TAG, "After - " + sortType);
         getprefs();         // Get multiplier values from Preferences
@@ -345,17 +373,16 @@ public class DraftScout_Activity extends AppCompatActivity {
         btn_Match.setVisibility(View.INVISIBLE);
         btn_Pit.setEnabled(false);
         btn_Pit.setVisibility(View.INVISIBLE);
-        pbSpinner =  (ProgressBar) findViewById(progressBar1);
+        pbSpinner = (ProgressBar) findViewById(progressBar1);
 
         pfDatabase = FirebaseDatabase.getInstance();
         pfMatchData_DBReference = pfDatabase.getReference("match-data/" + Pearadox.FRC_Event);    // Match Data
 
         RadioGroup radgrp_Sort = findViewById(R.id.radgrp_Sort);
-        for(int i = 0; i < radgrp_Sort.getChildCount(); i++){        // turn them all OFF
-           radgrp_Sort.getChildAt(i).setEnabled(false);
+        for (int i = 0; i < radgrp_Sort.getChildCount(); i++) {        // turn them all OFF
+            radgrp_Sort.getChildAt(i).setEnabled(false);
         }
-        radgrp_Sort.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
+        radgrp_Sort.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 Log.i(TAG, "@@ RadioClick_Sort @@");
@@ -434,7 +461,6 @@ public class DraftScout_Activity extends AppCompatActivity {
         });
 
 
-
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         lstView_Teams.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent,
@@ -442,10 +468,10 @@ public class DraftScout_Activity extends AppCompatActivity {
                 Log.w(TAG, "*** lstView_Teams ***   Item Selected: " + pos);
                 teamSelected = pos;
                 lstView_Teams.setSelector(android.R.color.holo_blue_light);
-        		/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+                /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 //                tnum = draftList.get(teamSelected).substring(0,4);
                 txt_SelNum = findViewById(R.id.txt_SelNum);
-                txt_SelNum.setText(String.valueOf(pos+1));      // Sort Position
+                txt_SelNum.setText(String.valueOf(pos + 1));      // Sort Position
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -462,7 +488,7 @@ public class DraftScout_Activity extends AppCompatActivity {
         SharedPreferences sharedPref =
                 PreferenceManager.getDefaultSharedPreferences(this);
 
-        Cell_Dump    = sharedPref.getString("prefPowerCell_Dump", "0.5");   // Dump
+        Cell_Dump = sharedPref.getString("prefPowerCell_Dump", "0.5");      // Dump
         PowerCell_L0 = sharedPref.getString("prefPowerCell_L0", "1.0");     // Low
         PowerCell_L1 = sharedPref.getString("prefPowerCell_L1", "2.0");     // Under
         PowerCell_L2 = sharedPref.getString("prefPowerCell_L2", "3.0");     // Line
@@ -475,22 +501,22 @@ public class DraftScout_Activity extends AppCompatActivity {
         PowerCell_C4 = sharedPref.getString("prefPowerCell_C4", "1.5");     // Boundary
         PowerCell_C5 = sharedPref.getString("prefPowerCell_C5", "1.0");     // LoadSta
 
-        panel_L1 = sharedPref.getString("prefPanel_L1", "1.0");            // C.P. Spin
-        panel_L2 = sharedPref.getString("prefPanel_L2", "2.0");            // C.P. Color
+        panel_L1 = sharedPref.getString("prefPanel_L1", "1.0");             // C.P. Spin
+        panel_L2 = sharedPref.getString("prefPanel_L2", "2.0");             // C.P. Color
 
-        climbSG     = sharedPref.getString("prefClimb_climb", "1.5");
-        parkSG      = sharedPref.getString("prefClimb_park", "0.5");
-        Balanced    = sharedPref.getString("prefClimb_Balanced", "2.5");
-        climbLift1  = sharedPref.getString("prefClimb_lift1", "1.5");
-        climbLift2  = sharedPref.getString("prefClimb_lift2", "2.0");
+        climbSG = sharedPref.getString("prefClimb_climb", "2.5");           // Climbed
+        parkSG = sharedPref.getString("prefClimb_park", "0.5");             // Parked
+        Balanced = sharedPref.getString("prefClimb_Balanced", "1.5");       // Balanced
+        climbLift1 = sharedPref.getString("prefClimb_lift1", "1.5");
+        climbLift2 = sharedPref.getString("prefClimb_lift2", "2.5");
         climbLifted = sharedPref.getString("prefClimb_lifted", "0.3");
-        climbHang0  = sharedPref.getString("prefClimb_Hang0", "-1.5");
-        climbHang1  = sharedPref.getString("prefClimb_Hang1", "1.0");
-        climbHang2  = sharedPref.getString("prefClimb_Hang2", "2.5");
-        climbHang3  = sharedPref.getString("prefClimb_Hang3", "5.0");
+        climbHang0 = sharedPref.getString("prefClimb_Hang0", "-1.5");       //** Alliance Climb = 0
+        climbHang1 = sharedPref.getString("prefClimb_Hang1", "1.0");        //** 1
+        climbHang2 = sharedPref.getString("prefClimb_Hang2", "2.5");        //** 2
+        climbHang3 = sharedPref.getString("prefClimb_Hang3", "5.0");        //** 3
 
-        wtClimb  = sharedPref.getString("prefWeight_climb", "3.0");
-        wtPowerCell  = sharedPref.getString("prefWeight_PowerCell", "2.0");
+        wtClimb = sharedPref.getString("prefWeight_climb", "3.0");
+        wtPowerCell = sharedPref.getString("prefWeight_PowerCell", "2.0");
         wtCP = sharedPref.getString("prefWeight_panel", "1.0");
 
         numPicks = Integer.parseInt(sharedPref.getString("prefAlliance_num", "24"));
@@ -504,18 +530,18 @@ public class DraftScout_Activity extends AppCompatActivity {
         getprefs();         // make sure Prefs are up to date
         switch (typ) {
             case "Climb":
-                form = "((" + climbSG + " * Climbed) + (" + parkSG +" * Parked + (" + Balanced + "*Balanced))  ✚  ((" + climbHang0 + " * Hang0) + (" + climbHang1 + "*Hang1) + (" + climbHang2 + " * Hang2) + \n(" + climbHang3 + " * Hang3))  ✚  " +"((Lift1 * " + climbLift1 + ") + " +"(Lift2 * " + climbLift2 + ") + (WasLifted * " + climbLifted + ")) / # matches";
+                form = "((" + climbSG + " * Climbed) + (" + parkSG + " * Parked + (" + Balanced + "*Balanced))  ✚  ((" + climbHang0 + " * Hang0) + (" + climbHang1 + "*Hang1) + (" + climbHang2 + " * Hang2) + \n(" + climbHang3 + " * Hang3))  ✚  " + "((Lift1 * " + climbLift1 + ") + " + "(Lift2 * " + climbLift2 + ") + (WasLifted * " + climbLifted + ")) / # matches";
                 lbl_Formula.setTextColor(Color.parseColor("#4169e1"));      // blue
                 txt_Formula.setText(form);
                 break;
             case "Cell":
-                form = "( (" + Cell_Dump +"* Dump) + (" + PowerCell_L0 +"* (aLow + tLow)) + (" + PowerCell_L1 +"* (AcellUnder + TcellUnder)} + (" + PowerCell_L2 + "* (AcellLine+ TcellLine)} + (" + PowerCell_L3 + "* (AcellFrontCP + TcellFrontCP)) + (" + PowerCell_L4 + "* TcellBackCP))  ✚  ";
+                form = "( (" + Cell_Dump + "* Dump) + (" + PowerCell_L0 + "* (aLow + tLow)) + (" + PowerCell_L1 + "* (AcellUnder + TcellUnder)} + (" + PowerCell_L2 + "* (AcellLine+ TcellLine)} + (" + PowerCell_L3 + "* (AcellFrontCP + TcellFrontCP)) + (" + PowerCell_L4 + "* TcellBackCP))  ✚  ";
                 form = form + " ( " + PowerCell_C0 + "*(aFloor + tFloor) + " + PowerCell_C1 + "*(aCP + tCP) + " + PowerCell_C2 + "*(aTrench + tTrench) + " + PowerCell_C3 + "*(aBoundary + tBoundary) + " + PowerCell_C4 + "*(aRobot + tRobot) + " + PowerCell_C5 + "*(tLoadSta) ) /#M matches";
                 lbl_Formula.setTextColor(Color.parseColor("#ee00ee"));      // magenta
                 txt_Formula.setText(form);
                 break;
             case "C.P.":
-                form = "((" + panel_L1 +"* spinCP) + (" + panel_L2 + "* colorCP)) " + "/# matches";
+                form = "((" + panel_L1 + "* spinCP) + (" + panel_L2 + "* colorCP)) " + "/# matches";
                 lbl_Formula.setTextColor(Color.parseColor("#00ff00"));      /// green
                 txt_Formula.setText(form);
                 break;
@@ -596,24 +622,24 @@ public class DraftScout_Activity extends AppCompatActivity {
 //            getMatch_Data();
             }
         }
-        public void onNothingSelected (AdapterView < ? > parent){
+
+        public void onNothingSelected(AdapterView<?> parent) {
             // Do nothing.
         }
     }
 
-public void Toast_Msg(String choice, Integer minimum) {
-    Toast toast = Toast.makeText(getBaseContext(), "\nCannot show '" + choice + "' some teams have " + minimum + " matches \n " , Toast.LENGTH_LONG);
-    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-    toast.show();
+    public void Toast_Msg(String choice, Integer minimum) {
+        Toast toast = Toast.makeText(getBaseContext(), "\nCannot show '" + choice + "' some teams have " + minimum + " matches \n ", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toast.show();
 
-}
-
+    }
 
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public void buttonDefault_Click(View view) {
         // Reload _ALL_ the Preference defaults
-        Log.i(TAG, ">>>>> buttonDefault_Click" );
+        Log.i(TAG, ">>>>> buttonDefault_Click");
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
@@ -626,7 +652,7 @@ public void Toast_Msg(String choice, Integer minimum) {
         loadTeams();                        // reload based on default
     }
 
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public void buttonMatch_Click(View view) {
         Log.i(TAG, ">>>>> buttonMatch_Click  " + teamSelected);
         HashMap<String, String> temp = new HashMap<String, String>();
@@ -659,8 +685,9 @@ public void Toast_Msg(String choice, Integer minimum) {
     public void buttonPit_Click(View view) {
         Log.i(TAG, ">>>>> buttonPit_Click  " + teamSelected);
         HashMap<String, String> temp = new HashMap<String, String>();
-        String teamHash="";
-        final String[] URL = {""};  Viz_URL = "";
+        String teamHash = "";
+        final String[] URL = {""};
+        Viz_URL = "";
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
         if (teamSelected >= 0) {
@@ -702,7 +729,7 @@ public void Toast_Msg(String choice, Integer minimum) {
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private void launchVizPit(String team, String name, String imgURL) {
-        Log.d(TAG,">>>>>>>>  launchVizPit " + team + " " + name + " " + imgURL);      // ** DEBUG **
+        Log.d(TAG, ">>>>>>>>  launchVizPit " + team + " " + name + " " + imgURL);      // ** DEBUG **
         Intent pit_intent = new Intent(DraftScout_Activity.this, VisPit_Activity.class);
         Bundle VZbundle = new Bundle();
         VZbundle.putString("team", team);        // Pass data to activity
@@ -730,7 +757,7 @@ public void Toast_Msg(String choice, Integer minimum) {
                         Pearadox.Matches_Data.add(mdobj);
                     }
                 }
-                Log.i(TAG, "***** Matches Loaded. # = "  + Pearadox.Matches_Data.size());
+                Log.i(TAG, "***** Matches Loaded. # = " + Pearadox.Matches_Data.size());
                 if (Pearadox.Matches_Data.size() > 0) {
                     Intent match_intent = new Intent(DraftScout_Activity.this, VisMatch_Activity.class);
                     Bundle VZbundle = new Bundle();
@@ -744,6 +771,7 @@ public void Toast_Msg(String choice, Integer minimum) {
                     toast.show();
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 /*listener failed or was removed for security reasons*/
@@ -759,12 +787,12 @@ public void Toast_Msg(String choice, Integer minimum) {
                 this,
                 draftList,
                 R.layout.draft_list_layout,
-                new String[] {"team","BA","Stats","Stats2","Stats3"},
-                new int[] {R.id.TeamData,R.id.BA, R.id.Stats, R.id.Stats2, R.id.Stats3}
+                new String[]{"team", "BA", "Stats", "Stats2", "Stats3"},
+                new int[]{R.id.TeamData, R.id.BA, R.id.Stats, R.id.Stats2, R.id.Stats3}
         );
 
         draftList.clear();
-        String totalScore="";
+        String totalScore = "";
         minMatches = 99;    // Reset for new search
         for (int i = 0; i < team_Scores.size(); i++) {    // load by sorted scores
             score_inst = team_Scores.get(i);
@@ -792,17 +820,17 @@ public void Toast_Msg(String choice, Integer minimum) {
                     totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_panelsScore()) + "]";
                     break;
                 case "Team#":
-                    totalScore=" ";
+                    totalScore = " ";
                     break;
                 default:                //
                     Log.e(TAG, "Invalid Sort - " + sortType);
             }
 
-            temp.put("Stats3", "☢ ¹" + CPspinNum + " ²"  + CPcolorNum + "  Climb ♺" + climb + " 円" + park  + " ⚖" + level + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + "    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted);
-            temp.put("Stats2", "Tele ◯◉ " + telePowerCellL0 + " U" + telePowerCellL1 + " L" + telePowerCellL2 + "  F" + telePowerCellL3 + "  B" + telePowerCellL4 + " ✿ U" + TconUnderNum + " L"  + TconLineNum + " F"  + TconFrontNum + " B"  + TconBackNum + "   ◯↑ F" + teleCollectFloor + " R" + teleCollectRobot + " C" + teleCollectCP + " T" + teleCollectTrench + " B" + teleCollectBoundary + " L" + teleCollectLoadSta);
-            temp.put("Stats",  "Auto ≠"  + SectLin + " ▼" + Dumped + "   ◯◉ " + autoCellLow + " U" + autoCellUnder + " L" + autoCellLine + " F" + autoCellFrontCP + " ✿ U" + AconUnderNum + " L"  + AconLineNum + " F"  + AconFrontNum + "   ◯↑ F" + autoCollectFloor + " R" + autoCollectRobot + " C" + autoCollectCP + " T" + autoCollectTrench + " B" + autoCollectBoundary  );
-            temp.put("team", tn + "-" + score_inst.getTeamName() + "  (" + mdNumMatches + ")  " +  totalScore);
-            temp.put("BA","Rank=" + tmRank + "   Score=" + tmRScore + "   WLT=" + tmWLT + "   OPR=" + tmOPR);
+            temp.put("Stats3", "☢ ¹" + CPspinNum + " ²" + CPcolorNum + "  Climb ♺" + climb + " 円" + park + " ⚖" + level + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + "    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted);
+            temp.put("Stats2", "Tele ◯◉ " + telePowerCellL0 + " U" + telePowerCellL1 + " L" + telePowerCellL2 + "  F" + telePowerCellL3 + "  B" + telePowerCellL4 + " ✿ U" + TconUnderNum + " L" + TconLineNum + " F" + TconFrontNum + " B" + TconBackNum + "   ◯↑ F" + teleCollectFloor + " R" + teleCollectRobot + " C" + teleCollectCP + " T" + teleCollectTrench + " B" + teleCollectBoundary + " L" + teleCollectLoadSta);
+            temp.put("Stats", "Auto ≠" + SectLin + " ▼" + Dumped + "   ◯◉ " + autoCellLow + " U" + autoCellUnder + " L" + autoCellLine + " F" + autoCellFrontCP + " ✿ U" + AconUnderNum + " L" + AconLineNum + " F" + AconFrontNum + "   ◯↑ F" + autoCollectFloor + " R" + autoCollectRobot + " C" + autoCollectCP + " T" + autoCollectTrench + " B" + autoCollectBoundary);
+            temp.put("team", tn + "-" + score_inst.getTeamName() + "  (" + mdNumMatches + ")  " + totalScore);
+            temp.put("BA", "Rank=" + tmRank + "   Score=" + tmRScore + "   WLT=" + tmWLT + "   OPR=" + tmOPR);
             draftList.add(temp);
         } // End For
         Log.w(TAG, "### Teams ###  : " + draftList.size());
@@ -835,7 +863,7 @@ public void Toast_Msg(String choice, Integer minimum) {
         }
         if (id == R.id.action_help) {
             Intent help_intent = new Intent(this, HelpActivity.class);
-            startActivity(help_intent);  	// Show Help
+            startActivity(help_intent);    // Show Help
             return true;
         }
         if (id == R.id.action_picks) {
@@ -848,7 +876,7 @@ public void Toast_Msg(String choice, Integer minimum) {
             return true;
         }
         if (id == R.id.action_screen) {
-            String filNam = Pearadox.FRC_Event.toUpperCase() + "-Draft"  + "_" + sortType + ".JPG";
+            String filNam = Pearadox.FRC_Event.toUpperCase() + "-Draft" + "_" + sortType + ".JPG";
             Log.w(TAG, "File='" + filNam + "'");
             try {
                 File imageFile = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/" + filNam);
@@ -875,7 +903,7 @@ public void Toast_Msg(String choice, Integer minimum) {
         return super.onOptionsItemSelected(item);
     }
 
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private void alliance_Picks() {
@@ -886,7 +914,9 @@ public void Toast_Msg(String choice, Integer minimum) {
 //        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 //        toast.show();
 
-        String tName = ""; String totalScore=""; String DS = "";
+        String tName = "";
+        String totalScore = "";
+        String DS = "";
         String underScore = new String(new char[30]).replace("\0", "_");    // string of 'x' underscores
         String blanks = new String(new char[50]).replace("\0", " ");        // string of 'x' blanks
         String pound = new String(new char[50]).replace("\0", "#");        // string of 'x' Pound
@@ -908,7 +938,7 @@ public void Toast_Msg(String choice, Integer minimum) {
         }
         if (numPicks > 24) {            //**** Try to keep on one page!
             DS = "";                    // Use Single Space
-        }else {
+        } else {
             DS = "\n";                  // Use Double Space on anything less than 24
         }
         try {
@@ -920,8 +950,8 @@ public void Toast_Msg(String choice, Integer minimum) {
             BufferedWriter bW = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(prt), "UTF-8"
             ));
-            bW.write(Pearadox.FRC_ChampDiv + "-" + Pearadox.FRC_EventName +  "\n");
-            bW.write(underScore + "  COMBINED  " + underScore +  "\n" + DS);
+            bW.write(Pearadox.FRC_ChampDiv + "-" + Pearadox.FRC_EventName + "\n");
+            bW.write(underScore + "  COMBINED  " + underScore + "\n" + DS);
             //  Combined sort
             Collections.sort(team_Scores, new Comparator<Scores>() {
                 @Override
@@ -939,14 +969,14 @@ public void Toast_Msg(String choice, Integer minimum) {
 //                Log.e(TAG, ">>>>  teamName '" + tName + "' ");
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_combinedScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
-                bW.write(String.format("%2d", i+1) +") " + tNumb + "-" + tName + "\t  (" + String.format("%2d",(Integer.parseInt(mdNumMatches))) + ")   " +  totalScore + " \t");
-                bW.write( "\n" + DS);
+                bW.write(String.format("%2d", i + 1) + ") " + tNumb + "-" + tName + "\t  (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ")   " + totalScore + " \t");
+                bW.write("\n" + DS);
             } // end For # teams
-            bW.write(" \n" + "\n" + (char)12);        // NL & FF
+            bW.write(" \n" + "\n" + (char) 12);        // NL & FF
             //=====================================================================
 
-            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName +  "\n");
-            bW.write(underScore + "  CELLS  " + underScore +  "\n \n");
+            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName + "\n");
+            bW.write(underScore + "  CELLS  " + underScore + "\n \n");
             //  Switch sort
             sortType = "Cell";
             Collections.sort(team_Scores, new Comparator<Scores>() {
@@ -964,14 +994,14 @@ public void Toast_Msg(String choice, Integer minimum) {
                 tName = tName + blanks.substring(0, (36 - tName.length()));
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_PowerCellScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
-                bW.write(String.format("%2d", i+1) + ") " + tNumb + "-" + tName  + "\t (" + String.format("%2d",(Integer.parseInt(mdNumMatches))) + ") " +  totalScore + "\t");
-                bW.write("Auto◯" + autoCellLow + " ₁" + autoCellUnder + " ₂" + autoCellLine + " ₃" + autoCellFrontCP + "  Tele" +"◯" + telePowerCellL0 + " ₁" + telePowerCellL1 + " ₂" + telePowerCellL2 + " ₃" + telePowerCellL3+ " ₄" + telePowerCellL4 + "\n" + DS);
+                bW.write(String.format("%2d", i + 1) + ") " + tNumb + "-" + tName + "\t (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ") " + totalScore + "\t");
+                bW.write("Auto◯" + autoCellLow + " ₁" + autoCellUnder + " ₂" + autoCellLine + " ₃" + autoCellFrontCP + "  Tele" + "◯" + telePowerCellL0 + " ₁" + telePowerCellL1 + " ₂" + telePowerCellL2 + " ₃" + telePowerCellL3 + " ₄" + telePowerCellL4 + "\n" + DS);
             } // end For # teams
-            bW.write(" \n" + "\n" + (char)12);        // NL & FF
+            bW.write(" \n" + "\n" + (char) 12);        // NL & FF
             //=====================================================================
 
-            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName +  "\n");
-            bW.write(underScore + "  CONTROL PANEL  " + underScore +  "\n" + DS);
+            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName + "\n");
+            bW.write(underScore + "  CONTROL PANEL  " + underScore + "\n" + DS);
             //  C.P. sort
             sortType = "C.P.";
             Collections.sort(team_Scores, new Comparator<Scores>() {
@@ -989,14 +1019,14 @@ public void Toast_Msg(String choice, Integer minimum) {
                 tName = tName + blanks.substring(0, (36 - tName.length()));
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_panelsScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
-                bW.write(String.format("%2d", i+1) +") " + tNumb + "-" + tName + "\t  (" + String.format("%2d",(Integer.parseInt(mdNumMatches))) + ")  " +  totalScore);
-                bW.write( "  ☢  ₁" + CPspinNum + " ₂" + CPcolorNum  + "\n" + DS);
+                bW.write(String.format("%2d", i + 1) + ") " + tNumb + "-" + tName + "\t  (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ")  " + totalScore);
+                bW.write("  ☢  ₁" + CPspinNum + " ₂" + CPcolorNum + "\n" + DS);
             } // end For # teams
-            bW.write(" \n" + "\n" + (char)12);        // NL & FF
+            bW.write(" \n" + "\n" + (char) 12);        // NL & FF
             //=====================================================================
 
-            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName +  "\n");
-            bW.write(underScore + "  CLIMB  " + underScore +  "\n \n");
+            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName + "\n");
+            bW.write(underScore + "  CLIMB  " + underScore + "\n \n");
             //  Scale sort
             sortType = "Climb";
             Collections.sort(team_Scores, new Comparator<Scores>() {
@@ -1014,10 +1044,10 @@ public void Toast_Msg(String choice, Integer minimum) {
                 tName = tName + blanks.substring(0, (36 - tName.length()));
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_climbScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
-                bW.write(String.format("%2d", i+1) +") " + tNumb + " - " + tName + "\t  (" + String.format("%2d",(Integer.parseInt(mdNumMatches))) + ") " +  totalScore + " \t");
+                bW.write(String.format("%2d", i + 1) + ") " + tNumb + " - " + tName + "\t  (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ") " + totalScore + " \t");
                 bW.write("♺" + climb + " 円" + park + " ⚖" + level);
-                bW.write("  Hang ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2  + " ₃" + climb_Hang3);
-                bW.write( "    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted + "\n" + DS);
+                bW.write("  Hang ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3);
+                bW.write("    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted + "\n" + DS);
             } // end For # teams
 //            bW.write(" \n" + "\n" + (char)12);        // NL & FF
             //=====================================================================
@@ -1063,10 +1093,10 @@ public void Toast_Msg(String choice, Integer minimum) {
 
             for (int i = 0; i < draftList.size(); i++) {    // load by sorted scores
                 temp = draftList.get(i);
-                bW.write(temp +  "\n");
+                bW.write(temp + "\n");
 
             } //end FOR
-                //**********************************************
+            //**********************************************
             bW.write(" \n" + "\n");        // NL
             bW.flush();
             bW.close();
@@ -1083,12 +1113,47 @@ public void Toast_Msg(String choice, Integer minimum) {
     /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
     private void teamData(String team) {
 //        Log.i(TAG, "$$$$  teamData  $$$$ " + team);
-        int base = 0; int dump = 0; int spinCP = 0; int colorCP = 0;
-        int colFloor = 0; int colRobot = 0; int colCP = 0; int colTrench = 0; int colBoundary = 0;
-        int TcolFloor = 0; int TcolRobot = 0; int TcolCP = 0; int TcolTrench = 0; int TcolBoundary = 0; int TcolLoadSta = 0;
-        int cellL0 = 0;int cellUnder = 0; int cellLine = 0; int cellFrontCP =0; int TcellL0 = 0; int TcellUnder = 0; int TcellLine = 0; int TcellFrontCP = 0; int TcellBackCP = 0; int TpanL1 = 0; int TpanL2 = 0; int TpanL3 = 0;
-        int climbed=0,parked=0, bal=0, climbH0= 0; int climbH1 = 0; int climbH2 = 0; int climbH3 = 0; int lift1Num = 0; int lift2Num = 0; int liftedNum = 0;
-        int conUnder = 0; int conLine = 0; int conFront = 0;   int TconUnder = 0; int TconLine = 0; int TconFront = 0; int TconBack = 0;
+        int base = 0;
+        int dump = 0;
+        int spinCP = 0;
+        int colorCP = 0;
+        int colFloor = 0;
+        int colRobot = 0;
+        int colCP = 0;
+        int colTrench = 0;
+        int colBoundary = 0;
+        int TcolFloor = 0;
+        int TcolRobot = 0;
+        int TcolCP = 0;
+        int TcolTrench = 0;
+        int TcolBoundary = 0;
+        int TcolLoadSta = 0;
+        int cellL0 = 0;
+        int cellUnder = 0;
+        int cellLine = 0;
+        int cellFrontCP = 0;
+        int TcellL0 = 0;
+        int TcellUnder = 0;
+        int TcellLine = 0;
+        int TcellFrontCP = 0;
+        int TcellBackCP = 0;
+        int TpanL1 = 0;
+        int TpanL2 = 0;
+        int TpanL3 = 0;
+        int climbed = 0, parked = 0, bal = 0, climbH0 = 0;
+        int climbH1 = 0;
+        int climbH2 = 0;
+        int climbH3 = 0;
+        int lift1Num = 0;
+        int lift2Num = 0;
+        int gotLiftedNum = 0;
+        int conUnder = 0;
+        int conLine = 0;
+        int conFront = 0;
+        int TconUnder = 0;
+        int TconLine = 0;
+        int TconFront = 0;
+        int TconBack = 0;
         int numMatches = 0;
 
 //        Log.d(TAG, ">>>>>>> All_Matches " + All_Matches.size());
@@ -1212,14 +1277,16 @@ public void Toast_Msg(String choice, Integer minimum) {
                 }
 
                 if (match_inst.isTele_lifted()) {
-                    lift1Num++;
-                }
-// ToDo - Lift 2
-                //                if (match_inst.isTele_lift_two()) {
-//                    lift2Num++;
-//                }
-                if (match_inst.isTele_got_lift()) {
-                    liftedNum++;
+                    if (match_inst.getTele_liftedNum() == 1) {
+                        lift1Num++;
+                    } else {
+                        if (match_inst.getTele_liftedNum() == 2) {
+                            lift2Num++;
+                        }
+                    }
+                    if (match_inst.isTele_got_lift()) {
+                        gotLiftedNum++;
+                    }
                 }
 //                Log.w(TAG, "Accum. matches = " + numMatches);
             } //End if teams equal
@@ -1233,7 +1300,7 @@ public void Toast_Msg(String choice, Integer minimum) {
         }
         if (numMatches > 0) {
             SectLin = String.valueOf(base);
-            Dumped = String.valueOf(dump); 
+            Dumped = String.valueOf(dump);
             autoCellLow = String.valueOf(cellL0);
             autoCellUnder = String.valueOf(cellUnder);
             autoCellLine = String.valueOf(cellLine);
@@ -1272,9 +1339,9 @@ public void Toast_Msg(String choice, Integer minimum) {
             climb_Hang3 = String.valueOf(climbH3);
             liftOne = String.valueOf(lift1Num);
             liftTwo = String.valueOf(lift2Num);
-            gotLifted = String.valueOf(liftedNum);
+            gotLifted = String.valueOf(gotLiftedNum);
         } else {
-            SectLin  = "0";
+            SectLin = "0";
             Dumped = "0";
             autoCellLow = "0";
             autoCellUnder = "0";
@@ -1308,31 +1375,42 @@ public void Toast_Msg(String choice, Integer minimum) {
             climb = "0";
             park = "0";
             level = "0";
-            climb_Hang0 = "0"; climb_Hang1 = "0"; climb_Hang2 = "0"; climb_Hang3 = "0";
+            climb_Hang0 = "0";
+            climb_Hang1 = "0";
+            climb_Hang2 = "0";
+            climb_Hang3 = "0";
             liftOne = "0";
             liftTwo = "0";
             gotLifted = "0";
         }
         //============================
-        float climbScore = 0; float cellScored = 0; float cellCollect = 0; float PowerCellScore = 0; float combinedScore = 0; float ControlPanelScore = 0;
-//        Log.e(TAG, team + " "+ climbs + " "+ lift1Num + " "+ lift2Num + " " + platNum +  " " + liftedNum + " / " + numMatches);
+        float climbScore = 0;
+        float cellScored = 0;
+        float cellCollect = 0;
+        float PowerCellScore = 0;
+        float combinedScore = 0;
+        float ControlPanelScore = 0;
         if (numMatches > 0) {
-            climbScore = (float) ((climbed * Float.parseFloat(climbSG) + (parked * Float.parseFloat(parkSG)) + (bal * Float.parseFloat(Balanced))) + ((climbH0 * Float.parseFloat(climbHang0)) + (climbH1 * Float.parseFloat(climbHang1)) + (climbH2 * Float.parseFloat(climbHang2)) + (climbH3 * Float.parseFloat(climbHang3)) + (lift1Num * Float.parseFloat(climbLift1)) + (lift2Num * Float.parseFloat(climbLift2)) + (liftedNum * Float.parseFloat(climbLifted))) / numMatches);
+            climbScore = ( (climbed * Float.parseFloat(climbSG) + (parked * Float.parseFloat(parkSG)) + (bal * Float.parseFloat(Balanced))) + ((climbH0 * Float.parseFloat(climbHang0)) + (climbH1 * Float.parseFloat(climbHang1)) + (climbH2 * Float.parseFloat(climbHang2)) + (climbH3 * Float.parseFloat(climbHang3))) + (lift1Num * Float.parseFloat(climbLift1)) + (lift2Num * Float.parseFloat(climbLift2)) + (gotLiftedNum * Float.parseFloat(climbLifted))) / (float)numMatches;
+            Log.e(TAG, team + " Climb ♺=" + (climbed*Float.parseFloat(climbSG)) + " 円=" + (parked*Float.parseFloat(parkSG)) + " ⚖=" + (bal*Float.parseFloat(Balanced)) + " ✚" + " ₀=" + (climbH0*Float.parseFloat(climbHang0)) + " ₁=" + (climbH1*Float.parseFloat(climbHang1)) + " ₂=" + (climbH2*Float.parseFloat(climbHang2)) + " ₃=" + (climbH3*Float.parseFloat(climbHang3)) + " ✚ ↨₁=" + (lift1Num*Float.parseFloat(climbLift1))+ " ↨₂=" + (lift2Num*Float.parseFloat(climbLift2))+ " ↑=" + (gotLiftedNum*Float.parseFloat(climbLifted)) + "  / " + numMatches + " ==[ " + climbScore + "]");
 
-            cellScored = ((dump * Float.parseFloat(Cell_Dump)) + ((cellL0+TcellL0) * Float.parseFloat(PowerCell_L0)) + ((cellUnder+TcellUnder) * Float.parseFloat(PowerCell_L1)) + ((cellLine+TcellLine) * Float.parseFloat(PowerCell_L2)) + ((cellFrontCP+TcellFrontCP) * Float.parseFloat(PowerCell_L3)) + ((TcellBackCP) * Float.parseFloat(PowerCell_L4)))  / numMatches;
-            cellCollect = ( (colFloor * Float.parseFloat(PowerCell_C0))  + (colRobot * Float.parseFloat(PowerCell_C1))  + (colCP * Float.parseFloat(PowerCell_C2)) + (colTrench * Float.parseFloat(PowerCell_C3)) + (colBoundary * Float.parseFloat(PowerCell_C4)) + (TcolLoadSta * Float.parseFloat(PowerCell_C4)));
+            cellScored = ( (dump * Float.parseFloat(Cell_Dump)) + ((cellL0 + TcellL0) * Float.parseFloat(PowerCell_L0)) + ((cellUnder + TcellUnder) * Float.parseFloat(PowerCell_L1)) + ((cellLine + TcellLine) * Float.parseFloat(PowerCell_L2)) + ((cellFrontCP + TcellFrontCP) * Float.parseFloat(PowerCell_L3)) + ((TcellBackCP) * Float.parseFloat(PowerCell_L4))) / (float)numMatches;
+            cellCollect = ( ((colFloor+ TcolFloor) * Float.parseFloat(PowerCell_C0)) + ((colRobot+TcolRobot) * Float.parseFloat(PowerCell_C1)) + ((colCP+TcolCP) * Float.parseFloat(PowerCell_C2)) + ((colTrench+TcolTrench) * Float.parseFloat(PowerCell_C3)) + ((colBoundary+TcolBoundary) * Float.parseFloat(PowerCell_C4)) + (TcolLoadSta * Float.parseFloat(PowerCell_C5))) / (float)numMatches;
             PowerCellScore = cellScored + cellCollect;
+//            Log.e(TAG, team + " Cells " + cellScored +  " ✚ " + cellCollect + "  / " + numMatches + " ==[ " + PowerCellScore + "]");
 
-            ControlPanelScore = (float) ((spinCP * Float.parseFloat(panel_L1)) + (colorCP * Float.parseFloat(panel_L2))  / numMatches);
+            ControlPanelScore = ( (spinCP * Float.parseFloat(panel_L1)) + (colorCP * Float.parseFloat(panel_L2))) / (float)numMatches;
+//            Log.e(TAG, team + " C.P. " + spinCP + " *" + panel_L1 + " ✚ " + colorCP + " *" + panel_L2 + "  / " + numMatches + " ==[ " + ControlPanelScore + "]");
+//            Log.e(TAG, team + " Math " + ( (spinCP * Float.parseFloat(panel_L1)) +  (colorCP * Float.parseFloat(panel_L2)) / (float)numMatches) );
 
-            combinedScore = (((climbScore * Float.parseFloat(wtClimb) + (PowerCellScore * Float.parseFloat(wtPowerCell)) + (ControlPanelScore * Float.parseFloat(wtCP)))) / numMatches);
+            combinedScore = (((climbScore * Float.parseFloat(wtClimb) + (PowerCellScore * Float.parseFloat(wtPowerCell)) + (ControlPanelScore * Float.parseFloat(wtCP)))) / (float)numMatches);
         } else {
             PowerCellScore = 0;
             ControlPanelScore = 0;
             climbScore = 0;
             combinedScore = 0;
         }
-        String tNumber="";
+        String tNumber = "";
         for (int i = 0; i < team_Scores.size(); i++) {    // load by sorted scores
             Scores score_data = new Scores();
             score_data = team_Scores.get(i);
@@ -1344,8 +1422,10 @@ public void Toast_Msg(String choice, Integer minimum) {
                 score_data.setSCORE_combinedScore(combinedScore);     //   scores
                 score_data.setSCORE_panelsScore(ControlPanelScore);   //
             }
-        }
-    }
+        }  // end For
+    } // end teamData
+
+
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private void addMD_VE_Listener(final DatabaseReference pfMatchData_DBReference) {
