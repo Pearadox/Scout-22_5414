@@ -1136,6 +1136,12 @@ pitData Pit_Data = new pitData();
                             case ("775pro"):
                                 spinner_Motor.setSelection(3);
                                 break;
+                            case ("NEO"):
+                                spinner_Motor.setSelection(4);
+                                break;
+                            case ("Falcon 500"):
+                                spinner_Motor.setSelection(5);
+                                break;
                             default:
                                 Log.w(TAG, "►►►►►  E R R O R  ◄◄◄◄◄");
                                 break;
@@ -1267,6 +1273,11 @@ pitData Pit_Data = new pitData();
                                    View view, int pos, long id) {
             motor = parent.getItemAtPosition(pos).toString();
             Log.d(TAG, ">>>>> Motor  '" + motor + "' " + pos);
+            if (motor.equals("Falcon 500")) {
+                Toast toast = Toast.makeText(getBaseContext(), "This motor has a reported set screw problem;\nAsk team if they had made suggested repairs.", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+            }
         }
         public void onNothingSelected(AdapterView<?> parent) {
             // Do nothing.
