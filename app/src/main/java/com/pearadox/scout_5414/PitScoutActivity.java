@@ -1274,7 +1274,7 @@ pitData Pit_Data = new pitData();
             motor = parent.getItemAtPosition(pos).toString();
             Log.d(TAG, ">>>>> Motor  '" + motor + "' " + pos);
             if (motor.equals("Falcon 500")) {
-                Toast toast = Toast.makeText(getBaseContext(), "This motor has a reported set screw problem;\nAsk team if they had made suggested repairs.", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getBaseContext(), "This motor has a reported set screw problem;\nAsk team if they have made suggested repairs.", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 toast.show();
             }
