@@ -485,24 +485,25 @@ public class TeleopScoutActivity extends Activity {
                 Log.w(TAG, "chk_UnderSG Listener");
                 if (buttonView.isChecked()) {
                     Log.w(TAG, "UnderSG is checked.");
-                    if (Climbed) {
-                        Log.e(TAG, "ERROR - cannot select if 'Climmbed' checked");
-                        Toast.makeText(getBaseContext(), "*** End # Hanging _MUST_ be selected ***", Toast.LENGTH_LONG).show();
-                        final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                        tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
-                    } else {
-                        UnderSG = true;
-                        chk_Climbed.setEnabled(false);
-                        Climbed = false;
-                        chk_LiftedBy.setEnabled(false);
-                        chk_Lifted.setEnabled(false);
-                    }
+                    UnderSG = true;
+                    Climbed = false;
+                    Balanced = false;
+                    chk_Climbed.setEnabled(false);
+                    chk_Climbed.setChecked(false);
+                    chk_LiftedBy.setEnabled(false);
+                    chk_LiftedBy.setChecked(false);
+                    chk_Lifted.setEnabled(false);
+                    chk_Lifted.setChecked(false);
+                    chk_Balanced.setEnabled(false);
+                    chk_Balanced.setChecked(false);
+
                 } else {  //not checked
-                    Log.w(TAG,"UnderSG is unchecked.");
+                    Log.w(TAG, "UnderSG is unchecked.");
                     UnderSG = false;
                     chk_Climbed.setEnabled(true);
                     chk_LiftedBy.setEnabled(true);
                     chk_Lifted.setEnabled(true);
+                    chk_Balanced.setEnabled(true);
                 }
             }
         });
