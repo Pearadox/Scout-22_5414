@@ -111,7 +111,7 @@ public class DraftScout_Activity extends AppCompatActivity {
     //    ArrayList<String> draftList = new ArrayList<String>();
     static final ArrayList<HashMap<String, String>> draftList = new ArrayList<HashMap<String, String>>();
     public int teamSelected = -1;
-    public static String sortType = "";
+    public static String sortType = "Team#";
     private ProgressDialog progress;
     String tNumb = "";
     String tn = "";
@@ -335,7 +335,7 @@ public class DraftScout_Activity extends AppCompatActivity {
     public ArrayList<Scores> team_Scores = new ArrayList<Scores>();
     Scores score_inst = new Scores();
 
-    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -377,6 +377,8 @@ public class DraftScout_Activity extends AppCompatActivity {
 
         pfDatabase = FirebaseDatabase.getInstance();
         pfMatchData_DBReference = pfDatabase.getReference("match-data/" + Pearadox.FRC_Event);    // Match Data
+        sortType = "Team#";     // Make 'Team#' the default
+        initScores();
 
         RadioGroup radgrp_Sort = findViewById(R.id.radgrp_Sort);
         for (int i = 0; i < radgrp_Sort.getChildCount(); i++) {        // turn them all OFF
@@ -420,19 +422,6 @@ public class DraftScout_Activity extends AppCompatActivity {
                         showFormula("Cell");              // update the formula
                         loadTeams();
                         break;
-                    case "Combined":
-//                Log.w(TAG, "Combined sort");
-                        sortType = "Combined";
-                        Collections.sort(team_Scores, new Comparator<Scores>() {
-                            @Override
-                            public int compare(Scores c1, Scores c2) {
-                                return Float.compare(c1.getSCORE_combinedScore(), c2.getSCORE_combinedScore());
-                            }
-                        });
-                        Collections.reverse(team_Scores);   // Descending
-                        showFormula(sortType);              // update the formula
-                        loadTeams();
-                        break;
                     case "C.P.":
                         sortType = "C.P.";
 //                        Log.w(TAG, "C.P. sort");
@@ -446,12 +435,25 @@ public class DraftScout_Activity extends AppCompatActivity {
                         showFormula(sortType);              // update the formula
                         loadTeams();
                         break;
+                    case "Combined":
+//                Log.w(TAG, "Combined sort");
+                        sortType = "Combined";
+                        Collections.sort(team_Scores, new Comparator<Scores>() {
+                            @Override
+                            public int compare(Scores c1, Scores c2) {
+                                return Float.compare(c1.getSCORE_combinedScore(), c2.getSCORE_combinedScore());
+                            }
+                        });
+                        Collections.reverse(team_Scores);   // Descending
+                        showFormula(sortType);              // update the formula
+                        loadTeams();
+                        break;
                     case "Team#":
 //                Log.w(TAG, "Team# sort");
                         sortType = "Team#";
                         Collections.sort(team_Scores, Scores.teamComp);
                         lbl_Formula.setTextColor(Color.parseColor("#ffffff"));
-                        txt_Formula.setText(" ");       // set formulat to blank
+                        txt_Formula.setText(" ");       // set formula to blank
                         loadTeams();
                         break;
                     default:                //
@@ -1392,7 +1394,7 @@ public class DraftScout_Activity extends AppCompatActivity {
         float ControlPanelScore = 0;
         if (numMatches > 0) {
             climbScore = ( (climbed * Float.parseFloat(climbSG) + (parked * Float.parseFloat(parkSG)) + (bal * Float.parseFloat(Balanced))) + ((climbH0 * Float.parseFloat(climbHang0)) + (climbH1 * Float.parseFloat(climbHang1)) + (climbH2 * Float.parseFloat(climbHang2)) + (climbH3 * Float.parseFloat(climbHang3))) + (lift1Num * Float.parseFloat(climbLift1)) + (lift2Num * Float.parseFloat(climbLift2)) + (gotLiftedNum * Float.parseFloat(climbLifted))) / (float)numMatches;
-            Log.e(TAG, team + " Climb ♺=" + (climbed*Float.parseFloat(climbSG)) + " 円=" + (parked*Float.parseFloat(parkSG)) + " ⚖=" + (bal*Float.parseFloat(Balanced)) + " ✚" + " ₀=" + (climbH0*Float.parseFloat(climbHang0)) + " ₁=" + (climbH1*Float.parseFloat(climbHang1)) + " ₂=" + (climbH2*Float.parseFloat(climbHang2)) + " ₃=" + (climbH3*Float.parseFloat(climbHang3)) + " ✚ ↨₁=" + (lift1Num*Float.parseFloat(climbLift1))+ " ↨₂=" + (lift2Num*Float.parseFloat(climbLift2))+ " ↑=" + (gotLiftedNum*Float.parseFloat(climbLifted)) + "  / " + numMatches + " ==[ " + climbScore + "]");
+//            Log.e(TAG, team + " Climb ♺=" + (climbed*Float.parseFloat(climbSG)) + " 円=" + (parked*Float.parseFloat(parkSG)) + " ⚖=" + (bal*Float.parseFloat(Balanced)) + " ✚" + " ₀=" + (climbH0*Float.parseFloat(climbHang0)) + " ₁=" + (climbH1*Float.parseFloat(climbHang1)) + " ₂=" + (climbH2*Float.parseFloat(climbHang2)) + " ₃=" + (climbH3*Float.parseFloat(climbHang3)) + " ✚ ↨₁=" + (lift1Num*Float.parseFloat(climbLift1))+ " ↨₂=" + (lift2Num*Float.parseFloat(climbLift2))+ " ↑=" + (gotLiftedNum*Float.parseFloat(climbLifted)) + "  / " + numMatches + " ==[ " + climbScore + "]");
 
             cellScored = ( (dump * Float.parseFloat(Cell_Dump)) + ((cellL0 + TcellL0) * Float.parseFloat(PowerCell_L0)) + ((cellUnder + TcellUnder) * Float.parseFloat(PowerCell_L1)) + ((cellLine + TcellLine) * Float.parseFloat(PowerCell_L2)) + ((cellFrontCP + TcellFrontCP) * Float.parseFloat(PowerCell_L3)) + ((TcellBackCP) * Float.parseFloat(PowerCell_L4))) / (float)numMatches;
             cellCollect = ( ((colFloor+ TcolFloor) * Float.parseFloat(PowerCell_C0)) + ((colRobot+TcolRobot) * Float.parseFloat(PowerCell_C1)) + ((colCP+TcolCP) * Float.parseFloat(PowerCell_C2)) + ((colTrench+TcolTrench) * Float.parseFloat(PowerCell_C3)) + ((colBoundary+TcolBoundary) * Float.parseFloat(PowerCell_C4)) + (TcolLoadSta * Float.parseFloat(PowerCell_C5))) / (float)numMatches;
@@ -1449,15 +1451,19 @@ public class DraftScout_Activity extends AppCompatActivity {
                 Button btn_Pit = findViewById(R.id.btn_Pit);
                 imgStat_Load.setImageDrawable(getResources().getDrawable(R.drawable.traffic_light_green));
                 txt_LoadStatus.setText(All_Matches.size() + " Matches");
-                radio_Team = findViewById(R.id.radio_Team);
-                radio_Team.performClick();         // "force" radio button click  (so it works 1st time)
                 for(int i = 0; i < radgrp_Sort.getChildCount(); i++){        // turn them all ON
                     radgrp_Sort.getChildAt(i).setEnabled(true);
                 }
+//              radio_Team = findViewById(R.id.radio_Team);
+//              radio_Team.performClick();         // "force" radio button click  (so it works 1st time)
                 btn_Match.setEnabled(true);
                 btn_Match.setVisibility(View.VISIBLE);
                 btn_Pit.setEnabled(true);
                 btn_Pit.setVisibility(View.VISIBLE);
+                sortType = "Team#";          // Attempt to "force" correct sort 1st time
+                Collections.sort(team_Scores, Scores.teamComp);
+                loadTeams();    // load for 1st time in Team# order
+
                 pbSpinner.setVisibility(View.INVISIBLE);
 //                setProgressBarIndeterminateVisibility(false);
             }
@@ -1469,9 +1475,6 @@ public class DraftScout_Activity extends AppCompatActivity {
         });
 
         // ======================================================================================
-        sortType = "Team#";          // Attempt to "force" correct sort 1st time
-        Collections.sort(team_Scores, Scores.teamComp);
-        loadTeams();    // load for 1st time in Team# order
     }
 
     private void initScores() {
@@ -1489,18 +1492,15 @@ public class DraftScout_Activity extends AppCompatActivity {
             curScrTeam.setScrOPR(team_inst.getTeam_OPR());
 //            Log.w(TAG, curScrTeam.getTeamNum() + "  " + curScrTeam.getTeamName());
             curScrTeam.setSCORE_climbScore((float) 0);        //Climb
-            curScrTeam.setSCORE_PowerCellScore((float) 0);        // Cell
+            curScrTeam.setSCORE_PowerCellScore((float) 0);    // Cell
             curScrTeam.setSCORE_combinedScore((float) 0);     // Combined
             curScrTeam.setSCORE_panelsScore((float) 0);       // C.P.
             team_Scores.add(i, curScrTeam);
         } // end For
         Log.w(TAG, "#Scores = " + team_Scores.size());
-        if (sortType.matches("") || sortType.matches("Team#")) {       // if 1st time
-            sortType = "Team#";
-        } else {
-//            SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-//            String sortType = prefs.getString("Sort", "");
-//
+//        if (sortType.matches("") || sortType.matches("Team#")) {       // if 1st time
+//            sortType = "Team#";
+//        } else {
             // ToDONE - Load teams according to Radio Button (VisMatch return messes it up)
             Log.e(TAG, "Leave scores alone '"  + sortType + "'");
             radgrp_Sort = findViewById(R.id.radgrp_Sort);
@@ -1523,10 +1523,14 @@ public class DraftScout_Activity extends AppCompatActivity {
                     radio_ControlPanel = findViewById(R.id.radio_ControlPanel);
                     radio_ControlPanel.performClick();         // "force" radio button click
                     break;
+                case "Team#":
+                    radio_Team = findViewById(R.id.radio_Team);
+                    radio_Team.performClick();         // "force" radio button click
+                    break;
                 default:                //
                     Log.e(TAG, "*** Invalid Type " + sortType);
             }
-        }
+//        } // End IF SortTyp
     }
 
 //###################################################################
@@ -1536,38 +1540,45 @@ public class DraftScout_Activity extends AppCompatActivity {
 public void onStart() {
     super.onStart();
     Log.v(TAG, "onStart");
-    sortType = "Team#";     // Make 'Team#' the default
-    initScores();
+    is_Resumed = false;
     addMD_VE_Listener(pfMatchData_DBReference);        // Load _ALL_ Matches
     }
-
 
 @Override
 public void onResume() {
     super.onResume();
     Log.v(TAG, "****> onResume <**** " + sortType);
     is_Resumed = true;
+    }
+
+@Override
+public void onRestart() {
+    super.onRestart();
+    Log.v(TAG, "****> onRestart <**** " + sortType);
     SharedPreferences prefs = getPreferences(MODE_PRIVATE);
     String sortType = prefs.getString("Sort", "");
-    Log.d(TAG, "Resume Prefs >> " + sortType);
-    initScores();           // make sure it sorts by _LAST_ radio button
-    }
+    Log.d(TAG, "Restart Prefs >> " + sortType);
+}
 
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.v(TAG, "onPause  "  + sortType);
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("Sort", sortType);
-        editor.commit();        // keep sort type
-    }
+@Override
+public void onPause() {
+    super.onPause();
+    Log.v(TAG, "onPause  "  + sortType);
+    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+    SharedPreferences.Editor editor = prefs.edit();
+    editor.putString("Sort", sortType);
+    editor.commit();        // keep sort type
+    Log.d(TAG, "Pause Prefs >> " + sortType);
+}
 @Override
 public void onStop() {
     super.onStop();
     Log.v(TAG, "onStop");
-    }
+    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+    SharedPreferences.Editor editor = prefs.edit();
+    editor.putString("Sort", "");
+    editor.commit();        // reset sort type
+}
 
 @Override
 public void onDestroy() {

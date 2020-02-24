@@ -7,8 +7,8 @@ android {
         applicationId "com.pearadox.scout_5414"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 33
-        versionName "3.33"
+        versionCode 34
+        versionName "3.34"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
