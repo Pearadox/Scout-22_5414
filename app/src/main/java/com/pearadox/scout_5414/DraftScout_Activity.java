@@ -63,6 +63,7 @@ public class DraftScout_Activity extends AppCompatActivity {
 
     String TAG = "DraftScout_Activity";        // This CLASS name
     Boolean is_Resumed = false;
+    Boolean restart = false;
     int start = 0;          // Start Position for matches (0=ALL)
     int numObjects = 0;
     int numProcessed = 0;
@@ -111,7 +112,7 @@ public class DraftScout_Activity extends AppCompatActivity {
     //    ArrayList<String> draftList = new ArrayList<String>();
     static final ArrayList<HashMap<String, String>> draftList = new ArrayList<HashMap<String, String>>();
     public int teamSelected = -1;
-    public static String sortType = "Team#";
+    public static String sortType = "";
     private ProgressDialog progress;
     String tNumb = "";
     String tn = "";
@@ -345,13 +346,14 @@ public class DraftScout_Activity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_draft_scout);
         Log.i(TAG, "@@@@@ DraftScout_Activity  @@@@@");
-        Log.e(TAG, "B4 - " + sortType);
-        if (savedInstanceState != null) {
+
+        Log.e(TAG, "B4 - " + sortType + "  R="+ restart);
+        if (restart) {
             Log.e(TAG, "Are we ever getting called? " + is_Resumed);
             SharedPreferences prefs = getPreferences(MODE_PRIVATE);
             String sortType = prefs.getString("Sort", "");
         } else {
-            //            sortType = "Team#";
+            sortType = "Team#";
         }
         Log.e(TAG, "After - " + sortType);
         getprefs();         // Get multiplier values from Preferences
@@ -377,13 +379,16 @@ public class DraftScout_Activity extends AppCompatActivity {
 
         pfDatabase = FirebaseDatabase.getInstance();
         pfMatchData_DBReference = pfDatabase.getReference("match-data/" + Pearadox.FRC_Event);    // Match Data
-        sortType = "Team#";     // Make 'Team#' the default
+
         initScores();
 
         RadioGroup radgrp_Sort = findViewById(R.id.radgrp_Sort);
         for (int i = 0; i < radgrp_Sort.getChildCount(); i++) {        // turn them all OFF
             radgrp_Sort.getChildAt(i).setEnabled(false);
         }
+
+
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         radgrp_Sort.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -1460,9 +1465,9 @@ public class DraftScout_Activity extends AppCompatActivity {
                 btn_Match.setVisibility(View.VISIBLE);
                 btn_Pit.setEnabled(true);
                 btn_Pit.setVisibility(View.VISIBLE);
-                sortType = "Team#";          // Attempt to "force" correct sort 1st time
+//                sortType = "Team#";          // Attempt to "force" correct sort 1st time
                 Collections.sort(team_Scores, Scores.teamComp);
-                loadTeams();    // load for 1st time in Team# order
+                loadTeams();    // load
 
                 pbSpinner.setVisibility(View.INVISIBLE);
 //                setProgressBarIndeterminateVisibility(false);
@@ -1540,8 +1545,9 @@ public class DraftScout_Activity extends AppCompatActivity {
 public void onStart() {
     super.onStart();
     Log.v(TAG, "onStart");
-    is_Resumed = false;
-    addMD_VE_Listener(pfMatchData_DBReference);        // Load _ALL_ Matches
+    if (!restart) {
+        addMD_VE_Listener(pfMatchData_DBReference);        // Load _ALL_ Matches
+    }
     }
 
 @Override
@@ -1555,6 +1561,7 @@ public void onResume() {
 public void onRestart() {
     super.onRestart();
     Log.v(TAG, "****> onRestart <**** " + sortType);
+    restart = true;
     SharedPreferences prefs = getPreferences(MODE_PRIVATE);
     String sortType = prefs.getString("Sort", "");
     Log.d(TAG, "Restart Prefs >> " + sortType);
@@ -1574,16 +1581,16 @@ public void onPause() {
 public void onStop() {
     super.onStop();
     Log.v(TAG, "onStop");
-    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-    SharedPreferences.Editor editor = prefs.edit();
-    editor.putString("Sort", "");
-    editor.commit();        // reset sort type
 }
 
 @Override
 public void onDestroy() {
     super.onDestroy();
     Log.v(TAG, "OnDestroy");
+    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+    SharedPreferences.Editor editor = prefs.edit();
+    editor.putString("Sort", "");
+    editor.commit();        // reset sort type
     }
 }
 
