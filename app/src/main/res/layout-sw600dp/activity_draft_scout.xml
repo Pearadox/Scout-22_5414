@@ -10,12 +10,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.pearadox.scout_5414.DraftScout_Activity">
 
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     <ImageView
         android:id="@+id/imageView_DS"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:contentDescription="Draft Scout logo"
         android:src="@drawable/draft_scout" />
 
@@ -70,11 +69,11 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/lbl_NumTeamsView"
         android:layout_alignTop="@+id/btn_Pit"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="-15dp"
         android:layout_marginTop="-30dp"
         android:text="99"
         android:textColor="@color/cyan"
-        android:textSize="14dp" />
+        android:textSize="24dp" />
 
     <TextView
         android:id="@+id/lbl_Formula"
@@ -90,30 +89,32 @@
     <TextView
         android:id="@+id/txt_Formula"
         android:layout_width="575dp"
-        android:layout_height="70dp"
-        android:layout_below="@+id/lbl_Formula"
+        android:layout_height="45dp"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/lbl_Formula"
         android:background="#d3d3d3"
         android:text="(A*(aCSw)+B*(aCSc)+C*(tCSw)+D*(tCSc)+E*(oth)+F*(Exc) \n more..."
         android:textColor="@color/black"
-        android:textSize="11sp" />
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/btn_Default"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
+        android:layout_alignEnd="@+id/lbl_Selected"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="61dp"
+        android:layout_alignStart="@+id/lbl_Selected"
+        android:layout_marginStart="20dp"
         android:onClick="buttonDefault_Click"
         android:padding="0dp"
-        android:text="Reset\n Defaults"
-        android:textSize="11sp" />
+        android:text="Reset Defaults" />
 
     <ImageView
         android:id="@+id/imgStat_Load"
         android:layout_width="30sp"
         android:layout_height="30sp"
         android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
         android:layout_toEndOf="@+id/btn_Default"
         android:contentDescription="Load Status"
         android:src="@drawable/traffic_light_red" />
@@ -173,22 +174,22 @@
 
     <Button
         android:id="@+id/btn_Match"
-        android:layout_width="60sp"
-        android:layout_height="25dp"
+        android:layout_width="70sp"
+        android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/lbl_NumTeamsView"
         android:background="@color/brightblue"
         android:onClick="buttonMatch_Click"
         android:text="MATCH DATA"
         android:textColor="@android:color/black"
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:backgroundTint="@color/cyan"
         tools:enabled="false" />
 
     <Button
         android:id="@+id/btn_Pit"
-        android:layout_width="60sp"
-        android:layout_height="25dp"
+        android:layout_width="70sp"
+        android:layout_height="30dp"
         android:layout_alignBottom="@+id/lbl_Formula"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="5dp"
@@ -196,7 +197,7 @@
         android:onClick="buttonPit_Click"
         android:text="PIT DATA"
         android:textColor="@android:color/black"
-        android:textSize="11sp"
+        android:textSize="12sp"
         tools:enabled="false" />
 
     <!--<Spinner-->
@@ -224,61 +225,62 @@
 
     <RadioGroup
         android:id="@+id/radgrp_Sort"
-        android:layout_width="220dp"
+        android:layout_width="400dp"
         android:layout_height="60dp"
         android:layout_below="@+id/lbl_Selected"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="-1dp"
+        android:layout_toEndOf="@+id/imageView_DS"
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radio_Team"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/grey"
             android:checked="true"
-            android:text="Team#"
-            android:textColor="@color/white" />
+            android:buttonTint="@color/grey"
+            android:textColor="@color/white"
+            android:text="Team#" />
 
         <RadioButton
             android:id="@+id/radio_PowerCell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:buttonTint="@color/magenta"
-            android:text="Cell"
-            android:textColor="@color/magenta" />
+            android:textColor="@color/magenta"
+            android:text="Cell" />
 
         <RadioButton
             android:id="@+id/radio_ControlPanel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:buttonTint="@color/green"
-            android:text="C.P."
-            android:textColor="@color/green" />
-
-        //-----------------------------------
+            android:textColor="@color/green"
+            android:text="C.P." />
 
         <RadioButton
             android:id="@+id/radio_Climb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="-190dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
             android:buttonTint="@color/blue"
-            android:text="Climb"
-            android:textColor="@color/brightblue" />
+            android:textColor="@color/brightblue"
+            android:text="Climb" />
+
+        //-----------------------------------
 
         <RadioButton
             android:id="@+id/radio_Weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_Pit"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="-240dp"
             android:layout_marginTop="30dp"
             android:buttonTint="@color/red"
-            android:text="Combined"
-            android:textColor="@color/red" />
+            android:textColor="@color/red"
+            android:text="Combined" />
 
         <!--<RadioButton-->
         <!--android:id="@+id/radio_pGt1"-->
