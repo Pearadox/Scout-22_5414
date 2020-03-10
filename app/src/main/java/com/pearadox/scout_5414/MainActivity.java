@@ -1,8 +1,10 @@
 package com.pearadox.scout_5414;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -13,6 +15,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -1120,6 +1124,23 @@ private void preReqs() {
         super.onStart();
         Log.i(TAG, "<<<<<  onStart  >>>>>");
         isInternetAvailable();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            Log.w(TAG, "*** Not authorized for SD card ***");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    99);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            Log.w(TAG, "*** Not authorized for Camera ***");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    110);
+        }
+
         FirebaseApp.initializeApp(this);
 //    FirebaseDatabase.getInstance().setPersistenceEnabled(true);     // Enable 'Offline' Database
         mAuth = FirebaseAuth.getInstance();
