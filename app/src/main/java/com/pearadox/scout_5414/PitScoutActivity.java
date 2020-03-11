@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -87,9 +88,11 @@ public class PitScoutActivity extends AppCompatActivity {
     Uri currentImageUri;
     String currentImagePath;
     String picname;
+    File robot_image;
+    String currentPhotoPath, path;
     AlertDialog alertbox;
-    int REQUEST_IMAGE_CAPTURE = 2;
-    int MAX_ROBOT_WEIGHT =125;      // 2020 maximum weight
+    int REQUEST_IMAGE_CAPTURE = 1;
+    int MAX_ROBOT_WEIGHT = 125;      // 2020 maximum weight
     public static String[] teams = new String[Pearadox.numTeams+1];  // Team list (array of just Team Names)
     public static String[] wheels = new String[]
             {"0","1","2","3","4","5","6", "7", "8"};
@@ -866,15 +869,40 @@ pitData Pit_Data = new pitData();
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
         } else {
-            File dirPhotos = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/images/" + Pearadox.FRC_Event + "/");
-            currentImagePath = String.valueOf(dirPhotos);
-            picname = "robot_" + teamSelected.trim() + ".png";
-            File x = new File (dirPhotos, picname);
-            currentImageUri = Uri.fromFile(x);
-            Intent intent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, currentImageUri); // set the image file name
-            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-            Log.w(TAG, "Photo taken");
+            File dirPhotos = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//            File dirPhotos = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/images/" + Pearadox.FRC_Event + "/");
+//            File dirPhotos = new File(Environment.getExternalStorageDirectory() + "/Android/data/com.pearadox.scout_5414/files/Pictures" );
+//            currentImagePath = String.valueOf(dirPhotos);
+            picname = "robot_" + teamSelected.trim();
+            File photoFile = null;
+            try {
+                File robot_image = File.createTempFile(
+                        picname,            /* prefix */
+                        ".png",       /* suffix */
+                        dirPhotos           /* directory */
+                );
+                photoFile = robot_image;
+                currentPhotoPath = robot_image.getPath();
+                File f = new File(currentPhotoPath);
+                Uri currentImageUri = Uri.fromFile(f);
+//                currentPhotoPath = robot_image.getAbsolutePath();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+//            File x = new File (dirPhotos, picname);
+//            Uri currentImageUri = Uri.fromFile(x);
+            if (photoFile != null) {
+//                Uri currentImageUri = FileProvider.getUriForFile(this,
+//                        "com.pearadox.scout_5414.android.fileprovider", photoFile);
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, currentImageUri);   // set the image file name
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    Log.w(TAG, "Photo taken");
+                } else {
+                    Log.w(TAG, "Photo _NOT_taken");
+                }
+            }
         }
     }
 
@@ -883,23 +911,38 @@ pitData Pit_Data = new pitData();
         Log.w(TAG, "*****  onActivityResult " + requestCode);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == PitScoutActivity.RESULT_OK) {
             Log.w(TAG, "requestCode = '" + requestCode + "'");
+            ImageView img_Photo = (ImageView) findViewById(R.id.img_Photo);
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            img_Photo.setImageBitmap(imageBitmap);
             galleryAddPic();
             File savedFile;
-            if(currentImagePath == null){
+            if(currentPhotoPath == null){
                 savedFile= new File(currentImageUri.getPath());
             }else{
-                savedFile = new File(currentImagePath);
+                savedFile = new File(currentPhotoPath);
             }
 
             String filename = "robot_" + teamSelected.trim() + ".png";
-            File directPhotos = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/images/" + Pearadox.FRC_Event + "/" + filename);
+//            File directPhotos = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/images/" + Pearadox.FRC_Event + "/" + filename);
 
-            ImageView img_Photo = (ImageView) findViewById(R.id.img_Photo);
             Log.w(TAG, "@@@ PHOTO EXISTS LOCALLY @@@ ");
+            int targetW = img_Photo.getWidth();
+            int targetH = img_Photo.getHeight();
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(directPhotos.getAbsolutePath(),bmOptions);
-            bitmap = Bitmap.createScaledBitmap(bitmap,img_Photo.getWidth(),img_Photo.getHeight(),true);
-            img_Photo.setImageBitmap(bitmap);
+            bmOptions.inJustDecodeBounds = true;
+            int photoW = bmOptions.outWidth;
+            int photoH = bmOptions.outHeight;
+            int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+            // Decode the image file into a Bitmap sized to fill the View
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inSampleSize = scaleFactor;
+            bmOptions.inPurgeable = true;
+
+            Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath,bmOptions);
+//            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+//            bitmap = Bitmap.createScaledBitmap(bitmap,img_Photo.getWidth(),img_Photo.getHeight(),true);
+//            img_Photo.setImageBitmap(bitmap);
 
             if (!imageOnFB) {
                 SaveToFirebase(savedFile);
@@ -914,6 +957,9 @@ pitData Pit_Data = new pitData();
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReferenceFromUrl("gs://pearadox-2020.appspot.com/images/"+ Pearadox.FRC_Event).child(picname);
+        File f = new File(currentPhotoPath);
+        // ToDo - take off time hack
+        Uri currentImageUri = Uri.fromFile(f);
 
         UploadTask uploadTask = storageReference.putFile(currentImageUri);
 
@@ -930,10 +976,10 @@ pitData Pit_Data = new pitData();
     }
 
     private void galleryAddPic() {
-        /**
-         * copy current image to Gallery
-         */
+        /** * copy current image to Gallery */
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(currentPhotoPath);
+        Uri currentImageUri = Uri.fromFile(f);
         mediaScanIntent.setData(currentImageUri);
         this.sendBroadcast(mediaScanIntent);
     }
