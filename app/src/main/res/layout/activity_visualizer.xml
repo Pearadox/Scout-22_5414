@@ -85,28 +85,6 @@
         android:textColor="@color/magenta"
         android:textSize="14sp" />
 
-    <!--<Spinner-->
-    <!--android:id="@+id/spinner_MatchType"-->
-    <!--android:layout_width="140dp"-->
-    <!--android:layout_height="25dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:prompt="@string/mtchtyp_prompt"-->
-    <!--android:visibility="invisible"-->
-    <!--android:layout_alignTop="@+id/lbl_MatchType"-->
-    <!--android:layout_toRightOf="@+id/lbl_MatchType"-->
-    <!--android:layout_toEndOf="@+id/lbl_MatchType" />-->
-
-    <!--<Spinner-->
-    <!--android:id="@+id/spinner_MatchNum"-->
-    <!--android:layout_width="80dp"-->
-    <!--android:layout_height="25dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:visibility="invisible"-->
-    <!--android:layout_below="@+id/spinner_MatchType"-->
-    <!--android:layout_alignLeft="@+id/spinner_MatchType"-->
-    <!--android:layout_alignStart="@+id/spinner_MatchType"-->
-    <!--android:layout_marginLeft="14sp"-->
-    <!--android:layout_marginStart="14sp" />-->
 
     <TextView
         android:id="@+id/lbl_MatchType"
@@ -309,7 +287,7 @@
         android:orientation="horizontal">
 
 
-        // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
 
         <TextView
             android:id="@+id/lbl_teamB1"
@@ -568,8 +546,8 @@
                     android:padding="1dip"
                     android:paddingLeft="1dip"
                     android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                    android:textColor="@color/grey"
-                    android:textSize="10sp" />
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -588,13 +566,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1R1"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/orange" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/orange"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1R1"
@@ -616,13 +595,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2R1"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/red" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/red"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2R1"
@@ -712,8 +692,8 @@
                     android:padding="1dip"
                     android:paddingLeft="1dip"
                     android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                    android:textColor="@color/grey"
-                    android:textSize="10sp" />
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -732,13 +712,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1R2"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/orange" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/orange"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1R2"
@@ -760,13 +741,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2R2"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/red" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/red"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2R2"
@@ -857,8 +839,8 @@
                         android:padding="1dip"
                         android:paddingLeft="1dip"
                         android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                        android:textColor="@color/grey"
-                        android:textSize="10sp" />
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -877,13 +859,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1R3"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/orange" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/orange"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1R3"
@@ -905,13 +888,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2R3"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/red" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/red"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2R3"
@@ -1004,8 +988,8 @@
                         android:padding="1dip"
                         android:paddingLeft="1dip"
                         android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                        android:textColor="@color/grey"
-                        android:textSize="10sp" />
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -1024,13 +1008,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1B1"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/brightblue" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/brightblue"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1B1"
@@ -1052,13 +1037,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2B1"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/cyan" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/cyan"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2B1"
@@ -1151,8 +1137,8 @@
                         android:padding="1dip"
                         android:paddingLeft="1dip"
                         android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                        android:textColor="@color/grey"
-                        android:textSize="10sp" />
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -1171,13 +1157,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1B2"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/brightblue" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/brightblue"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1B2"
@@ -1199,13 +1186,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2B2"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/cyan" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/cyan"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2B2"
@@ -1298,8 +1286,8 @@
                         android:padding="1dip"
                         android:paddingLeft="1dip"
                         android:text="Rank=99  Score=00.00  \nWLT=00-00-00   OPR=99.000"
-                        android:textColor="@color/grey"
-                        android:textSize="10sp" />
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -1318,13 +1306,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event1B3"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/brightblue" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/brightblue"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate1B3"
@@ -1346,13 +1335,14 @@
 
                     <TextView
                         android:id="@+id/tbl_event2B3"
-                        android:layout_width="10sp"
+                        android:layout_width="8dp"
                         android:layout_height="41sp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.14"
                         android:gravity="start"
                         android:padding="1dip"
-                        android:text="Sand \nTele"
-                        android:textColor="@color/cyan" />
+                        android:text="Auto \nTele"
+                        android:textColor="@color/cyan"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tbl_rate2B3"

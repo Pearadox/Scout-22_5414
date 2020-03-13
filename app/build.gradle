@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.pearadox.scout_5414"
         minSdkVersion 18
-        targetSdkVersion 26
-        versionCode 27
-        versionName "2.27"
+        targetSdkVersion 28
+        versionCode 35
+        versionName "3.35"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -51,3 +51,4 @@ dependencies {
 
 
 apply plugin: 'com.google.gms.google-services'
+

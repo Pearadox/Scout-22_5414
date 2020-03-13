@@ -134,7 +134,6 @@ public class Bluetooth_Activity extends AppCompatActivity {
                             btArray[4] = deviceHardwareAddress;
                             break;
                         case ("Blue-3"):
-                        case ("Gale's Tablet"):         // *** DEBUG!! ***
                             dev_inst.setDev_id("B3");
                             dev_inst.setDev_name(deviceName);
                             dev_inst.setBtUUID(deviceHardwareAddress);

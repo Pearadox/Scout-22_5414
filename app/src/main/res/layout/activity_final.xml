@@ -15,7 +15,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textAlignment="center" />
 
-
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     <CheckBox
@@ -37,23 +36,6 @@
         android:layout_alignBottom="@+id/chk_lostPart"
         android:layout_toEndOf="@+id/chk_lostPart" />
 
-    <CheckBox
-        android:id="@+id/chk_cargoDefense"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/chk_lostPart"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="1dp"
-        android:text="P/U Cargo on Defense" />
-
-    <CheckBox
-        android:id="@+id/chk_defense30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/chk_lostPart"
-        android:layout_marginStart="210dp"
-        android:layout_marginTop="1dp"
-        android:text="last 30sec. Defense" />
 
 
     //============ DEFENSE==============
@@ -70,41 +52,33 @@
         android:textSize="16sp" />
 
     <CheckBox
-        android:id="@+id/chkBox_final_int_Rocket"
+        android:id="@+id/chkBox_final_int_Trench"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lbl_Defense"
-        android:text="Rocket Interference" />
+        android:text="Trench Interference" />
 
     <CheckBox
         android:id="@+id/chk_block"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/chk_defense30"
-        android:layout_alignBottom="@+id/chkBox_final_int_Rocket"
-        android:text="Blocking" />
+        android:layout_alignStart="@+id/chk_lostComm"
+        android:layout_alignBottom="@+id/chkBox_final_int_Trench"
+        android:text="Blocking under SG" />
 
-    <!--<CheckBox-->
-        <!--android:id="@+id/chk_starve"-->
-        <!--android:text="Lane Starvation"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/lbl_Defense"-->
-        <!--android:layout_alignStart="@+id/lbl_Defense"-->
-        <!--android:layout_marginTop="21dp" />-->
 
-    <CheckBox
-        android:id="@+id/chk_whatever"
-        android:text=" XX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_alignBaseline="@+id/chk_lostComm"
-        android:layout_alignBottom="@+id/chk_lostComm"
-        android:layout_toEndOf="@+id/chk_lostComm"
-        android:focusable="false"
-        android:clickable="false"
-        android:visibility="invisible" />
+<!--    <CheckBox-->
+<!--        android:id="@+id/chk_whatever"-->
+<!--        android:text=" XX"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="68dp"-->
+<!--        android:layout_alignBaseline="@+id/chk_lostComm"-->
+<!--        android:layout_alignBottom="@+id/chk_lostComm"-->
+<!--        android:layout_toEndOf="@+id/chk_lostComm"-->
+<!--        android:focusable="false"-->
+<!--        android:clickable="false"-->
+<!--        android:visibility="invisible" />-->
 
     <Button
         android:text="SAVE"
@@ -131,8 +105,8 @@
         android:id="@+id/scrollv_comm"
         android:layout_width="500sp"
         android:layout_height="200sp"
-        android:layout_alignStart="@+id/chkBox_final_int_Rocket"
-        android:layout_below="@+id/chkBox_final_int_Rocket"
+        android:layout_alignStart="@+id/chkBox_final_int_Trench"
+        android:layout_below="@+id/chkBox_final_int_Trench"
         android:layout_marginTop="29dp"
         android:isScrollContainer="false">
 

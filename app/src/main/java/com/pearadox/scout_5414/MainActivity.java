@@ -1,8 +1,10 @@
 package com.pearadox.scout_5414;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -13,6 +15,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -101,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference pfPitData_DBReference;
     private DatabaseReference pfMatchData_DBReference;
     private DatabaseReference pfMatch_DBReference;
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
     String team_num, team_name, team_loc;
     String key = null;
     Uri currentImageUri;
@@ -121,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (NameNotFoundException e) {
             Log.e(TAG, e.getMessage());
         }
-        Toast toast = Toast.makeText(getBaseContext(), "Pearadox Scouting App ©2019  Ver." + Pearadox_Version, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getBaseContext(), "Pearadox Scouting App ©2020  Ver." + Pearadox_Version, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         toast.show();
         deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -146,11 +150,11 @@ public class MainActivity extends AppCompatActivity {
         Button btn_StoreData = (Button) findViewById(R.id.btn_StoreData);
         isInternetAvailable();          // See if device has Internet
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);     // Enable 'Offline' Database
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);     // Enable 'Offline' Database
         //loadStudentString();            // Force student load from Strings
         pfDatabase = FirebaseDatabase.getInstance();
         if (Pearadox.is_Network) {      // is Internet available?
-            Log.w(TAG, "%%%%%  FireBase %%%%%");                                       // ** DEBUG
+            Log.w(TAG, "%%%%%  FireBase init %%%%%");                                       // ** DEBUG
             pfEvent_DBReference = pfDatabase.getReference("competitions");      // Get list of Events/Competitions
             pfStudent_DBReference = pfDatabase.getReference("students");        // Get list of Students
             addStud_VE_Listener(pfStudent_DBReference);
@@ -425,7 +429,7 @@ public class MainActivity extends AppCompatActivity {
                         currentImageUri = Uri.fromFile(x);
                         Log.w(TAG, " URI " + currentImageUri);
                         FirebaseStorage storage = FirebaseStorage.getInstance();
-//                        StorageReference storageReference = storage.getReferenceFromUrl("gs://pearadox-2019.appspot.com/images/" + Pearadox.FRC_Event).child(tmpf);
+//                        StorageReference storageReference = storage.getReferenceFromUrl("gs://pearadox-2020.appspot.com/images/" + Pearadox.FRC_Event).child(tmpf);
 //
 //                        UploadTask uploadTask = storageReference.putFile(currentImageUri);
                         String src = direct_img + "/" + tmpf;
@@ -715,7 +719,7 @@ private void preReqs() {
                         }        //directory is created;
                     }
                 } else {
-                    Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_imgEvent);
+//                    Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_imgEvent);
                 }        //directory is created;
             }
             File direct_matchEvent = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/match/" + ev_code);
@@ -728,7 +732,7 @@ private void preReqs() {
                         }        //directory is created;
                     }
                 } else {
-                    Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_imgEvent);
+//                    Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_imgEvent);
                 }        //directory is created;
             }
             File direct_pitEvent = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/pit/" + ev_code);
@@ -742,7 +746,7 @@ private void preReqs() {
                 }
             }
             } else {
-                Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_pitEvent);
+//                Log.e(TAG, " ****>>> ERROR creating directory  <<<<**** " + direct_pitEvent);
             }        //directory is created;
         }  //End FOR
 
@@ -1050,7 +1054,7 @@ private void preReqs() {
 
 //______________________________________
     private void Fb_Auth() {
-        Log.w(TAG, "===Fb_Auth===  " + Pearadox.is_Network);
+        Log.w(TAG, "===Fb_Auth===    Net=" + Pearadox.is_Network);
         FB_logon = false;
         String pw = " "; String eMail="scout.5414@gmail.com";
         if (Pearadox.is_Network) {
@@ -1066,17 +1070,17 @@ private void preReqs() {
                 }
                 fileReader.close();
                 pw = (stringBuffer.toString());
-                pw = pw.substring(0, 11);    //Remove CR/LF
-            Log.e(TAG, "Peardox = '" + pw + "'");
+                pw = pw.substring(0, pw.length()-1);    //Remove CR/LF
+            Log.e(TAG, "Pearadox = '" + pw + "'");
             } catch (IOException e) {
-                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
-                Toast toast = Toast.makeText(getBaseContext(), "Firebase authentication - Password required", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.show();
+//                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+//                tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
+//                Toast toast = Toast.makeText(getBaseContext(), "Firebase authentication - Password required", Toast.LENGTH_LONG);
+//                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+//                toast.show();
                 e.printStackTrace();
             }
-        Log.e(TAG, "Sign-In " + eMail + "  '" + pw + "'");
+            Log.w(TAG, "****  Found P/W file - about to Authorize  ****   FB=" + FB_logon);
 
             mAuth.signInWithEmailAndPassword(eMail, pw)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -1120,12 +1124,30 @@ private void preReqs() {
         super.onStart();
         Log.i(TAG, "<<<<<  onStart  >>>>>");
         isInternetAvailable();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            Log.w(TAG, "*** Not authorized for SD card ***");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    99);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            Log.w(TAG, "*** Not authorized for Camera ***");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    110);
+        }
+
         FirebaseApp.initializeApp(this);
 //    FirebaseDatabase.getInstance().setPersistenceEnabled(true);     // Enable 'Offline' Database
         mAuth = FirebaseAuth.getInstance();
-//    if (FB_logon) {
+
+    if (!is_resumed) {
         Fb_Auth();      // Authenticate with Firebase
-//    }
+    }
 //    loadEvents();
     }
 @Override

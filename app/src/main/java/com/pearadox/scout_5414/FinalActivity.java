@@ -38,12 +38,13 @@ import java.util.Date;
  * Created by mlm.02000 on 2/5/2017.
  */
 
+
 public class FinalActivity extends Activity {
 
     String TAG = "FinalActivity";      // This CLASS name
     TextView txt_dev, txt_stud, txt_match, txt_MyTeam, txt_robotnum;
     EditText editText_Comments;
-    CheckBox chk_lostPart, chk_lostComm, chk_block, chkBox_final_int_Rocket, chk_defense30,chk_cargoDefense;
+    CheckBox chk_lostPart, chk_lostComm, chk_block, chkBox_final_int_Trench;
     Button button_Saved;
     RadioGroup radioGroup_defense;
     RadioButton rdBtn_def_good, radioButton_def_bad;
@@ -64,7 +65,7 @@ public class FinalActivity extends Activity {
     public boolean final_def_Block = false;                     // Did they use Blocking Defense?
     public boolean final_def_RocketInt;                         // Did they block the Rocket
     public String final_studID = "";                            // set in Auto
-    public boolean final_cargoDefense = false;                  // pickup cargo when on defense
+    public boolean final_PowerCellDefense = false;                  // pickup PowerCell when on defense
     public boolean final_endDefense = false;                    // last 30 seconds defense
 
 
@@ -104,9 +105,7 @@ public class FinalActivity extends Activity {
         chk_lostPart.requestFocus();        // Don't let EditText mess up layout!!
         chk_lostComm = (CheckBox) findViewById(R.id.chk_lostComm);
         chk_block = (CheckBox) findViewById(R.id.chk_block);
-        chkBox_final_int_Rocket = (CheckBox) findViewById(R.id.chkBox_final_int_Rocket);
-        chk_cargoDefense = (CheckBox) findViewById(R.id.chk_cargoDefense);
-        chk_defense30 = (CheckBox) findViewById(R.id.chk_defense30);
+        chkBox_final_int_Trench = (CheckBox) findViewById(R.id.chkBox_final_int_Trench);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
         editText_Comments.setClickable(true);
         button_Saved = (Button) findViewById(R.id.button_Saved);
@@ -181,44 +180,6 @@ public class FinalActivity extends Activity {
             }
         }
         );
-        chk_defense30.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.i(TAG, "chk_defense30 Listener");
-                if (buttonView.isChecked()) {
-                    //checked
-                    Log.i(TAG, "TextBox is checked.");
-                    final_endDefense = true;
-
-                } else {
-                    //not checked
-                    Log.i(TAG, "TextBox is unchecked.");
-                    final_endDefense = false;
-
-                }
-            }
-        }
-        );
-        chk_cargoDefense.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-             @Override
-             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                 Log.i(TAG, "chk_cargoDefense Listener");
-                 if (buttonView.isChecked()) {
-                     //checked
-                     Log.i(TAG, "CargoDef is checked.");
-                     final_cargoDefense = true;
-
-                 } else {
-                     //not checked
-                     Log.i(TAG, "CargoDef is unchecked.");
-                     final_cargoDefense = false;
-
-                 }
-             }
-         }
-        );
     chk_block.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
          @Override
          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -235,10 +196,10 @@ public class FinalActivity extends Activity {
          }
      }
     );
-        chkBox_final_int_Rocket.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkBox_final_int_Trench.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
          @Override
          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-             Log.i(TAG, "chkBox_final_int_Rocket Listener");
+             Log.i(TAG, "chkBox_final_int_Trench Listener");
              if (buttonView.isChecked()) {
                  Log.i(TAG, "Rocket is checked.");  //checked
                  final_def_RocketInt = true;
@@ -258,11 +219,9 @@ public class FinalActivity extends Activity {
         Log.w(TAG, timeStamp + " is the current date and time.");
         Pearadox.Match_Data.setFinal_lostParts(lost_Parts);
         Pearadox.Match_Data.setFinal_lostComms(lost_Comms);
-        Pearadox.Match_Data.setFinal_puCargoDef(final_cargoDefense);
-        Pearadox.Match_Data.setFinal_defLast30(final_endDefense);
         Pearadox.Match_Data.setFinal_defense_good(final_defense_good);
         Pearadox.Match_Data.setFinal_def_Block(final_def_Block);
-        Pearadox.Match_Data.setFinal_def_RocketInt(final_def_RocketInt);
+        Pearadox.Match_Data.setFinal_def_TrenchInt(final_def_RocketInt);
 
          /* */
         Pearadox.Match_Data.setFinal_dateTime(timeStamp);
@@ -427,6 +386,5 @@ public class FinalActivity extends Activity {
         Log.v(TAG, "OnDestroy");
 
     }
-
 }
 

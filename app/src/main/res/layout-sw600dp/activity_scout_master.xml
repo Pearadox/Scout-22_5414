@@ -343,13 +343,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lbl_Divider" >
-        <ImageView
-            android:id="@+id/imgBT_R1"
-            android:layout_width="25dp"
-            android:layout_height="30sp"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="Bluetooth Status"
-            android:src="@drawable/bluetooth_off" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imgBT_R1"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="30sp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:contentDescription="Bluetooth Status"-->
+<!--            android:src="@drawable/bluetooth_off" />-->
 
         <TextView
             android:id="@+id/lbl_scoutR1"
@@ -395,13 +395,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/devListR1" >
-        <ImageView
-            android:id="@+id/imgBT_R2"
-            android:layout_width="25dp"
-            android:layout_height="30sp"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="Bluetooth Status"
-            android:src="@drawable/bluetooth_off" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imgBT_R2"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="30sp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:contentDescription="Bluetooth Status"-->
+<!--            android:src="@drawable/bluetooth_off" />-->
         <TextView
             android:id="@+id/lbl_scoutR2"
             android:layout_width="120dp"
@@ -444,13 +444,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/devListR2" >
-        <ImageView
-            android:id="@+id/imgBT_R3"
-            android:layout_width="25dp"
-            android:layout_height="30sp"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="Bluetooth Status"
-            android:src="@drawable/bluetooth_off" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imgBT_R3"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="30sp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:contentDescription="Bluetooth Status"-->
+<!--            android:src="@drawable/bluetooth_off" />-->
         <TextView
             android:id="@+id/lbl_scoutR3"
             android:layout_width="120dp"
@@ -493,13 +493,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/devListR3" >
-        <ImageView
-            android:id="@+id/imgBT_B1"
-            android:layout_width="25dp"
-            android:layout_height="30sp"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="Bluetooth Status"
-            android:src="@drawable/bluetooth_off" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imgBT_B1"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="30sp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:contentDescription="Bluetooth Status"-->
+<!--            android:src="@drawable/bluetooth_off" />-->
         <TextView
             android:id="@+id/lbl_scoutB1"
             android:layout_width="120dp"
@@ -544,13 +544,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/devListB1" >
-        <ImageView
-            android:id="@+id/imgBT_B2"
-            android:layout_width="25dp"
-            android:layout_height="30sp"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="Bluetooth Status"
-            android:src="@drawable/bluetooth_off" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imgBT_B2"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="30sp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:contentDescription="Bluetooth Status"-->
+<!--            android:src="@drawable/bluetooth_off" />-->
         <TextView
             android:id="@+id/lbl_scoutB2"
             android:layout_width="120dp"
@@ -593,13 +593,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/devListB2" >
-        <ImageView
-            android:id="@+id/imgBT_B3"
-            android:layout_width="25dp"
-            android:layout_height="30sp"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="Bluetooth Status"
-            android:src="@drawable/bluetooth_off" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imgBT_B3"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="30sp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:contentDescription="Bluetooth Status"-->
+<!--            android:src="@drawable/bluetooth_off" />-->
         <TextView
             android:id="@+id/lbl_scoutB3"
             android:layout_width="120dp"

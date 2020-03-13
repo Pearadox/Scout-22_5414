@@ -140,52 +140,52 @@ public class ScoutMaster_Activity extends AppCompatActivity {
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private void findBluetooth() {
         Log.w(TAG,"*** findBluetooth *** ");
-        ImageView imgBT_R1 = (ImageView) findViewById(R.id.imgBT_R1);
-        ImageView imgBT_R2 = (ImageView) findViewById(R.id.imgBT_R2);
-        ImageView imgBT_R3 = (ImageView) findViewById(R.id.imgBT_R3);
-        ImageView imgBT_B1 = (ImageView) findViewById(R.id.imgBT_B1);
-        ImageView imgBT_B2 = (ImageView) findViewById(R.id.imgBT_B2);
-        ImageView imgBT_B3 = (ImageView) findViewById(R.id.imgBT_B3);
-        final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-        if (pairedDevices.size() > 0) {
-            for (BluetoothDevice device : pairedDevices) {
-                String deviceName = device.getName();
-                String deviceHardwareAddress = device.getAddress(); // MAC address
-                Log.w(TAG, ">>> Device: " + deviceName + "  Addr: " + deviceHardwareAddress);
-                for(int i=0 ; i < 6 ; i++) {
-                    if (btArray[i].equals(deviceHardwareAddress)) {
-                        Log.w(TAG, ">>> SCOUT: " + deviceName);
-                        switch (deviceName) {
-                            case "Red-1":
-                                imgBT_R1.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
-                            break;
-                            case "Red-2":
-                                imgBT_R2.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
-                            break;
-                            case "Red-3":
-                                imgBT_R3.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
-                            break;
-                            case "Blue-1":
-                                imgBT_B1.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
-                            break;
-                            case "Blue-2":
-                                imgBT_B2.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
-                            break;
-                            case ("Blue-3"):
-                            case ("Gale's Tablet"):         // *** DEBUG!! ***
-                                imgBT_B3.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
-                            break;
-                            default:                //
-                                Log.w(TAG, "DEV not a Scout  '" + deviceName + "' ");
-                                break;
-                        }
-                    }
-                } //end FOR
-
-            } //end FOR
-        } //end IF
-
+//        ImageView imgBT_R1 = (ImageView) findViewById(R.id.imgBT_R1);
+//        ImageView imgBT_R2 = (ImageView) findViewById(R.id.imgBT_R2);
+//        ImageView imgBT_R3 = (ImageView) findViewById(R.id.imgBT_R3);
+//        ImageView imgBT_B1 = (ImageView) findViewById(R.id.imgBT_B1);
+//        ImageView imgBT_B2 = (ImageView) findViewById(R.id.imgBT_B2);
+//        ImageView imgBT_B3 = (ImageView) findViewById(R.id.imgBT_B3);
+//        final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+//        if (pairedDevices.size() > 0) {
+//            for (BluetoothDevice device : pairedDevices) {
+//                String deviceName = device.getName();
+//                String deviceHardwareAddress = device.getAddress(); // MAC address
+//                Log.w(TAG, ">>> Device: " + deviceName + "  Addr: " + deviceHardwareAddress);
+//                for(int i=0 ; i < 6 ; i++) {
+//                    if (btArray[i].equals(deviceHardwareAddress)) {
+//                        Log.w(TAG, ">>> SCOUT: " + deviceName);
+//                        switch (deviceName) {
+//                            case "Red-1":
+//                                imgBT_R1.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
+//                            break;
+//                            case "Red-2":
+//                                imgBT_R2.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
+//                            break;
+//                            case "Red-3":
+//                                imgBT_R3.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
+//                            break;
+//                            case "Blue-1":
+//                                imgBT_B1.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
+//                            break;
+//                            case "Blue-2":
+//                                imgBT_B2.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
+//                            break;
+//                            case ("Blue-3"):
+//                            case ("Gale's Tablet"):         // *** DEBUG!! ***
+//                                imgBT_B3.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
+//                            break;
+//                            default:                //
+//                                Log.w(TAG, "DEV not a Scout  '" + deviceName + "' ");
+//                                break;
+//                        }
+//                    }
+//                } //end FOR
+//
+//            } //end FOR
+//        } //end IF
+//
     }
 
 
