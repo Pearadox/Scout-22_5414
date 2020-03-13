@@ -689,101 +689,91 @@ public class VisMatch_Activity extends AppCompatActivity {
 
             case 6:
                 StackedBarModel s6 = new StackedBarModel(match);
-                s6.addBar(new BarModel(3.0f, 0xFFff0000));    // Low
-                s6.addBar(new BarModel(6.0f, 0xFF0000ff));    // Under
-                s6.addBar(new BarModel(12.0f, 0xFF006400));    // Line
-                s6.addBar(new BarModel(4.0f, 0xFF800080));    // Front
-                s6.addBar(new BarModel(2.0f, 0xFFff8300));    // Back
+                s6.addBar(new BarModel(low, 0xFFff0000));    // Low
+                s6.addBar(new BarModel(under, 0xFF0000ff));    // Under
+                s6.addBar(new BarModel(line, 0xFF006400));    // Line
+                s6.addBar(new BarModel(front, 0xFF800080));    // Front
                 autonBarChart.addBar(s6);
                 break;
 
             case 7:
                 StackedBarModel s7 = new StackedBarModel(match);
-                s7.addBar(new BarModel(3.0f, 0xFFff0000));    // Low
-                s7.addBar(new BarModel(6.0f, 0xFF0000ff));    // Under
-                s7.addBar(new BarModel(12.0f, 0xFF006400));    // Line
-                s7.addBar(new BarModel(4.0f, 0xFF800080));    // Front
-                s7.addBar(new BarModel(2.0f, 0xFFff8300));    // Back
+                s7.addBar(new BarModel(low, 0xFFff0000));    // Low
+                s7.addBar(new BarModel(under, 0xFF0000ff));    // Under
+                s7.addBar(new BarModel(line, 0xFF006400));    // Line
+                s7.addBar(new BarModel(front, 0xFF800080));    // Front
                 autonBarChart.addBar(s7);
                 break;
 
             case 8:
                 StackedBarModel s8 = new StackedBarModel(match);
-                s8.addBar(new BarModel(0.0f, 0xFFff0000));    // Low
-                s8.addBar(new BarModel(1.0f, 0xFF0000ff));    // Under
-                s8.addBar(new BarModel(0.0f, 0xFF006400));    // Line
-                s8.addBar(new BarModel(0.0f, 0xFF800080));    // Front
-                s8.addBar(new BarModel(0.0f, 0xFFff8300));    // Back
+                s8.addBar(new BarModel(low, 0xFFff0000));    // Low
+                s8.addBar(new BarModel(under, 0xFF0000ff));    // Under
+                s8.addBar(new BarModel(line, 0xFF006400));    // Line
+                s8.addBar(new BarModel(front, 0xFF800080));    // Front
                 autonBarChart.addBar(s8);
                 break;
 
             case 9:
                 StackedBarModel s9 = new StackedBarModel(match);
-                s9.addBar(new BarModel(3.0f, 0xFFff0000));    // Low
-                s9.addBar(new BarModel(6.0f, 0xFF0000ff));    // Under
-                s9.addBar(new BarModel(12.0f, 0xFF006400));    // Line
-                s9.addBar(new BarModel(4.0f, 0xFF800080));    // Front
-                s9.addBar(new BarModel(2.0f, 0xFFff8300));    // Back
+                s9.addBar(new BarModel(low, 0xFFff0000));    // Low
+                s9.addBar(new BarModel(under, 0xFF0000ff));    // Under
+                s9.addBar(new BarModel(line, 0xFF006400));    // Line
+                s9.addBar(new BarModel(front, 0xFF800080));    // Front
                 autonBarChart.addBar(s9);
                 break;
 
             case 10:
                 StackedBarModel s10 = new StackedBarModel(match);
-                s10.addBar(new BarModel(3.0f, 0xFFff0000));    // Low
-                s10.addBar(new BarModel(6.0f, 0xFF0000ff));    // Under
-                s10.addBar(new BarModel(12.0f, 0xFF006400));    // Line
-                s10.addBar(new BarModel(4.0f, 0xFF800080));    // Front
-                s10.addBar(new BarModel(2.0f, 0xFFff8300));    // Back
+                s10.addBar(new BarModel(low, 0xFFff0000));    // Low
+                s10.addBar(new BarModel(under, 0xFF0000ff));    // Under
+                s10.addBar(new BarModel(line, 0xFF006400));    // Line
+                s10.addBar(new BarModel(front, 0xFF800080));    // Front
                 autonBarChart.addBar(s10);
                 break;
 
             case 11:
                 StackedBarModel s11 = new StackedBarModel(match);
-                s11.addBar(new BarModel(3.0f, 0xFFff0000));    // Low
-                s11.addBar(new BarModel(6.0f, 0xFF0000ff));    // Under
-                s11.addBar(new BarModel(8.0f, 0xFF006400));   // Line
-                s11.addBar(new BarModel(3.0f, 0xFF800080));    // Front
-                s11.addBar(new BarModel(3.0f, 0xFFff8300));    // Back
+                s11.addBar(new BarModel(low, 0xFFff0000));    // Low
+                s11.addBar(new BarModel(under, 0xFF0000ff));    // Under
+                s11.addBar(new BarModel(line, 0xFF006400));    // Line
+                s11.addBar(new BarModel(front, 0xFF800080));    // Front
                 autonBarChart.addBar(s11);
                 break;
 
             case 12:
                 StackedBarModel s12 = new StackedBarModel(match);
-                s12.addBar(new BarModel(3, 0xFFff0000));    // Low
-                s12.addBar(new BarModel(6, 0xFF0000ff));    // Under
-                s12.addBar(new BarModel(12, 0xFF006400));    // Line
-                s12.addBar(new BarModel(2, 0xFF800080));    // Front
-                s12.addBar(new BarModel(4, 0xFFff8300));    // Back
+                s12.addBar(new BarModel(low, 0xFFff0000));    // Low
+                s12.addBar(new BarModel(under, 0xFF0000ff));    // Under
+                s12.addBar(new BarModel(line, 0xFF006400));    // Line
+                s12.addBar(new BarModel(front, 0xFF800080));    // Front
                 autonBarChart.addBar(s12);
                 break;
 
             case 13:
                 StackedBarModel s13 = new StackedBarModel(match);
-                s13.addBar(new BarModel(3.0f, 0xFFff0000));    // Low
-                s13.addBar(new BarModel(6.0f, 0xFF0000ff));    // Under
-                s13.addBar(new BarModel(8.0f, 0xFF006400));    // Line
-                s13.addBar(new BarModel(2.0f, 0xFF800080));    // Front
-                s13.addBar(new BarModel(1.0f, 0xFFff8300));    // Back
+                s13.addBar(new BarModel(low, 0xFFff0000));    // Low
+                s13.addBar(new BarModel(under, 0xFF0000ff));    // Under
+                s13.addBar(new BarModel(line, 0xFF006400));    // Line
+                s13.addBar(new BarModel(front, 0xFF800080));    // Front
                 autonBarChart.addBar(s13);
                 break;
 
             case 14:
                 StackedBarModel s14 = new StackedBarModel(match);
-                s14.addBar(new BarModel(3.0f, 0xFFff0000));    // Low
-                s14.addBar(new BarModel(12.0f, 0xFF0000ff));    // Under
-                s14.addBar(new BarModel(10.0f, 0xFF006400));    // Line
-                s14.addBar(new BarModel(3.0f, 0xFF800080));    // Front
-                s14.addBar(new BarModel(2.0f, 0xFFff8300));    // Back
+                s14.addBar(new BarModel(low, 0xFFff0000));    // Low
+                s14.addBar(new BarModel(under, 0xFF0000ff));    // Under
+                s14.addBar(new BarModel(line, 0xFF006400));    // Line
+                s14.addBar(new BarModel(front, 0xFF800080));    // Front
                 autonBarChart.addBar(s14);
                 break;
 
             case 15:
                 StackedBarModel s15 = new StackedBarModel(match);
-                s15.addBar(new BarModel(3.0f, 0xFFff0000));    // Low
-                s15.addBar(new BarModel(12.0f, 0xFF0000ff));    // Under
-                s15.addBar(new BarModel(10.0f, 0xFF006400));    // Line
-                s15.addBar(new BarModel(3.0f, 0xFF800080));    // Front
-                s15.addBar(new BarModel(2.0f, 0xFFff8300));    // Back
+                s15.addBar(new BarModel(low, 0xFFff0000));    // Low
+                s15.addBar(new BarModel(under, 0xFF0000ff));    // Under
+                s15.addBar(new BarModel(line, 0xFF006400));    // Line
+                s15.addBar(new BarModel(front, 0xFF800080));    // Front
                 autonBarChart.addBar(s15);
                 break;
 
