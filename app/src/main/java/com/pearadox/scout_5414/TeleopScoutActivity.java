@@ -471,6 +471,7 @@ public class TeleopScoutActivity extends Activity {
             Log.w(TAG, "chk_Balanced Listener");
             if (buttonView.isChecked()) {
                 Log.w(TAG,"Balanced is checked.");
+
                 Balanced = true;
             } else {  //not checked
                 Log.w(TAG,"Balanced is unchecked.");
@@ -614,6 +615,7 @@ public class TeleopScoutActivity extends Activity {
             Log.w(TAG, "None");
             Hang_Num = 0;
             chk_UnderSG.setEnabled(true);
+            chk_Balanced.setEnabled(false);
         } else if (value.equals("One")){        // One?
             Log.w(TAG, "One");
             if (liftedNum > 0) {
@@ -624,6 +626,7 @@ public class TeleopScoutActivity extends Activity {
                 Hang_Num = 1;
             }
             chk_UnderSG.setEnabled(false);
+            chk_Balanced.setEnabled(true);
         } else if (value.equals("Two")){        // Two
             Log.w(TAG, "Two");
             if (liftedNum > 1) {
@@ -634,6 +637,7 @@ public class TeleopScoutActivity extends Activity {
                 Hang_Num = 2;
             }
             chk_UnderSG.setEnabled(false);
+            chk_Balanced.setEnabled(true);
         } else {                                // Three
             Log.w(TAG, "Three");
             if (!UnderSG) {
@@ -642,6 +646,7 @@ public class TeleopScoutActivity extends Activity {
                 UnderSG = false;
                 chk_UnderSG.setChecked(false);
                 chk_UnderSG.setEnabled(false);
+                chk_Balanced.setEnabled(true);
             } else {
                 Toast toast = Toast.makeText(getBaseContext(), "'Under SG' is checked;  pick # Hanging less than 3!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
