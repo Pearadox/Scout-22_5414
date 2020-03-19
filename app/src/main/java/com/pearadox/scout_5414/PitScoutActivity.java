@@ -1,10 +1,12 @@
 package com.pearadox.scout_5414;
 
 import android.app.BuildConfig;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
@@ -87,12 +89,14 @@ public class PitScoutActivity extends AppCompatActivity {
     Button btn_Save;
     Boolean OnOff= false;
     Uri currentImageUri, imageUri;
+    private Uri FB_uri;
     String mCurrentPhotoPath;
-    String currentImagePath;
     String picname;
     AlertDialog alertbox;
     static final int REQUEST_TAKE_PHOTO = 1;
-//    int REQUEST_IMAGE_CAPTURE = 2;
+    String manufacturer = Build.MANUFACTURER;
+    String model = Build.MODEL;
+
     int MAX_ROBOT_WEIGHT =125;      // 2020 maximum weight
     public static String[] teams = new String[Pearadox.numTeams+1];  // Team list (array of just Team Names)
     public static String[] wheels = new String[]
@@ -317,8 +321,6 @@ pitData Pit_Data = new pitData();
 //        editText_Comments.setFocusable(true);
 //        editText_Comments.setClickable(true);
 
-        String manufacturer = Build.MANUFACTURER;
-        String model = Build.MODEL;
         Log.d(TAG, "Manuf.=" + manufacturer + "  Model=" + model);
         if (model.equals("K88")) {
             imageView_numEnt.setImageDrawable(getResources().getDrawable(R.drawable.k88num_enter));
@@ -915,22 +917,32 @@ pitData Pit_Data = new pitData();
             Log.w(TAG, "requestCode = '" + requestCode + "'");
             imageUri = Uri.parse(mCurrentPhotoPath);
             File file = new File(imageUri.getPath());
+            picname = "robot_" + teamSelected.trim() + ".png";
+            Bitmap rotatedBitmap = null;
             try {
                 InputStream ims = new FileInputStream(file);
-                img_Photo.setImageBitmap(BitmapFactory.decodeStream(ims));
+                Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                if (model.equals("K88")) {
+                    Matrix matrix = new Matrix();
+                    matrix.postRotate(-90);
+                    rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                    img_Photo.setImageBitmap(rotatedBitmap);
+                    FB_uri = getImageUri(this, rotatedBitmap);
+                } else {
+                    img_Photo.setImageBitmap(BitmapFactory.decodeStream(ims));
+                }
             } catch (FileNotFoundException e) {
                 return;
             }
 
-            galleryAddPic();
-            File savedFile;
-            if(mCurrentPhotoPath == null){
-                savedFile= new File(currentImageUri.getPath());
-            }else{
-                savedFile = new File(mCurrentPhotoPath);
-            }
+//            galleryAddPic();
+//            File savedFile;
+//            if(mCurrentPhotoPath == null){
+//                savedFile= new File(imageUri.getPath());
+//            }else{
+//                savedFile = new File(mCurrentPhotoPath);
+//            }
 
-            picname = "robot_" + teamSelected.trim() + ".png";
             //            String filename = "robot_" + teamSelected.trim() + ".png";
 //            File directPhotos = new File(Environment.getExternalStorageDirectory() + "/download/FRC5414/images/" + Pearadox.FRC_Event + "/" + filename);
 //
@@ -941,20 +953,20 @@ pitData Pit_Data = new pitData();
 //            img_Photo.setImageBitmap(bitmap);
 
             if (!imageOnFB) {
-                SaveToFirebase(savedFile);
+                SaveToFirebase();
             }else{
                 Log.w(TAG, "*** PHOTO EXISTS ON FIREBASE *** ");
             }
         }
     }
 
-    private void SaveToFirebase(File savedFile) {
-        Log.w(TAG, "$$$$$  SaveToFirebase  $$$$$" + savedFile);
+    private void SaveToFirebase() {
+        Log.w(TAG, "$$$$$  SaveToFirebase  $$$$$");
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReferenceFromUrl("gs://pearadox-2020.appspot.com/images/"+ Pearadox.FRC_Event).child(picname);
-
-        UploadTask uploadTask = storageReference.putFile(imageUri);
+        UploadTask uploadTask = storageReference.putFile(FB_uri);
+//        UploadTask uploadTask = storageReference.putFile(imageUri);
 
         // Now get the URL
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -973,12 +985,18 @@ pitData Pit_Data = new pitData();
          * copy current image to Gallery
          */
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        mediaScanIntent.setData(currentImageUri);
+        mediaScanIntent.setData(imageUri);
         this.sendBroadcast(mediaScanIntent);
     }
 
-    public void encodeBitmapAndSaveToFirebase(Bitmap bitmap) {
-        Log.w(TAG, "$$$$$  encodeBitmapAndSaveToFirebase  $$$$$");
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", picname);
+        return Uri.parse(path);
+    }
+    public void encodeBitmapAndSave(Bitmap bitmap) {
+        Log.w(TAG, "$$$$$  encodeBitmapAndSave $$$$$");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         String picname = "robot_" + teamSelected.trim() + ".png";
         Log.w(TAG, "Photo = '" + picname + "'");
