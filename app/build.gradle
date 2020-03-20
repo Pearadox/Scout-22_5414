@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.pearadox.scout_5414"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 35
         versionName "3.35"
         multiDexEnabled true
