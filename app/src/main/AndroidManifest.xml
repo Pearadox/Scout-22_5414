@@ -17,10 +17,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Bluetooth_Activity"></activity>
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -73,15 +74,9 @@
             android:value="@integer/google_play_services_version" />
 
         <!--            android:name="android.support.v4.content.FileProvider"  androidx.core.content.FileProvider -->
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.pearadox.scout_5414.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
-        </provider>
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths"></meta-data>
 
     </application>
 
