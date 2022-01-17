@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.media.MediaActionSound;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -27,6 +27,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileOutputStream;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class VisPit_Activity extends AppCompatActivity {
 

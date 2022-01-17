@@ -1,6 +1,7 @@
 package com.pearadox.scout_5414;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,17 +10,19 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+//import android.support.annotation.NonNull;
+//import android.support.v4.app.ActivityCompat;
+//import android.support.v4.content.ContextCompat;
+//import android.support.v7.app.AlertDialog;
+//import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -35,6 +38,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -65,6 +69,13 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Iterator;
 
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import static android.util.Log.e;
 import static android.util.Log.i;
@@ -125,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (NameNotFoundException e) {
             Log.e(TAG, e.getMessage());
         }
-        Toast toast = Toast.makeText(getBaseContext(), "Pearadox Scouting App ©2020  Ver." + Pearadox_Version, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getBaseContext(), "Pearadox Scouting App ©2022  Ver." + Pearadox_Version, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         toast.show();
         deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -353,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+//            setSupportActionBar(toolbar);
         }
 
 
@@ -429,7 +440,7 @@ public class MainActivity extends AppCompatActivity {
                         currentImageUri = Uri.fromFile(x);
                         Log.w(TAG, " URI " + currentImageUri);
                         FirebaseStorage storage = FirebaseStorage.getInstance();
-//                        StorageReference storageReference = storage.getReferenceFromUrl("gs://pearadox-2020.appspot.com/images/" + Pearadox.FRC_Event).child(tmpf);
+//                        StorageReference storageReference = storage.getReferenceFromUrl("gs://pearadox-2022.appspot.com/images/" + Pearadox.FRC_Event).child(tmpf);
 //
 //                        UploadTask uploadTask = storageReference.putFile(currentImageUri);
                         String src = direct_img + "/" + tmpf;
@@ -763,52 +774,60 @@ private void preReqs() {
 
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     // ToDo - Add broadcast receiver to tell when internet status changes
+//    @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean isInternetAvailable() {
-        Log.i(TAG, "<<<< Checking Internet Status >>>>");
+        Log.d(TAG, "<<<< Checking Internet Status >>>>");
         boolean status = false;
         Pearadox.is_Network = false;
         ImageView img_netStatus = (ImageView) findViewById(R.id.img_netStatus);
 
         try {
-            final ConnectivityManager connMgr = (ConnectivityManager)
-                    this.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-            NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            Log.w(TAG, ">>>>> wifi = " + wifi);
-            NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-            Log.w(TAG, ">>>>> mobile = " + mobile);
-            NetworkInfo bt = connMgr.getNetworkInfo(ConnectivityManager.TYPE_BLUETOOTH);
-            Log.w(TAG, ">>>>> Bluetooth = " + bt);
+            ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+            @SuppressLint("MissingPermission")
+            NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                status = true;
+                Log.e(TAG, "*** Connection ***" + capabilities.toString());
+            }
+//            final ConnectivityManager connMgr = (ConnectivityManager)
+//                    this.getSystemService(Context.CONNECTIVITY_SERVICE);
+//
+//            NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+//            Log.w(TAG, ">>>>> wifi = " + wifi);
+//            NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+//            Log.w(TAG, ">>>>> mobile = " + mobile);
+//            NetworkInfo bt = connMgr.getNetworkInfo(ConnectivityManager.TYPE_BLUETOOTH);
+//            Log.w(TAG, ">>>>> Bluetooth = " + bt);
 
             // ========= Test it =========
-            if( wifi.isAvailable() && wifi.isConnected()){
-                Log.w(TAG, "$$$ Wi-Fi $$$ " + wifi.getExtraInfo());
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                Log.w(TAG, "$$$ Wi-Fi $$$ " + capabilities.toString());
 //                Toast.makeText(this, "Wifi" , Toast.LENGTH_LONG).show();
                 img_netStatus.setImageDrawable(getResources().getDrawable(R.drawable.wifi_bad));
                 Pearadox.is_Network = true;
                 status = true;
-            }
-            else if( mobile.isAvailable() ){
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
                 Log.w(TAG, "*** Mobile ***");
 //                Toast.makeText(this, "Mobile 3/4G " , Toast.LENGTH_LONG).show();
                 img_netStatus.setImageDrawable(getResources().getDrawable(R.drawable.net_4g));
                 Pearadox.is_Network = true;
                 status = true;
             }
-            else if( bt.isAvailable() ){
-                Log.w(TAG, "### Bluetooth ###");
-//                Toast.makeText(this, " Bluetooth " , Toast.LENGTH_LONG).show();
-                img_netStatus.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
-                Pearadox.is_Network = true;
-                status = true;
-            }
-            else
-            {
+//            else if( bt.isAvailable() ){
+//                Log.w(TAG, "### Bluetooth ###");
+////                Toast.makeText(this, " Bluetooth " , Toast.LENGTH_LONG).show();
+//                img_netStatus.setImageDrawable(getResources().getDrawable(R.drawable.bluetooth));
+//                Pearadox.is_Network = true;
+//                status = true;
+//            }
+            else {
                 Log.w(TAG, "@@@ No Network @@@");
 //                Toast.makeText(this, "No Network " , Toast.LENGTH_LONG).show();
                 img_netStatus.setImageDrawable(getResources().getDrawable(R.drawable.no_connection));
                 Pearadox.is_Network = false;
             }
+
         } catch (Exception e) {
             Log.d(TAG, "*****  Error in Communication Manager  *****" );
 //            e.printStackTrace();
@@ -844,16 +863,16 @@ private void preReqs() {
             about.show();
             return true;
         }
-        if (id == R.id.action_bluetooth) {
-            Log.d(TAG, "*****  Bluetooth status  *****" );
-            Intent blue_intent = new Intent(MainActivity.this, Bluetooth_Activity.class);
-            Bundle BluBundle = new Bundle();
-            BluBundle.putString("dev", devSelected);             // Pass data to activity
-            BluBundle.putString("andid", deviceId);        //
-            blue_intent.putExtras(BluBundle);
-            startActivity(blue_intent);                        // Bluetooth
-            return true;
-        }
+//        if (id == R.id.action_bluetooth) {
+//            Log.d(TAG, "*****  Bluetooth status  *****" );
+//            Intent blue_intent = new Intent(MainActivity.this, Bluetooth_Activity.class);
+//            Bundle BluBundle = new Bundle();
+//            BluBundle.putString("dev", devSelected);             // Pass data to activity
+//            BluBundle.putString("andid", deviceId);        //
+//            blue_intent.putExtras(BluBundle);
+//            startActivity(blue_intent);                        // Bluetooth
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

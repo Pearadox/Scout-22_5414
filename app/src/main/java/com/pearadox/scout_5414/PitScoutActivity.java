@@ -1,6 +1,6 @@
 package com.pearadox.scout_5414;
 
-import android.app.BuildConfig;
+//import android.app.BuildConfig;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,9 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -66,6 +63,10 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import static android.app.PendingIntent.getActivity;
 import static android.view.View.VISIBLE;
@@ -911,6 +912,7 @@ pitData Pit_Data = new pitData();
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         Log.w(TAG, "*****  onActivityResult " + requestCode);
         ImageView img_Photo = (ImageView) findViewById(R.id.img_Photo);
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
@@ -954,7 +956,7 @@ pitData Pit_Data = new pitData();
 
             if (!imageOnFB) {
                 SaveToFirebase();
-            }else{
+            } else {
                 Log.w(TAG, "*** PHOTO EXISTS ON FIREBASE *** ");
             }
         }

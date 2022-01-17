@@ -2,19 +2,19 @@ package com.pearadox.scout_5414;
 
 import android.os.Bundle;
 import android.preference.SwitchPreference;
-import android.support.v4.app.Fragment;
-import android.support.v7.preference.EditTextPreference;
-import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.preference.SwitchPreferenceCompat;
+//import android.support.v4.app.Fragment;
+//import android.support.v7.preference.EditTextPreference;
+//import android.support.v7.preference.PreferenceFragmentCompat;
+//import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import androidx.preference.EditTextPreference;
+import androidx.preference.PreferenceFragmentCompat;
+
 
 public class CubeSettingsFrag extends PreferenceFragmentCompat {
     String TAG = "CubeSettingsFrag";        // This CLASS name

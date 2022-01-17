@@ -5,7 +5,7 @@ import android.media.AudioManager;
 import android.media.MediaActionSound;
 import android.media.ToneGenerator;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -26,6 +26,8 @@ import org.eazegraph.lib.models.StackedBarModel;
 
 import java.io.File;
 import java.io.FileOutputStream;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import static android.util.Log.e;
 
