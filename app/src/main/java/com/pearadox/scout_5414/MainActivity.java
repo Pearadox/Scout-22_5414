@@ -11,18 +11,10 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
-//import android.support.annotation.NonNull;
-//import android.support.v4.app.ActivityCompat;
-//import android.support.v4.content.ContextCompat;
-//import android.support.v7.app.AlertDialog;
-//import android.support.v7.app.AppCompatActivity;
-//import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -38,7 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import android.widget.Toolbar;
+//import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -60,6 +52,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+//import java.io.FileReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,18 +62,13 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Iterator;
 
-
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import static android.util.Log.e;
-import static android.util.Log.i;
-import static android.util.Log.v;
-import static android.util.Log.w;
 import static android.view.View.VISIBLE;
 
 // Debug & Messaging
@@ -130,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "******* Starting Pearadox-5414  *******");
+        setContentView(R.layout.activity_main);
 
         try {
             Pearadox_Version = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
@@ -143,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
 //        Toast.makeText(this,"Device ID: " + deviceId, Toast.LENGTH_LONG).show();    // ** DEBUG
         Log.w(TAG, "Device ID: " + deviceId);                                       // ** DEBUG
         Pearadox.FRC514_Device = deviceId;        // Save device ID
-        setContentView(R.layout.activity_main);
 
         Pearadox.FRC_Event = "";
         txt_messageLine = (TextView) findViewById(R.id.txt_messageLine);
@@ -1090,13 +1078,13 @@ private void preReqs() {
                 fileReader.close();
                 pw = (stringBuffer.toString());
                 pw = pw.substring(0, pw.length()-1);    //Remove CR/LF
-            Log.e(TAG, "Pearadox = '" + pw + "'");
+                Log.e(TAG, "Pearadox = '" + pw + "'");
             } catch (IOException e) {
-//                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-//                tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
-//                Toast toast = Toast.makeText(getBaseContext(), "Firebase authentication - Password required", Toast.LENGTH_LONG);
-//                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-//                toast.show();
+                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
+                Toast toast = Toast.makeText(getBaseContext(), "Firebase authentication - Password required" + "'" + pw + "'", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
                 e.printStackTrace();
             }
             Log.w(TAG, "****  Found P/W file - about to Authorize  ****   FB=" + FB_logon);

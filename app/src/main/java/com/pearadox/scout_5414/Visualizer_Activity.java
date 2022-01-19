@@ -206,7 +206,7 @@ public class Visualizer_Activity extends AppCompatActivity {
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 toast.show();
 
-                blueTooth_Xfer(imageFile);      // bluetooth transfer to paired Phones
+//                blueTooth_Xfer(imageFile);      // bluetooth transfer to paired Phones
 
             } catch (Throwable e) {
                 // Several error may come out with file handling or DOM
@@ -218,43 +218,43 @@ public class Visualizer_Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void blueTooth_Xfer(File imgFile) {
-        w(TAG,"*** blueTooth_Xfer ***   file: " + imgFile);
-        BluetoothAdapter BA;
-        Set<BluetoothDevice> pairedDevices;
-
-        BA = BluetoothAdapter.getDefaultAdapter();
-        if (!BA.isEnabled()) {
-            Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(turnOn, 0);
-            Toast.makeText(getApplicationContext(), "Turned on",Toast.LENGTH_LONG).show();
-        } else {
-//            Toast.makeText(getApplicationContext(), "Already on", Toast.LENGTH_LONG).show();
-        }
-
-        pairedDevices = BA.getBondedDevices();
-
-        ArrayList list = new ArrayList();
-        for(BluetoothDevice bt : pairedDevices) {
-            list.add(bt.getName());
-            Log.v(TAG, "PairedDevices: " + bt.getName() + " " + bt.getAddress() + " |" + bt.getBluetoothClass()+ "| ");
-        }
-//        Toast.makeText(getApplicationContext(), "Paired Devices = " + list.size(),Toast.LENGTH_SHORT).show();
-        try
-        {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_SEND);
-            intent.setType("image/png");
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imgFile) );
-            startActivity(intent);
-        }
-        catch (Exception e)
-        {
-            Toast.makeText(Visualizer_Activity.this, " " + e.getMessage(), Toast.LENGTH_LONG).show();
-
-        }
-
-    }
+//    private void blueTooth_Xfer(File imgFile) {
+//        w(TAG,"*** blueTooth_Xfer ***   file: " + imgFile);
+//        BluetoothAdapter BA;
+//        Set<BluetoothDevice> pairedDevices;
+//
+//        BA = BluetoothAdapter.getDefaultAdapter();
+//        if (!BA.isEnabled()) {
+//            Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//            startActivityForResult(turnOn, 0);
+//            Toast.makeText(getApplicationContext(), "Turned on",Toast.LENGTH_LONG).show();
+//        } else {
+////            Toast.makeText(getApplicationContext(), "Already on", Toast.LENGTH_LONG).show();
+//        }
+//
+//        pairedDevices = BA.getBondedDevices();
+//
+//        ArrayList list = new ArrayList();
+//        for(BluetoothDevice bt : pairedDevices) {
+//            list.add(bt.getName());
+//            Log.v(TAG, "PairedDevices: " + bt.getName() + " " + bt.getAddress() + " |" + bt.getBluetoothClass()+ "| ");
+//        }
+////        Toast.makeText(getApplicationContext(), "Paired Devices = " + list.size(),Toast.LENGTH_SHORT).show();
+//        try
+//        {
+//            Intent intent = new Intent();
+//            intent.setAction(Intent.ACTION_SEND);
+//            intent.setType("image/png");
+//            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imgFile) );
+//            startActivity(intent);
+//        }
+//        catch (Exception e)
+//        {
+//            Toast.makeText(Visualizer_Activity.this, " " + e.getMessage(), Toast.LENGTH_LONG).show();
+//
+//        }
+//
+//    }
 
 // =================================================================
     private void clearTeams() {
