@@ -1079,6 +1079,7 @@ private void preReqs() {
                 pw = (stringBuffer.toString());
                 pw = pw.substring(0, pw.length()-1);    //Remove CR/LF
                 Log.e(TAG, "Pearadox = '" + pw + "'");
+                pw = "pear@5414%$";    //**DEBUG**
             } catch (IOException e) {
                 final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
                 tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);

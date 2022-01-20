@@ -98,7 +98,7 @@ public class PitScoutActivity extends AppCompatActivity {
     String manufacturer = Build.MANUFACTURER;
     String model = Build.MODEL;
 
-    int MAX_ROBOT_WEIGHT =125;      // 2020 maximum weight
+    int MAX_ROBOT_WEIGHT =125;      // 2022 maximum weight
     public static String[] teams = new String[Pearadox.numTeams+1];  // Team list (array of just Team Names)
     public static String[] wheels = new String[]
             {"0","1","2","3","4","5","6", "7", "8"};
@@ -966,7 +966,7 @@ pitData Pit_Data = new pitData();
         Log.w(TAG, "$$$$$  SaveToFirebase  $$$$$");
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageReference = storage.getReferenceFromUrl("gs://pearadox-2020.appspot.com/images/"+ Pearadox.FRC_Event).child(picname);
+        StorageReference storageReference = storage.getReferenceFromUrl("gs://pearadox-2022.appspot.com/images/"+ Pearadox.FRC_Event).child(picname);
         UploadTask uploadTask = storageReference.putFile(FB_uri);
 //        UploadTask uploadTask = storageReference.putFile(imageUri);
 
@@ -1283,7 +1283,7 @@ pitData Pit_Data = new pitData();
             imageOnFB = false;
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageReference = storage.getReferenceFromUrl("gs://pearadox-2020.appspot.com/images/" + Pearadox.FRC_Event).child("robot_" + team.trim() + ".png");
+            StorageReference storageReference = storage.getReferenceFromUrl("gs://pearadox-2022.appspot.com/images/" + Pearadox.FRC_Event).child("robot_" + team.trim() + ".png");
             Log.e(TAG, "images/" + Pearadox.FRC_Event + "/robot_" + team.trim() + ".png" + "\n \n");
             storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
