@@ -63,6 +63,7 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -91,6 +92,7 @@ public class PitScoutActivity extends AppCompatActivity {
     Boolean OnOff= false;
     Uri currentImageUri, imageUri;
     private Uri FB_uri;
+    File file = null;
     String mCurrentPhotoPath;
     String picname;
     AlertDialog alertbox;
@@ -118,6 +120,7 @@ public class PitScoutActivity extends AppCompatActivity {
     Boolean imageOnFB = false;      // Does image already exist in Firebase
     boolean dataSaved = false;      // Make sure they save before exiting
     public Boolean Wt_entered = false;      // Weight entered
+
     // ===================  Data Elements for Pit Scout object ===================
     public String teamSelected = " ";           // Team #
     public int weight = 0;                      // Height (inches)
@@ -170,7 +173,7 @@ pitData Pit_Data = new pitData();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_scout);
-        Log.w(TAG, "<< Pit Scout >>");
+        Log.w(TAG, "<<<<<<   Pit Scout   >>>>>>");
         Bundle bundle = this.getIntent().getExtras();
         String param1 = bundle.getString("dev");
         String param2 = bundle.getString("stud");
@@ -183,7 +186,6 @@ pitData Pit_Data = new pitData();
         pfPitData_DBReference = pfDatabase.getReference("pit-data/" + Pearadox.FRC_Event); // Pit Scout Data
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-
         ImageView img_Photo = (ImageView) findViewById(R.id.img_Photo);
         ImageView imageView_numEnt = (ImageView) findViewById(R.id.imageView_numEnt);
         txt_dev = (TextView) findViewById(R.id.txt_Dev);
@@ -322,7 +324,7 @@ pitData Pit_Data = new pitData();
 //        editText_Comments.setFocusable(true);
 //        editText_Comments.setClickable(true);
 
-        Log.d(TAG, "Manuf.=" + manufacturer + "  Model=" + model);
+        Log.w(TAG, "Manuf.=" + manufacturer + "  Model=" + model);
         if (model.equals("K88")) {
             imageView_numEnt.setImageDrawable(getResources().getDrawable(R.drawable.k88num_enter));
         } else {
@@ -830,7 +832,7 @@ pitData Pit_Data = new pitData();
         chkBox_ClimberR2.setEnabled(onOff);
         chkBox_ClimberR3.setEnabled(onOff);
         if (!onOff) {                           // turn them all off
-            Log.d(TAG, "@@@ setClimbers UN-checked B4 " + onOff + "  CG=" + CG);
+            Log.w(TAG, "@@@ setClimbers UN-checked B4 " + onOff + "  CG=" + CG);
             chkBox_ClimberL1.setChecked(false);
             chkBox_ClimberL2.setChecked(false);
             chkBox_ClimberL3.setChecked(false);
@@ -841,7 +843,7 @@ pitData Pit_Data = new pitData();
             chkBox_ClimberR2.setChecked(false);
             chkBox_ClimberR3.setChecked(false);
             CG = false;
-            Log.d(TAG, "@@@ setClimbers UN-checked After " + onOff + "  CG=" + CG);
+            Log.w(TAG, "@@@ setClimbers UN-checked After " + onOff + "  CG=" + CG);
         }
 
     }
@@ -1310,7 +1312,7 @@ pitData Pit_Data = new pitData();
         public void onItemSelected(AdapterView<?> parent,
                                    View view, int pos, long id) {
             lang = parent.getItemAtPosition(pos).toString();
-            Log.d(TAG, ">>>>> Language  '" + lang + "' " + pos);
+            Log.w(TAG, ">>>>> Language  '" + lang + "' " + pos);
         }
         public void onNothingSelected(AdapterView<?> parent) {
             // Do nothing.
@@ -1320,7 +1322,7 @@ pitData Pit_Data = new pitData();
         public void onItemSelected(AdapterView<?> parent,
                                    View view, int pos, long id) {
             autoMode = parent.getItemAtPosition(pos).toString();
-            Log.d(TAG, ">>>>> Oper.Mode  '" + autoMode + "' " + pos);
+            Log.w(TAG, ">>>>> Oper.Mode  '" + autoMode + "' " + pos);
         }
         public void onNothingSelected(AdapterView<?> parent) {
             // Do nothing.
@@ -1331,7 +1333,7 @@ pitData Pit_Data = new pitData();
         public void onItemSelected(AdapterView<?> parent,
                                    View view, int pos, long id) {
             motor = parent.getItemAtPosition(pos).toString();
-            Log.d(TAG, ">>>>> Motor  '" + motor + "' " + pos);
+            Log.w(TAG, ">>>>> Motor  '" + motor + "' " + pos);
             if (motor.equals("Falcon 500")) {
                 Toast toast = Toast.makeText(getBaseContext(), "This motor has a reported set screw problem;\nAsk team if they have made suggested repairs.", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
