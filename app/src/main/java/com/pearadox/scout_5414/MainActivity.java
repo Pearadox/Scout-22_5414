@@ -352,7 +352,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//            setSupportActionBar(toolbar);
+            setSupportActionBar(toolbar);
         }
 
 
@@ -830,6 +830,8 @@ private void preReqs() {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        Log.e(TAG, "**** Menu Bar **** ");
+//        Toast.makeText(getBaseContext(), "Menu Inflate", Toast.LENGTH_LONG).show();
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -839,6 +841,7 @@ private void preReqs() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        Log.e(TAG, "$$$ Menu Options $$$ ");
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -851,6 +854,13 @@ private void preReqs() {
             about.show();
             return true;
         }
+        if (id == R.id.action_ver) {
+            Toast toast = Toast.makeText(getBaseContext(), "Pearadox Scouting App ©2022  Ver." + Pearadox_Version, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+            return true;
+        }
+
 //        if (id == R.id.action_bluetooth) {
 //            Log.d(TAG, "*****  Bluetooth status  *****" );
 //            Intent blue_intent = new Intent(MainActivity.this, Bluetooth_Activity.class);
