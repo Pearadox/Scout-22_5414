@@ -72,7 +72,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="PowerCell Ball"
-            android:src="@drawable/power_cell" />
+            android:src="@drawable/cargo" />
 
         <CheckBox
             android:id="@+id/chkBox_PowerCellLoadSta"
@@ -82,7 +82,7 @@
             android:text="LoadingSta." />
 
         <CheckBox
-            android:id="@+id/chkBox_PU_PowerCell_floor"
+            android:id="@+id/chkBox_PU_Cargo_floor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -106,7 +106,7 @@
             android:layout_marginStart="5dp"
             android:text="Boundary" />
         <CheckBox
-            android:id="@+id/chkBox_GotCell_Robot"
+            android:id="@+id/chkBox_GotCargo_Robot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -144,8 +144,8 @@
         android:layout_width="70dp"
         android:layout_height="160dp"
         android:layout_below="@+id/lin_Row3"
-        android:contentDescription="Power Port"
-        android:src="@drawable/power_port" />
+        android:contentDescription="Hub"
+        android:src="@drawable/hub" />
 
     // ==============================================================================
 
@@ -382,14 +382,14 @@
     </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/imageView_CP"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/imageView_PP"
-        android:layout_marginTop="10dp"
-        android:contentDescription="Control Panel"
-        android:src="@drawable/control_panel" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView_CP"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_below="@+id/imageView_PP"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:contentDescription="Control Panel"-->
+<!--        android:src="@drawable/control_panel" />-->
 
     // ==============================================================================
 

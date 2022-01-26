@@ -40,7 +40,7 @@ public class TeleopScoutActivity extends Activity {
 
     String TAG = "TeleopScoutActivity";      // This CLASS name
     /* Header Sect. */  TextView txt_dev, txt_stud, txt_match, txt_tnum;
-    /* P/U Sect. */     CheckBox chkBox_PU_PowerCell_floor, chkBox_PowerCellLoadSta, chkBox_PU_Cell_Trench, chkBox_ControlPanel, chkBox_PU_Cell_Boundary, chkBox_GotCell_Robot;
+    /* P/U Sect. */     CheckBox chkBox_PU_Cargo_floor, chkBox_PowerCellLoadSta, chkBox_PU_Cell_Trench, chkBox_ControlPanel, chkBox_PU_Cell_Boundary, chkBox_GotCargo_Robot;
     /* Shoot Sect. */   TextView  txt_OuterClose; Button btn_OuterClosePlus, btn_OuterCloseMinus;  CheckBox checkbox_OuterCloseConsistent;
                         TextView  txt_OuterLine; Button btn_OuterLineMinus, btn_OuterLinePlus;  CheckBox checkbox_OuterLineConsistent;
                         TextView  txt_OuterFrontCP; Button btn_OuterFrontCPMinus, btn_OuterFrontCPPlus;  CheckBox checkbox_OuterFrontCPConsistent;
@@ -113,12 +113,12 @@ public class TeleopScoutActivity extends Activity {
         txt_tnum.setText(tn);
 
         editText_TeleComments   = (EditText) findViewById(R.id.editText_teleComments);
-        chkBox_PU_PowerCell_floor = (CheckBox) findViewById(R.id.chkBox_PU_PowerCell_floor);
+        chkBox_PU_Cargo_floor = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
         chkBox_PowerCellLoadSta = (CheckBox) findViewById(R.id.chkBox_PowerCellLoadSta);
         chkBox_PU_Cell_Trench   = (CheckBox) findViewById(R.id.chkBox_PU_Cell_Trench);
         chkBox_ControlPanel     = (CheckBox) findViewById(R.id.chkBox_ControlPanel);
         chkBox_PU_Cell_Boundary = (CheckBox) findViewById(R.id.chkBox_PU_Cell_Boundary);
-        chkBox_GotCell_Robot    = (CheckBox) findViewById(R.id.chkBox_GotCell_Robot);
+        chkBox_GotCargo_Robot    = (CheckBox) findViewById(R.id.chkBox_GotCargo_Robot);
         checkbox_CPspin         = (CheckBox) findViewById(R.id.checkbox_CPspin);
         checkbox_CPcolor        = (CheckBox) findViewById(R.id.checkbox_CPcolor);
         chk_Climbed             = (CheckBox) findViewById(R.id.chk_Climbed);
@@ -198,10 +198,10 @@ public class TeleopScoutActivity extends Activity {
         }
     });
 
-    chkBox_PU_PowerCell_floor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    chkBox_PU_Cargo_floor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chkBox_PU_PowerCell_floor Listener");
+            Log.w(TAG, "chkBox_PU_Cargo_floor Listener");
             if (buttonView.isChecked()) {
                 Log.w(TAG,"PU_PowerCell is checked.");
                 PowerCell_floor = true;
@@ -263,15 +263,15 @@ public class TeleopScoutActivity extends Activity {
             }
         }
     });
-        chkBox_GotCell_Robot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkBox_GotCargo_Robot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chkBox_GotCell_Robot Listener");
+                Log.w(TAG, "chkBox_GotCargo_Robot Listener");
                 if (buttonView.isChecked()) {
-                    Log.w(TAG,"chkBox_GotCell_Robot is checked.");
+                    Log.w(TAG,"chkBox_GotCargo_Robot is checked.");
                     PowerCell_Robot = true;
                 } else {  //not checked
-                    Log.w(TAG,"chkBox_GotCell_Robot is unchecked.");
+                    Log.w(TAG,"chkBox_GotCargo_Robot is unchecked.");
                     PowerCell_Robot = false;
                 }
             }

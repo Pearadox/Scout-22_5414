@@ -449,12 +449,12 @@
                 android:layout_weight="0.70"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView_CP"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:contentDescription="Control Panel"
-                    android:src="@drawable/control_panel" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView_CP"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:contentDescription="Control Panel"-->
+<!--                    android:src="@drawable/control_panel" />-->
 
                 <CheckBox
                     android:id="@+id/checkbox_CPspin"
@@ -524,7 +524,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:contentDescription="PowerCell Ball"
-                    android:src="@drawable/power_cell" />
+                    android:src="@drawable/cargo" />
 
                 <TextView
                     android:id="@+id/lbl_From"

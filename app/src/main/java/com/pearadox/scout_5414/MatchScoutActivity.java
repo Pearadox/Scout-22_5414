@@ -47,8 +47,8 @@ public class MatchScoutActivity extends AppCompatActivity {
                         EditText editTxt_Team, editTxt_Match;
     /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_start1, radio_start2, radio_Pick;
                         Spinner spinner_startPos;
-    /* After Start */   CheckBox checkbox_leftSectLine, checkbox_noAUTO, checkbox_Dump;
-                        CheckBox chkBox_PU_PowerCell_floor, chkBox_ControlPanel, chkBox_PU_Cell_Trench, chkBox_PU_Cell_Boundary, chkBox_GotCell_Robot;
+    /* After Start */   CheckBox checkbox_leftTarmac, checkbox_noAUTO, checkbox_Dump;
+                        CheckBox chkBox_PU_Cargo_floor, chkBox_ControlPanel, chkBox_PU_Cell_Trench, chkBox_PU_Cell_Boundary, chkBox_GotCargo_Robot;
     /* Power Port */    TextView  txt_OuterClose; Button btn_OuterClosePlus, btn_OuterCloseMinus;  CheckBox checkbox_OuterCloseConsistent;
                         TextView  txt_OuterLine; Button btn_OuterLineMinus, btn_OuterLinePlus;  CheckBox checkbox_OuterLineConsistent;
                         TextView  txt_OuterFrontCP; Button btn_OuterFrontCPMinus, btn_OuterFrontCPPlus;  CheckBox checkbox_OuterFrontCPConsistent;
@@ -77,27 +77,17 @@ public class MatchScoutActivity extends AppCompatActivity {
     // Declare & initialize
     public String matchID               = "T00";    // Type + #
     public String tn                    = "";       // Team #
-    public int PlayerSta                = 0;        // #cells carried
+    public int PlayerSta                = 0;        // Player Station
 
-    public int cells_carried            = -1;       // #cells carried
+    public int cargo_carried            = -1;       // #argo carried
     public String  startPos             = " ";      // Start Position
     // ---- AFTER Start ----
     public boolean noAuto               = false;    // Do they have Autonomous mode?
-    public boolean leftSectorLine       = false;    // Did they leave HAB
-    private boolean Dump                = false;    // Did they Dump balls to partner?
+    public boolean leftTarmac           = false;    // Did they leave Tarmac
     private boolean CollectFloor        = false;    // Collect from Floor?
-    private boolean CollectCP           = false;    // Collect from Control Panel?
-    private boolean CollectTrench       = false;    // Collect from Trench?
-    private boolean CollectSGboundary   = false;    // Collect from SG boundary?
-    private boolean CollectRobot        = false;    // Collect from Floor?
+    private boolean CollectTerminal     = false;    // Collect from Terminal?
     private int     Low                 = 0;        // # Low Goal balls
-    private int     HighClose           = 0;        // # High Goal balls - Close
-    private int     HighLine            = 0;        // # High Goal balls - Line
-    private int     HighFrontCP         = 0;        // # High Goal balls - Front CP
-    private int     HighBackCP          = 0;        // # High Goal balls - Back CP
-    private boolean conInnerClose       = false;    // Consistent Inner Goal scored Close?
-    private boolean conInnerLine        = false;    // Consistent Inner Goal scored on Line?
-    private boolean conInnerFrontCP     = false;    // Consistent Inner Goal scored in Front of CP?
+    private int     High                = 0;        // # High Goal balls
 
     /* */
     public String autoComment = " ";        // Comment
@@ -258,16 +248,8 @@ public class MatchScoutActivity extends AppCompatActivity {
         }
 
         checkbox_noAUTO             = (CheckBox) findViewById(R.id.checkbox_noAUTO);
-        checkbox_leftSectLine       = (CheckBox) findViewById(R.id.checkbox_leftSectLine);
-        checkbox_Dump               = (CheckBox) findViewById(R.id.checkbox_Dump);
-        chkBox_PU_PowerCell_floor   = (CheckBox) findViewById(R.id.chkBox_PU_PowerCell_floor);
-        chkBox_ControlPanel         = (CheckBox) findViewById(R.id.chkBox_ControlPanel);
-        chkBox_PU_Cell_Trench       = (CheckBox) findViewById(R.id.chkBox_PU_Cell_Trench);
-        chkBox_PU_Cell_Boundary     = (CheckBox) findViewById(R.id.chkBox_PU_Cell_Boundary);
-        chkBox_GotCell_Robot        = (CheckBox) findViewById(R.id.chkBox_GotCell_Robot);
-        checkbox_OuterCloseConsistent = (CheckBox) findViewById(R.id.checkbox_OuterCloseConsistent);
-        checkbox_OuterLineConsistent = (CheckBox) findViewById(R.id.checkbox_OuterLineConsistent);
-        checkbox_OuterFrontCPConsistent = (CheckBox) findViewById(R.id.checkbox_OuterFrontCPConsistent);
+        checkbox_leftTarmac       = (CheckBox) findViewById(R.id.checkbox_leftTarmac);
+        chkBox_PU_Cargo_floor   = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
         txt_OuterClose              = (TextView) findViewById(R.id.txt_OuterClose);
         txt_OuterLine               = (TextView) findViewById(R.id.txt_OuterLine);
         txt_OuterFrontCP            = (TextView) findViewById(R.id.txt_OuterFrontCP);
@@ -306,8 +288,8 @@ public class MatchScoutActivity extends AppCompatActivity {
                      Log.w(TAG, "No Auto is checked.");
                      noAuto = true;
                      // ToDo - turn ON/OFF correct widgets
-                     checkbox_leftSectLine.setChecked(false);
-                     checkbox_leftSectLine.setEnabled(false);
+                     checkbox_leftTarmac.setChecked(false);
+                     checkbox_leftTarmac.setEnabled(false);
                      checkbox_Dump.setChecked(false);
                      checkbox_Dump.setEnabled(false);
                      if (!NoShow) {         // Leave message as is if No Show
@@ -320,7 +302,7 @@ public class MatchScoutActivity extends AppCompatActivity {
                      Log.w(TAG, "No Auto is unchecked.");
                      noAuto = false;
 
-                     checkbox_leftSectLine.setEnabled(true);
+                     checkbox_leftTarmac.setEnabled(true);
                      checkbox_Dump.setEnabled(true);
                      editText_autoComment.setText(" ");
                      autoComment = " ";
@@ -328,34 +310,23 @@ public class MatchScoutActivity extends AppCompatActivity {
              }
          });
 
-        checkbox_leftSectLine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkbox_leftTarmac.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            Log.w(TAG, "checkbox_leftSectLine Listener");
+            Log.w(TAG, "checkbox_leftTarmac Listener");
             if (buttonView.isChecked()) {
-                    leftSectorLine = true;
+                    leftTarmac = true;
                 } else {
-                    leftSectorLine = false;
+                    leftTarmac = false;
                 }
             }
         });
 
-        checkbox_Dump.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-             @Override
-             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                 Log.w(TAG, "checkbox_Dump Listener");
-                 if (buttonView.isChecked()) {
-                     Dump = true;
-                 } else {
-                     Dump = false;
-                 }
-             }
-        });
 
-        chkBox_PU_PowerCell_floor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkBox_PU_Cargo_floor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
              @Override
              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-             Log.w(TAG, "chkBox_PU_PowerCell_floor Listener");
+             Log.w(TAG, "chkBox_PU_Cargo_floor Listener");
                  if (buttonView.isChecked()) {
                      CollectFloor = true;
                  } else {
@@ -364,142 +335,39 @@ public class MatchScoutActivity extends AppCompatActivity {
             }
         });
 
-        chkBox_ControlPanel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        chkBox_GotCargo_Robot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "chkBox_ControlPanel Listener");
+                Log.w(TAG, "chkBox_GotCargo_Robot Listener");
                 if (buttonView.isChecked()) {
-                    CollectCP = true;
+                    CollectTerminal = true;
                 } else {
-                    CollectCP = false;
+                    CollectTerminal = false;
                 }
             }
         });
 
-        chkBox_PU_Cell_Trench.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    CollectTrench = true;
-                } else {
-                    CollectTrench = false;
-                }
-            }
-        });
-
-        chkBox_PU_Cell_Boundary.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "chkBox_PU_Cell_Boundary Listener");
-                if (buttonView.isChecked()) {
-                    CollectSGboundary = true;
-                } else {
-                    CollectSGboundary = false;
-                }
-            }
-        });
-
-        chkBox_GotCell_Robot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "chkBox_GotCell_Robot Listener");
-                if (buttonView.isChecked()) {
-                    CollectRobot = true;
-                } else {
-                    CollectRobot = false;
-                }
-            }
-        });
-
-        checkbox_OuterCloseConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "checkbox_OuterCloseConsistent Listener");
-                if (buttonView.isChecked()) {
-                    conInnerClose = true;
-                } else {
-                    conInnerClose = false;
-                }
-            }
-        });
-
-        checkbox_OuterLineConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "checkbox_OuterLineConsistent Listener");
-                if (buttonView.isChecked()) {
-                    conInnerLine = true;
-                } else {
-                    conInnerLine = false;
-                }
-                Log.d(TAG, "OuterLineConsistent " + conInnerLine);
-            }
-        });
-
-        checkbox_OuterFrontCPConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "checkbox_OuterCloseConsistent Listener");
-                if (buttonView.isChecked()) {
-                    conInnerFrontCP = true;
-                } else {
-                    conInnerFrontCP = false;
-                }
-            }
-        });
 
 
         //*****************************************************************
         btn_OuterClosePlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                HighClose++;
-                Log.w(TAG, "OuterUnder = " + Integer.toString(HighClose));      // ** DEBUG **
-                txt_OuterClose.setText(Integer.toString(HighClose));    // Perform action on click
+                High++;
+                Log.w(TAG, "OuterUnder = " + Integer.toString(High));      // ** DEBUG **
+                txt_OuterClose.setText(Integer.toString(High));    // Perform action on click
             }
         });
         btn_OuterCloseMinus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (HighClose >= 1) {
-                    HighClose--;
+                if (High >= 1) {
+                    High--;
                 }
-                Log.w(TAG, "OuterUnder = " + Integer.toString(HighClose));      // ** DEBUG **
-                txt_OuterClose.setText(Integer.toString(HighClose));    // Perform action on click
+                Log.w(TAG, "OuterUnder = " + Integer.toString(High));      // ** DEBUG **
+                txt_OuterClose.setText(Integer.toString(High));    // Perform action on click
             }
         });
 
-        btn_OuterLinePlus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                HighLine++;
-                Log.w(TAG, "OuterLine = " + Integer.toString(HighLine));      // ** DEBUG **
-                txt_OuterLine.setText(Integer.toString(HighLine));
-            }
-        });
-        btn_OuterLineMinus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (HighLine >= 1) {
-                    HighLine--;
-                }
-                Log.w(TAG, "OuterLine = " + Integer.toString(HighLine));      // ** DEBUG **
-                txt_OuterLine.setText(Integer.toString(HighLine));
-            }
-        });
-
-        btn_OuterFrontCPPlus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                HighFrontCP++;
-                Log.w(TAG, "OuterFrontCP = " + Integer.toString(HighFrontCP));      // ** DEBUG **
-                txt_OuterFrontCP.setText(Integer.toString(HighFrontCP));
-            }
-        });
-        btn_OuterFrontCPMinus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (HighFrontCP >= 1) {
-                    HighFrontCP--;
-                }
-                Log.w(TAG, "OuterFrontCP = " + Integer.toString(HighFrontCP));      // ** DEBUG **
-                txt_OuterFrontCP.setText(Integer.toString(HighFrontCP));
-            }
-        });
 
         btn_BottomPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -527,10 +395,10 @@ public class MatchScoutActivity extends AppCompatActivity {
 
             } else {        // It's OK - Match has started
 
-                Log.e(TAG, "*** TeleOps - #Cells=" + cells_carried + "  Start=" + spinner_startPos.getSelectedItemPosition());
+                Log.e(TAG, "*** TeleOps - #Cells=" + cargo_carried + "  Start=" + spinner_startPos.getSelectedItemPosition());
                 // ToDo - check to see if ALL required fields entered (Start-pos, cells, ....)
                     if ((noAuto==false) &&
-                            ((cells_carried < ZERO)  ||
+                            ((cargo_carried < ZERO)  ||
                             (spinner_startPos.getSelectedItemPosition() == 0))) {  //Required fields
 
                         Toast.makeText(getBaseContext(), "\t*** Select _ALL_ required fields!  ***\n Starting Position, # Cells ", Toast.LENGTH_LONG).show();
@@ -605,19 +473,19 @@ public class MatchScoutActivity extends AppCompatActivity {
         String value = radio_Pick.getText().toString();
         if (value.equals("None")) {        // None
             Log.w(TAG, "None");
-            cells_carried = 0;
+            cargo_carried = 0;
         }
         if (value.equals("1")) {        // 1
             Log.w(TAG, "One");
-            cells_carried = 1;
+            cargo_carried = 1;
         }
         if (value.equals("2")) {        // 2
             Log.w(TAG, "Two");
-            cells_carried = 2;
+            cargo_carried = 2;
         }
         if (value.equals("3")) {        // 2
             Log.w(TAG, "Three");
-            cells_carried = 3;
+            cargo_carried = 3;
         }
     }
 
@@ -630,25 +498,15 @@ public class MatchScoutActivity extends AppCompatActivity {
         Pearadox.Match_Data.setMatch(matchID);
         Pearadox.Match_Data.setTeam_num(tn);
         Pearadox.Match_Data.setPre_PlayerSta(PlayerSta);
-        Pearadox.Match_Data.setPre_cells_carried(cells_carried);
+        Pearadox.Match_Data.setPre_cargo_carried(cargo_carried);
         Pearadox.Match_Data.setPre_startPos(startPos);
 
         Pearadox.Match_Data.setAuto_CollectFloor(CollectFloor);
         Pearadox.Match_Data.setAuto_mode(noAuto);
-        Pearadox.Match_Data.setAuto_leftSectorLine(leftSectorLine);
-        Pearadox.Match_Data.setAuto_Dump(Dump);
+        Pearadox.Match_Data.setAuto_leftTarmac(leftTarmac);
         Pearadox.Match_Data.setAuto_CollectFloor(CollectFloor);
-        Pearadox.Match_Data.setAuto_CollectCP(CollectCP);
-        Pearadox.Match_Data.setAuto_CollectTrench(CollectTrench);
-        Pearadox.Match_Data.setAuto_CollectSGboundary(CollectSGboundary);
-        Pearadox.Match_Data.setAuto_CollectRobot(CollectRobot);
         Pearadox.Match_Data.setAuto_Low(Low);
-        Pearadox.Match_Data.setAuto_HighClose(HighClose);
-        Pearadox.Match_Data.setAuto_HighLine(HighLine);
-        Pearadox.Match_Data.setAuto_HighFrontCP(HighFrontCP);
-        Pearadox.Match_Data.setAuto_conInnerClose(conInnerClose);
-        Pearadox.Match_Data.setAuto_conInnerLine(conInnerLine);
-        Pearadox.Match_Data.setAuto_conInnerFrontCP(conInnerFrontCP);
+        Pearadox.Match_Data.setAuto_High(High);
 
         // ToDo - set all 'After Start' variables to object
 //        Pearadox.Match_Data.setSand_PU2ndPanel(PU2ndPanel);
@@ -794,7 +652,7 @@ public class MatchScoutActivity extends AppCompatActivity {
                 NoShow = true;
                 editText_autoComment.setText("### Team/robot is a No Show ###");
                 autoComment = "### Team/robot is a No Show ###";
-                cells_carried = 0;      //
+                cargo_carried = 0;      //
                 Log.d(TAG, "No Show" + editText_autoComment.getText() + " " + autoComment);
                 ;
                 checkbox_noAUTO.setChecked(true);
