@@ -90,15 +90,17 @@
     <!-- ##### Start Position for Autononous ##### -->
     <string-array name="auto_start_array">
         <item> </item>
-        <item>Left</item>
-        <item>Left Middle</item>
-        <item>Middle</item>
-        <item>Right Middle</item>
-        <item>Right</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
         // ...
         <item>No Show</item>
     </string-array>
 
+    <!--  Pit Scout  -->
     <!-- ##### Autonomous Operating Mode ##### -->
     <string-array name="auto_Mode_array">
         <item> </item>
