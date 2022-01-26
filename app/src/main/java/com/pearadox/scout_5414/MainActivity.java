@@ -1112,8 +1112,8 @@ private void preReqs() {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.e(TAG, "signInWithEmail:failure", task.getException());
-                                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                                tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
+//                                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+//                                tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
                                 Toast toast = Toast.makeText(getBaseContext(), "Firebase authentication failed.", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                 toast.show();

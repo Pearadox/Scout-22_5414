@@ -1176,88 +1176,28 @@ public class DraftScout_Activity extends AppCompatActivity {
 //                Log.w(TAG, "Team Match " + team);
                 // New Match Data Object *** GLF 1/27/20
                 // ******************** Autonomous ********************
-                if (match_inst.isAuto_leftSectorLine()) {
+                if (match_inst.isAuto_leftTarmac()) {
                     base++;
                 }
-                if (match_inst.isAuto_Dump()) {
-                    dump++;
-                }
                 cellL0 = cellL0 + match_inst.getAuto_Low();
-                cellUnder = cellUnder + match_inst.getAuto_HighClose();
-                cellLine = cellLine + match_inst.getAuto_HighLine();
-                cellFrontCP = cellFrontCP + match_inst.getAuto_HighFrontCP();
-                if (match_inst.isAuto_conInnerClose()) {
-                    conUnder++;
-                }
-                if (match_inst.isAuto_conInnerLine()) {
-                    conLine++;
-                }
-                if (match_inst.isAuto_conInnerFrontCP()) {
-                    conFront++;
-                }
 
                 if (match_inst.isAuto_CollectFloor()) {         //**  Collect Auto
                     colFloor++;                                 //**
                 }                                               //**
-                if (match_inst.isAuto_CollectRobot()) {         //**
-                    colRobot++;                                 //**
-                }                                               //**
-                if (match_inst.isAuto_CollectCP()) {            //**
-                    colCP++;                                    //**
-                }                                               //**
-                if (match_inst.isAuto_CollectTrench()) {        //**
-                    colTrench++;                                //**
-                }                                               //**
-                if (match_inst.isAuto_CollectSGboundary()) {    //**
-                    colBoundary++;                              //**
-                }                                               //*********
 
                 // *************************************************
                 // ******************** TeleOps ********************
                 // *************************************************
                 TcellL0 = TcellL0 + match_inst.getTele_Low();
-                TcellUnder = TcellUnder + match_inst.getTele_HighClose();
-                TcellLine = TcellLine + match_inst.getTele_HighLine();
-                TcellFrontCP = TcellFrontCP + match_inst.getTele_HighFrontCP();
-                TcellBackCP = TcellBackCP + match_inst.getTele_HighBackCP();
-                if (match_inst.isTele_conInnerClose()) {
-                    TconUnder++;
-                }
-                if (match_inst.isTele_conInnerLine()) {
-                    TconLine++;
-                }
-                if (match_inst.isTele_conInnerFrontCP()) {
-                    TconFront++;
-                }
-                if (match_inst.isTele_conInnerBackCP()) {
-                    TconBack++;
-                }
+                TcellUnder = TcellUnder + match_inst.getTele_High();
 
-                if (match_inst.isTele_PowerCell_floor()) {      //**  Collect Tele
+                if (match_inst.isTele_Cargo_floor()) {          //**  Collect Tele
                     TcolFloor++;                                //**
                 }                                               //**
-                if (match_inst.isTele_PowerCell_Robot()) {      //**
-                    TcolRobot++;                                //**
-                }                                               //**
-                if (match_inst.isTele_PowerCell_CP()) {         //**
-                    TcolCP++;                                   //**
-                }                                               //**
-                if (match_inst.isTele_PowerCell_Trench()) {     //**
-                    TcolTrench++;                               //**
-                }                                               //**
-                if (match_inst.isTele_PowerCell_Boundary()) {   //**
-                    TcolBoundary++;                             //**
-                }                                               //**
-                if (match_inst.isTele_PowerCell_LoadSta()) {    //**
+                 if (match_inst.isTele_Cargo_term()) {          //**
                     TcolLoadSta++;                              //**
                 }                                               //*********
 
-                if (match_inst.isTele_CPspin()) {
-                    spinCP++;
-                }
-                if (match_inst.isTele_CPcolor()) {
-                    colorCP++;
-                }
 
                 if (match_inst.isTele_Climbed()) {
                     climbed++;
@@ -1265,40 +1205,8 @@ public class DraftScout_Activity extends AppCompatActivity {
                 if (match_inst.isTele_UnderSG()) {
                     parked++;
                 }
-                if (match_inst.isTele_Balanced()) {
-                    bal++;
-                }
 
-                int endHang = match_inst.getTele_Hang_num();        // end # Hanging
-                switch (endHang) {
-                    case 0:         // Zero
-                        climbH0++;
-                        break;
-                    case 1:         // Level 1
-                        climbH1++;
-                        break;
-                    case 2:         // Level 2
-                        climbH2++;
-                        break;
-                    case 3:         // Level 3
-                        climbH3++;
-                        break;
-                    default:                // ????
-                        e(TAG, "*** Error - bad Hang Level indicator  ***");
-                }
 
-                if (match_inst.isTele_lifted()) {
-                    if (match_inst.getTele_liftedNum() == 1) {
-                        lift1Num++;
-                    } else {
-                        if (match_inst.getTele_liftedNum() == 2) {
-                            lift2Num++;
-                        }
-                    }
-                    if (match_inst.isTele_got_lift()) {
-                        gotLiftedNum++;
-                    }
-                }
 //                Log.w(TAG, "Accum. matches = " + numMatches);
             } //End if teams equal
         } // End For _ALL_ matches

@@ -48,7 +48,7 @@ public class MatchScoutActivity extends AppCompatActivity {
     /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_start1, radio_start2, radio_Pick;
                         Spinner spinner_startPos;
     /* After Start */   CheckBox checkbox_leftTarmac, checkbox_noAUTO, checkbox_Dump;
-                        CheckBox chkBox_PU_Cargo_floor, chkBox_ControlPanel, chkBox_PU_Cell_Trench, chkBox_PU_Cell_Boundary, chkBox_GotCargo_Robot;
+                        CheckBox chkBox_PU_Cargo_floor;
     /* Power Port */    TextView  txt_OuterClose; Button btn_OuterClosePlus, btn_OuterCloseMinus;  CheckBox checkbox_OuterCloseConsistent;
                         TextView  txt_OuterLine; Button btn_OuterLineMinus, btn_OuterLinePlus;  CheckBox checkbox_OuterLineConsistent;
                         TextView  txt_OuterFrontCP; Button btn_OuterFrontCPMinus, btn_OuterFrontCPPlus;  CheckBox checkbox_OuterFrontCPConsistent;
@@ -336,17 +336,17 @@ public class MatchScoutActivity extends AppCompatActivity {
         });
 
 
-        chkBox_GotCargo_Robot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "chkBox_GotCargo_Robot Listener");
-                if (buttonView.isChecked()) {
-                    CollectTerminal = true;
-                } else {
-                    CollectTerminal = false;
-                }
-            }
-        });
+//        chkBox_GotCargo_Robot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                Log.w(TAG, "chkBox_GotCargo_Robot Listener");
+//                if (buttonView.isChecked()) {
+//                    CollectTerminal = true;
+//                } else {
+//                    CollectTerminal = false;
+//                }
+//            }
+//        });
 
 
 

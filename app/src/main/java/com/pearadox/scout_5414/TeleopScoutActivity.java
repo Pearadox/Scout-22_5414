@@ -707,31 +707,13 @@ public class TeleopScoutActivity extends Activity {
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private void storeTeleData() {
         Log.w(TAG, ">>>>  storeTeleData  <<<<");
-        // New Match Data Object *** GLF 1/26/20
-        Pearadox.Match_Data.setTele_PowerCell_LoadSta(PowerCell_LoadSta);
-        Pearadox.Match_Data.setTele_PowerCell_floor(PowerCell_floor);
-        Pearadox.Match_Data.setTele_PowerCell_CP(PowerCell_CP);
-        Pearadox.Match_Data.setTele_PowerCell_Trench(PowerCell_Trench);
-        Pearadox.Match_Data.setTele_PowerCell_Boundary(PowerCell_Boundary);
-        Pearadox.Match_Data.setTele_PowerCell_Robot(PowerCell_Robot);
+        // New Match Data Object *** GLF 1/26/22
+        Pearadox.Match_Data.setTele_Cargo_term(PowerCell_LoadSta);
+        Pearadox.Match_Data.setTele_Cargo_floor(PowerCell_floor);
         Pearadox.Match_Data.setTele_Low(Low);
-        Pearadox.Match_Data.setTele_HighClose(HighClose);
-        Pearadox.Match_Data.setTele_HighLine(HighLine);
-        Pearadox.Match_Data.setTele_HighFrontCP(HighFrontCP);
-        Pearadox.Match_Data.setTele_HighBackCP(HighBackCP);
-        Pearadox.Match_Data.setTele_conInnerClose(conInnerClose);
-        Pearadox.Match_Data.setTele_conInnerLine(conInnerLine);
-        Pearadox.Match_Data.setTele_conInnerFrontCP(conInnerFrontCP);
-        Pearadox.Match_Data.setTele_conInnerBackCP(conInnerBackCP);
-        Pearadox.Match_Data.setTele_CPspin(CPspin);
-        Pearadox.Match_Data.setTele_CPcolor(CPcolor);
+        Pearadox.Match_Data.setTele_High(HighClose);
         Pearadox.Match_Data.setTele_Climbed(Climbed);
         Pearadox.Match_Data.setTele_UnderSG(UnderSG);
-        Pearadox.Match_Data.setTele_Hang_num(Hang_Num);
-        Pearadox.Match_Data.setTele_Balanced(Balanced);
-        Pearadox.Match_Data.setTele_got_lift(got_lift);
-        Pearadox.Match_Data.setTele_lifted(lifted);
-        Pearadox.Match_Data.setTele_liftedNum(liftedNum);
         Pearadox.Match_Data.setTele_num_Penalties(num_Penalties);
 
         // **

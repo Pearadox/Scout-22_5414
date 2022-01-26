@@ -178,7 +178,7 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isAuto_mode()) {
                 noAuton++;
             }
-            if (match_inst.isAuto_leftSectorLine()) {
+            if (match_inst.isAuto_leftTarmac()) {
                 numleftSectorLine++;
             }
 
@@ -229,7 +229,7 @@ public class VisMatch_Activity extends AppCompatActivity {
                     Log.e(TAG, "***  Invalid Player Station!!!  ***" );
             }
 
-            int BallStart = match_inst.getPre_cells_carried();
+            int BallStart = match_inst.getPre_cargo_carried();
 //            Log.w(TAG, "Pre-Cells." + BallStart);
             switch (BallStart) {
                 case 0:
@@ -250,57 +250,20 @@ public class VisMatch_Activity extends AppCompatActivity {
                 auton_Floor++;
             }
 
-            if (match_inst.isAuto_CollectTrench() ) {
-                auton_Trench++;
-            }
-
-            if (match_inst.isAuto_CollectCP()) {
-                auton_ControlP++;
-            }
-
-            if (match_inst.isAuto_CollectSGboundary()) {
-                auton_Boundary++;
-            }
-
-            if (match_inst.isAuto_CollectRobot()) {
-                auton_Robot++;
-            }
 
 
             auto_Low = auto_Low + match_inst.getAuto_Low();
-            auto_HighClose = auto_HighClose + match_inst.getAuto_HighClose();
-            auto_HighLine = auto_HighLine + match_inst.getAuto_HighLine();
-            auto_HighFrontCP = auto_HighFrontCP + match_inst.getAuto_HighFrontCP();
 
             AutoStackBar(i+1, match_id, (float)auto_Low , (float)auto_HighClose, (float)auto_HighLine, (float)auto_HighFrontCP);
 
             // *************************************************
             // ******************** TeleOps ********************
             // *************************************************
-            if (match_inst.isTele_PowerCell_floor()){
+            if (match_inst.isTele_Cargo_floor()){
                 tele_PowerCellFloor++;
             }
-            if (match_inst.isTele_PowerCell_LoadSta()) {
+            if (match_inst.isTele_Cargo_term()) {
                 tele_PowerCellPlasta++;
-            }
-            if (match_inst.isTele_PowerCell_Trench()) {
-                tele_PowerCellTrench++;
-            }
-            if (match_inst.isTele_PowerCell_CP()) {
-                tele_PowerCellCP++;
-            }
-            if (match_inst.isTele_PowerCell_Boundary()) {
-                tele_PowerCellBoundary++;
-            }
-            if (match_inst.isTele_PowerCell_Robot()){
-                tele_PowerCellRobot++;
-            }
-
-            if (match_inst.isTele_CPspin()) {
-                tele_CPSpin++;
-            }
-            if (match_inst.isTele_CPcolor()) {
-                tele_CPColor++;
             }
 
             if (match_inst.isTele_Climbed()) {
@@ -309,47 +272,12 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isTele_UnderSG()) {
                 tele_Park++;
             }
-            if (match_inst.isTele_Balanced()) {
-                tele_Balance++;
-            }
 
-            int endHang = match_inst.getTele_Hang_num();        // end HAB Level
-            switch (endHang) {
-                case 0:         // Not On
-                    climbH0++;
-                    break;
-                case 1:         // Level 1
-                    climbH1++;
-                    break;
-                case 2:         // Level 2
-                    climbH2++;
-                    break;
-                case 3:         // Level 3
-                    climbH3++;
-                    break;
-                default:                // ????
-                    e(TAG, "*** Error - bad HAB Level indicator  ***");
-            }
-
-            LiftNm = LiftNm + match_inst.getTele_liftedNum();
-
-            if (match_inst.isTele_got_lift()) {
-                WasLifted++;
-            }
-//                if (match_inst.isTele_lift_two()) {
-//                    lift2Num++;
-//                }
-            if (match_inst.isTele_got_lift()) {
-                liftedNum++;
-            }
 
             Tele_Low = Tele_Low + match_inst.getTele_Low();
-            Tele_HighClose = Tele_HighClose + match_inst.getTele_HighClose();
-            Tele_HighLine = Tele_HighLine + match_inst.getTele_HighLine();
-            Tele_HighFrontCP = Tele_HighFrontCP + match_inst.getTele_HighFrontCP();
-            Tele_HighBackCP = Tele_HighBackCP + match_inst.getTele_HighBackCP();
+            Tele_HighClose = Tele_HighClose + match_inst.getTele_High();
 
-            TeleStackBar(i+1, match_id, (float)Tele_Low , (float)Tele_HighClose, (float)Tele_HighLine, (float)Tele_HighFrontCP, (float)Tele_HighBackCP);
+            TeleStackBar(i+1, match_id, (float)Tele_Low , (float)Tele_HighClose);
 
             if (match_inst.getTele_comment().length() > 1) {
                 tele_Comments = tele_Comments + match_inst.getMatch() + "-" + match_inst.getTele_comment() + "\n" + underScore  + "\n" ;
@@ -367,9 +295,9 @@ public class VisMatch_Activity extends AppCompatActivity {
                 final_DefGood++;
             }
             // Todo Rocket Int.
-            if (match_inst.isFinal_def_TrenchInt()) {
-                final_TrenchInt++;
-            }
+//            if (match_inst.isFinal_def_TrenchInt()) {
+//                final_TrenchInt++;
+//            }
             if (match_inst.isFinal_def_Block()) {
                 final_DefDump++;
             }
@@ -784,7 +712,7 @@ public class VisMatch_Activity extends AppCompatActivity {
 
         }}
 
-    private void TeleStackBar(int num,String match, float low, float under, float line, float front, float back) {
+    private void TeleStackBar(int num, String match, float low, float under) {
         StackedBarChart teleBarChart = (StackedBarChart) findViewById(R.id.teleBarChart);
 
         switch (num) {
@@ -792,135 +720,135 @@ public class VisMatch_Activity extends AppCompatActivity {
                 StackedBarModel s1 = new StackedBarModel(match);
                 s1.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s1.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s1.addBar(new BarModel(line, 0xFF006400));    // Line
-                s1.addBar(new BarModel(front, 0xFF800080));    // Front
-                s1.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s1.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s1.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s1.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s1);
                 break;
             case 2:
                 StackedBarModel s2 = new StackedBarModel(match);
                 s2.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s2.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s2.addBar(new BarModel(line, 0xFF006400));   // Line
-                s2.addBar(new BarModel(front, 0xFF800080));    // Front
-                s2.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s2.addBar(new BarModel(line, 0xFF006400));   // Line
+//                s2.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s2.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s2);
                 break;
             case 3:
                 StackedBarModel s3 = new StackedBarModel(match);
                 s3.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s3.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s3.addBar(new BarModel(line, 0xFF006400));    // Line
-                s3.addBar(new BarModel(front, 0xFF800080));    // Front
-                s3.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s3.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s3.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s3.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s3);
                 break;
             case 4:
                 StackedBarModel s4 = new StackedBarModel(match);
                 s4.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s4.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s4.addBar(new BarModel(line, 0xFF006400));    // Line
-                s4.addBar(new BarModel(front, 0xFF800080));    // Front
-                s4.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s4.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s4.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s4.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s4);
                 break;
             case 5:
                 StackedBarModel s5 = new StackedBarModel(match);
                 s5.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s5.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s5.addBar(new BarModel(line, 0xFF006400));    // Line
-                s5.addBar(new BarModel(front, 0xFF800080));    // Front
-                s5.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s5.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s5.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s5.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s5);
                 break;
             case 6:
                 StackedBarModel s6 = new StackedBarModel(match);
                 s6.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s6.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s6.addBar(new BarModel(line, 0xFF006400));    // Line
-                s6.addBar(new BarModel(front, 0xFF800080));    // Front
-                s6.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s6.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s6.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s6.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s6);
                 break;
             case 7:
                 StackedBarModel s7 = new StackedBarModel(match);
                 s7.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s7.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s7.addBar(new BarModel(line, 0xFF006400));   // Line
-                s7.addBar(new BarModel(front, 0xFF800080));    // Front
-                s7.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s7.addBar(new BarModel(line, 0xFF006400));   // Line
+//                s7.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s7.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s7);
                 break;
             case 8:
                 StackedBarModel s8 = new StackedBarModel(match);
                 s8.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s8.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s8.addBar(new BarModel(line, 0xFF006400));    // Line
-                s8.addBar(new BarModel(front, 0xFF800080));    // Front
-                s8.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s8.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s8.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s8.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s8);
                 break;
             case 9:
                 StackedBarModel s9 = new StackedBarModel(match);
                 s9.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s9.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s9.addBar(new BarModel(line, 0xFF006400));    // Line
-                s9.addBar(new BarModel(front, 0xFF800080));    // Front
-                s9.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s9.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s9.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s9.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s9);
                 break;
             case 10:
                 StackedBarModel s10 = new StackedBarModel(match);
                 s10.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s10.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s10.addBar(new BarModel(line, 0xFF006400));    // Line
-                s10.addBar(new BarModel(front, 0xFF800080));    // Front
-                s10.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s10.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s10.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s10.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s10);
                 break;
             case 11:
                 StackedBarModel s11 = new StackedBarModel(match);
                 s11.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s11.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s11.addBar(new BarModel(line, 0xFF006400));    // Line
-                s11.addBar(new BarModel(front, 0xFF800080));    // Front
-                s11.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s11.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s11.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s11.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s11);
                 break;
             case 12:
                 StackedBarModel s12 = new StackedBarModel(match);
                 s12.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s12.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s12.addBar(new BarModel(line, 0xFF006400));    // Line
-                s12.addBar(new BarModel(front, 0xFF800080));    // Front
-                s12.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s12.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s12.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s12.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s12);
                 break;
             case 13:
                 StackedBarModel s13 = new StackedBarModel(match);
                 s13.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s13.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s13.addBar(new BarModel(line, 0xFF006400));    // Line
-                s13.addBar(new BarModel(front, 0xFF800080));    // Front
-                s13.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s13.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s13.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s13.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s13);
                 break;
             case 14:
                 StackedBarModel s14 = new StackedBarModel(match);
                 s14.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s14.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s14.addBar(new BarModel(line, 0xFF006400));    // Line
-                s14.addBar(new BarModel(front, 0xFF800080));    // Front
-                s14.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s14.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s14.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s14.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s14);
                 break;
             case 15:
                 StackedBarModel s15 = new StackedBarModel(match);
                 s15.addBar(new BarModel(low, 0xFFff0000));    // Low
                 s15.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s15.addBar(new BarModel(line, 0xFF006400));    // Line
-                s15.addBar(new BarModel(front, 0xFF800080));    // Front
-                s15.addBar(new BarModel(back, 0xFFff8300));    // Back
+//                s15.addBar(new BarModel(line, 0xFF006400));    // Line
+//                s15.addBar(new BarModel(front, 0xFF800080));    // Front
+//                s15.addBar(new BarModel(back, 0xFFff8300));    // Back
                 teleBarChart.addBar(s15);
                 break;
 

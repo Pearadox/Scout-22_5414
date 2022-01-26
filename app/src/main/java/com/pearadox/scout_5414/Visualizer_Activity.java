@@ -1030,87 +1030,20 @@ public class Visualizer_Activity extends AppCompatActivity {
                 if (mdt.matches(team)) {        // is this match data for the team we are working on?
                 Log.w(TAG, "GMFT TEAM  " + mdt);
                     numMDs++;       // increment # of MDs
-                    if (match_inst.isAuto_leftSectorLine()) {      // Left SL (crossed baseline)
+                    if (match_inst.isAuto_leftTarmac()) {      // Left SL (crossed baseline)
                         base++;
                     }
-                    if (match_inst.isAuto_Dump()) {      // Dumped to partner
-                        AdumpNum++;
-                    }
                     AbotNum = AbotNum + match_inst.getAuto_Low();
-                    AcellNumUnder = AcellNumUnder + match_inst.getAuto_HighClose();
-                    AcellNumLine = AcellNumLine + match_inst.getAuto_HighLine();
-                    AcellNumCPFront = AcellNumCPFront + match_inst.getAuto_HighFrontCP();
-                    if (match_inst.isAuto_conInnerClose()) {
-                        AconUnderNum++;
-                    }
-                    if (match_inst.isAuto_conInnerLine()) {
-                        AconLineNum++;
-                    }
-                    if (match_inst.isAuto_conInnerFrontCP()) {
-                        AconFrontNum++;
-                    }
 
 
                     // ********************  Tele  ********************
                     TbotNum = TbotNum + match_inst.getTele_Low();
-                    TcellNumUnder = TcellNumUnder + match_inst.getTele_HighClose();
-                    TcellNumLine = TcellNumLine + match_inst.getTele_HighLine();
-                    TcellNumCPFront = TcellNumCPFront + match_inst.getTele_HighFrontCP();
-                    TcellNumCPBack = TcellNumCPBack + match_inst.getTele_HighBackCP();
-                    if (match_inst.isTele_conInnerClose()) {
-                        TconUnderNum++;
-                    }
-                    if (match_inst.isTele_conInnerLine()) {
-                        TconLineNum++;
-                    }
-                    if (match_inst.isTele_conInnerFrontCP()) {
-                        TconFrontNum++;
-                    }
-                    if (match_inst.isTele_conInnerBackCP()) {
-                        TconBackNum++;
-                    }
 
 
                     if (match_inst.isTele_Climbed()) {
                         climbed++;
                     }
-                    if (match_inst.isTele_Balanced()) {
-                        bal ++;
-                    }
-                    if (match_inst.isTele_UnderSG()) {
-                        undSG ++;
-                    }
-                    if (match_inst.isTele_CPspin()) {
-                        CPspinNum ++;
-                    }
-                    if (match_inst.isTele_CPcolor()) {
-                        CPcolorNum ++;
-                    }
 
-                    int endHang = match_inst.getTele_Hang_num();        // END - How many Hung?
-                    switch (endHang) {
-                        case 0:         // Not On
-                            Hang0++;
-                            break;
-                        case 1:         // Level 1
-                            Hang1++;
-                            break;
-                        case 2:         // Level 2
-                            Hang1++;
-                            break;
-                        case 3:         // Level 3
-                            Hang3++;
-                            break;
-                        default:                // ????
-                            e(TAG, "*** Error - bad Hang Level indicator  ***");
-                    }
-
-                    if (match_inst.isTele_lifted()) {
-                        lift1++;
-                    }
-                    if (match_inst.isTele_got_lift()) {
-                        was++;
-                    }
                     pen = pen + match_inst.getTele_num_Penalties(); ;
 
                     // *************************************************
