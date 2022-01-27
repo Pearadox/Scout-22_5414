@@ -269,7 +269,7 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isTele_Climbed()) {
                 tele_Climb++;
             }
-            if (match_inst.isTele_UnderSG()) {
+            if (match_inst.istele_HangarLevel()) {
                 tele_Park++;
             }
 

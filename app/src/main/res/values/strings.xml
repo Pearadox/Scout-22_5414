@@ -87,7 +87,7 @@
 
 
     <!--  Match Scout  -->
-    <!-- ##### Start Position for Autononous ##### -->
+    <!-- ##### Climb Position on Hangar ##### -->
     <string-array name="auto_start_array">
         <item> </item>
         <item>1</item>
@@ -98,6 +98,15 @@
         <item>6</item>
         // ...
         <item>No Show</item>
+
+    </string-array>
+    <!-- ##### Start Position for Autononous ##### -->
+    <string-array name="hangar_rung_level">
+        <item> </item>
+        <item>Low</item>
+        <item>Mid</item>
+        <item>High</item>
+        <item>Traversal</item>
     </string-array>
 
     <!--  Pit Scout  -->

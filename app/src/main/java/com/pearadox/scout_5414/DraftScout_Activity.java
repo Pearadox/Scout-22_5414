@@ -1202,7 +1202,7 @@ public class DraftScout_Activity extends AppCompatActivity {
                 if (match_inst.isTele_Climbed()) {
                     climbed++;
                 }
-                if (match_inst.isTele_UnderSG()) {
+                if (match_inst.istele_HangarLevel()) {
                     parked++;
                 }
 

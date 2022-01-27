@@ -52,7 +52,7 @@ public class MatchScoutActivity extends AppCompatActivity {
     /* Power Port */    TextView  txt_OuterClose; Button btn_OuterClosePlus, btn_OuterCloseMinus;  CheckBox checkbox_OuterCloseConsistent;
                         TextView  txt_OuterLine; Button btn_OuterLineMinus, btn_OuterLinePlus;  CheckBox checkbox_OuterLineConsistent;
                         TextView  txt_OuterFrontCP; Button btn_OuterFrontCPMinus, btn_OuterFrontCPPlus;  CheckBox checkbox_OuterFrontCPConsistent;
-                        TextView  txt_Bottom; Button btn_BottomMinus, btn_BottomPlus;
+                        TextView  txt_Bottom; Button btn_LowerMinus, btn_LowerPlus;
     /* Last Sect. */    EditText editText_autoComment;
 
     protected Vibrator vibrate;
@@ -260,8 +260,8 @@ public class MatchScoutActivity extends AppCompatActivity {
         btn_OuterLineMinus          = (Button) findViewById(R.id.btn_OuterLineMinus);
         btn_OuterFrontCPPlus        = (Button) findViewById(R.id.btn_OuterFrontCPPlus);
         btn_OuterFrontCPMinus       = (Button) findViewById(R.id.btn_OuterFrontCPMinus);
-        btn_BottomPlus              = (Button) findViewById(R.id.btn_BottomPlus);
-        btn_BottomMinus             = (Button) findViewById(R.id.btn_BottomMinus);
+        btn_LowerPlus              = (Button) findViewById(R.id.btn_LowerPlus);
+        btn_LowerMinus             = (Button) findViewById(R.id.btn_LowerMinus);
         button_GoToTeleopActivity = (Button) findViewById(R.id.button_GoToTeleopActivity);
         button_GoToArenaLayoutActivity = (Button) findViewById(R.id.button_GoToArenaLayoutActivity);
         final Spinner spinner_startPos = (Spinner) findViewById(R.id.spinner_startPos);
@@ -369,14 +369,14 @@ public class MatchScoutActivity extends AppCompatActivity {
         });
 
 
-        btn_BottomPlus.setOnClickListener(new View.OnClickListener() {
+        btn_LowerPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Low++;
                 Log.w(TAG, "Bottom = " + Integer.toString(Low));      // ** DEBUG **
                 txt_Bottom.setText(Integer.toString(Low));
             }
         });
-        btn_BottomMinus.setOnClickListener(new View.OnClickListener() {
+        btn_LowerMinus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (Low >= 1) {
                     Low--;
@@ -647,7 +647,7 @@ public class MatchScoutActivity extends AppCompatActivity {
             checkbox_noAUTO = (CheckBox) findViewById(R.id.checkbox_noAUTO);
             editText_autoComment = (EditText) findViewById(R.id.editText_autoComment);
             final Spinner spinner_startPos = (Spinner) findViewById(R.id.spinner_startPos);
-            if (spinner_startPos.getSelectedItemPosition() == 6) {  //  No Show?
+            if (spinner_startPos.getSelectedItemPosition() == 7) {  //  No Show?
                 Log.e(TAG, "### Team/robot is a No Show ###" );
                 NoShow = true;
                 editText_autoComment.setText("### Team/robot is a No Show ###");
@@ -656,7 +656,7 @@ public class MatchScoutActivity extends AppCompatActivity {
                 Log.d(TAG, "No Show" + editText_autoComment.getText() + " " + autoComment);
                 ;
                 checkbox_noAUTO.setChecked(true);
-                // ????? - Do we want to turn off all other widgets?
+                // ToDo ????? - Do we want to turn off all other widgets?
             }
             if (spinner_startPos.getSelectedItemPosition() >= 1 && spinner_startPos.getSelectedItemPosition() <= 5 ) {
                 checkbox_noAUTO.setChecked(false);                            // un-check if old value was NoShow

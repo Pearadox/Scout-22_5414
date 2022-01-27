@@ -45,7 +45,7 @@ public class TeleopScoutActivity extends Activity {
                         TextView  txt_OuterLine; Button btn_OuterLineMinus, btn_OuterLinePlus;  CheckBox checkbox_OuterLineConsistent;
                         TextView  txt_OuterFrontCP; Button btn_OuterFrontCPMinus, btn_OuterFrontCPPlus;  CheckBox checkbox_OuterFrontCPConsistent;
                         TextView  txt_OuterBackCP; Button btn_OuterBackCPMinus, btn_OuterBackCPPlus;  CheckBox checkbox_OuterBackConsistent;
-                        TextView  txt_Bottom; Button btn_BottomMinus, btn_BottomPlus;
+                        TextView  txt_Bottom; Button btn_LowerMinus, btn_LowerPlus;
                         CheckBox checkbox_CPspin, checkbox_CPcolor;
     /* Climb Sect. */   CheckBox chk_Climbed, chk_Balanced, chk_UnderSG;
                         CheckBox chk_LiftedBy, chk_Lifted; Spinner spinner_numRobots;
@@ -138,8 +138,8 @@ public class TeleopScoutActivity extends Activity {
         btn_OuterFrontCPMinus       = (Button) findViewById(R.id.btn_OuterFrontCPMinus);
         btn_OuterBackCPPlus        = (Button) findViewById(R.id.btn_OuterBackCPPlus);
         btn_OuterBackCPMinus       = (Button) findViewById(R.id.btn_OuterBackCPMinus);
-        btn_BottomPlus              = (Button) findViewById(R.id.btn_BottomPlus);
-        btn_BottomMinus             = (Button) findViewById(R.id.btn_BottomMinus);
+        btn_LowerPlus              = (Button) findViewById(R.id.btn_LowerPlus);
+        btn_LowerMinus             = (Button) findViewById(R.id.btn_LowerMinus);
         txt_OuterClose          = (TextView) findViewById(R.id.txt_OuterClose);
         txt_OuterLine               = (TextView) findViewById(R.id.txt_OuterLine);
         txt_OuterFrontCP            = (TextView) findViewById(R.id.txt_OuterFrontCP);
@@ -349,14 +349,14 @@ public class TeleopScoutActivity extends Activity {
             }
         });
 
-        btn_BottomPlus.setOnClickListener(new View.OnClickListener() {
+        btn_LowerPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Low++;
                 Log.w(TAG, "Bottom = " + Integer.toString(Low));      // ** DEBUG **
                 txt_Bottom.setText(Integer.toString(Low));
             }
         });
-        btn_BottomMinus.setOnClickListener(new View.OnClickListener() {
+        btn_LowerMinus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (Low >= 1) {
                     Low--;
@@ -713,7 +713,7 @@ public class TeleopScoutActivity extends Activity {
         Pearadox.Match_Data.setTele_Low(Low);
         Pearadox.Match_Data.setTele_High(HighClose);
         Pearadox.Match_Data.setTele_Climbed(Climbed);
-        Pearadox.Match_Data.setTele_UnderSG(UnderSG);
+        Pearadox.Match_Data.settele_HangarLevel(UnderSG);
         Pearadox.Match_Data.setTele_num_Penalties(num_Penalties);
 
         // **

@@ -28,7 +28,7 @@ public class matchData implements Serializable {
     private int     tele_High;              // # High Goal balls
 
     private boolean tele_Climbed;           // Did they Climb?
-    private boolean tele_UnderSG;           // Parked under Shield Generator
+    private boolean tele_HangarLevel;       // Climbed to Hangar Level 'x'
 
     private int     tele_num_Penalties;     // How many penalties received?
     private String  tele_comment;           // Tele comment
@@ -48,7 +48,7 @@ public class matchData implements Serializable {
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //  Constructor
 
-    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_CollectFloor, int auto_Low, int auto_High, String auto_comment, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, boolean tele_Climbed, boolean tele_UnderSG, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defense_good, boolean final_def_Block, boolean final_def_HangarInt, String final_comment, String final_studID, String final_dateTime) {
+    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_CollectFloor, int auto_Low, int auto_High, String auto_comment, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, boolean tele_Climbed, boolean tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defense_good, boolean final_def_Block, boolean final_def_HangarInt, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
         this.pre_cargo_carried = pre_cargo_carried;
@@ -65,7 +65,7 @@ public class matchData implements Serializable {
         this.tele_Low = tele_Low;
         this.tele_High = tele_High;
         this.tele_Climbed = tele_Climbed;
-        this.tele_UnderSG = tele_UnderSG;
+        this.tele_HangarLevel = tele_HangarLevel;
         this.tele_num_Penalties = tele_num_Penalties;
         this.tele_comment = tele_comment;
         this.final_lostParts = final_lostParts;
@@ -222,12 +222,12 @@ public matchData() {
         this.tele_Climbed = tele_Climbed;
     }
 
-    public boolean isTele_UnderSG() {
-        return tele_UnderSG;
+    public boolean istele_HangarLevel() {
+        return tele_HangarLevel;
     }
 
-    public void setTele_UnderSG(boolean tele_UnderSG) {
-        this.tele_UnderSG = tele_UnderSG;
+    public void settele_HangarLevel(boolean tele_HangarLevel) {
+        this.tele_HangarLevel = tele_HangarLevel;
     }
 
     public int getTele_num_Penalties() {
