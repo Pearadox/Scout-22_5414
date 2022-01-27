@@ -42,12 +42,8 @@ public class TeleopScoutActivity extends Activity {
     /* Header Sect. */  TextView txt_dev, txt_stud, txt_match, txt_tnum;
     /* P/U Sect. */     CheckBox chkBox_PU_Cargo_floor, chkBox_CargoTerminal, chkBox_PU_Cell_Trench, chkBox_ControlPanel, chkBox_PU_Cell_Boundary, chkBox_GotCargo_Robot;
     /* Shoot Sect. */   TextView  txt_UpperHub; Button btn_UpperHubPlus, btn_UpperHubMinus;  CheckBox checkbox_OuterCloseConsistent;
-                        TextView  txt_OuterLine; Button btn_OuterLineMinus, btn_OuterLinePlus;  CheckBox checkbox_OuterLineConsistent;
-                        TextView  txt_OuterFrontCP; Button btn_OuterFrontCPMinus, btn_OuterFrontCPPlus;  CheckBox checkbox_OuterFrontCPConsistent;
-                        TextView  txt_OuterBackCP; Button btn_OuterBackCPMinus, btn_OuterBackCPPlus;  CheckBox checkbox_OuterBackConsistent;
                         TextView  txt_Lower; Button btn_LowerMinus, btn_LowerPlus;
-                        CheckBox checkbox_CPspin, checkbox_CPcolor;
-    /* Climb Sect. */   CheckBox chk_Climbed, chk_Balanced, chk_UnderSG;
+    /* Climb Sect. */   CheckBox chk_Climbed;
                         CheckBox chk_LiftedBy, chk_Lifted; Spinner spinner_numRobots;
                         RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_One, radio_Two, radio_Three, radio_Zero;
     /* Comment */       EditText editText_TeleComments;
@@ -95,8 +91,6 @@ public class TeleopScoutActivity extends Activity {
         editText_TeleComments   = (EditText) findViewById(R.id.editText_teleComments);
         chkBox_PU_Cargo_floor   = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
         chkBox_CargoTerminal    = (CheckBox) findViewById(R.id.chkBox_CargoTerminal);
-        checkbox_CPspin         = (CheckBox) findViewById(R.id.checkbox_CPspin);
-        checkbox_CPcolor        = (CheckBox) findViewById(R.id.checkbox_CPcolor);
         chk_Climbed             = (CheckBox) findViewById(R.id.chk_Climbed);
         radio_Zero              = (RadioButton) findViewById(R.id.radio_Zero);
         radio_One               = (RadioButton) findViewById(R.id.radio_One);
@@ -138,16 +132,23 @@ public class TeleopScoutActivity extends Activity {
 
     button_GoToFinalActivity.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-        Log.w(TAG, "###  Clicked Final  ### " );
-                storeTeleData();                    // Put all the TeleOps data collected in Match object
-                updateDev("Final");           // Update 'Phase' for stoplight indicator in ScoutMaster
+        Log.e(TAG, "###  Clicked Final  ###  " + HangarLev);
+            if (chk_Climbed.isChecked())
+                if (HangarLev.length() < 3) {      // Level not selected
+                    Toast toast = Toast.makeText(getBaseContext(), "\n\n*** Climb was checked - Specify Hangar Level Climbed ***\n", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    toast.show();
+                } else {  // OK
+                    storeTeleData();                    // Put all the TeleOps data collected in Match object
+                    updateDev("Final");           // Update 'Phase' for stoplight indicator in ScoutMaster
 
-                Intent smast_intent = new Intent(TeleopScoutActivity.this, FinalActivity.class);
-                Bundle SMbundle = new Bundle();
-                SMbundle.putString("tnum", tn);
-                smast_intent.putExtras(SMbundle);
-                startActivity(smast_intent);
-        }
+                    Intent smast_intent = new Intent(TeleopScoutActivity.this, FinalActivity.class);
+                    Bundle SMbundle = new Bundle();
+                    SMbundle.putString("tnum", tn);
+                    smast_intent.putExtras(SMbundle);
+                    startActivity(smast_intent);
+                }
+    }
     });
 
     chkBox_PU_Cargo_floor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
