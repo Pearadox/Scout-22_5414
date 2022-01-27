@@ -47,12 +47,10 @@ public class MatchScoutActivity extends AppCompatActivity {
                         EditText editTxt_Team, editTxt_Match;
     /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_start1, radio_start2, radio_Pick;
                         Spinner spinner_startPos;
-    /* After Start */   CheckBox checkbox_leftTarmac, checkbox_noAUTO, checkbox_Dump;
+    /* After Start */   CheckBox checkbox_leftTarmac, checkbox_noAUTO;
                         CheckBox chkBox_PU_Cargo_floor;
-    /* Power Port */    TextView  txt_OuterClose; Button btn_OuterClosePlus, btn_OuterCloseMinus;  CheckBox checkbox_OuterCloseConsistent;
-                        TextView  txt_OuterLine; Button btn_OuterLineMinus, btn_OuterLinePlus;  CheckBox checkbox_OuterLineConsistent;
-                        TextView  txt_OuterFrontCP; Button btn_OuterFrontCPMinus, btn_OuterFrontCPPlus;  CheckBox checkbox_OuterFrontCPConsistent;
-                        TextView  txt_Bottom; Button btn_LowerMinus, btn_LowerPlus;
+    /* Hub */           TextView  txt_UpperHub; Button btn_UpperHubPlus, btn_UpperHubMinus;  CheckBox checkbox_OuterCloseConsistent;
+                        TextView  txt_Lower; Button btn_LowerMinus, btn_LowerPlus;
     /* Last Sect. */    EditText editText_autoComment;
 
     protected Vibrator vibrate;
@@ -248,20 +246,14 @@ public class MatchScoutActivity extends AppCompatActivity {
         }
 
         checkbox_noAUTO             = (CheckBox) findViewById(R.id.checkbox_noAUTO);
-        checkbox_leftTarmac       = (CheckBox) findViewById(R.id.checkbox_leftTarmac);
-        chkBox_PU_Cargo_floor   = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
-        txt_OuterClose              = (TextView) findViewById(R.id.txt_OuterClose);
-        txt_OuterLine               = (TextView) findViewById(R.id.txt_OuterLine);
-        txt_OuterFrontCP            = (TextView) findViewById(R.id.txt_OuterFrontCP);
-        txt_Bottom                  = (TextView) findViewById(R.id.txt_Bottom);
-        btn_OuterClosePlus          = (Button) findViewById(R.id.btn_OuterClosePlus);
-        btn_OuterCloseMinus         = (Button) findViewById(R.id.btn_OuterCloseMinus);
-        btn_OuterLinePlus           = (Button) findViewById(R.id.btn_OuterLinePlus);
-        btn_OuterLineMinus          = (Button) findViewById(R.id.btn_OuterLineMinus);
-        btn_OuterFrontCPPlus        = (Button) findViewById(R.id.btn_OuterFrontCPPlus);
-        btn_OuterFrontCPMinus       = (Button) findViewById(R.id.btn_OuterFrontCPMinus);
-        btn_LowerPlus              = (Button) findViewById(R.id.btn_LowerPlus);
-        btn_LowerMinus             = (Button) findViewById(R.id.btn_LowerMinus);
+        checkbox_leftTarmac         = (CheckBox) findViewById(R.id.checkbox_leftTarmac);
+        chkBox_PU_Cargo_floor       = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
+        txt_UpperHub                = (TextView) findViewById(R.id.txt_UpperHub);
+        txt_Lower                   = (TextView) findViewById(R.id.txt_Lower);
+        btn_UpperHubPlus            = (Button) findViewById(R.id.btn_UpperHubPlus);
+        btn_UpperHubMinus           = (Button) findViewById(R.id.btn_UpperHubMinus);
+        btn_LowerPlus               = (Button) findViewById(R.id.btn_LowerPlus);
+        btn_LowerMinus              = (Button) findViewById(R.id.btn_LowerMinus);
         button_GoToTeleopActivity = (Button) findViewById(R.id.button_GoToTeleopActivity);
         button_GoToArenaLayoutActivity = (Button) findViewById(R.id.button_GoToArenaLayoutActivity);
         final Spinner spinner_startPos = (Spinner) findViewById(R.id.spinner_startPos);
@@ -290,8 +282,6 @@ public class MatchScoutActivity extends AppCompatActivity {
                      // ToDo - turn ON/OFF correct widgets
                      checkbox_leftTarmac.setChecked(false);
                      checkbox_leftTarmac.setEnabled(false);
-                     checkbox_Dump.setChecked(false);
-                     checkbox_Dump.setEnabled(false);
                      if (!NoShow) {         // Leave message as is if No Show
                         editText_autoComment.setText("No Autonomous activity - didn't move");
                         autoComment = "No Autonomous activity - didn't move";
@@ -303,7 +293,6 @@ public class MatchScoutActivity extends AppCompatActivity {
                      noAuto = false;
 
                      checkbox_leftTarmac.setEnabled(true);
-                     checkbox_Dump.setEnabled(true);
                      editText_autoComment.setText(" ");
                      autoComment = " ";
                  }
@@ -351,20 +340,20 @@ public class MatchScoutActivity extends AppCompatActivity {
 
 
         //*****************************************************************
-        btn_OuterClosePlus.setOnClickListener(new View.OnClickListener() {
+        btn_UpperHubPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 High++;
-                Log.w(TAG, "OuterUnder = " + Integer.toString(High));      // ** DEBUG **
-                txt_OuterClose.setText(Integer.toString(High));    // Perform action on click
+                Log.w(TAG, "UpperHubPlus = " + Integer.toString(High));      // ** DEBUG **
+                txt_UpperHub.setText(Integer.toString(High));    // Perform action on click
             }
         });
-        btn_OuterCloseMinus.setOnClickListener(new View.OnClickListener() {
+        btn_UpperHubMinus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (High >= 1) {
                     High--;
                 }
                 Log.w(TAG, "OuterUnder = " + Integer.toString(High));      // ** DEBUG **
-                txt_OuterClose.setText(Integer.toString(High));    // Perform action on click
+                txt_UpperHub.setText(Integer.toString(High));    // Perform action on click
             }
         });
 
@@ -373,7 +362,7 @@ public class MatchScoutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Low++;
                 Log.w(TAG, "Bottom = " + Integer.toString(Low));      // ** DEBUG **
-                txt_Bottom.setText(Integer.toString(Low));
+                txt_Lower.setText(Integer.toString(Low));
             }
         });
         btn_LowerMinus.setOnClickListener(new View.OnClickListener() {
@@ -382,7 +371,7 @@ public class MatchScoutActivity extends AppCompatActivity {
                     Low--;
                 }
                 Log.w(TAG, "Bottom = " + Integer.toString(Low));      // ** DEBUG **
-                txt_Bottom.setText(Integer.toString(Low));
+                txt_Lower.setText(Integer.toString(Low));
             }
         });
 

@@ -303,8 +303,8 @@
             android:id="@+id/lbl_AfterStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/lin_PreMatch"
+            android:layout_alignParentStart="true"
             android:text="_____________________________After Start____________________________"
             android:textColor="@color/red" />
 
@@ -404,8 +404,8 @@
 
         <LinearLayout
             android:id="@+id/lin_Row4"
-            android:layout_width="match_parent"
-            android:layout_height="40sp"
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
             android:layout_below="@+id/lin_Row3"
             android:layout_marginStart="00sp"
             android:orientation="horizontal">
@@ -419,7 +419,7 @@
                 android:src="@drawable/hub" />
 
             <TextView
-                android:id="@+id/txt_OuterClose"
+                android:id="@+id/txt_UpperHub"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="19sp"
@@ -429,7 +429,7 @@
                 android:textSize="16dp" />
 
             <Button
-                android:id="@+id/btn_OuterCloseMinus"
+                android:id="@+id/btn_UpperHubMinus"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
@@ -437,43 +437,16 @@
                 android:text="-" />
 
             <Button
-                android:id="@+id/btn_OuterClosePlus"
+                android:id="@+id/btn_UpperHubPlus"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="-4dp"
                 android:text="+" />
 
-            //===========================================================
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/txt_OuterLine"-->
-            <!--                android:layout_width="25dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="50sp"-->
-            <!--                android:layout_marginTop="-8dp"-->
-            <!--                android:text="00"-->
-            <!--                android:textColor="@color/orange"-->
-            <!--                android:textSize="16dp" />-->
-
-            <!--            <Button-->
-            <!--                android:id="@+id/btn_OuterLineMinus"-->
-            <!--                android:layout_width="30dp"-->
-            <!--                android:layout_height="40dp"-->
-            <!--                android:layout_marginStart="10dp"-->
-            <!--                android:layout_marginTop="-4dp"-->
-            <!--                android:text="-" />-->
-
-            <!--            <Button-->
-            <!--                android:id="@+id/btn_OuterLinePlus"-->
-            <!--                android:layout_width="30dp"-->
-            <!--                android:layout_height="40dp"-->
-            <!--                android:layout_marginStart="10dp"-->
-            <!--                android:layout_marginTop="-4dp"-->
-            <!--                android:text="+" />-->
-
-
         </LinearLayout>
+
+        // ==============================================================================
 
         <LinearLayout
             android:id="@+id/lin_Label2"
@@ -481,6 +454,7 @@
             android:layout_height="25sp"
             android:layout_below="@+id/lin_Row4"
             android:layout_marginStart="120sp"
+            android:layout_marginTop="-86dp"
             android:orientation="horizontal">
 
             <TextView
@@ -492,7 +466,14 @@
 
         </LinearLayout>
 
-        // ==============================================================================
+        <!--        <LinearLayout-->
+<!--            android:id="@+id/lin_Row6"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40sp"-->
+<!--            android:layout_below="@+id/lin_Row5"-->
+<!--            android:layout_marginStart="70sp"-->
+<!--            android:orientation="horizontal">-->
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/lin_Row5"
@@ -500,6 +481,7 @@
             android:layout_height="45sp"
             android:layout_below="@+id/lin_Label2"
             android:layout_marginStart="120sp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
 
@@ -531,17 +513,6 @@
 
         </LinearLayout>
 
-<!--        <LinearLayout-->
-<!--            android:id="@+id/lin_Row6"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="40sp"-->
-<!--            android:layout_below="@+id/lin_Row5"-->
-<!--            android:layout_marginStart="70sp"-->
-<!--            android:orientation="horizontal">-->
-
-
-<!--        </LinearLayout>-->
-
         <Button
             android:id="@+id/button_GoToTeleopActivity"
             android:layout_width="wrap_content"
@@ -566,26 +537,26 @@
             android:id="@+id/scrollv_comm"
             android:layout_width="400sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/lin_Row6"
+            android:layout_below="@+id/lin_Row5"
             android:layout_alignParentStart="true"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:isScrollContainer="false">
 
             <EditText
                 android:id="@+id/editText_autoComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spinner_stopPos"
-                android:layout_alignStart="@+id/text_collected_balls"
+                android:layout_below="@+id/imageView_PP"
+                android:layout_alignStart="@+id/imageView_PP"
                 android:layout_marginTop="5dp"
                 android:layout_toStartOf="@+id/button_GoToArenaLayoutActivity"
                 android:background="@drawable/border"
                 android:ems="12"
                 android:hint="Tap to add any additional comments."
                 android:inputType="textMultiLine"
-                android:nextFocusDown="@+id/editTxt_Match"
                 android:lines="2"
+                android:nextFocusDown="@+id/editTxt_Match"
                 android:scrollbars="vertical"
                 android:textColor="@color/red" />
 
