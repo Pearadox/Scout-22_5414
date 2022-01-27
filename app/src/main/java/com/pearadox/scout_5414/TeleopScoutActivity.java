@@ -40,12 +40,12 @@ public class TeleopScoutActivity extends Activity {
 
     String TAG = "TeleopScoutActivity";      // This CLASS name
     /* Header Sect. */  TextView txt_dev, txt_stud, txt_match, txt_tnum;
-    /* P/U Sect. */     CheckBox chkBox_PU_Cargo_floor, chkBox_PowerCellLoadSta, chkBox_PU_Cell_Trench, chkBox_ControlPanel, chkBox_PU_Cell_Boundary, chkBox_GotCargo_Robot;
-    /* Shoot Sect. */   TextView  txt_OuterClose; Button btn_OuterClosePlus, btn_OuterCloseMinus;  CheckBox checkbox_OuterCloseConsistent;
+    /* P/U Sect. */     CheckBox chkBox_PU_Cargo_floor, chkBox_CargoTerminal, chkBox_PU_Cell_Trench, chkBox_ControlPanel, chkBox_PU_Cell_Boundary, chkBox_GotCargo_Robot;
+    /* Shoot Sect. */   TextView  txt_UpperHub; Button btn_UpperHubPlus, btn_UpperHubMinus;  CheckBox checkbox_OuterCloseConsistent;
                         TextView  txt_OuterLine; Button btn_OuterLineMinus, btn_OuterLinePlus;  CheckBox checkbox_OuterLineConsistent;
                         TextView  txt_OuterFrontCP; Button btn_OuterFrontCPMinus, btn_OuterFrontCPPlus;  CheckBox checkbox_OuterFrontCPConsistent;
                         TextView  txt_OuterBackCP; Button btn_OuterBackCPMinus, btn_OuterBackCPPlus;  CheckBox checkbox_OuterBackConsistent;
-                        TextView  txt_Bottom; Button btn_LowerMinus, btn_LowerPlus;
+                        TextView  txt_Lower; Button btn_LowerMinus, btn_LowerPlus;
                         CheckBox checkbox_CPspin, checkbox_CPcolor;
     /* Climb Sect. */   CheckBox chk_Climbed, chk_Balanced, chk_UnderSG;
                         CheckBox chk_LiftedBy, chk_Lifted; Spinner spinner_numRobots;
@@ -61,40 +61,20 @@ public class TeleopScoutActivity extends Activity {
 //    private DatabaseReference pfCur_Match_DBReference;
     String key = null;
     String tn  = " ";
-    public static String[] carry = new String[]             // Num. of robots this robot can lift
-            {" ","1","2"};
 
     // ===================  TeleOps Elements for Match Scout Data object ===================
     // Declare & initialize
 
-    public boolean PowerCell_floor      = false;    // Did they pickup PowerCell off the ground?
-    public boolean PowerCell_LoadSta    = false;    // Did they get PowerCell from Loading Station?
-    public boolean PowerCell_CP         = false;    // Did they pick up PowerCell from Control Panel
-    public boolean PowerCell_Trench     = false;    // Did they get PowerCell from Loading Station
-    public boolean PowerCell_Boundary   = false;    // Did they get PowerCell from SG boundary?
-    public boolean PowerCell_Robot      = false;    // Get from a Robot?
-    public int     Low                  = 0;        // # Low Goal balls
-    public int     HighClose            = 0;        // # High Goal balls - Close
-    public int     HighLine             = 0;        // # High Goal balls - Line
-    public int     HighFrontCP          = 0;        // # High Goal balls - Front CP
-    public int     HighBackCP           = 0;        // # High Goal balls - Back CP
-    public boolean conInnerClose        = false;    // Consistent Inner Goal scored Close?
-    public boolean conInnerLine         = false;    // Consistent Inner Goal scored Con Line?
-    public boolean conInnerFrontCP      = false;    // Consistent Inner Goal scored in Front of CP?
-    public boolean conInnerBackCP       = false;    // Consistent Inner Goal scored in Back of CP?
-    public boolean CPspin               = false;    // Control Panel Spin
-    public boolean CPcolor              = false;    // Control Panel Color
+    public boolean Cargo_floor      = false;        // Did they pickup Cargo off the ground?
+    public boolean Cargo_Terminal   = false;        // Did they get Cargo from Loading Station?
+    public int     Low              = 0;            // # Low Goal balls
+    public int     HighHub          = 0;            // # High Goal balls
 
-    public boolean Climbed              = false;    // Did they Climb?
-    public boolean UnderSG              = false;    // Parked under Shield Generator
-    public int     liftedNum            = 0;        // How many lifted?
-    public int     Hang_Num             = 99;       // End - How many on Bar (0-3)
-    public boolean Balanced             = false;    // SG is Balanced
-    public boolean got_lift             = false;    // Got Lifted by another robot
-    public boolean lifted               = false;    // Did they lift a robot
-    public int num_Penalties            = 0;        // How many penalties received?
+    public boolean Climbed          = false;        // Did they Climb?
+    public String  HangarLev        = "";           // What Level Climb  
+    public int num_Penalties        = 0;            // How many penalties received?
     /* */
-    public String  teleComment          = " ";    // Tele Comment
+    public String  teleComment          = " ";      // Tele Comment
     // ===========================================================================
     matchData match_cycle = new matchData();
 
@@ -113,53 +93,32 @@ public class TeleopScoutActivity extends Activity {
         txt_tnum.setText(tn);
 
         editText_TeleComments   = (EditText) findViewById(R.id.editText_teleComments);
-        chkBox_PU_Cargo_floor = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
-        chkBox_PowerCellLoadSta = (CheckBox) findViewById(R.id.chkBox_PowerCellLoadSta);
-        chkBox_PU_Cell_Trench   = (CheckBox) findViewById(R.id.chkBox_PU_Cell_Trench);
-        chkBox_ControlPanel     = (CheckBox) findViewById(R.id.chkBox_ControlPanel);
-        chkBox_PU_Cell_Boundary = (CheckBox) findViewById(R.id.chkBox_PU_Cell_Boundary);
-        chkBox_GotCargo_Robot    = (CheckBox) findViewById(R.id.chkBox_GotCargo_Robot);
+        chkBox_PU_Cargo_floor   = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
+        chkBox_CargoTerminal    = (CheckBox) findViewById(R.id.chkBox_CargoTerminal);
         checkbox_CPspin         = (CheckBox) findViewById(R.id.checkbox_CPspin);
         checkbox_CPcolor        = (CheckBox) findViewById(R.id.checkbox_CPcolor);
         chk_Climbed             = (CheckBox) findViewById(R.id.chk_Climbed);
-        chk_Balanced            = (CheckBox) findViewById(R.id.chk_Balanced);
-        chk_UnderSG             = (CheckBox) findViewById(R.id.chk_UnderSG);
         radio_Zero              = (RadioButton) findViewById(R.id.radio_Zero);
         radio_One               = (RadioButton) findViewById(R.id.radio_One);
         radio_Two               = (RadioButton) findViewById(R.id.radio_Two);
         radio_Three             = (RadioButton) findViewById(R.id.radio_Three);
-        chk_LiftedBy            = (CheckBox) findViewById(R.id.chk_LiftedBy);
-        chk_Lifted              = (CheckBox) findViewById(R.id.chk_Lifted);
-        btn_OuterClosePlus      = (Button) findViewById(R.id.btn_OuterClosePlus);
-        btn_OuterCloseMinus     = (Button) findViewById(R.id.btn_OuterCloseMinus);
-        btn_OuterLinePlus           = (Button) findViewById(R.id.btn_OuterLinePlus);
-        btn_OuterLineMinus          = (Button) findViewById(R.id.btn_OuterLineMinus);
-        btn_OuterFrontCPPlus        = (Button) findViewById(R.id.btn_OuterFrontCPPlus);
-        btn_OuterFrontCPMinus       = (Button) findViewById(R.id.btn_OuterFrontCPMinus);
-        btn_OuterBackCPPlus        = (Button) findViewById(R.id.btn_OuterBackCPPlus);
-        btn_OuterBackCPMinus       = (Button) findViewById(R.id.btn_OuterBackCPMinus);
-        btn_LowerPlus              = (Button) findViewById(R.id.btn_LowerPlus);
-        btn_LowerMinus             = (Button) findViewById(R.id.btn_LowerMinus);
-        txt_OuterClose          = (TextView) findViewById(R.id.txt_OuterClose);
-        txt_OuterLine               = (TextView) findViewById(R.id.txt_OuterLine);
-        txt_OuterFrontCP            = (TextView) findViewById(R.id.txt_OuterFrontCP);
-        txt_OuterBackCP            = (TextView) findViewById(R.id.txt_OuterBackCP);
-        txt_Bottom                  = (TextView) findViewById(R.id.txt_Bottom);
-        checkbox_OuterCloseConsistent = (CheckBox) findViewById(R.id.checkbox_OuterCloseConsistent);
-        checkbox_OuterLineConsistent = (CheckBox) findViewById(R.id.checkbox_OuterLineConsistent);
-        checkbox_OuterFrontCPConsistent = (CheckBox) findViewById(R.id.checkbox_OuterFrontCPConsistent);
-        checkbox_OuterBackConsistent = (CheckBox) findViewById(R.id.checkbox_OuterBackConsistent);
+        btn_UpperHubPlus        = (Button) findViewById(R.id.btn_UpperHubPlus);
+        btn_UpperHubMinus       = (Button) findViewById(R.id.btn_UpperHubMinus);
+        btn_LowerPlus           = (Button) findViewById(R.id.btn_LowerPlus);
+        btn_LowerMinus          = (Button) findViewById(R.id.btn_LowerMinus);
+        txt_UpperHub            = (TextView) findViewById(R.id.txt_UpperHub);
+        txt_Lower               = (TextView) findViewById(R.id.txt_Lower);
         button_Number_PenaltiesPlus = (Button) findViewById(R.id.button_Number_PenaltiesPlus);
         button_Number_PenaltiesUndo = (Button) findViewById(R.id.button_Number_PenaltiesUndo);
         button_GoToFinalActivity  = (Button)   findViewById(R.id.button_GoToFinalActivity);
         txt_Number_Penalties    = (TextView) findViewById(R.id.txt_Number_Penalties);
-        spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
-        ArrayAdapter adapter_Robs = new ArrayAdapter<String>(this, R.layout.robonum_list_layout, carry);
-        adapter_Robs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_numRobots.setAdapter(adapter_Robs);
-        spinner_numRobots.setSelection(0, false);
-        spinner_numRobots.setOnItemSelectedListener(new TeleopScoutActivity.numRobots_OnItemSelectedListener());
-        spinner_numRobots.setVisibility(View.GONE);
+//        spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
+//        ArrayAdapter adapter_Robs = new ArrayAdapter<String>(this, R.layout.robonum_list_layout, carry);
+//        adapter_Robs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner_numRobots.setAdapter(adapter_Robs);
+//        spinner_numRobots.setSelection(0, false);
+//        spinner_numRobots.setOnItemSelectedListener(new TeleopScoutActivity.numRobots_OnItemSelectedListener());
+//        spinner_numRobots.setVisibility(View.GONE);
 
         pfDatabase                = FirebaseDatabase.getInstance();            // Firebase
         pfDevice_DBReference      = pfDatabase.getReference("devices");     // List of Devices
@@ -179,8 +138,7 @@ public class TeleopScoutActivity extends Activity {
 
     button_GoToFinalActivity.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-        Log.w(TAG, "###  Clicked Final  ### " + Hang_Num);
-            if (Hang_Num < 4) {        // Gotta pick one!
+        Log.w(TAG, "###  Clicked Final  ### " );
                 storeTeleData();                    // Put all the TeleOps data collected in Match object
                 updateDev("Final");           // Update 'Phase' for stoplight indicator in ScoutMaster
 
@@ -189,12 +147,6 @@ public class TeleopScoutActivity extends Activity {
                 SMbundle.putString("tnum", tn);
                 smast_intent.putExtras(SMbundle);
                 startActivity(smast_intent);
-            } else {
-                Log.e(TAG, "ERROR - did not select lift type");
-                Toast.makeText(getBaseContext(), "*** End # Hanging _MUST_ be selected ***", Toast.LENGTH_LONG).show();
-                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
-            }
         }
     });
 
@@ -203,157 +155,53 @@ public class TeleopScoutActivity extends Activity {
         public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
             Log.w(TAG, "chkBox_PU_Cargo_floor Listener");
             if (buttonView.isChecked()) {
-                Log.w(TAG,"PU_PowerCell is checked.");
-                PowerCell_floor = true;
+                Log.w(TAG,"PU_Cargo_floor is checked.");
+                Cargo_floor = true;
             } else {  //not checked
-                Log.w(TAG,"PU_PowerCell is unchecked.");
-                PowerCell_floor = false;
+                Log.w(TAG,"PU_Cargo_floor is unchecked.");
+                Cargo_floor = false;
             }
         }
     });
-    chkBox_PowerCellLoadSta.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    chkBox_CargoTerminal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chkBox_PowerCellLoadSta Listener");
+            Log.w(TAG, "chkBox_CargoTerminal Listener");
             if (buttonView.isChecked()) {
-                Log.w(TAG,"chkBox_PowerCellLoadSta is checked.");
-                PowerCell_LoadSta = true;
+                Log.w(TAG,"chkBox_CargoTerminal is checked.");
+                Cargo_Terminal = true;
             } else {  //not checked
-                Log.w(TAG,"chkBox_PowerCellLoadSta is unchecked.");
-                PowerCell_LoadSta = false;
+                Log.w(TAG,"chkBox_CargoTerminal is unchecked.");
+                Cargo_Terminal = false;
             }
         }
     });
-    chkBox_PU_Cell_Trench.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chkBox_PU_Cell_Trench Listener");
-            if (buttonView.isChecked()) {
-                Log.w(TAG,"chkBox_PU_Cell_Trench is checked.");
-                PowerCell_Trench = true;
-            } else {  //not checked
-                Log.w(TAG,"chkBox_PU_Cell_Trench is unchecked.");
-                PowerCell_Trench = false;
-            }
-        }
-    });
-    chkBox_ControlPanel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-        Log.w(TAG, "chkBox_ControlPanel Listener");
-        if (buttonView.isChecked()) {
-            Log.w(TAG,"chkBox_ControlPanel is checked.");
-            PowerCell_CP = true;
-        } else {  //not checked
-            Log.w(TAG,"chkBox_ControlPanel is unchecked.");
-            PowerCell_CP = false;
-        }
-    }
-    });
-        chkBox_PU_Cell_Boundary.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chkBox_PU_Cell_Boundary Listener");
-            if (buttonView.isChecked()) {
-                Log.w(TAG,"chkBox_PU_Cell_Boundary is checked.");
-                PowerCell_Boundary = true;
-            } else {  //not checked
-                Log.w(TAG,"chkBox_PU_Cell_Boundary is unchecked.");
-                PowerCell_Boundary = false;
-            }
-        }
-    });
-        chkBox_GotCargo_Robot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chkBox_GotCargo_Robot Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"chkBox_GotCargo_Robot is checked.");
-                    PowerCell_Robot = true;
-                } else {  //not checked
-                    Log.w(TAG,"chkBox_GotCargo_Robot is unchecked.");
-                    PowerCell_Robot = false;
-                }
-            }
-        });
 
 
         //============================================================================
-        btn_OuterClosePlus.setOnClickListener(new View.OnClickListener() {
+        btn_UpperHubPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                HighClose++;
-                Log.w(TAG, "Outer = " + Integer.toString(HighClose));      // ** DEBUG **
-                txt_OuterClose.setText(Integer.toString(HighClose));    // Perform action on click
+                HighHub++;
+                Log.w(TAG, "Outer = " + Integer.toString(HighHub));      // ** DEBUG **
+                txt_UpperHub.setText(Integer.toString(HighHub));    // Perform action on click
             }
         });
-        btn_OuterCloseMinus.setOnClickListener(new View.OnClickListener() {
+        btn_UpperHubMinus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (HighClose >= 1) {
-                    HighClose--;
+                if (HighHub >= 1) {
+                    HighHub--;
                 }
-                Log.w(TAG, "Outer = " + Integer.toString(HighClose));      // ** DEBUG **
-                txt_OuterClose.setText(Integer.toString(HighClose));    // Perform action on click
+                Log.w(TAG, "Outer = " + Integer.toString(HighHub));      // ** DEBUG **
+                txt_UpperHub.setText(Integer.toString(HighHub));    // Perform action on click
             }
         });
 
-        btn_OuterLinePlus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                HighLine++;
-                Log.w(TAG, "OuterLine = " + Integer.toString(HighLine));      // ** DEBUG **
-                txt_OuterLine.setText(Integer.toString(HighLine));
-            }
-        });
-        btn_OuterLineMinus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (HighLine >= 1) {
-                    HighLine--;
-                }
-                Log.w(TAG, "OuterLine = " + Integer.toString(HighLine));      // ** DEBUG **
-                txt_OuterLine.setText(Integer.toString(HighLine));
-            }
-        });
-
-        btn_OuterFrontCPPlus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.d(TAG, "btn_OuterFrontCPPlus Listener");
-                HighFrontCP++;
-                Log.w(TAG, "OuterFrontCP = " + Integer.toString(HighFrontCP));      // ** DEBUG **
-                txt_OuterFrontCP.setText(Integer.toString(HighFrontCP));
-            }
-        });
-        btn_OuterFrontCPMinus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.d(TAG, "btn_OuterFrontCPMinus Listener");
-                if (HighFrontCP >= 1) {
-                    HighFrontCP--;
-                }
-                Log.w(TAG, "OuterFrontCP = " + Integer.toString(HighFrontCP));      // ** DEBUG **
-                txt_OuterFrontCP.setText(Integer.toString(HighFrontCP));
-            }
-        });
-
-        btn_OuterBackCPPlus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                HighBackCP++;
-                Log.w(TAG, "OuterBackCP = " + Integer.toString(HighBackCP));      // ** DEBUG **
-                txt_OuterBackCP.setText(Integer.toString(HighBackCP));
-            }
-        });
-        btn_OuterBackCPMinus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (HighBackCP >= 1) {
-                    HighBackCP--;
-                }
-                Log.w(TAG, "OuterBackCP = " + Integer.toString(HighBackCP));      // ** DEBUG **
-                txt_OuterBackCP.setText(Integer.toString(HighBackCP));
-            }
-        });
 
         btn_LowerPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Low++;
                 Log.w(TAG, "Bottom = " + Integer.toString(Low));      // ** DEBUG **
-                txt_Bottom.setText(Integer.toString(Low));
+                txt_Lower.setText(Integer.toString(Low));
             }
         });
         btn_LowerMinus.setOnClickListener(new View.OnClickListener() {
@@ -362,85 +210,11 @@ public class TeleopScoutActivity extends Activity {
                     Low--;
                 }
                 Log.w(TAG, "Bottom = " + Integer.toString(Low));      // ** DEBUG **
-                txt_Bottom.setText(Integer.toString(Low));
+                txt_Lower.setText(Integer.toString(Low));
             }
         });
 
-        checkbox_OuterCloseConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "checkbox_OuterCloseConsistent Listener");
-                if (buttonView.isChecked()) {
-                    conInnerClose = true;
-                } else {
-                    conInnerClose = false;
-                }
-                Log.d(TAG, "OuterCloseConsistent " + conInnerClose);
-            }
-        });
-        checkbox_OuterLineConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "checkbox_OuterLineConsistent Listener");
-                if (buttonView.isChecked()) {
-                    conInnerLine = true;
-                } else {
-                    conInnerLine = false;
-                }
-                Log.d(TAG, "OuterLineConsistent " + conInnerLine);
-            }
-        });
-        checkbox_OuterFrontCPConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "checkbox_OuterCloseConsistent Listener");
-                if (buttonView.isChecked()) {
-                    conInnerFrontCP = true;
-                } else {
-                    conInnerFrontCP = false;
-                }
-                Log.d(TAG, "OuterFrontCPConsistent " + conInnerFrontCP);
-            }
-        });
-        checkbox_OuterBackConsistent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.w(TAG, "checkbox_OuterBackConsistent Listener");
-                if (buttonView.isChecked()) {
-                    conInnerBackCP = true;
-                } else {
-                    conInnerBackCP = false;
-                }
-                Log.d(TAG, "OuterBackConsistent " + conInnerBackCP);
-            }
-        });
 
-        checkbox_CPspin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "checkbox_CPspin Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"checkbox_CPspin is checked.");
-                    CPspin = true;
-                } else {  //not checked
-                    Log.w(TAG,"checkbox_CPspin is unchecked.");
-                    CPspin = false;
-                }
-            }
-        });
-        checkbox_CPcolor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "checkbox_CPcolor Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"checkbox_CPcolor is checked.");
-                    CPcolor = true;
-                } else {  //not checked
-                    Log.w(TAG,"checkbox_CPcolor is unchecked.");
-                    CPcolor = false;
-                }
-            }
-        });
 
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==
     chk_Climbed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -450,115 +224,13 @@ public class TeleopScoutActivity extends Activity {
         if (buttonView.isChecked()) {
             Log.w(TAG,"Climbed is checked.");
             Climbed = true;
-            chk_UnderSG.setEnabled(false);
-            chk_UnderSG.setChecked(false);
-            UnderSG = false;
-            chk_LiftedBy.setChecked(false);       // Can't be both!!
-            chk_LiftedBy.setEnabled(false);
-            radio_Zero.setEnabled(false);
-            got_lift = false;
         } else {  //not checked
             Log.w(TAG,"Climbed is unchecked.");
             Climbed = false;
-            chk_UnderSG.setEnabled(true);
-            chk_LiftedBy.setEnabled(true);
-            radio_Zero.setEnabled(true);
         }
-        }
+    }
     });
 
-    chk_Balanced.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chk_Balanced Listener");
-            if (buttonView.isChecked()) {
-                Log.w(TAG,"Balanced is checked.");
-
-                Balanced = true;
-            } else {  //not checked
-                Log.w(TAG,"Balanced is unchecked.");
-                Balanced = false;
-            }
-        }
-    });
-
-        chk_UnderSG.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chk_UnderSG Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG, "UnderSG is checked.");
-                    UnderSG = true;
-                    Climbed = false;
-                    Balanced = false;
-                    chk_Climbed.setEnabled(false);
-                    chk_Climbed.setChecked(false);
-                    chk_LiftedBy.setEnabled(false);
-                    chk_LiftedBy.setChecked(false);
-                    chk_Lifted.setEnabled(false);
-                    chk_Lifted.setChecked(false);
-                    chk_Balanced.setEnabled(false);
-                    chk_Balanced.setChecked(false);
-
-                } else {  //not checked
-                    Log.w(TAG, "UnderSG is unchecked.");
-                    UnderSG = false;
-                    chk_Climbed.setEnabled(true);
-                    chk_LiftedBy.setEnabled(true);
-                    chk_Lifted.setEnabled(true);
-                    chk_Balanced.setEnabled(true);
-                }
-            }
-        });
-
-        chk_LiftedBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chk_LiftedBy Listener");
-                if (chk_LiftedBy.isChecked()) {
-                    //checked
-                    Log.w(TAG,"LiftedBy is checked.");
-                    got_lift = true;
-                    chk_Lifted.setChecked(false);       // Can't be both!!
-                    lifted = false;
-                    chk_UnderSG.setChecked(false);
-                    chk_UnderSG.setEnabled(false);      // Can't also be 'Parked'
-                    UnderSG = false;
-                    chk_Climbed.setEnabled(false);
-                    Climbed = false;
-                } else {
-                    //not checked
-                    Log.w(TAG,"LiftedBy is unchecked.");
-                    if (!chk_Climbed.isChecked()) {
-                        got_lift = false;
-                        chk_UnderSG.setEnabled(true);
-                        chk_Climbed.setEnabled(true);
-                    }
-                }
-        }
-    });
-
-    chk_Lifted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-            Log.w(TAG, "chk_Lifted Listener");
-            if (chk_Lifted.isChecked()) {
-                //checked
-                Log.w(TAG,"Lifted is checked.");
-                lifted = true;
-                chk_LiftedBy.setChecked(false);       // Can't be both!!
-                spinner_numRobots.setVisibility(VISIBLE);
-                got_lift = false;
-                chk_UnderSG.setEnabled(false);      // Can't also be 'Parked'
-            } else {
-                //not checked
-                Log.w(TAG,"Lifted is unchecked.");
-                lifted = false;
-                spinner_numRobots.setVisibility(View.GONE);
-                chk_UnderSG.setEnabled(true);
-            }
-        }
-    });
 
 
         button_Number_PenaltiesPlus.setOnClickListener(new View.OnClickListener() {
@@ -610,96 +282,24 @@ public class TeleopScoutActivity extends Activity {
         Log.w(TAG, "@@ RadioClick_Hanging @@" );
         radgrp_END = (RadioGroup) findViewById(R.id.radgrp_END);
         int selectedId = radgrp_END.getCheckedRadioButtonId();
-        Log.d(TAG, "*** Selected=" + selectedId + " Lift="+ liftedNum);
+        Log.d(TAG, "*** Selected=" + selectedId );
         radio_Lift = (RadioButton) findViewById(selectedId);
         String value = radio_Lift.getText().toString();
-        if (value.equals("None")) {             // Not On?
-            Log.w(TAG, "None");
-            Hang_Num = 0;
-            chk_UnderSG.setEnabled(true);
-            chk_Balanced.setEnabled(false);
-        } else if (value.equals("One")){        // One?
-            Log.w(TAG, "One");
-            if (liftedNum > 0) {
-                Toast toast = Toast.makeText(getBaseContext(), "Lifted robots='" + liftedNum + "' Please correct # Hanging.", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.show();
-            } else {
-                Hang_Num = 1;
-            }
-            chk_UnderSG.setEnabled(false);
-            chk_Balanced.setEnabled(true);
-        } else if (value.equals("Two")){        // Two
-            Log.w(TAG, "Two");
-            if (liftedNum > 1) {
-                Toast toast = Toast.makeText(getBaseContext(), "Lifted robots='" + liftedNum + "' Please correct # Hanging.", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.show();
-            } else {
-                Hang_Num = 2;
-            }
-            chk_UnderSG.setEnabled(false);
-            chk_Balanced.setEnabled(true);
+        if (value.equals("Low")) {             // Zero?
+            Log.w(TAG, "Low");
+            HangarLev = "Low";
+        } else if (value.equals("Mid")){        // One?
+            Log.w(TAG, "Mid");
+            HangarLev = "Mid";
+       } else if (value.equals("High")){        // Two
+            Log.w(TAG, "High");
+            HangarLev = "High";
         } else {                                // Three
-            Log.w(TAG, "Three");
-            if (!UnderSG) {
-                Log.d(TAG, "Hanging=3");
-                Hang_Num = 3;
-                UnderSG = false;
-                chk_UnderSG.setChecked(false);
-                chk_UnderSG.setEnabled(false);
-                chk_Balanced.setEnabled(true);
-            } else {
-                Toast toast = Toast.makeText(getBaseContext(), "'Under SG' is checked;  pick # Hanging less than 3!", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.show();
-                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                tg.startTone(ToneGenerator.TONE_PROP_BEEP);
-            }
+            Log.w(TAG, "Traversal");
+            HangarLev = "Traversal";
         }
     }
 
-    public class numRobots_OnItemSelectedListener implements AdapterView.OnItemSelectedListener {
-        public void onItemSelected(AdapterView<?> parent,
-                                   View view, int pos, long id) {
-            Log.w(TAG, "###  numRobots_OnItemSelectedListener  ###");
-            String num = " ";
-            num = parent.getItemAtPosition(pos).toString();
-            if (pos > 0) {
-                liftedNum = Integer.parseInt(num);
-                spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
-                switch (liftedNum) {
-                    case 1:
-                        Log.w(TAG, "** 1 ** Robots Lifted '" + liftedNum + "'  Hang=" + Hang_Num);
-                        if ((Hang_Num == 99) || (Hang_Num < 2)) {
-                            Toast toast = Toast.makeText(getBaseContext(), "'# Hanging less than 2!  Please correct.", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                            toast.show();
-                        }
-                        break;
-                    case 2:
-                        Log.w(TAG, "** 2 ** Robots Lifted '" + liftedNum + "' Hang=" + Hang_Num);
-                        if ((Hang_Num == 99) || (Hang_Num < 3)) {
-//                            spinner_numRobots.setSelection(3, false);
-                            Toast toast = Toast.makeText(getBaseContext(), "'# Hanging less than 3!  Please correct.", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                            toast.show();
-                        }
-                        break;
-                }
-            } else {
-                Toast toast = Toast.makeText(getBaseContext(), "Must specify # robots lifted!", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.show();
-                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                tg.startTone(ToneGenerator.TONE_PROP_BEEP);
-            }
-            Log.w(TAG, ">>>>> NumRobots '" + liftedNum + "'");
-        }
-        public void onNothingSelected(AdapterView<?> parent) {
-            // Do nothing.
-        }
-    }
 
 
 
@@ -708,12 +308,12 @@ public class TeleopScoutActivity extends Activity {
     private void storeTeleData() {
         Log.w(TAG, ">>>>  storeTeleData  <<<<");
         // New Match Data Object *** GLF 1/26/22
-        Pearadox.Match_Data.setTele_Cargo_term(PowerCell_LoadSta);
-        Pearadox.Match_Data.setTele_Cargo_floor(PowerCell_floor);
+        Pearadox.Match_Data.setTele_Cargo_term(Cargo_Terminal);
+        Pearadox.Match_Data.setTele_Cargo_floor(Cargo_floor);
         Pearadox.Match_Data.setTele_Low(Low);
-        Pearadox.Match_Data.setTele_High(HighClose);
+        Pearadox.Match_Data.setTele_High(HighHub);
         Pearadox.Match_Data.setTele_Climbed(Climbed);
-        Pearadox.Match_Data.settele_HangarLevel(UnderSG);
+        Pearadox.Match_Data.setTele_HangarLevel(HangarLev);
         Pearadox.Match_Data.setTele_num_Penalties(num_Penalties);
 
         // **

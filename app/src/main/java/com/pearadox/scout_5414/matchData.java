@@ -28,7 +28,7 @@ public class matchData implements Serializable {
     private int     tele_High;              // # High Goal balls
 
     private boolean tele_Climbed;           // Did they Climb?
-    private boolean tele_HangarLevel;       // Climbed to Hangar Level 'x'
+    private String  tele_HangarLevel;       // Climbed to Hangar Level 'x'
 
     private int     tele_num_Penalties;     // How many penalties received?
     private String  tele_comment;           // Tele comment
@@ -48,7 +48,8 @@ public class matchData implements Serializable {
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //  Constructor
 
-    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_CollectFloor, int auto_Low, int auto_High, String auto_comment, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, boolean tele_Climbed, boolean tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defense_good, boolean final_def_Block, boolean final_def_HangarInt, String final_comment, String final_studID, String final_dateTime) {
+
+    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_CollectFloor, int auto_Low, int auto_High, String auto_comment, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, boolean tele_Climbed, String tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defense_good, boolean final_def_Block, boolean final_def_HangarInt, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
         this.pre_cargo_carried = pre_cargo_carried;
@@ -222,11 +223,11 @@ public matchData() {
         this.tele_Climbed = tele_Climbed;
     }
 
-    public boolean istele_HangarLevel() {
+    public String getTele_HangarLevel() {
         return tele_HangarLevel;
     }
 
-    public void settele_HangarLevel(boolean tele_HangarLevel) {
+    public void setTele_HangarLevel(String tele_HangarLevel) {
         this.tele_HangarLevel = tele_HangarLevel;
     }
 
@@ -309,7 +310,7 @@ public matchData() {
     public void setFinal_dateTime(String final_dateTime) {
         this.final_dateTime = final_dateTime;
     }
-//   GLF 1/26/22
+//   GLF 1/27/22
 // End of Getters/Setters
 
 }
