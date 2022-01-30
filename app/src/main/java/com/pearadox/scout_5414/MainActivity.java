@@ -1091,8 +1091,8 @@ private void preReqs() {
                 Log.e(TAG, "Pearadox = '" + pw + "'");
                 pw = "pear@5414%$";    //**DEBUG**
             } catch (IOException e) {
-                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
+//                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+//                tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
                 Toast toast = Toast.makeText(getBaseContext(), "Firebase authentication - Password required" + "'" + pw + "'", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 toast.show();

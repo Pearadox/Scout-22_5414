@@ -48,7 +48,7 @@ public class MatchScoutActivity extends AppCompatActivity {
     /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_start1, radio_start2, radio_Pick;
                         Spinner spinner_startPos;
     /* After Start */   CheckBox checkbox_leftTarmac, checkbox_noAUTO;
-                        CheckBox chkBox_PU_Cargo_floor;
+                        CheckBox chkBox_PU_Cargo_floor, chkBox_PU_Cargo_terminal;
     /* Hub */           TextView  txt_UpperHub; Button btn_UpperHubPlus, btn_UpperHubMinus;  CheckBox checkbox_OuterCloseConsistent;
                         TextView  txt_Lower; Button btn_LowerMinus, btn_LowerPlus;
     /* Last Sect. */    EditText editText_autoComment;
@@ -248,6 +248,7 @@ public class MatchScoutActivity extends AppCompatActivity {
         checkbox_noAUTO             = (CheckBox) findViewById(R.id.checkbox_noAUTO);
         checkbox_leftTarmac         = (CheckBox) findViewById(R.id.checkbox_leftTarmac);
         chkBox_PU_Cargo_floor       = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
+        chkBox_PU_Cargo_terminal       = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_terminal);
         txt_UpperHub                = (TextView) findViewById(R.id.txt_UpperHub);
         txt_Lower                   = (TextView) findViewById(R.id.txt_Lower);
         btn_UpperHubPlus            = (Button) findViewById(R.id.btn_UpperHubPlus);
@@ -325,17 +326,17 @@ public class MatchScoutActivity extends AppCompatActivity {
         });
 
 
-//        chkBox_GotCargo_Robot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                Log.w(TAG, "chkBox_GotCargo_Robot Listener");
-//                if (buttonView.isChecked()) {
-//                    CollectTerminal = true;
-//                } else {
-//                    CollectTerminal = false;
-//                }
-//            }
-//        });
+        chkBox_PU_Cargo_terminal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.w(TAG, "chkBox_PU_Cargo_terminal Listener");
+                if (buttonView.isChecked()) {
+                    CollectTerminal = true;
+                } else {
+                    CollectTerminal = false;
+                }
+            }
+        });
 
 
 
@@ -479,8 +480,6 @@ public class MatchScoutActivity extends AppCompatActivity {
     }
 
 
-
-
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private void storeAutoData() {
         Log.i(TAG, ">>>>  storeAutoData  <<<< " + studID);
@@ -491,9 +490,9 @@ public class MatchScoutActivity extends AppCompatActivity {
         Pearadox.Match_Data.setPre_startPos(startPos);
 
         Pearadox.Match_Data.setAuto_CollectFloor(CollectFloor);
+        Pearadox.Match_Data.setAuto_CollectTerm(CollectTerminal);
         Pearadox.Match_Data.setAuto_mode(noAuto);
         Pearadox.Match_Data.setAuto_leftTarmac(leftTarmac);
-        Pearadox.Match_Data.setAuto_CollectFloor(CollectFloor);
         Pearadox.Match_Data.setAuto_Low(Low);
         Pearadox.Match_Data.setAuto_High(High);
 

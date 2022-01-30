@@ -14,8 +14,9 @@ public class matchData implements Serializable {
 
                                             // ---- AFTER Start ----
     private boolean auto_mode;              // Do they have Autonomous mode?
-    private boolean auto_leftTarmac;        // Did they leave Sector Line
+    private boolean auto_leftTarmac;        // Did they leave Tarmac
     private boolean auto_CollectFloor;      // Collect from Floor?
+    private boolean auto_CollectTerm;       // Collect from Terminal?
     private int     auto_Low;               // # Low Goal balls
     private int     auto_High;              // # High Goal balls
 
@@ -36,7 +37,7 @@ public class matchData implements Serializable {
     // ============= Final  ================
     private boolean final_lostParts;         // Did they lose parts
     private boolean final_lostComms;         // Did they lose communication
-    private String final_defense;            // Their overall Defense
+    private String  final_defense;           // Their overall Defense
     /*=============================================================================*/
     private String  final_comment;           // Final comment
     private String  final_studID;            // Student doing the scouting
@@ -47,7 +48,7 @@ public class matchData implements Serializable {
 //  Constructor
 
 
-    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_CollectFloor, int auto_Low, int auto_High, String auto_comment, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, boolean tele_Climbed, String tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, String final_defense, String final_comment, String final_studID, String final_dateTime) {
+    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_CollectFloor, boolean auto_CollectTerm, int auto_Low, int auto_High, String auto_comment, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, boolean tele_Climbed, String tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, String final_defense, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
         this.pre_cargo_carried = pre_cargo_carried;
@@ -56,6 +57,7 @@ public class matchData implements Serializable {
         this.auto_mode = auto_mode;
         this.auto_leftTarmac = auto_leftTarmac;
         this.auto_CollectFloor = auto_CollectFloor;
+        this.auto_CollectTerm = auto_CollectTerm;
         this.auto_Low = auto_Low;
         this.auto_High = auto_High;
         this.auto_comment = auto_comment;
@@ -153,6 +155,14 @@ public matchData() {
 
     public void setAuto_CollectFloor(boolean auto_CollectFloor) {
         this.auto_CollectFloor = auto_CollectFloor;
+    }
+
+    public boolean isAuto_CollectTerm() {
+        return auto_CollectTerm;
+    }
+
+    public void setAuto_CollectTerm(boolean auto_CollectTerm) {
+        this.auto_CollectTerm = auto_CollectTerm;
     }
 
     public int getAuto_Low() {
@@ -290,7 +300,8 @@ public matchData() {
     public void setFinal_dateTime(String final_dateTime) {
         this.final_dateTime = final_dateTime;
     }
-//   GLF 1/30/22
+
+    //   GLF 1/30/22
 // End of Getters/Setters
 
 }

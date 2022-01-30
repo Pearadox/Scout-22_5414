@@ -1006,23 +1006,23 @@ public class Visualizer_Activity extends AppCompatActivity {
 
                     if (match_inst.isTele_Climbed()) {
                         climbed++;
-                        switch (match_inst.getTele_HangarLevel()) {
-                            case "Low":
-                                Hang1++;
-                                break;
-                            case "Mid":
-                                Hang2++;
-                                break;
-                            case "High":
-                                Hang3++;
-                                break;
-                            case "Traversal":
-                                Hang4++;
-                                break;
-                            default:                // ????
-                                Log.e(TAG, "*** Error - bad Hangar Level  ***");
-                        } // end Switch
                     }
+                    switch (match_inst.getTele_HangarLevel()) {
+                        case "Low":
+                            Hang1++;
+                            break;
+                        case "Mid":
+                            Hang2++;
+                            break;
+                        case "High":
+                            Hang3++;
+                            break;
+                        case "Traversal":
+                            Hang4++;
+                            break;
+                        default:                // ????
+                            Log.e(TAG, "*** Error - bad Hangar Level  ***");
+                    } // end Switch
 
                     pen = pen + match_inst.getTele_num_Penalties(); ;
 
@@ -1071,42 +1071,42 @@ public class Visualizer_Activity extends AppCompatActivity {
             case 0:
                 txt_MatchesR1.setText(String.valueOf(numMDs));
                 tbl_event1R1.setText("Auto" + " \n" + "Tele");
-                tbl_rate1R1.setText( "Left⭓" + base + " ◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum  );
+                tbl_rate1R1.setText( "◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum + "   LeftÐ" + base );
                 tbl_event2R1.setText("Hang" + "\n" + "Final");
                 tbl_rate2R1.setText("╪ " + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑ " + pen );
                 break;
             case 1:
                 txt_MatchesR2.setText(String.valueOf(numMDs));
                 tbl_event1R2.setText("Auto" + " \n" + "Tele");
-                tbl_rate1R2.setText( "Left⭓" + base + " ◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum );
+                tbl_rate1R2.setText( "◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum + "   LeftÐ" + base);
                 tbl_event2R2.setText("Hang" + "\n" + "Final");
                 tbl_rate2R2.setText( "╪ " + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑ " + pen  );
                 break;
             case 2:
                 txt_MatchesR3.setText(String.valueOf(numMDs));
                 tbl_event1R3.setText("Auto" + " \n" + "Tele");
-                tbl_rate1R3.setText( "Left⭓" + base + " ◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum );
+                tbl_rate1R3.setText( "◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum + "   LeftÐ" + base);
                 tbl_event2R3.setText("Hang" + "\n" + "Final");
                 tbl_rate2R3.setText( "╪ " + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑ " + pen );
                 break;
             case 3:
                 txt_MatchesB1.setText(String.valueOf(numMDs));
                 tbl_event1B1.setText("Auto" + " \n" + "Tele");
-                tbl_rate1B1.setText( "Left⭓" + base + " ◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum  );
+                tbl_rate1B1.setText( "◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum + "   LeftÐ" + base );
                 tbl_event2B1.setText("Hang" + "\n" + "Final");
                 tbl_rate2B1.setText( "╪ " + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑ " + pen );
                 break;
             case 4:
                 txt_MatchesB2.setText(String.valueOf(numMDs));
                 tbl_event1B2.setText("Auto" + " \n" + "Tele");
-                tbl_rate1B2.setText( "Left⭓" + base + " ◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum );
+                tbl_rate1B2.setText( "◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum + "   LeftÐ" + base);
                 tbl_event2B2.setText("Hang" + "\n" + "Final");
                 tbl_rate2B2.setText("╪ " + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑ " + pen  );
                 break;
             case 5:
                 txt_MatchesB3.setText(String.valueOf(numMDs));
                 tbl_event1B3.setText("Auto" + " \n" + "Tele");
-                tbl_rate1B3.setText( "Left⭓" + base + " ◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum );
+                tbl_rate1B3.setText( "◯Hub L" + A_lowNum + " U" + A_highNum + "\n" + "◯Hub L" + T_lowNum + " U" + T_highNum + "   LeftÐ" + base );
                 tbl_event2B3.setText("Hang" + "\n" + "Final");
                 tbl_rate2B3.setText("╪ " + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑ " + pen  );
                 break;

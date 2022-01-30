@@ -6,12 +6,12 @@
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
-            <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\bubba\.android\avd\ATT_K88_API_23.avd" />
+            <type value="SERIAL_NUMBER" />
+            <value value="318ef0ae" />
           </Key>
         </deviceKey>
       </Target>
     </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-01-30T19:17:19.023401400Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-01-30T20:38:53.631835100Z" />
   </component>
 </project>
