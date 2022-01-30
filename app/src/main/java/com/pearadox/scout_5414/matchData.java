@@ -36,9 +36,7 @@ public class matchData implements Serializable {
     // ============= Final  ================
     private boolean final_lostParts;         // Did they lose parts
     private boolean final_lostComms;         // Did they lose communication
-    private boolean final_defense_good;      // Was their overall Defense Good (bad=false)
-    private boolean final_def_Block;         // Did they use Blocking Defense on SG
-    private boolean final_def_HangarInt;     // Did they block the Hangar
+    private String final_defense;            // Their overall Defense
     /*=============================================================================*/
     private String  final_comment;           // Final comment
     private String  final_studID;            // Student doing the scouting
@@ -49,7 +47,7 @@ public class matchData implements Serializable {
 //  Constructor
 
 
-    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_CollectFloor, int auto_Low, int auto_High, String auto_comment, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, boolean tele_Climbed, String tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_defense_good, boolean final_def_Block, boolean final_def_HangarInt, String final_comment, String final_studID, String final_dateTime) {
+    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_CollectFloor, int auto_Low, int auto_High, String auto_comment, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, boolean tele_Climbed, String tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, String final_defense, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
         this.pre_cargo_carried = pre_cargo_carried;
@@ -71,9 +69,7 @@ public class matchData implements Serializable {
         this.tele_comment = tele_comment;
         this.final_lostParts = final_lostParts;
         this.final_lostComms = final_lostComms;
-        this.final_defense_good = final_defense_good;
-        this.final_def_Block = final_def_Block;
-        this.final_def_HangarInt = final_def_HangarInt;
+        this.final_defense = final_defense;
         this.final_comment = final_comment;
         this.final_studID = final_studID;
         this.final_dateTime = final_dateTime;
@@ -263,28 +259,12 @@ public matchData() {
         this.final_lostComms = final_lostComms;
     }
 
-    public boolean isFinal_defense_good() {
-        return final_defense_good;
+    public String getFinal_defense() {
+        return final_defense;
     }
 
-    public void setFinal_defense_good(boolean final_defense_good) {
-        this.final_defense_good = final_defense_good;
-    }
-
-    public boolean isFinal_def_Block() {
-        return final_def_Block;
-    }
-
-    public void setFinal_def_Block(boolean final_def_Block) {
-        this.final_def_Block = final_def_Block;
-    }
-
-    public boolean isFinal_def_HangarInt() {
-        return final_def_HangarInt;
-    }
-
-    public void setFinal_def_HangarInt(boolean final_def_HangarInt) {
-        this.final_def_HangarInt = final_def_HangarInt;
+    public void setFinal_defense(String final_defense) {
+        this.final_defense = final_defense;
     }
 
     public String getFinal_comment() {
@@ -310,7 +290,7 @@ public matchData() {
     public void setFinal_dateTime(String final_dateTime) {
         this.final_dateTime = final_dateTime;
     }
-//   GLF 1/27/22
+//   GLF 1/30/22
 // End of Getters/Setters
 
 }

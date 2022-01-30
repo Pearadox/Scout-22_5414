@@ -221,9 +221,6 @@ public class FinalActivity extends Activity {
         Log.w(TAG, timeStamp + " is the current date and time.");
         Pearadox.Match_Data.setFinal_lostParts(lost_Parts);
         Pearadox.Match_Data.setFinal_lostComms(lost_Comms);
-        Pearadox.Match_Data.setFinal_defense_good(final_defense_good);
-        Pearadox.Match_Data.setFinal_def_Block(final_def_Block);
- //       Pearadox.Match_Data.setFinal_def_TrenchInt(final_def_RocketInt);
 
          /* */
         Pearadox.Match_Data.setFinal_dateTime(timeStamp);

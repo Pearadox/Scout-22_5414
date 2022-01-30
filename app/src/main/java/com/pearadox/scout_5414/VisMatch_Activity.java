@@ -288,16 +288,16 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isFinal_lostParts()) {
                 final_LostParts++;
             }
-            if (match_inst.isFinal_defense_good()) {
-                final_DefGood++;
-            }
+//            if (match_inst.isFinal_defense_good()) {
+//                final_DefGood++;
+//            }
             // Todo Rocket Int.
 //            if (match_inst.isFinal_def_TrenchInt()) {
 //                final_TrenchInt++;
 //            }
-            if (match_inst.isFinal_def_Block()) {
-                final_DefDump++;
-            }
+//            if (match_inst.isFinal_def_Block()) {
+//                final_DefDump++;
+//            }
             if (match_inst.getTele_num_Penalties() > 0) {
                 final_NumPen = final_NumPen + match_inst.getTele_num_Penalties();
             }
