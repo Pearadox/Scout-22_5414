@@ -8,13 +8,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout-land/dev_list_layout.xml" value="0.12257495590828923" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout-sw600dp/content_main.xml" value="0.1" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/about.xml" value="0.1171875" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/activity_arena_layout.xml" value="0.1" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/activity_bluetooth.xml" value="0.2" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/activity_main.xml" value="0.11979166666666667" />
-        <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/activity_match_scout.xml" value="0.3292307692307692" />
+        <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/activity_match_scout.xml" value="0.264" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/activity_pit_scout.xml" value="0.11979166666666667" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/activity_teleop_scout.xml" value="0.264" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/content_main.xml" value="0.2" />
@@ -22,6 +23,7 @@
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/dev_list_layout.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/help_layout.xml" value="0.11979166666666667" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/match_list_layout.xml" value="0.11145833333333334" />
+        <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/layout/start_pos_list_layout.xml" value="0.14479166666666668" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/menu/menu_main.xml" value="0.264" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/menu/menu_viz.xml" value="0.264" />
         <entry key="..\:/Users/bubba/github/Scout-22_5414/app/src/main/res/xml/preferences.xml" value="0.11145833333333334" />

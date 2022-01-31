@@ -17,6 +17,7 @@ public class matchData implements Serializable {
     private boolean auto_leftTarmac;        // Did they leave Tarmac
     private boolean auto_CollectFloor;      // Collect from Floor?
     private boolean auto_CollectTerm;       // Collect from Terminal?
+    private boolean auto_Human;             // Score by Human Player?
     private int     auto_Low;               // # Low Goal balls
     private int     auto_High;              // # High Goal balls
 
@@ -47,8 +48,7 @@ public class matchData implements Serializable {
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //  Constructor
 
-
-    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_CollectFloor, boolean auto_CollectTerm, int auto_Low, int auto_High, String auto_comment, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, boolean tele_Climbed, String tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, String final_defense, String final_comment, String final_studID, String final_dateTime) {
+    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_CollectFloor, boolean auto_CollectTerm, boolean auto_Human, int auto_Low, int auto_High, String auto_comment, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, boolean tele_Climbed, String tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, String final_defense, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
         this.pre_cargo_carried = pre_cargo_carried;
@@ -58,6 +58,7 @@ public class matchData implements Serializable {
         this.auto_leftTarmac = auto_leftTarmac;
         this.auto_CollectFloor = auto_CollectFloor;
         this.auto_CollectTerm = auto_CollectTerm;
+        this.auto_Human = auto_Human;
         this.auto_Low = auto_Low;
         this.auto_High = auto_High;
         this.auto_comment = auto_comment;
@@ -114,8 +115,7 @@ public matchData() {
     }
 
     public void setPre_cargo_carried(int pre_cargo_carried) {
-        this.pre_cargo_carried = pre_cargo_carried;
-    }
+        this.pre_cargo_carried = pre_cargo_carried; }
 
     public String getPre_startPos() {
         return pre_startPos;
@@ -237,6 +237,14 @@ public matchData() {
         this.tele_HangarLevel = tele_HangarLevel;
     }
 
+    public boolean isAuto_Human() {
+        return auto_Human;
+    }
+
+    public void setAuto_Human(boolean auto_Human) {
+        this.auto_Human = auto_Human;
+    }
+
     public int getTele_num_Penalties() {
         return tele_num_Penalties;
     }
@@ -301,7 +309,7 @@ public matchData() {
         this.final_dateTime = final_dateTime;
     }
 
-    //   GLF 1/30/22
+    //   GLF 1/31/22
 // End of Getters/Setters
 
 }

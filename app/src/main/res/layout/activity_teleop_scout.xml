@@ -249,7 +249,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="RadioClick_Hanging"
-                android:text="Low"
+                android:text="None"
                 android:textColor="@color/cyan" />
 
             <RadioButton
@@ -257,7 +257,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="RadioClick_Hanging"
-                android:text="Mid"
+                android:text="Low"
                 android:textColor="@color/cyan" />
 
             <RadioButton
@@ -265,10 +265,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="RadioClick_Hanging"
-                android:text="High"
+                android:text="Mid"
                 android:textColor="@color/cyan" />
             <RadioButton
                 android:id="@+id/radio_Three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="RadioClick_Hanging"
+                android:text="High"
+                android:textColor="@color/cyan" />
+            <RadioButton
+                android:id="@+id/radio_Four"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="RadioClick_Hanging"

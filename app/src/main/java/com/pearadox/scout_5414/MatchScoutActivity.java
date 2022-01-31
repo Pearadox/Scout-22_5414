@@ -48,7 +48,7 @@ public class MatchScoutActivity extends AppCompatActivity {
     /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_start1, radio_start2, radio_Pick;
                         Spinner spinner_startPos;
     /* After Start */   CheckBox checkbox_leftTarmac, checkbox_noAUTO;
-                        CheckBox chkBox_PU_Cargo_floor, chkBox_PU_Cargo_terminal;
+                        CheckBox chkBox_PU_Cargo_floor, chkBox_PU_Cargo_terminal, chkBox_HumanPlayer;
     /* Hub */           TextView  txt_UpperHub; Button btn_UpperHubPlus, btn_UpperHubMinus;  CheckBox checkbox_OuterCloseConsistent;
                         TextView  txt_Lower; Button btn_LowerMinus, btn_LowerPlus;
     /* Last Sect. */    EditText editText_autoComment;
@@ -84,6 +84,7 @@ public class MatchScoutActivity extends AppCompatActivity {
     public boolean leftTarmac           = false;    // Did they leave Tarmac
     private boolean CollectFloor        = false;    // Collect from Floor?
     private boolean CollectTerminal     = false;    // Collect from Terminal?
+    private boolean Human               = false;    // Score by Human?
     private int     Low                 = 0;        // # Low Goal balls
     private int     High                = 0;        // # High Goal balls
 
@@ -248,7 +249,8 @@ public class MatchScoutActivity extends AppCompatActivity {
         checkbox_noAUTO             = (CheckBox) findViewById(R.id.checkbox_noAUTO);
         checkbox_leftTarmac         = (CheckBox) findViewById(R.id.checkbox_leftTarmac);
         chkBox_PU_Cargo_floor       = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
-        chkBox_PU_Cargo_terminal       = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_terminal);
+        chkBox_PU_Cargo_terminal    = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_terminal);
+        chkBox_HumanPlayer          = (CheckBox) findViewById(R.id.chkBox_HumanPlayer);
         txt_UpperHub                = (TextView) findViewById(R.id.txt_UpperHub);
         txt_Lower                   = (TextView) findViewById(R.id.txt_Lower);
         btn_UpperHubPlus            = (Button) findViewById(R.id.btn_UpperHubPlus);
@@ -259,7 +261,7 @@ public class MatchScoutActivity extends AppCompatActivity {
         button_GoToArenaLayoutActivity = (Button) findViewById(R.id.button_GoToArenaLayoutActivity);
         final Spinner spinner_startPos = (Spinner) findViewById(R.id.spinner_startPos);
         String[] autostartPos = getResources().getStringArray(R.array.auto_start_array);
-        adapter_autostartpos = new ArrayAdapter<String>(this, R.layout.dev_list_layout, autostartPos);
+        adapter_autostartpos = new ArrayAdapter<String>(this, R.layout.start_pos_list_layout, autostartPos);
         adapter_autostartpos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_startPos.setAdapter(adapter_autostartpos);
         spinner_startPos.setSelection(0, false);
@@ -338,6 +340,18 @@ public class MatchScoutActivity extends AppCompatActivity {
             }
         });
 
+
+        chkBox_HumanPlayer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.w(TAG, "chkBox_HumanPlayer Listener");
+                if (buttonView.isChecked()) {
+                    Human = true;
+                } else {
+                    Human = false;
+                }
+            }
+        });
 
 
         //*****************************************************************
@@ -491,6 +505,7 @@ public class MatchScoutActivity extends AppCompatActivity {
 
         Pearadox.Match_Data.setAuto_CollectFloor(CollectFloor);
         Pearadox.Match_Data.setAuto_CollectTerm(CollectTerminal);
+        Pearadox.Match_Data.setAuto_Human(Human);
         Pearadox.Match_Data.setAuto_mode(noAuto);
         Pearadox.Match_Data.setAuto_leftTarmac(leftTarmac);
         Pearadox.Match_Data.setAuto_Low(Low);
