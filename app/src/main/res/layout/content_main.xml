@@ -143,6 +143,17 @@
             android:layout_marginTop="0dp" />
     </RadioGroup>
 
+    <ImageView
+        android:id="@+id/imageView_RapidReact"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="130dp"
+        android:contentDescription="Rapid React logo"
+        android:src="@drawable/rapid_react" />
+
 
     <ToggleButton
         android:text="ToggleButton"
@@ -161,10 +172,10 @@
         android:id="@+id/img_netStatus"
         android:layout_width="75sp"
         android:layout_height="75sp"
-        app:srcCompat="@drawable/no_connection"
-        android:layout_marginBottom="72dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="30dp"
+        app:srcCompat="@drawable/no_connection" />
 
     <Button
         android:id="@+id/btn_StoreData"
