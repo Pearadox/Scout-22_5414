@@ -45,7 +45,7 @@ public class TeleopScoutActivity extends Activity {
                         TextView  txt_Lower; Button btn_LowerMinus, btn_LowerPlus;
     /* Climb Sect. */   CheckBox chk_Climbed;
                         CheckBox chk_LiftedBy, chk_Lifted; Spinner spinner_numRobots;
-                        RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_One, radio_Two, radio_Three, radio_Zero;
+                        RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_Zero, radio_One, radio_Two, radio_Three, radio_Four;
     /* Comment */       EditText editText_TeleComments;
     /* Last Sect. */    Button button_GoToFinalActivity, button_Number_PenaltiesPlus, button_Number_PenaltiesUndo;
                         TextView txt_Number_Penalties;
@@ -96,6 +96,7 @@ public class TeleopScoutActivity extends Activity {
         radio_One               = (RadioButton) findViewById(R.id.radio_One);
         radio_Two               = (RadioButton) findViewById(R.id.radio_Two);
         radio_Three             = (RadioButton) findViewById(R.id.radio_Three);
+        radio_Four             = (RadioButton) findViewById(R.id.radio_Four);
         btn_UpperHubPlus        = (Button) findViewById(R.id.btn_UpperHubPlus);
         btn_UpperHubMinus       = (Button) findViewById(R.id.btn_UpperHubMinus);
         btn_LowerPlus           = (Button) findViewById(R.id.btn_LowerPlus);
@@ -283,21 +284,31 @@ public class TeleopScoutActivity extends Activity {
         Log.w(TAG, "@@ RadioClick_Hanging @@" );
         radgrp_END = (RadioGroup) findViewById(R.id.radgrp_END);
         int selectedId = radgrp_END.getCheckedRadioButtonId();
-        Log.d(TAG, "*** Selected=" + selectedId );
+        Log.d(TAG, "*** Selected=" + selectedId);
         radio_Lift = (RadioButton) findViewById(selectedId);
         String value = radio_Lift.getText().toString();
-        if (value.equals("Low")) {             // Zero?
+        if (value.equals("None")) {             // Zero?
+            Log.w(TAG, "None");
+            HangarLev = "None";
+            chk_Climbed.setChecked(false);
+        } else if (value.equals("Low")){        // One?
             Log.w(TAG, "Low");
             HangarLev = "Low";
-        } else if (value.equals("Mid")){        // One?
+            chk_Climbed.setChecked(true);
+       } else if (value.equals("Mid")){         // Two
             Log.w(TAG, "Mid");
             HangarLev = "Mid";
-       } else if (value.equals("High")){        // Two
+            chk_Climbed.setChecked(true);
+        } else if (value.equals("High")){       // Three
             Log.w(TAG, "High");
             HangarLev = "High";
-        } else {                                // Three
+            chk_Climbed.setChecked(true);
+        } else if (value.equals("Traversal")){  // Four
             Log.w(TAG, "Traversal");
             HangarLev = "Traversal";
+            chk_Climbed.setChecked(true);
+        } else {                                // Invalid
+            Log.e(TAG, "****  Invalid Hangar Level ****");
         }
     }
 
