@@ -103,7 +103,7 @@ public class MatchScoutActivity extends AppCompatActivity {
         onStart = false;
         setContentView(R.layout.activity_match_scout);
         Bundle bundle = this.getIntent().getExtras();
-        String device = bundle.getString("dev");
+        device = bundle.getString("dev");
         studID = bundle.getString("stud");
         Log.w(TAG, device + " " + studID);      // ** DEBUG **
         String ps = device.substring(device.length() - 1);
@@ -435,6 +435,8 @@ public class MatchScoutActivity extends AppCompatActivity {
                 Log.i(TAG, "Clicked Sidebar");
                 Intent smast_intent = new Intent(MatchScoutActivity.this, ArenaLayoutActivity.class);
                 Bundle SMbundle = new Bundle();
+                SMbundle.putString("dev", device);              // Pass data
+                SMbundle.putString("stud", studID);             //  to activity
                 smast_intent.putExtras(SMbundle);
                 startActivity(smast_intent);
         }
