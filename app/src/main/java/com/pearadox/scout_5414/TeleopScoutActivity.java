@@ -133,23 +133,20 @@ public class TeleopScoutActivity extends Activity {
 
     button_GoToFinalActivity.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-        Log.e(TAG, "###  Clicked Final  ###  " + HangarLev);
-            if (chk_Climbed.isChecked())
-                if (HangarLev.length() < 3) {      // Level not selected
-                    Toast toast = Toast.makeText(getBaseContext(), "\n\n*** Climb was checked - Specify Hangar Level Climbed ***\n", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                    toast.show();
-                } else {  // OK
-                    storeTeleData();                    // Put all the TeleOps data collected in Match object
-                    updateDev("Final");           // Update 'Phase' for stoplight indicator in ScoutMaster
+        Log.e(TAG, "###  Clicked Final  ###  " + HangarLev + "  " + HangarLev.length());
+            if (!PreReqs()) {
+                // should have issued errors
+            } else {  // OK
+                storeTeleData();                    // Put all the TeleOps data collected in Match object
+                updateDev("Final");           // Update 'Phase' for stoplight indicator in ScoutMaster
 
-                    Intent smast_intent = new Intent(TeleopScoutActivity.this, FinalActivity.class);
-                    Bundle SMbundle = new Bundle();
-                    SMbundle.putString("tnum", tn);
-                    smast_intent.putExtras(SMbundle);
-                    startActivity(smast_intent);
-                }
-    }
+                Intent smast_intent = new Intent(TeleopScoutActivity.this, FinalActivity.class);
+                Bundle SMbundle = new Bundle();
+                SMbundle.putString("tnum", tn);
+                smast_intent.putExtras(SMbundle);
+                startActivity(smast_intent);
+            }
+}
     });
 
     chkBox_PU_Cargo_floor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -226,9 +223,14 @@ public class TeleopScoutActivity extends Activity {
         if (buttonView.isChecked()) {
             Log.w(TAG,"Climbed is checked.");
             Climbed = true;
+            radio_Zero.setChecked(false);
+            radio_Zero.setClickable(false);
         } else {  //not checked
             Log.w(TAG,"Climbed is unchecked.");
             Climbed = false;
+            radio_Zero.setClickable(true);
+            radio_Zero.setChecked(true);
+            HangarLev = "";
         }
     }
     });
@@ -327,7 +329,6 @@ public class TeleopScoutActivity extends Activity {
         Pearadox.Match_Data.setTele_Climbed(Climbed);
         Pearadox.Match_Data.setTele_HangarLevel(HangarLev);
         Pearadox.Match_Data.setTele_num_Penalties(num_Penalties);
-
         // **
         Pearadox.Match_Data.setTele_comment(teleComment);
     }
@@ -365,6 +366,30 @@ public class TeleopScoutActivity extends Activity {
         }
         pfDevice_DBReference.child(key).child("phase").setValue(phase);
     }
+
+    public boolean PreReqs () {
+        Log.w(TAG, "@@@  PreReqs  @@@  " + HangarLev + "  " + HangarLev.length());
+        if (chk_Climbed.isChecked()) {
+            if (HangarLev.length() > 3) {
+                return true;
+            } else {
+                Toast toast = Toast.makeText(getBaseContext(), "\n\n*** Climb was checked - Specify Hangar Level  ***\n", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+                return false;
+            }
+        } else {  // Climb NOT checked
+            if (!HangarLev.equals("None")) {
+                Toast toast = Toast.makeText(getBaseContext(), "\n\n*** Climb was NOT checked - Specify Hangar Level 'None'  ***\n", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+                return false;
+            }
+            return false;
+        }
+    }
+
+
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
