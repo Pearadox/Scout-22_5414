@@ -40,8 +40,8 @@ public class TeleopScoutActivity extends Activity {
 
     String TAG = "TeleopScoutActivity";      // This CLASS name
     /* Header Sect. */  TextView txt_dev, txt_stud, txt_match, txt_tnum;
-    /* P/U Sect. */     CheckBox chkBox_PU_Cargo_floor, chkBox_CargoTerminal, chkBox_PU_Cell_Trench, chkBox_ControlPanel, chkBox_PU_Cell_Boundary, chkBox_GotCargo_Robot;
-    /* Shoot Sect. */   TextView  txt_UpperHub; Button btn_UpperHubPlus, btn_UpperHubMinus;  CheckBox checkbox_OuterCloseConsistent;
+    /* P/U Sect. */     CheckBox chkBox_PU_Cargo_floor, chkBox_CargoTerminal;
+    /* Shoot Sect. */   TextView  txt_UpperHub; Button btn_UpperHubPlus, btn_UpperHubMinus; ;
                         TextView  txt_Lower; Button btn_LowerMinus, btn_LowerPlus;
     /* Climb Sect. */   CheckBox chk_Climbed;
                         CheckBox chk_LiftedBy, chk_Lifted; Spinner spinner_numRobots;
@@ -51,10 +51,7 @@ public class TeleopScoutActivity extends Activity {
                         TextView txt_Number_Penalties;
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     private FirebaseDatabase  pfDatabase;
-//    private DatabaseReference pfTeam_DBReference;
-//    private DatabaseReference pfMatch_DBReference;
     private DatabaseReference pfDevice_DBReference;
-//    private DatabaseReference pfCur_Match_DBReference;
     String key = null;
     String tn  = " ";
 
@@ -96,27 +93,23 @@ public class TeleopScoutActivity extends Activity {
         radio_One               = (RadioButton) findViewById(R.id.radio_One);
         radio_Two               = (RadioButton) findViewById(R.id.radio_Two);
         radio_Three             = (RadioButton) findViewById(R.id.radio_Three);
-        radio_Four             = (RadioButton) findViewById(R.id.radio_Four);
+        radio_Four              = (RadioButton) findViewById(R.id.radio_Four);
         btn_UpperHubPlus        = (Button) findViewById(R.id.btn_UpperHubPlus);
         btn_UpperHubMinus       = (Button) findViewById(R.id.btn_UpperHubMinus);
         btn_LowerPlus           = (Button) findViewById(R.id.btn_LowerPlus);
         btn_LowerMinus          = (Button) findViewById(R.id.btn_LowerMinus);
         txt_UpperHub            = (TextView) findViewById(R.id.txt_UpperHub);
         txt_Lower               = (TextView) findViewById(R.id.txt_Lower);
+        txt_Number_Penalties    = (TextView) findViewById(R.id.txt_Number_Penalties);
         button_Number_PenaltiesPlus = (Button) findViewById(R.id.button_Number_PenaltiesPlus);
         button_Number_PenaltiesUndo = (Button) findViewById(R.id.button_Number_PenaltiesUndo);
-        button_GoToFinalActivity  = (Button)   findViewById(R.id.button_GoToFinalActivity);
-        txt_Number_Penalties    = (TextView) findViewById(R.id.txt_Number_Penalties);
-//        spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
-//        ArrayAdapter adapter_Robs = new ArrayAdapter<String>(this, R.layout.robonum_list_layout, carry);
-//        adapter_Robs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner_numRobots.setAdapter(adapter_Robs);
-//        spinner_numRobots.setSelection(0, false);
-//        spinner_numRobots.setOnItemSelectedListener(new TeleopScoutActivity.numRobots_OnItemSelectedListener());
-//        spinner_numRobots.setVisibility(View.GONE);
+        button_GoToFinalActivity    = (Button)   findViewById(R.id.button_GoToFinalActivity);
 
         pfDatabase                = FirebaseDatabase.getInstance();            // Firebase
         pfDevice_DBReference      = pfDatabase.getReference("devices");     // List of Devices
+
+        radio_Zero.setChecked(true);        // Start with Climb radio button NONE
+        HangarLev = "None";                 //   so they HAVE to change it (ChkBx starts off)
 
         if (Pearadox.Match_Data.isAuto_mode()) {
             Toast toast = Toast.makeText(getBaseContext(), "\n\n*** No Autonomous was set - Watch for any scoring in TeleOps ***\n\n", Toast.LENGTH_LONG);
@@ -223,14 +216,14 @@ public class TeleopScoutActivity extends Activity {
         if (buttonView.isChecked()) {
             Log.w(TAG,"Climbed is checked.");
             Climbed = true;
-            radio_Zero.setChecked(false);
-            radio_Zero.setClickable(false);
+            radio_Zero.setChecked(false);       // Turn OFF 'None'
+            radio_Zero.setClickable(false);     // Make it so they can't pick 'None'
         } else {  //not checked
             Log.w(TAG,"Climbed is unchecked.");
             Climbed = false;
-            radio_Zero.setClickable(true);
-            radio_Zero.setChecked(true);
-            HangarLev = "";
+            HangarLev = "None";
+            radio_Zero.setClickable(true);      // Make it so they can pick 'None'
+            radio_Zero.setChecked(true);        // Turn OFF 'None'
         }
     }
     });
@@ -362,7 +355,7 @@ public class TeleopScoutActivity extends Activity {
                 key = "7";
                 break;
             default:                //
-                Log.w(TAG, "DEV = NULL" );
+                Log.e(TAG, "DEV = NULL" );
         }
         pfDevice_DBReference.child(key).child("phase").setValue(phase);
     }
@@ -370,7 +363,7 @@ public class TeleopScoutActivity extends Activity {
     public boolean PreReqs () {
         Log.w(TAG, "@@@  PreReqs  @@@  " + HangarLev + "  " + HangarLev.length());
         if (chk_Climbed.isChecked()) {
-            if (HangarLev.length() > 3) {
+            if (HangarLev.equals("Low") || HangarLev.equals("Mid") || HangarLev.equals("High") || HangarLev.equals("Traversal"))  {
                 return true;
             } else {
                 Toast toast = Toast.makeText(getBaseContext(), "\n\n*** Climb was checked - Specify Hangar Level  ***\n", Toast.LENGTH_LONG);
@@ -380,12 +373,13 @@ public class TeleopScoutActivity extends Activity {
             }
         } else {  // Climb NOT checked
             if (!HangarLev.equals("None")) {
-                Toast toast = Toast.makeText(getBaseContext(), "\n\n*** Climb was NOT checked - Specify Hangar Level 'None'  ***\n", Toast.LENGTH_LONG);
+                //Log.e(TAG, "NOT checked"  + HangarLev);   // *** DEBUG ***
+                Toast toast = Toast.makeText(getBaseContext(), "\n\n*** Climb was NOT checked - Set Hangar Level 'None'  ***\n", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 toast.show();
                 return false;
             }
-            return false;
+            return true;
         }
     }
 
