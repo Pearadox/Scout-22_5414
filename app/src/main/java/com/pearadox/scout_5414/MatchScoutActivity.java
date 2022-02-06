@@ -82,7 +82,7 @@ public class MatchScoutActivity extends AppCompatActivity {
     // ---- AFTER Start ----
     public boolean noAuto               = false;    // Do they have Autonomous mode?
     public boolean leftTarmac           = false;    // Did they leave Tarmac
-    public boolean acquCargo             = false;    // Did they acquire Cargo
+    public boolean acquCargo            = false;    // Did they acquire Cargo
     private boolean CollectFloor        = false;    // Collect from Floor?
     private boolean CollectTerminal     = false;    // Collect from Terminal?
     private boolean Human               = false;    // Score by Human?

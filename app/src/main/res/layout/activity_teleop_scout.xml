@@ -75,17 +75,24 @@
             android:src="@drawable/cargo" />
 
         <CheckBox
+            android:id="@+id/checkbox_aquiredCargo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Acquired Cargo? " />
+
+        <CheckBox
             android:id="@+id/chkBox_CargoTerminal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
+            android:layout_marginLeft="10dp"
             android:text="Terminal" />
 
         <CheckBox
             android:id="@+id/chkBox_PU_Cargo_floor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:text="Floor" />
 
     </LinearLayout>
@@ -105,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0sp"
-            android:text="______Upper______ "
+            android:text="_______Scored_____________Missed______"
             android:textColor="@color/red" />
 
     </LinearLayout>
@@ -135,7 +142,7 @@
             android:layout_marginStart="55sp"
             android:layout_marginTop="0dp"
             android:text="00"
-            android:textColor="@color/red"
+            android:textColor="@color/green"
             android:textSize="16dp" />
 
         <Button
@@ -148,6 +155,31 @@
 
         <Button
             android:id="@+id/btn_UpperHubPlus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-4dp"
+            android:text="+" />
+        <TextView
+            android:id="@+id/txt_MissedUpper"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="0dp"
+            android:text="00"
+            android:textColor="@color/red"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_MissedUpperMinus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-4dp"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/btn_MissedUpperPlus"
             android:layout_width="30dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
@@ -169,7 +201,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="52sp"
-            android:text="______Lower______ "
+            android:text="_______Scored_____________Missed______"
             android:textColor="@color/magenta" />
     </LinearLayout>
 
@@ -190,7 +222,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="55sp"
             android:text="00"
-            android:textColor="@color/magenta"
+            android:textColor="@color/green"
             android:textSize="16dp" />
 
         <Button
@@ -207,15 +239,41 @@
             android:layout_marginStart="10dp"
             android:text="+" />
 
+        <TextView
+            android:id="@+id/txt_MissedLower"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="0dp"
+            android:text="00"
+            android:textColor="@color/red"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_MissedLowerMinus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/btn_MissedLowerPlus"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:text="+" />
+
     </LinearLayout>
 
 
     // ==============================================================================
+
     <LinearLayout
         android:id="@+id/lin_END"
         android:layout_width="match_parent"
         android:layout_height="40sp"
         android:layout_below="@+id/lin_Row6"
+        android:layout_marginTop="25dp"
         android:orientation="horizontal">
 
         <CheckBox
@@ -267,6 +325,7 @@
                 android:onClick="RadioClick_Hanging"
                 android:text="Mid"
                 android:textColor="@color/cyan" />
+
             <RadioButton
                 android:id="@+id/radio_Three"
                 android:layout_width="wrap_content"
@@ -274,6 +333,7 @@
                 android:onClick="RadioClick_Hanging"
                 android:text="High"
                 android:textColor="@color/cyan" />
+
             <RadioButton
                 android:id="@+id/radio_Four"
                 android:layout_width="wrap_content"
@@ -286,11 +346,13 @@
 
 
     // ==============================================================================
+
     <LinearLayout
         android:id="@+id/lin_Last"
         android:layout_width="match_parent"
         android:layout_height="65sp"
         android:layout_below="@+id/lin_END"
+        android:layout_marginTop="35dp"
         android:orientation="horizontal">
 
         <TextView

@@ -40,9 +40,9 @@ public class TeleopScoutActivity extends Activity {
 
     String TAG = "TeleopScoutActivity";      // This CLASS name
     /* Header Sect. */  TextView txt_dev, txt_stud, txt_match, txt_tnum;
-    /* P/U Sect. */     CheckBox chkBox_PU_Cargo_floor, chkBox_CargoTerminal;
-    /* Shoot Sect. */   TextView  txt_UpperHub; Button btn_UpperHubPlus, btn_UpperHubMinus; ;
-                        TextView  txt_Lower; Button btn_LowerMinus, btn_LowerPlus;
+    /* P/U Sect. */     CheckBox checkbox_aquiredCargo, chkBox_PU_Cargo_floor, chkBox_CargoTerminal;
+    /* Upper Hub */     TextView txt_UpperHub, txt_MissedUpper; Button btn_UpperHubPlus, btn_UpperHubMinus, btn_MissedUpperMinus, btn_MissedUpperPlus;
+    /* Lower Hub */     TextView txt_Lower, txt_MissedLower; Button btn_LowerMinus, btn_LowerPlus, btn_MissedLowerMinus, btn_MissedLowerPlus;
     /* Climb Sect. */   CheckBox chk_Climbed;
                         CheckBox chk_LiftedBy, chk_Lifted; Spinner spinner_numRobots;
                         RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_Zero, radio_One, radio_Two, radio_Three, radio_Four;
@@ -58,10 +58,13 @@ public class TeleopScoutActivity extends Activity {
     // ===================  TeleOps Elements for Match Scout Data object ===================
     // Declare & initialize
 
+    public boolean acquCargo        = false;        // Did they acquire Cargo
     public boolean Cargo_floor      = false;        // Did they pickup Cargo off the ground?
     public boolean Cargo_Terminal   = false;        // Did they get Cargo from Loading Station?
     public int     Low              = 0;            // # Low Goal balls
     public int     HighHub          = 0;            // # High Goal balls
+    private int    MissedLow        = 0;            // # Missed Low Goal balls
+    private int    MissedHigh       = 0;            // # Missed High Goal balls
 
     public boolean Climbed          = false;        // Did they Climb?
     public String  HangarLev        = "";           // What Level Climb  
@@ -86,6 +89,7 @@ public class TeleopScoutActivity extends Activity {
         txt_tnum.setText(tn);
 
         editText_TeleComments   = (EditText) findViewById(R.id.editText_teleComments);
+        checkbox_aquiredCargo   = (CheckBox) findViewById(R.id.checkbox_aquiredCargo);
         chkBox_PU_Cargo_floor   = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
         chkBox_CargoTerminal    = (CheckBox) findViewById(R.id.chkBox_CargoTerminal);
         chk_Climbed             = (CheckBox) findViewById(R.id.chk_Climbed);
@@ -100,6 +104,12 @@ public class TeleopScoutActivity extends Activity {
         btn_LowerMinus          = (Button) findViewById(R.id.btn_LowerMinus);
         txt_UpperHub            = (TextView) findViewById(R.id.txt_UpperHub);
         txt_Lower               = (TextView) findViewById(R.id.txt_Lower);
+        txt_MissedUpper         = (TextView) findViewById(R.id.txt_MissedUpper);
+        txt_MissedLower         = (TextView) findViewById(R.id.txt_MissedLower);
+        btn_MissedUpperPlus     = (Button) findViewById(R.id.btn_MissedUpperPlus);
+        btn_MissedUpperMinus    = (Button) findViewById(R.id.btn_MissedUpperMinus);
+        btn_MissedLowerPlus     = (Button) findViewById(R.id.btn_MissedLowerPlus);
+        btn_MissedLowerMinus    = (Button) findViewById(R.id.btn_MissedLowerMinus);
         txt_Number_Penalties    = (TextView) findViewById(R.id.txt_Number_Penalties);
         button_Number_PenaltiesPlus = (Button) findViewById(R.id.button_Number_PenaltiesPlus);
         button_Number_PenaltiesUndo = (Button) findViewById(R.id.button_Number_PenaltiesUndo);
@@ -139,10 +149,22 @@ public class TeleopScoutActivity extends Activity {
                 smast_intent.putExtras(SMbundle);
                 startActivity(smast_intent);
             }
-}
+        }
     });
 
-    chkBox_PU_Cargo_floor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkbox_aquiredCargo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.w(TAG, "checkbox_aquiredCargo Listener");
+                if (buttonView.isChecked()) {
+                    acquCargo = true;
+                } else {
+                    acquCargo = false;
+                }
+            }
+        });
+
+        chkBox_PU_Cargo_floor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
             Log.w(TAG, "chkBox_PU_Cargo_floor Listener");
@@ -188,7 +210,6 @@ public class TeleopScoutActivity extends Activity {
             }
         });
 
-
         btn_LowerPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Low++;
@@ -205,10 +226,45 @@ public class TeleopScoutActivity extends Activity {
                 txt_Lower.setText(Integer.toString(Low));
             }
         });
+//******* MISSED ***************
+        btn_MissedUpperPlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                MissedHigh++;
+                Log.w(TAG, "btn_MissedUpperPlus = " + Integer.toString(MissedHigh));      // ** DEBUG **
+                txt_MissedUpper.setText(Integer.toString(MissedHigh));    // Perform action on click
+            }
+        });
+        btn_MissedUpperMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (MissedHigh >= 1) {      // Don't go negative
+                    MissedHigh--;
+                }
+                Log.w(TAG, "btn_MissedUpperMinus = " + Integer.toString(MissedHigh));      // ** DEBUG **
+                txt_MissedUpper.setText(Integer.toString(MissedHigh));    // Perform action on click
+            }
+        });
+
+        btn_MissedLowerPlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                MissedLow++;
+                Log.w(TAG, "Bottom = " + Integer.toString(MissedLow));      // ** DEBUG **
+                txt_MissedLower.setText(Integer.toString(MissedLow));
+            }
+        });
+        btn_MissedLowerMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (MissedLow >= 1) {
+                    MissedLow--;
+                }
+                Log.w(TAG, "Bottom = " + Integer.toString(MissedLow));      // ** DEBUG **
+                txt_MissedLower.setText(Integer.toString(MissedLow));
+            }
+        });
 
 
 
-    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==
+
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==
     chk_Climbed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
     @Override
     public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
