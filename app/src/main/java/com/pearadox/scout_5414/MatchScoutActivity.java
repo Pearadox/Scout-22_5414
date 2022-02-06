@@ -560,12 +560,12 @@ public class MatchScoutActivity extends AppCompatActivity {
         Pearadox.Match_Data.setPre_cargo_carried(cargo_carried);
         Pearadox.Match_Data.setPre_startPos(startPos);
 
+        Pearadox.Match_Data.setAuto_aquCargo(acquCargo);
         Pearadox.Match_Data.setAuto_CollectFloor(CollectFloor);
         Pearadox.Match_Data.setAuto_CollectTerm(CollectTerminal);
         Pearadox.Match_Data.setAuto_Human(Human);
         Pearadox.Match_Data.setAuto_mode(noAuto);
         Pearadox.Match_Data.setAuto_leftTarmac(leftTarmac);
-        Pearadox.Match_Data.setAuto_aquCargo(acquCargo);
         Pearadox.Match_Data.setAuto_Low(Low);
         Pearadox.Match_Data.setAuto_High(High);
         Pearadox.Match_Data.setAuto_MissedLow(MissedLow);

@@ -371,10 +371,13 @@ public class TeleopScoutActivity extends Activity {
     private void storeTeleData() {
         Log.w(TAG, ">>>>  storeTeleData  <<<<");
         // New Match Data Object *** GLF 1/26/22
+        Pearadox.Match_Data.setTele_aquCargo(acquCargo);
         Pearadox.Match_Data.setTele_Cargo_term(Cargo_Terminal);
         Pearadox.Match_Data.setTele_Cargo_floor(Cargo_floor);
         Pearadox.Match_Data.setTele_Low(Low);
         Pearadox.Match_Data.setTele_High(HighHub);
+        Pearadox.Match_Data.setTele_MissedLow(MissedLow);
+        Pearadox.Match_Data.setTele_MissedHigh(MissedHigh);
         Pearadox.Match_Data.setTele_Climbed(Climbed);
         Pearadox.Match_Data.setTele_HangarLevel(HangarLev);
         Pearadox.Match_Data.setTele_num_Penalties(num_Penalties);
