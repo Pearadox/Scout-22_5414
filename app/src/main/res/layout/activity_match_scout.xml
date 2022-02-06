@@ -347,7 +347,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="Left Tarmac?" />
+            android:text="Left Tarmac? (Taxi)" />
+
+        <CheckBox
+            android:id="@+id/checkbox_aquiredCargo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Aquired Cargo? " />
 
 
     </LinearLayout>
@@ -413,11 +420,11 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/lbl_UpperHube"
+                    android:id="@+id/lbl_UpperHub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0sp"
-                    android:text="______Upper Hub______   "
+                    android:text="_______Scored_____________Missed______"
                     android:textColor="@color/red" />
 
             </LinearLayout>
@@ -439,7 +446,7 @@
                     android:layout_marginStart="0sp"
                     android:layout_marginTop="0dp"
                     android:text="00"
-                    android:textColor="@color/red"
+                    android:textColor="@color/green"
                     android:textSize="16dp" />
 
                 <Button
@@ -457,6 +464,31 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="-4dp"
                     android:text="+" />
+                <TextView
+                    android:id="@+id/txt_MissedUpper"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20sp"
+                    android:layout_marginTop="0dp"
+                    android:text="00"
+                    android:textColor="@color/red"
+                    android:textSize="16dp" />
+
+                <Button
+                    android:id="@+id/btn_MissedUpperMinus"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="-4dp"
+                    android:text="-" />
+
+                <Button
+                    android:id="@+id/btn_MissedUpperPlus"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="-4dp"
+                    android:text="+" />
 
             </LinearLayout>
 
@@ -465,23 +497,23 @@
             <LinearLayout
                 android:id="@+id/lin_Label2"
                 android:layout_width="match_parent"
-                android:layout_height="25sp"
+                android:layout_height="20sp"
                 android:layout_marginStart="10sp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/lbl_LowerHub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="_____Lower Hub____  "
+                    android:text="_______Scored_____________Missed______"
                     android:textColor="@color/magenta" />
 
                 <CheckBox
                     android:id="@+id/chkBox_HumanPlayer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
+                    android:layout_marginStart="70dp"
                     android:text="Scored by Human Player" />
 
             </LinearLayout>
@@ -503,7 +535,7 @@
                     android:layout_marginStart="0sp"
                     android:layout_marginTop="0dp"
                     android:text="00"
-                    android:textColor="@color/magenta"
+                    android:textColor="@color/green"
                     android:textSize="16dp" />
 
                 <Button
@@ -519,6 +551,31 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="10dp"
                     android:text="+" />
+
+                <TextView
+                    android:id="@+id/txt_MissedLower"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20sp"
+                    android:layout_marginTop="0dp"
+                    android:text="00"
+                    android:textColor="@color/red"
+                    android:textSize="16dp" />
+
+                <Button
+                    android:id="@+id/btn_MissedLowerMinus"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:text="-" />
+
+                <Button
+                    android:id="@+id/btn_MissedLowerPlus"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:text="+" />
+
             </LinearLayout>
 
 
@@ -578,7 +635,7 @@
         <ImageView
             android:id="@+id/imageView_PP"
             android:layout_width="100dp"
-            android:layout_height="120dp"
+            android:layout_height="130dp"
             android:layout_below="@+id/lin_Row2"
             android:contentDescription="Hub"
             android:src="@drawable/hub" />

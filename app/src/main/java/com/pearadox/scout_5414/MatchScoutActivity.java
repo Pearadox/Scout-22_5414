@@ -47,10 +47,10 @@ public class MatchScoutActivity extends AppCompatActivity {
                         EditText editTxt_Team, editTxt_Match;
     /* Pre-Match */     RadioGroup radgrp_startPiece; RadioButton radio_startNone, radio_start1, radio_start2, radio_Pick;
                         Spinner spinner_startPos;
-    /* After Start */   CheckBox checkbox_leftTarmac, checkbox_noAUTO;
+    /* After Start */   CheckBox checkbox_noAUTO, checkbox_leftTarmac, checkbox_aquiredCargo;
                         CheckBox chkBox_PU_Cargo_floor, chkBox_PU_Cargo_terminal, chkBox_HumanPlayer;
-    /* Hub */           TextView  txt_UpperHub; Button btn_UpperHubPlus, btn_UpperHubMinus;  CheckBox checkbox_OuterCloseConsistent;
-                        TextView  txt_Lower; Button btn_LowerMinus, btn_LowerPlus;
+    /* Upper Hub */     TextView txt_UpperHub, txt_MissedUpper; Button btn_UpperHubPlus, btn_UpperHubMinus, btn_MissedUpperMinus, btn_MissedUpperPlus;
+    /* Lower Hub */     TextView txt_Lower, txt_MissedLower; Button btn_LowerMinus, btn_LowerPlus, btn_MissedLowerMinus, btn_MissedLowerPlus;
     /* Last Sect. */    EditText editText_autoComment;
 
     protected Vibrator vibrate;
@@ -77,16 +77,19 @@ public class MatchScoutActivity extends AppCompatActivity {
     public String tn                    = "";       // Team #
     public int PlayerSta                = 0;        // Player Station
 
-    public int cargo_carried            = -1;       // #argo carried
+    public int cargo_carried            = -1;       // #Cargo carried
     public String  startPos             = " ";      // Start Position
     // ---- AFTER Start ----
     public boolean noAuto               = false;    // Do they have Autonomous mode?
     public boolean leftTarmac           = false;    // Did they leave Tarmac
+    public boolean acquCargo             = false;    // Did they acquire Cargo
     private boolean CollectFloor        = false;    // Collect from Floor?
     private boolean CollectTerminal     = false;    // Collect from Terminal?
     private boolean Human               = false;    // Score by Human?
     private int     Low                 = 0;        // # Low Goal balls
     private int     High                = 0;        // # High Goal balls
+    private int     MissedLow           = 0;        // # Missed Low Goal balls
+    private int     MissedHigh          = 0;        // # Missed High Goal balls
 
     /* */
     public String autoComment = " ";        // Comment
@@ -248,6 +251,7 @@ public class MatchScoutActivity extends AppCompatActivity {
 
         checkbox_noAUTO             = (CheckBox) findViewById(R.id.checkbox_noAUTO);
         checkbox_leftTarmac         = (CheckBox) findViewById(R.id.checkbox_leftTarmac);
+        checkbox_aquiredCargo       = (CheckBox) findViewById(R.id.checkbox_aquiredCargo);
         chkBox_PU_Cargo_floor       = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_floor);
         chkBox_PU_Cargo_terminal    = (CheckBox) findViewById(R.id.chkBox_PU_Cargo_terminal);
         chkBox_HumanPlayer          = (CheckBox) findViewById(R.id.chkBox_HumanPlayer);
@@ -257,6 +261,12 @@ public class MatchScoutActivity extends AppCompatActivity {
         btn_UpperHubMinus           = (Button) findViewById(R.id.btn_UpperHubMinus);
         btn_LowerPlus               = (Button) findViewById(R.id.btn_LowerPlus);
         btn_LowerMinus              = (Button) findViewById(R.id.btn_LowerMinus);
+        txt_MissedUpper             = (TextView) findViewById(R.id.txt_MissedUpper);
+        txt_MissedLower             = (TextView) findViewById(R.id.txt_MissedLower);
+        btn_MissedUpperPlus         = (Button) findViewById(R.id.btn_MissedUpperPlus);
+        btn_MissedUpperMinus        = (Button) findViewById(R.id.btn_MissedUpperMinus);
+        btn_MissedLowerPlus         = (Button) findViewById(R.id.btn_MissedLowerPlus);
+        btn_MissedLowerMinus        = (Button) findViewById(R.id.btn_MissedLowerMinus);
         button_GoToTeleopActivity = (Button) findViewById(R.id.button_GoToTeleopActivity);
         button_GoToArenaLayoutActivity = (Button) findViewById(R.id.button_GoToArenaLayoutActivity);
         final Spinner spinner_startPos = (Spinner) findViewById(R.id.spinner_startPos);
@@ -314,6 +324,18 @@ public class MatchScoutActivity extends AppCompatActivity {
             }
         });
 
+        checkbox_aquiredCargo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.w(TAG, "checkbox_aquiredCargo Listener");
+                if (buttonView.isChecked()) {
+                    acquCargo = true;
+                } else {
+                    acquCargo = false;
+                }
+            }
+        });
+
 
         chkBox_PU_Cargo_floor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
              @Override
@@ -354,7 +376,7 @@ public class MatchScoutActivity extends AppCompatActivity {
         });
 
 
-        //*****************************************************************
+//*****************************************************************
         btn_UpperHubPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 High++;
@@ -372,7 +394,6 @@ public class MatchScoutActivity extends AppCompatActivity {
             }
         });
 
-
         btn_LowerPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Low++;
@@ -387,6 +408,40 @@ public class MatchScoutActivity extends AppCompatActivity {
                 }
                 Log.w(TAG, "Bottom = " + Integer.toString(Low));      // ** DEBUG **
                 txt_Lower.setText(Integer.toString(Low));
+            }
+        });
+//******* MISSED ***************
+        btn_MissedUpperPlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                MissedHigh++;
+                Log.w(TAG, "btn_MissedUpperPlus = " + Integer.toString(MissedHigh));      // ** DEBUG **
+                txt_MissedUpper.setText(Integer.toString(MissedHigh));    // Perform action on click
+            }
+        });
+        btn_MissedUpperMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (MissedHigh >= 1) {      // Don't go negative
+                    MissedHigh--;
+                }
+                Log.w(TAG, "btn_MissedUpperMinus = " + Integer.toString(MissedHigh));      // ** DEBUG **
+                txt_MissedUpper.setText(Integer.toString(MissedHigh));    // Perform action on click
+            }
+        });
+
+        btn_MissedLowerPlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                MissedLow++;
+                Log.w(TAG, "Bottom = " + Integer.toString(MissedLow));      // ** DEBUG **
+                txt_MissedLower.setText(Integer.toString(MissedLow));
+            }
+        });
+        btn_MissedLowerMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (MissedLow >= 1) {
+                    MissedLow--;
+                }
+                Log.w(TAG, "Bottom = " + Integer.toString(MissedLow));      // ** DEBUG **
+                txt_MissedLower.setText(Integer.toString(MissedLow));
             }
         });
 
@@ -510,11 +565,11 @@ public class MatchScoutActivity extends AppCompatActivity {
         Pearadox.Match_Data.setAuto_Human(Human);
         Pearadox.Match_Data.setAuto_mode(noAuto);
         Pearadox.Match_Data.setAuto_leftTarmac(leftTarmac);
+        Pearadox.Match_Data.setAuto_aquCargo(acquCargo);
         Pearadox.Match_Data.setAuto_Low(Low);
         Pearadox.Match_Data.setAuto_High(High);
-
-        // ToDo - set all 'After Start' variables to object
-//        Pearadox.Match_Data.setSand_PU2ndPanel(PU2ndPanel);
+        Pearadox.Match_Data.setAuto_MissedLow(MissedLow);
+        Pearadox.Match_Data.setAuto_MissedHigh(MissedHigh);
 
         // --------------
         Pearadox.Match_Data.setAuto_comment(autoComment);
