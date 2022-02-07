@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,8 +8,160 @@
         android:id="@+id/imageView_MS"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/txt_GearsPlaced"
-        android:contentDescription=""
+        android:contentDescription="Arena"
         android:src="@mipmap/arena_layout" />
-</LinearLayout>
+
+    // NOTE:Start + Top numbers _MUST_ be set with K88 device - Designer does NOT work right!!
+    <Button
+        android:id="@+id/button_Red1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="440dp"
+        android:textSize="18dp"
+        android:background="@color/red"
+        android:textColor="@color/black"
+        android:text="1" />
+    <Button
+        android:id="@+id/button_Red2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="390dp"
+        android:textSize="18dp"
+        android:background="@color/red"
+        android:textColor="@color/black"
+        android:text="2" />
+    <Button
+        android:id="@+id/button_Red3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="350dp"
+        android:textSize="18dp"
+        android:background="@color/red"
+        android:textColor="@color/black"
+        android:text="3" />
+    <Button
+        android:id="@+id/button_Red4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="255dp"
+        android:layout_marginTop="325dp"
+        android:textSize="18dp"
+        android:background="@color/red"
+        android:textColor="@color/black"
+        android:text="4" />
+    <Button
+        android:id="@+id/button_Red5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="310dp"
+        android:layout_marginTop="330dp"
+        android:textSize="18dp"
+        android:background="@color/red"
+        android:textColor="@color/black"
+        android:text="5" />
+
+    <Button
+        android:id="@+id/button_Red6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="355dp"
+        android:layout_marginTop="360dp"
+        android:background="@color/red"
+        android:text="6"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
+
+
+    // ==============================================================================
+
+    <Button
+        android:id="@+id/button_Blue1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="195dp"
+        android:layout_marginTop="495dp"
+        android:background="@color/blue"
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/button_Blue2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="235dp"
+        android:layout_marginTop="520dp"
+        android:background="@color/blue"
+        android:text="2"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/button_Blue3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="520dp"
+        android:background="@color/blue"
+        android:text="3"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/button_Blue4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="335dp"
+        android:layout_marginTop="500dp"
+        android:background="@color/blue"
+        android:text="4"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/button_Blue5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="365dp"
+        android:layout_marginTop="460dp"
+        android:background="@color/blue"
+        android:text="5"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/button_Blue6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="365dp"
+        android:layout_marginTop="410dp"
+        android:background="@color/blue"
+        android:text="6"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    //*****************************************************8888
+
+    <Button
+        android:id="@+id/button_Set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:background="@color/orange"
+        android:text="Set Position" />
+
+    <TextView
+        android:id="@+id/textView_Pos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="280dp"
+        android:textSize="20dp"
+        android:textColor="@color/green"
+        android:text="0" />
+
+</RelativeLayout>

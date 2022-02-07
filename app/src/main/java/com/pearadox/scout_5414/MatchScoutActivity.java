@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Iterator;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -70,6 +71,8 @@ public class MatchScoutActivity extends AppCompatActivity {
     private DatabaseReference pfCur_Match_DBReference;
     String key = null;      // key for Devices Firebase
     ArrayAdapter<String> adapter_autostartpos;
+    private final static int MY_REQUEST_CODE = 99;
+    String tarmacPos = "";
 
     // ===================  Autonomous Elements for Match Scout Data object ===================
     // Declare & initialize
@@ -493,7 +496,7 @@ public class MatchScoutActivity extends AppCompatActivity {
                 SMbundle.putString("dev", device);              // Pass data
                 SMbundle.putString("stud", studID);             //  to activity
                 smast_intent.putExtras(SMbundle);
-                startActivity(smast_intent);
+                startActivityForResult(smast_intent, MY_REQUEST_CODE);
         }
         });
 
@@ -761,6 +764,39 @@ public class MatchScoutActivity extends AppCompatActivity {
                 .show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == ArenaLayoutActivity.class.RESULT_OK) {
+            if (requestCode == MY_REQUEST_CODE) {
+                if (data != null)
+                tarmacPos = (data.getStringExtra("value"));
+                spinner_startPos = (Spinner) findViewById(R.id.spinner_startPos);
+                switch (tarmacPos) {
+                    case ("1"):
+                        spinner_startPos.setSelection(1);
+                        break;
+                    case ("2"):
+                        spinner_startPos.setSelection(2);
+                        break;
+                    case ("3"):
+                        spinner_startPos.setSelection(3);
+                        break;
+                    case ("4"):
+                        spinner_startPos.setSelection(4);
+                        break;
+                    case ("5"):
+                        spinner_startPos.setSelection(5);
+                        break;
+                    case ("6"):
+                        spinner_startPos.setSelection(6);
+                        break;
+                    default:                //
+                        Log.d(TAG, "****  Invalid Tarmac Position  ****");
+                }
+            }
+//        }
+    }
 
 
 //###################################################################
