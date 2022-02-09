@@ -7,60 +7,131 @@
 
     <TextView
         android:id="@+id/TeleOps"
-        android:text="Final period"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/green"
-        tools:textAlignment="center"
+        android:text="Final period"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textAlignment="center" />
+        android:textColor="@color/green"
+        tools:textAlignment="center" />
 
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-    <CheckBox
-        android:id="@+id/chk_lostPart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/lin_Team"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_below="@+id/TeleOps"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="58dp"
-        android:text="Lost Parts" />
+        android:orientation="horizontal">
 
-    <CheckBox
-        android:id="@+id/chk_lostComm"
-        android:text="Lost Comms"
+    <TextView
+        android:id="@+id/txt_teamnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_alignBaseline="@+id/chk_lostPart"
-        android:layout_alignBottom="@+id/chk_lostPart"
-        android:layout_toEndOf="@+id/chk_lostPart" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/TeleOps"
+        android:text="Robot Team Number"
+        android:textColor="@color/white" />
 
+    <TextView
+        android:id="@+id/txt_robotnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green"
+        android:textSize="24sp"
+        android:text="0000" />
+    </LinearLayout>
+
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+    <LinearLayout
+        android:id="@+id/lin_CheckBoxes"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/lin_Team"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/chk_lostPart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
+            android:text="Lost Parts" />
+
+        <CheckBox
+            android:id="@+id/chk_lostComm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Lost Comms" />
+
+        <CheckBox
+            android:id="@+id/chk_tipped"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="0dp"
+            android:text="Tipped" />
+    </LinearLayout>
 
     //============ DEFENSE==============
+    <LinearLayout
+        android:id="@+id/lin_Defence"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/lin_CheckBoxes"
+        android:orientation="horizontal">
 
-    <CheckBox
-        android:id="@+id/chk_tipped"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/chk_lostPart"
-        android:layout_alignBottom="@+id/chk_lostPart"
-        android:layout_marginStart="206dp"
-        android:layout_marginBottom="0dp"
-        android:layout_toEndOf="@+id/chk_lostPart"
-        android:text="Tipped" />
 
     <TextView
         android:id="@+id/lbl_Defense"
         android:layout_width="80dp"
         android:layout_height="35dp"
-        android:layout_below="@+id/chk_lostPart"
-        android:layout_alignStart="@+id/chk_lostPart"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="00dp"
         android:text="Defense"
         android:textColor="@color/green"
         android:textSize="16sp" />
+        <RadioGroup
+            android:id="@+id/radioGroup_defense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <RadioButton
+                android:id="@+id/radioButton_def_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/radioGroup_defense"
+                android:layout_toEndOf="@+id/chk_lostPart"
+                android:layout_weight="1"
+                android:onClick="RadioClick_Defense"
+                android:text="Bad" />
+
+            <RadioButton
+                android:id="@+id/radioButton_def_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="RadioClick_Defense"
+                android:text="Avg" />
+
+            <RadioButton
+                android:id="@+id/radioButton_def_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="RadioClick_Defense"
+                android:text="Good" />
+
+            <RadioButton
+                android:id="@+id/radioButton_def_NA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="RadioClick_Defense"
+                android:text="Not Observed (None)" />
+
+        </RadioGroup>
+
+    </LinearLayout>
 
 
     <Button
@@ -73,56 +144,6 @@
         android:layout_marginBottom="24dp" />
 
 
-    <RadioGroup
-        android:id="@+id/radioGroup_defense"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignEnd="@+id/chk_block"
-        android:layout_toEndOf="@+id/lbl_Defense"
-        android:layout_alignTop="@+id/lbl_Defense"
-        android:layout_alignBottom="@+id/lbl_Defense">
-
-        <RadioButton
-            android:id="@+id/radioButton_def_bad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/radioGroup_defense"
-            android:layout_toEndOf="@+id/chkBox_final_def_gear"
-            android:layout_weight="1"
-            android:onClick="RadioClick_Defense"
-            android:text="Bad" />
-
-        <RadioButton
-            android:id="@+id/radioButton_def_avg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/radioGroup_defense"
-            android:layout_toEndOf="@+id/chkBox_final_def_gear"
-            android:layout_weight="1"
-            android:onClick="RadioClick_Defense"
-            android:text="Avg" />
-
-        <RadioButton
-            android:id="@+id/rdBtn_def_good"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/chk_block"
-            android:layout_alignTop="@+id/radioGroup_defense"
-            android:onClick="RadioClick_Defense"
-            android:text="Good" />
-
-        <RadioButton
-            android:id="@+id/rdBtn_def_NA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/chk_block"
-            android:layout_alignTop="@+id/radioGroup_defense"
-            android:onClick="RadioClick_Defense"
-            android:text="Not Observed (None)" />
-
-
-    </RadioGroup>
 
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -140,9 +161,9 @@
         android:id="@+id/scrollv_comm"
         android:layout_width="500sp"
         android:layout_height="200sp"
-        android:layout_below="@+id/radioGroup_defense"
-        android:layout_alignStart="@+id/chk_lostPart"
-        android:layout_marginTop="40dp"
+        android:layout_below="@+id/TeleOps"
+        android:layout_alignStart="@+id/TeleOps"
+        android:layout_marginTop="200dp"
         android:isScrollContainer="false">
 
         <EditText
@@ -161,26 +182,6 @@
 
     </ScrollView>
 
-
-
-    <TextView
-        android:id="@+id/txt_teamnum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/TeleOps"
-        android:text="Robot Team Number"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/txt_robotnum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/green"
-        android:textSize="24sp"
-        android:text="0000"
-        android:layout_below="@+id/TeleOps"
-        android:layout_alignStart="@+id/chk_lostComm" />
 
 
 </RelativeLayout>

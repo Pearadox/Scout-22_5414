@@ -49,7 +49,7 @@ public class FinalActivity extends Activity {
     CheckBox chk_lostPart, chk_lostComm, chk_tipped;
     Button button_Saved;
     RadioGroup radioGroup_defense;
-    RadioButton rdBtn_def_good, radioButton_def_bad;
+    RadioButton radioButton_def_bad, radioButton_def_avg, radioButton_def_good, radioButton_def_NA;
     private FirebaseDatabase pfDatabase;
     private DatabaseReference pfDevice_DBReference;
     private DatabaseReference pfMatchData_DBReference;
@@ -61,7 +61,7 @@ public class FinalActivity extends Activity {
     public boolean lost_Parts = false;                          // Did they lose parts?
     public boolean lost_Comms = false;                          // Did they lose communication?
     public boolean tipped = false;                              // Did they tipp/get tipped?
-    public String final_defense = "";                      // overall Defense?
+    public String final_defense = "";                           // overall Defense?
     public String driver = "";                                  // Driver skill
 
     public String final_studID = "";                            // set in Auto
@@ -97,15 +97,21 @@ public class FinalActivity extends Activity {
         Log.w(TAG, timeStamp);
 
         radioButton_def_bad = (RadioButton) findViewById(R.id.radioButton_def_bad);
-        rdBtn_def_good = (RadioButton) findViewById(R.id.rdBtn_def_good);
+        radioButton_def_avg = (RadioButton) findViewById(R.id.radioButton_def_avg);
+        radioButton_def_good = (RadioButton) findViewById(R.id.radioButton_def_good);
+        radioButton_def_NA = (RadioButton) findViewById(R.id.radioButton_def_NA);
         radioGroup_defense = (RadioGroup) findViewById(R.id.radioGroup_defense);
         chk_lostPart = (CheckBox) findViewById(R.id.chk_lostPart);
-        chk_lostPart.requestFocus();        // Don't let EditText mess up layout!!
+//        chk_lostPart.requestFocus();        // Don't let EditText mess up layout!!
         chk_lostComm = (CheckBox) findViewById(R.id.chk_lostComm);
         chk_tipped = (CheckBox) findViewById(R.id.chk_tipped);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
         editText_Comments.setClickable(true);
         button_Saved = (Button) findViewById(R.id.button_Saved);
+
+        radioButton_def_NA.setChecked(true);    // Default to NONE
+        final_defense = "Not Observed (None)";
+
         button_Saved.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -199,6 +205,7 @@ public class FinalActivity extends Activity {
         Pearadox.Match_Data.setFinal_lostParts(lost_Parts);
         Pearadox.Match_Data.setFinal_lostComms(lost_Comms);
         Pearadox.Match_Data.setFinal_tipped(tipped);
+        Pearadox.Match_Data.setFinal_defense(final_defense);
 
          /* */
         Pearadox.Match_Data.setFinal_dateTime(timeStamp);
@@ -238,8 +245,8 @@ public class FinalActivity extends Activity {
         Log.w(TAG, "@@ RadioClick_Scout @@");
         radioGroup_defense = (RadioGroup) findViewById(R.id.radioGroup_defense);
         int selectedId = radioGroup_defense.getCheckedRadioButtonId();
-        rdBtn_def_good = (RadioButton) findViewById(selectedId);
-        String value = rdBtn_def_good.getText().toString();
+        radioButton_def_good = (RadioButton) findViewById(selectedId);
+        String value = radioButton_def_good.getText().toString();
         Log.w(TAG, "RadioDefnse - Button '" + value + "'");
         switch (value) {
             case ("Bad"):
