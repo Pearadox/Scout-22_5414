@@ -514,7 +514,8 @@
                     android:id="@+id/chkBox_HumanPlayer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="15dp"
+                    android:textSize="11dp"
                     android:text="Scored by Human Player" />
 
             </LinearLayout>

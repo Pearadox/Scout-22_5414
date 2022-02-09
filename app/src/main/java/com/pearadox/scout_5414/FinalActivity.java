@@ -44,17 +44,14 @@ import androidx.appcompat.app.AlertDialog;
 public class FinalActivity extends Activity {
 
     String TAG = "FinalActivity";      // This CLASS name
-    TextView txt_dev, txt_stud, txt_match, txt_MyTeam, txt_robotnum;
+    TextView txt_robotnum;
     EditText editText_Comments;
-    CheckBox chk_lostPart, chk_lostComm, chk_block, chkBox_final_int_Trench;
+    CheckBox chk_lostPart, chk_lostComm, chk_tipped;
     Button button_Saved;
     RadioGroup radioGroup_defense;
     RadioButton rdBtn_def_good, radioButton_def_bad;
     private FirebaseDatabase pfDatabase;
-    private DatabaseReference pfTeam_DBReference;
-    private DatabaseReference pfMatch_DBReference;
     private DatabaseReference pfDevice_DBReference;
-    private DatabaseReference pfCur_Match_DBReference;
     private DatabaseReference pfMatchData_DBReference;
     String key = null;
     String tn = "";
@@ -63,12 +60,11 @@ public class FinalActivity extends Activity {
     // ToDo - add any remaining FINAL elements
     public boolean lost_Parts = false;                          // Did they lose parts?
     public boolean lost_Comms = false;                          // Did they lose communication?
-    public boolean final_defense_good = false;                  // Was their overall Defense Good (bad = false)?
-    public boolean final_def_Block = false;                     // Did they use Blocking Defense?
-    public boolean final_def_RocketInt;                         // Did they block the Rocket
+    public boolean tipped = false;                              // Did they tipp/get tipped?
+    public String final_defense = "";                      // overall Defense?
+    public String driver = "";                                  // Driver skill
+
     public String final_studID = "";                            // set in Auto
-    public boolean final_PowerCellDefense = false;                  // pickup PowerCell when on defense
-    public boolean final_endDefense = false;                    // last 30 seconds defense
 
 
     /* */
@@ -106,17 +102,16 @@ public class FinalActivity extends Activity {
         chk_lostPart = (CheckBox) findViewById(R.id.chk_lostPart);
         chk_lostPart.requestFocus();        // Don't let EditText mess up layout!!
         chk_lostComm = (CheckBox) findViewById(R.id.chk_lostComm);
-        chk_block = (CheckBox) findViewById(R.id.chk_block);
-        chkBox_final_int_Trench = (CheckBox) findViewById(R.id.chkBox_final_int_Trench);
+        chk_tipped = (CheckBox) findViewById(R.id.chk_tipped);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
         editText_Comments.setClickable(true);
         button_Saved = (Button) findViewById(R.id.button_Saved);
         button_Saved.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                updateDev("Saved");         // Update "traffic light" status for Scout Master
-                storeFinalData();           // Put all the Final data collected in Match object
-                Pearadox.MatchData_Saved = true;    // Set flag to show saved
+                updateDev("Saved");               // Update "traffic light" status for Scout Master
+                storeFinalData();                       // Put all the Final data collected in Match object
+                Pearadox.MatchData_Saved = true;        // Set flag to show saved
                 // ToDo - Clear all data back to original settings
 
                 finish();       // Exit
@@ -144,27 +139,25 @@ public class FinalActivity extends Activity {
             }
         });
         chk_lostPart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Log.i(TAG, "chk_lostPart Listener");
+                    if (buttonView.isChecked()) {
+                        //checked
+                        Log.i(TAG, "TextBox is checked.");
+                        lost_Parts = true;
+                        Log.d(TAG, "Lost Parts = " + lost_Parts);
+                    } else {
+                        //not checked
+                        Log.i(TAG, "TextBox is unchecked.");
+                        lost_Parts = false;
+                        Log.d(TAG, "Lost Parts = " + lost_Parts);
 
-                                                    @Override
-                                                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                                        Log.i(TAG, "chk_lostPart Listener");
-                                                        if (buttonView.isChecked()) {
-                                                            //checked
-                                                            Log.i(TAG, "TextBox is checked.");
-                                                            lost_Parts = true;
-                                                            Log.d(TAG, "Lost Parts = " + lost_Parts);
-                                                        } else {
-                                                            //not checked
-                                                            Log.i(TAG, "TextBox is unchecked.");
-                                                            lost_Parts = false;
-                                                            Log.d(TAG, "Lost Parts = " + lost_Parts);
-
-                                                        }
-                                                    }
-                                                }
+                    }
+                }
+            }
         );
         chk_lostComm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.i(TAG, "chk_lostComm Listener");
@@ -182,32 +175,16 @@ public class FinalActivity extends Activity {
             }
         }
         );
-    chk_block.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chk_tipped.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
          @Override
          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-             Log.i(TAG, "chk_block Listener");
+             Log.i(TAG, "chk_tipped Listener");
              if (buttonView.isChecked()) {
-                 //checked
-                 Log.i(TAG, "chk_block is checked.");
-                 final_def_Block = true;
-             } else {
-                 //not checked
-                 Log.i(TAG, "chk_block is unchecked.");
-                 final_def_Block = false;
-             }
-         }
-     }
-    );
-        chkBox_final_int_Trench.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-         @Override
-         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-             Log.i(TAG, "chkBox_final_int_Trench Listener");
-             if (buttonView.isChecked()) {
-                 Log.i(TAG, "Rocket is checked.");  //checked
-                 final_def_RocketInt = true;
+                 Log.i(TAG, "Tipped is checked.");  //checked
+                 tipped = true;
              } else {       //not checked
-                 Log.i(TAG, "Rocket is unchecked.");
-                 final_def_RocketInt = false;
+                 Log.i(TAG, "Tipped is unchecked.");
+                 tipped = false;
              }
          }
      }
@@ -221,6 +198,7 @@ public class FinalActivity extends Activity {
         Log.w(TAG, timeStamp + " is the current date and time.");
         Pearadox.Match_Data.setFinal_lostParts(lost_Parts);
         Pearadox.Match_Data.setFinal_lostComms(lost_Comms);
+        Pearadox.Match_Data.setFinal_tipped(tipped);
 
          /* */
         Pearadox.Match_Data.setFinal_dateTime(timeStamp);
@@ -263,12 +241,25 @@ public class FinalActivity extends Activity {
         rdBtn_def_good = (RadioButton) findViewById(selectedId);
         String value = rdBtn_def_good.getText().toString();
         Log.w(TAG, "RadioDefnse - Button '" + value + "'");
-        if (value.equals("Good")) { 	    // Match?
-            Log.w(TAG, "Good Defense");
-            final_defense_good = true;
-        } else {                               // Pit
-            Log.w(TAG, "Bad Defense");
-            final_defense_good = false;
+        switch (value) {
+            case ("Bad"):
+                Log.w(TAG, "Bad Defense");
+                final_defense = "Bad";
+                break;
+            case ("Avg"):
+                Log.w(TAG, "Avg Defense");
+                final_defense = "Avg";
+                break;
+            case ("Good"):
+                Log.w(TAG, "Good Defense");
+                final_defense = "Good";
+                break;
+            case ("Not Observed (None)"):
+                Log.w(TAG, "Not Observed (None)");
+                final_defense = "Not Observed (None)";
+                break;
+            default:
+                Log.e(TAG, "*** Invalide Defense setting ***");
         }
     }
 

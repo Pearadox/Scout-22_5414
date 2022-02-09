@@ -457,13 +457,13 @@ public class MatchScoutActivity extends AppCompatActivity {
 
             } else {        // It's OK - Match has started
 
-                Log.e(TAG, "*** TeleOps - #Cells=" + cargo_carried + "  Start=" + spinner_startPos.getSelectedItemPosition());
-                // ToDo - check to see if ALL required fields entered (Start-pos, cells, ....)
+                Log.e(TAG, "*** TeleOps - #Cargo=" + cargo_carried + "  Start=" + spinner_startPos.getSelectedItemPosition());
+                // ToDo - check to see if ALL required fields entered (Start-pos, cargo, ....)
                     if ((noAuto==false) &&
                             ((cargo_carried < ZERO)  ||
                             (spinner_startPos.getSelectedItemPosition() == 0))) {  //Required fields
 
-                        Toast.makeText(getBaseContext(), "\t*** Select _ALL_ required fields!  ***\n Starting Position, # Cells ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(), "\t*** Select _ALL_ required fields!  ***\n Starting Position, # Cargo ", Toast.LENGTH_LONG).show();
                         if (spinner_startPos.getSelectedItemPosition() == 0) {
                             spinner_startPos.performClick();
                         }

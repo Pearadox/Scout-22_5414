@@ -37,8 +37,18 @@
         android:layout_toEndOf="@+id/chk_lostPart" />
 
 
-
     //============ DEFENSE==============
+
+    <CheckBox
+        android:id="@+id/chk_tipped"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/chk_lostPart"
+        android:layout_alignBottom="@+id/chk_lostPart"
+        android:layout_marginStart="206dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/chk_lostPart"
+        android:text="Tipped" />
 
     <TextView
         android:id="@+id/lbl_Defense"
@@ -47,38 +57,11 @@
         android:layout_below="@+id/chk_lostPart"
         android:layout_alignStart="@+id/chk_lostPart"
         android:layout_marginTop="70dp"
-        android:text="Defense(s)"
+        android:text="Defense"
         android:textColor="@color/green"
         android:textSize="16sp" />
 
-    <CheckBox
-        android:id="@+id/chkBox_final_int_Trench"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lbl_Defense"
-        android:text="Trench Interference" />
 
-    <CheckBox
-        android:id="@+id/chk_block"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/chk_lostComm"
-        android:layout_alignBottom="@+id/chkBox_final_int_Trench"
-        android:text="Blocking under SG" />
-
-
-<!--    <CheckBox-->
-<!--        android:id="@+id/chk_whatever"-->
-<!--        android:text=" XX"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="68dp"-->
-<!--        android:layout_alignBaseline="@+id/chk_lostComm"-->
-<!--        android:layout_alignBottom="@+id/chk_lostComm"-->
-<!--        android:layout_toEndOf="@+id/chk_lostComm"-->
-<!--        android:focusable="false"-->
-<!--        android:clickable="false"-->
-<!--        android:visibility="invisible" />-->
 
     <Button
         android:text="SAVE"
@@ -88,6 +71,58 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="24dp" />
+
+
+    <RadioGroup
+        android:id="@+id/radioGroup_defense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignEnd="@+id/chk_block"
+        android:layout_toEndOf="@+id/lbl_Defense"
+        android:layout_alignTop="@+id/lbl_Defense"
+        android:layout_alignBottom="@+id/lbl_Defense">
+
+        <RadioButton
+            android:id="@+id/radioButton_def_bad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/radioGroup_defense"
+            android:layout_toEndOf="@+id/chkBox_final_def_gear"
+            android:layout_weight="1"
+            android:onClick="RadioClick_Defense"
+            android:text="Bad" />
+
+        <RadioButton
+            android:id="@+id/radioButton_def_avg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/radioGroup_defense"
+            android:layout_toEndOf="@+id/chkBox_final_def_gear"
+            android:layout_weight="1"
+            android:onClick="RadioClick_Defense"
+            android:text="Avg" />
+
+        <RadioButton
+            android:id="@+id/rdBtn_def_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/chk_block"
+            android:layout_alignTop="@+id/radioGroup_defense"
+            android:onClick="RadioClick_Defense"
+            android:text="Good" />
+
+        <RadioButton
+            android:id="@+id/rdBtn_def_NA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/chk_block"
+            android:layout_alignTop="@+id/radioGroup_defense"
+            android:onClick="RadioClick_Defense"
+            android:text="Not Observed (None)" />
+
+
+    </RadioGroup>
 
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -105,9 +140,9 @@
         android:id="@+id/scrollv_comm"
         android:layout_width="500sp"
         android:layout_height="200sp"
-        android:layout_alignStart="@+id/chkBox_final_int_Trench"
-        android:layout_below="@+id/chkBox_final_int_Trench"
-        android:layout_marginTop="29dp"
+        android:layout_below="@+id/radioGroup_defense"
+        android:layout_alignStart="@+id/chk_lostPart"
+        android:layout_marginTop="40dp"
         android:isScrollContainer="false">
 
         <EditText
@@ -126,37 +161,6 @@
 
     </ScrollView>
 
-
-    <RadioGroup
-        android:id="@+id/radioGroup_defense"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignEnd="@+id/chk_block"
-        android:layout_toEndOf="@+id/lbl_Defense"
-        android:layout_alignTop="@+id/lbl_Defense"
-        android:layout_alignBottom="@+id/lbl_Defense">
-
-        <RadioButton
-            android:id="@+id/rdBtn_def_good"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/chk_block"
-            android:layout_alignTop="@+id/radioGroup_defense"
-            android:onClick="RadioClick_Defense"
-            android:text="Good" />
-
-        <RadioButton
-            android:id="@+id/radioButton_def_bad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/radioGroup_defense"
-            android:layout_toEndOf="@+id/chkBox_final_def_gear"
-            android:layout_weight="1"
-            android:onClick="RadioClick_Defense"
-            android:text="Bad" />
-
-    </RadioGroup>
 
 
     <TextView

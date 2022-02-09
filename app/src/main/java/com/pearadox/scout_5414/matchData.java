@@ -44,6 +44,7 @@ public class matchData implements Serializable {
     // ============= Final  ================
     private boolean final_lostParts;         // Did they lose parts
     private boolean final_lostComms;         // Did they lose communication
+    private boolean final_tipped;           // Did they tip/get tipped?
     private String  final_driver;            // Driver Skill
     private String  final_defense;           // Their overall Defense
     /*=============================================================================*/
@@ -56,7 +57,7 @@ public class matchData implements Serializable {
 //  Constructor
 
 
-    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_aquCargo, boolean auto_CollectFloor, boolean auto_CollectTerm, boolean auto_Human, int auto_Low, int auto_High, int auto_MissedLow, int auto_MissedHigh, String auto_comment, boolean tele_aquCargo, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, int tele_MissedLow, int tele_MissedHigh, boolean tele_Climbed, String tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, String final_driver, String final_defense, String final_comment, String final_studID, String final_dateTime) {
+    public matchData(String match, String team_num, int pre_cargo_carried, String pre_startPos, int pre_PlayerSta, boolean auto_mode, boolean auto_leftTarmac, boolean auto_aquCargo, boolean auto_CollectFloor, boolean auto_CollectTerm, boolean auto_Human, int auto_Low, int auto_High, int auto_MissedLow, int auto_MissedHigh, String auto_comment, boolean tele_aquCargo, boolean tele_Cargo_floor, boolean tele_Cargo_term, int tele_Low, int tele_High, int tele_MissedLow, int tele_MissedHigh, boolean tele_Climbed, String tele_HangarLevel, int tele_num_Penalties, String tele_comment, boolean final_lostParts, boolean final_lostComms, boolean final_tipped, String final_driver, String final_defense, String final_comment, String final_studID, String final_dateTime) {
         this.match = match;
         this.team_num = team_num;
         this.pre_cargo_carried = pre_cargo_carried;
@@ -86,6 +87,7 @@ public class matchData implements Serializable {
         this.tele_comment = tele_comment;
         this.final_lostParts = final_lostParts;
         this.final_lostComms = final_lostComms;
+        this.final_tipped = final_tipped;
         this.final_driver = final_driver;
         this.final_defense = final_defense;
         this.final_comment = final_comment;
@@ -339,6 +341,14 @@ public matchData() {
 
     public void setFinal_lostComms(boolean final_lostComms) {
         this.final_lostComms = final_lostComms;
+    }
+
+    public boolean isFinal_tipped() {
+        return final_tipped;
+    }
+
+    public void setFinal_tipped(boolean final_tipped) {
+        this.final_tipped = final_tipped;
     }
 
     public String getFinal_driver() {
