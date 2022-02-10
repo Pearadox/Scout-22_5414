@@ -85,21 +85,17 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/lbl_leftSectorLine"
+            android:id="@+id/lbl_leftTarmac"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/lbl_Autonomous"
-            android:layout_alignParentStart="true"
-            android:text="Left Sector Line"
+            android:text="Left Tarmac"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/txt_auto_leftSectorLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/lbl_leftSectorLine"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/lbl_leftSectorLine"
             android:textColor="@color/red"
             tools:text="00" />
 
@@ -123,8 +119,8 @@
             android:id="@+id/lbl_StartPos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:text="Start Position"
+            android:layout_marginStart="35dp"
+            android:text="____Start Position____"
             android:textColor="@color/white" />
 
         <TextView
@@ -132,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:text="Player Station"
+            android:text="_Player Station_"
             android:textColor="@color/white" />
     </LinearLayout>
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -142,17 +138,17 @@
     // PowerCell
 
     <ImageView
-        android:id="@+id/img_Ss_PowerCell"
+        android:id="@+id/img_Cargo"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_below="@+id/lin_SsStart"
         android:layout_alignParentStart="true"
         android:layout_marginTop="11dp"
-        android:contentDescription="Switch"
+        android:contentDescription="Cargo"
         android:src="@drawable/cargo" />
 
     <LinearLayout
-        android:id="@+id/lin_AutoSwitch"
+        android:id="@+id/lbl_Line2"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="45dp"
@@ -164,26 +160,26 @@
             android:id="@+id/txt_StartingBalls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="7dp"
             android:textColor="@color/red"
-            tools:text=" ⁰00  ¹00  ²00  ³00" />
+            tools:text="Load: ⁰00  ¹00" />
 
         <TextView
-            android:id="@+id/lbl_L_Lm_M_Rm_R_NS"
+            android:id="@+id/lbl_Start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="120dp"
-            android:layout_marginTop="7dp"
-            android:text=" L   Lm  M   Rm  R   NS"
+            android:layout_marginTop="0dp"
+            android:text=" 1   2   3   4   5   6   NS"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/lbl_Pos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="0dp"
             android:text=" 1    2    3"
             android:textColor="@color/white" />
 
@@ -193,37 +189,38 @@
     //
 
     <LinearLayout
-        android:id="@+id/lin_AutoScale"
+        android:id="@+id/lbl_Line3"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_below="@+id/lin_AutoSwitch"
+        android:layout_below="@+id/lbl_Line2"
         android:layout_marginTop="1sp"
-        android:layout_alignStart="@id/lin_AutoSwitch"
+        android:layout_alignStart="@id/lbl_Line2"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/img_Ss_Hatch_Panel"-->
-        <!--            android:layout_width="30dp"-->
-        <!--            android:layout_height="30dp"-->
-        <!--            android:layout_alignParentStart="true"-->
-        <!--            android:contentDescription="Hatch"-->
-        <!--            android:src="@drawable/hatch_panel" />-->
-
         <TextView
-            android:id="@+id/txt_Ss_PowerCellScored"
+            android:id="@+id/txt_Auto_CargoScored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="-46dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="-5dp"
             android:textColor="@color/red"
-            tools:text=" ⚪00   U00  L00  F00" />
+            tools:text="⚪00   U00  " />
+
+        <TextView
+            android:id="@+id/txt_Auto_CargoMissed"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/red"
+            tools:text="⚪L00  U00 " />
 
         <TextView
             android:id="@+id/txt_StartPositions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="110dp"
+            android:layout_marginStart="85dp"
             android:layout_marginTop="-5dp"
             android:text="11  22   33   44   55  66"
             android:textColor="@color/red" />
@@ -232,7 +229,7 @@
             android:id="@+id/txt_Pos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="-5dp"
             android:text="11  22  33"
             android:textColor="@color/red" />
@@ -245,12 +242,12 @@
         android:id="@+id/lin_PickUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lin_AutoScale"
+        android:layout_below="@+id/lbl_Line3"
         android:layout_marginTop="1sp"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/lbl_2ndPiece"
+            android:id="@+id/lbl_Pickup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="00dp"
@@ -261,7 +258,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="⚪Fl="
+            android:text="⚪F="
             android:textColor="@color/cyan" />
 
         <TextView
@@ -273,68 +270,21 @@
             android:textColor="@color/red" />
 
         <TextView
-            android:id="@+id/lbl_AutonTrench"
+            android:id="@+id/lbl_AutonTerminal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Tr="
+            android:text="T="
             android:textColor="@color/cyan" />
 
         <TextView
-            android:id="@+id/txt_AutonTrench"
+            android:id="@+id/txt_AutonTerminal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="0"
             android:textColor="@color/red" />
 
-        <TextView
-            android:id="@+id/lbl_AutonControlP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="CP="
-            android:textColor="@color/cyan" />
-
-        <TextView
-            android:id="@+id/txt_AutonControlP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="0"
-            android:textColor="@color/red" />
-
-        <TextView
-            android:id="@+id/lbl_AutonBoundary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="B="
-            android:textColor="@color/cyan" />
-
-        <TextView
-            android:id="@+id/txt_AutonBoundary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="0"
-            android:textColor="@color/red" />
-
-        <TextView
-            android:id="@+id/lbl_AutonRobot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="R="
-            android:textColor="@color/cyan" />
-
-        <TextView
-            android:id="@+id/txt_AutonURobot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="0"
-            android:textColor="@color/red" />
 
     </LinearLayout>
 
@@ -365,7 +315,7 @@
             android:id="@+id/lbl_Low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="█ = Low"
+            android:text="█ = Lower"
             android:textColor="@color/red"
             android:textSize="16sp" />
 
@@ -374,34 +324,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="█ = Under"
+            android:text="█ = Upper"
             android:textColor="@color/brightblue"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/lbl_Line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="█ = Line"
-            android:textColor="@color/darkgreen"
-            android:textSize="16sp" />
-        <TextView
-            android:id="@+id/lbl_Front"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="█ = Front"
-            android:textColor="@color/purple"
-            android:textSize="16sp" />
-        <TextView
-            android:id="@+id/lbl_Back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="█ = Back"
-            android:textColor="@color/orange"
-            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -461,7 +387,7 @@
 
     <LinearLayout
 
-        android:id="@+id/lin_TelePlatform"
+        android:id="@+id/lin_TeleLine1"
         android:layout_width="match_parent"
         android:layout_height="30sp"
         android:layout_below="@+id/lbl_Tele"
@@ -469,28 +395,46 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/img_Tele_PowerCell"
+            android:id="@+id/img_Tele_Cargo"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignTop="@+id/lbl_Ss_PowerCell"
-            android:layout_alignParentStart="true"
             android:contentDescription="Switch"
             android:src="@drawable/cargo" />
 
         <TextView
-            android:id="@+id/txt_Tele_PowerCellScored"
+            android:id="@+id/txt_Tele_CargoScored"
             android:layout_width="wrap_content"
-            android:layout_height="46dp"
+            android:layout_height="36dp"
             android:layout_marginStart="10dp"
             android:textColor="@color/yellow"
-            tools:text=" ⚪00  U00  L00  F00  B00" />
+            tools:text="⚪L00  U00 " />
+
+        <TextView
+            android:id="@+id/txt_Tele_CargoMissed"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/yellow"
+            tools:text="⊗L00  U00 " />
+
+    </LinearLayout>
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    <LinearLayout
+        android:id="@+id/lin_TeleLine2"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/lin_TeleLine1"
+        android:layout_marginTop="4sp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/lbl_TeleFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:text="P/U⚪ Fl="
+            android:text="P/U⚪ F="
             android:textColor="@color/white" />
 
         <TextView
@@ -502,79 +446,15 @@
             android:textColor="@color/yellow" />
 
         <TextView
-            android:id="@+id/lbl_TelePlaSta"
+            android:id="@+id/lbl_TeleTerminal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="LS="
+            android:text="T="
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/txt_TelePlaSta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="0"
-            android:textColor="@color/yellow" />
-
-        <TextView
-            android:id="@+id/lbl_TeleTrench"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Tr="
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_TeleTrench"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="0"
-            android:textColor="@color/yellow" />
-
-        <TextView
-            android:id="@+id/lbl_TeleCP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="CP="
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_TeleCP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="0"
-            android:textColor="@color/yellow" />
-
-        <TextView
-            android:id="@+id/lbl_TeleBoundary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="B="
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_TeleBoundary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="0"
-            android:textColor="@color/yellow" />
-
-        <TextView
-            android:id="@+id/lbl_TeleRobot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="R="
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_TeleRobot"
+            android:id="@+id/txt_TeleTerminal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -582,105 +462,6 @@
             android:textColor="@color/yellow" />
 
 
-
-    </LinearLayout>
-
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-    <LinearLayout
-        android:id="@+id/lin_TeleHatch"
-        android:layout_width="match_parent"
-        android:layout_height="30sp"
-        android:layout_below="@+id/lin_TelePlatform"
-        android:layout_marginTop="4sp"
-        android:orientation="horizontal">
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/img_Tele_Hatch_Panel"-->
-        <!--            android:layout_width="30dp"-->
-        <!--            android:layout_height="30dp"-->
-        <!--            android:layout_alignParentStart="true"-->
-        <!--            android:contentDescription="Hatch"-->
-        <!--            android:src="@drawable/hatch_panel" />-->
-
-        <TextView
-            android:id="@+id/lbl_TeleCPSpin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:text="☢  Spn="
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_TeleCPSpin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="0"
-            android:textColor="@color/yellow" />
-
-        <TextView
-            android:id="@+id/lbl_TeleCPColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="Clr="
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_TeleCPColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="0"
-            android:textColor="@color/yellow" />
-
-        <TextView
-            android:id="@+id/lbl_TeleClimb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:text="Climb="
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_TeleClimb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:textColor="@color/yellow"
-            tools:text=" 00 " />
-
-        <TextView
-            android:id="@+id/lbl_TelePark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Park="
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_TelePark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:textColor="@color/yellow"
-            tools:text=" 00 " />
-        <TextView
-            android:id="@+id/lbl_TeleBalanced"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Balance="
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_TeleBalanced"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:textColor="@color/yellow"
-            tools:text=" 00 " />
 
     </LinearLayout>
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -708,71 +489,42 @@
         android:id="@+id/lin_Climb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lin_TeleHatch"
+        android:layout_below="@+id/lin_TeleLine2"
         android:layout_marginTop="4sp"
         android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lbl_TeleClimb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:text="Climb="
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/txt_TeleClimb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/yellow"
+            tools:text=" 00 " />
 
         <TextView
             android:id="@+id/lbl_Hang_End"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:text="End Hang"
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/txt_HabLvl"
+            android:id="@+id/txt_HangLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="⁰00 ¹00 ²00 ³00"
+            android:text="⁰00 ¹00 ²00 ³00 ⁴00"
             android:textColor="@color/yellow" />
 
-        <TextView
-            android:id="@+id/lbl_Lift1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:text="Lift 1"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_Lift1NUM"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginLeft="5dp"
-            android:text="0"
-            android:textColor="@color/yellow" />
-
-        <TextView
-            android:id="@+id/lbl_Lift2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="   2"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_Lift2NUM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="0"
-            android:textColor="@color/yellow" />
-
-        <TextView
-            android:id="@+id/lbl_WasLifted"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:text="Was Lifted"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_WasLiftedNUM"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginLeft="5dp"
-            android:text="0"
-            android:textColor="@color/yellow" />
 
     </LinearLayout>
 

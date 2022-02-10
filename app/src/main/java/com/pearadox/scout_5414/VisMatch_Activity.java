@@ -41,14 +41,13 @@ public class VisMatch_Activity extends AppCompatActivity {
     String underScore = new String(new char[60]).replace("\0", "_");  // string of 'x' underscores
     String matches = "";  String match_id = "";
     TextView txt_team, txt_teamName, txt_NumMatches, txt_Matches;
-    TextView txt_auto_leftSectorLine, txt_StartingBalls, txt_noAuton, txt_Ss_PowerCellScored;
-    TextView txt_Tele_PowerCellScored;
-    TextView txt_HabLvl, txt_Lift1NUM, txt_Lift2NUM, txt_WasLiftedNUM;
-    TextView txt_AutonFloor, txt_AutonTrench, txt_AutonControlP, txt_AutonBoundary , txt_AutonURobot;
-    TextView txt_TeleFloor, txt_TelePlaSta, txt_TeleTrench, txt_TeleCP, txt_TeleBoundary, txt_TeleRobot;
-    TextView txt_TeleCPSpin, txt_TeleCPColor;
-    TextView txt_TeleClimb, txt_TelePark, txt_TeleBalance;
-    // ToDo - TextViews for PowerCell/Panels 2nd & 3rd
+    TextView txt_auto_leftSectorLine, txt_StartingBalls, txt_noAuton;
+    TextView txt_Auto_CargoScored, txt_Auto_CargoMissed;
+    TextView txt_Tele_CargoScored, txt_Tele_CargoMissed;
+    TextView txt_HangLevel;
+    TextView txt_AutonFloor, txt_AutonTerminal;
+    TextView txt_TeleFloor, txt_TeleTerminal;
+    TextView txt_TeleClimb;
     /* Comment Boxes */     TextView txt_AutoComments, txt_TeleComments, txt_FinalComments;
     TextView txt_StartPositions;
     TextView txt_Pos;
@@ -56,15 +55,15 @@ public class VisMatch_Activity extends AppCompatActivity {
             {"ALL","Last","Last 2","Last 3","Last 4","Last 5"};
     StackedBarChart teleBarChart; StackedBarChart autonBarChart;
     //----------------------------------
-    int numleftSectorLine = 0; int numleftSectorLine2 = 0; int noAuton = 0; int precellsCarried = 0; int precell_0 = 0; int precell_1 = 0; int precell_2 = 0; int precell_3 = 0;
-    int auto_B1 = 0; int auto_B2 = 0; int auto_B3 = 0; int auto_B4 = 0; int auto_B5 = 0; int auto_B6 = 0;
+    int numleftSectorLine = 0; int noAuton = 0; int precellsCarried = 0; int precell_0 = 0; int precell_1 = 0;
+    int auto_B1 = 0; int auto_B2 = 0; int auto_B3 = 0; int auto_B4 = 0; int auto_B5 = 0; int auto_B6 = 0;  int auto_B7 = 0;
     // NOTE: _ALL_ external mentions of Playere Sta. (PS) were changed to Loading Sta. (LS) so as to NOT be confused with Player Control Sta. (Driver)
     int auto_Ps1 = 0; int auto_Ps2 = 0; int auto_Ps3 = 0;
-    int auton_Floor= 0; int auton_Trench = 0; int auton_ControlP = 0; int auton_Boundary = 0; int auton_Robot = 0;
+    int auton_Floor= 0; int auton_Terminal = 0; int auton_ControlP = 0; int auton_Boundary = 0; int auton_Robot = 0;
     int tele_PowerCellFloor = 0; int tele_PowerCellPlasta = 0; int tele_PowerCellTrench = 0; int tele_PowerCellCP = 0; int tele_PowerCellBoundary = 0; int tele_PowerCellRobot = 0;
     int tele_CPSpin = 0; int tele_CPColor = 0;
     int tele_Climb = 0; int tele_Park = 0; int tele_Balance = 0;
-    int climbH0= 0; int climbH1 = 0; int climbH2 = 0; int climbH3 = 0; int lift1Num = 0; int liftedNum = 0;
+    int climbH0= 0; int climbH1 = 0; int climbH2 = 0; int climbH3 = 0;  int climbH4 = 0;
     int auto_Low = 0; int auto_HighClose = 0; int auto_HighLine = 0; int auto_HighFrontCP =0;
     int Tele_Low = 0; int Tele_HighClose = 0; int Tele_HighLine = 0; int Tele_HighFrontCP = 0;  int Tele_HighBackCP = 0;
     int TpanL1 = 0; int TpanL2 = 0; int TpanL3 = 0;
@@ -108,37 +107,24 @@ public class VisMatch_Activity extends AppCompatActivity {
         /*  Auto  */
         txt_auto_leftSectorLine = (TextView) findViewById(R.id.txt_auto_leftSectorLine);
 //        txt_Ss_leftSectorLine2 = (TextView) findViewById(R.id.txt_Ss_leftSectorLine2);
-        txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
+        txt_HangLevel = (TextView) findViewById(R.id.txt_HangLevel);
         txt_noAuton = (TextView) findViewById(R.id.txt_noAuton);
         txt_StartingBalls = (TextView) findViewById(R.id.txt_StartingBalls);
-        txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
+        txt_Auto_CargoScored = (TextView) findViewById(R.id.txt_Auto_CargoScored);
+        txt_Auto_CargoMissed = (TextView) findViewById(R.id.txt_Auto_CargoMissed);
         txt_AutonFloor = (TextView) findViewById(R.id.txt_AutonFloor);
-        txt_AutonTrench = (TextView) findViewById(R.id.txt_AutonTrench);
-        txt_AutonControlP = (TextView) findViewById(R.id.txt_AutonControlP);
-        txt_AutonBoundary = (TextView) findViewById(R.id.txt_AutonBoundary);
-        txt_AutonURobot = (TextView) findViewById(R.id.txt_AutonURobot);
+        txt_AutonTerminal = (TextView) findViewById(R.id.txt_AutonTerminal);
         txt_TeleFloor = (TextView) findViewById(R.id.txt_TeleFloor);
-        txt_TelePlaSta = (TextView) findViewById(R.id.txt_TelePlaSta);
-        txt_TeleTrench = (TextView) findViewById(R.id.txt_TeleTrench);
-        txt_TeleCP = (TextView) findViewById(R.id.txt_TeleCP);
-        txt_TeleBoundary = (TextView) findViewById(R.id.txt_TeleBoundary);
-        txt_TeleRobot = (TextView) findViewById(R.id.txt_TeleRobot);
 
-        txt_TeleCPSpin = (TextView) findViewById(R.id.txt_TeleCPSpin);
-        txt_TeleCPColor = (TextView) findViewById(R.id.txt_TeleCPColor);
         txt_TeleClimb = (TextView) findViewById(R.id.txt_TeleClimb);
-        txt_TelePark = (TextView) findViewById(R.id.txt_TelePark);
-        txt_TeleBalance = (TextView) findViewById(R.id.txt_TeleBalanced);
         txt_StartPositions = (TextView) findViewById(R.id.txt_StartPositions);
         txt_Pos = (TextView) findViewById(R.id.txt_Pos);
         txt_AutoComments = (TextView) findViewById(R.id.txt_AutoComments);
         txt_AutoComments.setTextSize(12);       // normal
         txt_AutoComments.setMovementMethod(new ScrollingMovementMethod());
         /*  Tele  */
-        txt_Tele_PowerCellScored = (TextView) findViewById(R.id.txt_Tele_PowerCellScored);
-        txt_Lift1NUM = (TextView) findViewById(R.id.txt_Lift1NUM);
-        txt_Lift2NUM = (TextView) findViewById(R.id.txt_Lift2NUM);
-        txt_WasLiftedNUM = (TextView) findViewById(R.id.txt_WasLiftedNUM);
+        txt_Tele_CargoScored = (TextView) findViewById(R.id.txt_Tele_CargoScored);
+        txt_Tele_CargoMissed = (TextView) findViewById(R.id.txt_Tele_CargoMissed);
         teleBarChart = (StackedBarChart) findViewById(R.id.teleBarChart);
         autonBarChart = (StackedBarChart) findViewById(R.id.autonBarChart);
         txt_TeleComments = (TextView) findViewById(R.id.txt_TeleComments);
@@ -191,23 +177,26 @@ public class VisMatch_Activity extends AppCompatActivity {
 //            Log.w(TAG, "Start Pos. " + pos);
             // ToDo - new Start Pos
             switch (pos) {
-                case "Left":
+                case "1":
                     auto_B1++;
                     break;
-                case ("Left Middle"):
+                case ("2"):
                     auto_B2++;
                     break;
-                case "Middle":
+                case "3":
                     auto_B3++;
                     break;
-                case "Right Middle":
+                case "4":
                     auto_B4++;
                     break;
-                case "Right":
+                case "5":
                     auto_B5++;
                     break;
-                case "No Show":
+                case "6":
                     auto_B6++;
+                    break;
+                case "No Show":
+                    auto_B7++;
                     break;
                 default:                //
                     Log.e(TAG, "***  Invalid Start Position!!!  ***" );
@@ -236,10 +225,6 @@ public class VisMatch_Activity extends AppCompatActivity {
                     precell_0++;
                 case 1:
                     precell_1++;
-                case 2:
-                    precell_2++;
-                case 3:
-                    precell_3++;
             }
 
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -268,6 +253,26 @@ public class VisMatch_Activity extends AppCompatActivity {
 
             if (match_inst.isTele_Climbed()) {
                 tele_Climb++;
+            }
+            String Hang = match_inst.getTele_HangarLevel();
+            switch (Hang) {
+                case "None":
+                    climbH0++;
+                    break;
+                case "Low":
+                    climbH1++;
+                    break;
+                case ("Mid"):
+                    climbH2++;
+                    break;
+                case "High":
+                    climbH3++;
+                    break;
+                case "Traversal":
+                    climbH4++;
+                    break;
+                default:                //
+                    Log.e(TAG, "***  Invalid Hangar Level!!!  ***" );
             }
 
 
@@ -313,59 +318,39 @@ public class VisMatch_Activity extends AppCompatActivity {
 // ======  Now start displaying all the data we collected  ========
 // ================================================================
         txt_auto_leftSectorLine = (TextView) findViewById(R.id.txt_auto_leftSectorLine);
-        txt_HabLvl = (TextView) findViewById(R.id.txt_HabLvl);
+        txt_HangLevel = (TextView) findViewById(R.id.txt_HangLevel);
         txt_noAuton = (TextView) findViewById(R.id.txt_noAuton);
         txt_StartingBalls = (TextView) findViewById(R.id.txt_StartingBalls);
-        txt_Ss_PowerCellScored = (TextView) findViewById(R.id.txt_Ss_PowerCellScored);
-        txt_Tele_PowerCellScored = (TextView) findViewById(R.id.txt_Tele_PowerCellScored);
+        txt_Auto_CargoScored = (TextView) findViewById(R.id.txt_Auto_CargoScored);
+        txt_Tele_CargoScored = (TextView) findViewById(R.id.txt_Tele_CargoScored);
         txt_AutonFloor = (TextView) findViewById(R.id.txt_AutonFloor);
-        txt_AutonTrench = (TextView) findViewById(R.id.txt_AutonTrench);
-        txt_AutonControlP = (TextView) findViewById(R.id.txt_AutonControlP);
-        txt_AutonBoundary = (TextView) findViewById(R.id.txt_AutonBoundary);
-        txt_AutonURobot = (TextView) findViewById(R.id.txt_AutonURobot);
+        txt_AutonTerminal = (TextView) findViewById(R.id.txt_AutonTerminal);
         txt_TeleFloor = (TextView) findViewById(R.id.txt_TeleFloor);
-        txt_TelePlaSta = (TextView) findViewById(R.id.txt_TelePlaSta);
-        txt_TeleTrench = (TextView) findViewById(R.id.txt_TeleTrench);
-        txt_TeleCP = (TextView) findViewById(R.id.txt_TeleCP);
-        txt_TeleBoundary = (TextView) findViewById(R.id.txt_TeleBoundary);
-        txt_TeleRobot = (TextView) findViewById(R.id.txt_TeleRobot);
-        txt_TeleCPSpin = (TextView) findViewById(R.id.txt_TeleCPSpin);
-        txt_TeleCPColor = (TextView) findViewById(R.id.txt_TeleCPColor);
+        txt_TeleTerminal = (TextView) findViewById(R.id.txt_TeleTerminal);
         txt_TeleClimb = (TextView) findViewById(R.id.txt_TeleClimb);
-        txt_TelePark = (TextView) findViewById(R.id.txt_TelePark);
-        txt_TeleBalance = (TextView) findViewById(R.id.txt_TeleBalanced);
         txt_StartPositions = (TextView) findViewById(R.id.txt_StartPositions);
         txt_Pos = (TextView) findViewById(R.id.txt_Pos);
         txt_Matches.setText(matches);
         txt_auto_leftSectorLine.setText(String.valueOf(numleftSectorLine));
         txt_noAuton.setText(String.valueOf(noAuton));
-//        Log.w(TAG, "Ratio of Placed to Attempted Gears in Auto = " + auto_SwCubesPlaced + "/" + auto_SwCubesAttempted);
-        String carScored = "⚪" + String.format("%-3s", auto_Low) + " U" + String.format("%-3s", auto_HighClose) + " L" + String.format("%-3s", auto_HighLine) + " F" + String.format("%-3s", auto_HighFrontCP);
-        txt_Ss_PowerCellScored.setText(carScored);
-        String startingBalls = "⁰" + String.format("%-3s", precell_0) + " ¹" + String.format("%-3s", precell_1) + " ²" + String.format("%-3s", precell_2) + " ³" + String.format("%-3s", precell_3);
+
+        String carScored = "⚪L" + String.format("%-3s", auto_Low) + " U" + String.format("%-3s", auto_HighClose) ;
+        txt_Auto_CargoScored.setText(carScored);
+        String Amiss = "⊗"+ "L00 U00";
+        txt_Auto_CargoMissed.setText(Amiss);
+        String startingBalls = "Load: ⁰" + String.format("%-3s", precell_0) + " ¹" + String.format("%-3s", precell_1);
         txt_StartingBalls.setText(startingBalls);
-        String telePowerCell = "⚪" + String.format("%-3s", Tele_Low) + " U" + String.format("%-3s", Tele_HighClose) + " L" + String.format("%-3s", Tele_HighLine) + " F" + String.format("%-3s", Tele_HighFrontCP) + " B" + String.format("%-3s", Tele_HighBackCP);
-        txt_Tele_PowerCellScored.setText(telePowerCell);
-        String teleHatchPanel = "¹" + String.valueOf(TpanL1) + " ²" + String.valueOf(TpanL2) + " ³" + String.valueOf(TpanL3);
-        String HabEnd = "⁰"+ String.valueOf(climbH0) + " ¹" + String.valueOf(climbH1) + " ²" + String.valueOf(climbH2) + " ³" + String.valueOf(climbH3);
-        txt_HabLvl.setText(HabEnd);
+        String telePowerCell = "⚪L" + String.format("%-3s", Tele_Low) + " U" + String.format("%-3s", Tele_HighClose);
+        txt_Tele_CargoScored.setText(telePowerCell);
+        String Tmiss = "⊗"+ "L00 U00";
+        String HabEnd = "⁰"+ String.valueOf(climbH0) + " ¹" + String.valueOf(climbH1) + " ²" + String.valueOf(climbH2) + " ³" + String.valueOf(climbH3)+ " ⁴" + String.valueOf(climbH4);
+        txt_HangLevel.setText(HabEnd);
         txt_AutonFloor.setText(String.valueOf(auton_Floor));
-        txt_AutonTrench.setText(String.valueOf(auton_Trench));
-        txt_AutonBoundary.setText(String.valueOf(auton_Boundary));
-        txt_AutonControlP.setText(String.valueOf(auton_ControlP));
-        txt_AutonURobot.setText(String.valueOf(auton_Robot));
+        txt_AutonTerminal.setText(String.valueOf(auton_Terminal));
         txt_TeleFloor.setText(String.valueOf(tele_PowerCellFloor));
-        txt_TelePlaSta.setText(String.valueOf(tele_PowerCellPlasta));
-        txt_TeleTrench.setText(String.valueOf(tele_PowerCellTrench));
-        txt_TeleCP.setText(String.valueOf(tele_PowerCellCP));
-        txt_TeleBoundary.setText(String.valueOf(tele_PowerCellBoundary));
-        txt_TeleRobot.setText(String.valueOf(tele_PowerCellRobot));
-        txt_TeleCPSpin.setText(String.valueOf(tele_CPSpin));
-        txt_TeleCPColor.setText(String.valueOf(tele_CPColor));
+        txt_TeleTerminal.setText(String.valueOf(tele_PowerCellPlasta));
         txt_TeleClimb.setText(String.valueOf(tele_Climb));
-        txt_TelePark.setText(String.valueOf(tele_Park));
-        txt_TeleBalance.setText(String.valueOf(tele_Balance));
-        String StartPositions = String.format("%-3s", Integer.toString(auto_B1)) + "  " + String.format("%-3s", Integer.toString(auto_B2)) + "  " + String.format("%-3s", Integer.toString(auto_B3)) + "   " + String.format("%-3s", Integer.toString(auto_B4)) + "   " + String.format("%-3s", Integer.toString(auto_B5)) + "  " + auto_B6;
+        String StartPositions = String.format("%-3s", Integer.toString(auto_B1)) + "  " + String.format("%-3s", Integer.toString(auto_B2)) + "  " + String.format("%-3s", Integer.toString(auto_B3)) + "   " + String.format("%-3s", Integer.toString(auto_B4)) + "   " + String.format("%-3s", Integer.toString(auto_B5)) + "  " + String.format("%-3s", Integer.toString(auto_B6)) + "  " + String.format("%-3s", Integer.toString(auto_B7));
         txt_StartPositions.setText(String.valueOf(StartPositions));
         txt_Pos.setText(String.format("%-3s", Integer.toString(auto_Ps1)) + "  " + String.format("%-3s", Integer.toString(auto_Ps2)) + "  " + String.format("%-3s", Integer.toString(auto_Ps3)));
 
@@ -373,8 +358,6 @@ public class VisMatch_Activity extends AppCompatActivity {
 
         // ==============================================
         // Display Tele elements
-        txt_Lift1NUM.setText(String.valueOf(LiftNm));
-        txt_WasLiftedNUM.setText(String.valueOf(WasLifted));
 
         txt_TeleComments.setText(tele_Comments);
 
@@ -399,26 +382,21 @@ public class VisMatch_Activity extends AppCompatActivity {
     private void init_Values() {
         noAuton = 0;
         numleftSectorLine = 0;
-        numleftSectorLine2 = 0;
-        precell_0 = 0; precell_1 = 0; precell_2 = 0; precell_3 = 0;
+        precell_0 = 0; precell_1 = 0;
         auto_Ps1 = 0;
         auto_Ps2 = 0;
         auto_Ps3 = 0;
-        auto_Low = 0; auto_HighClose = 0; auto_HighLine = 0; auto_HighFrontCP = 0;
-        Tele_Low = 0; Tele_HighClose = 0; Tele_HighLine = 0; Tele_HighFrontCP = 0;  Tele_HighBackCP = 0;
+        auto_Low = 0; auto_HighClose = 0;
+        Tele_Low = 0; Tele_HighClose = 0;
         panL1 = 0; panL2 = 0; panL3 = 0; TpanL1 = 0; TpanL2 = 0; TpanL3 = 0;
-        auton_Floor= 0; auton_Trench = 0; auton_ControlP = 0; auton_Boundary = 0; auton_Robot = 0;
+        auton_Floor= 0; auton_Terminal = 0; auton_ControlP = 0; auton_Boundary = 0; auton_Robot = 0;
         tele_PowerCellFloor = 0; tele_PowerCellPlasta = 0; tele_PowerCellTrench = 0; tele_PowerCellCP = 0; tele_PowerCellBoundary = 0; tele_PowerCellRobot = 0;
         tele_CPSpin = 0; tele_CPColor = 0;
         tele_Climb = 0; tele_Park = 0; tele_Balance = 0;
         numTeleClimbSuccess = 0;
-        lift1Num = 0;
-        liftedNum = 0;
-        LiftNm = 0;
-        WasLifted = 0;
-        auto_B1 = 0; auto_B2 = 0; auto_B3 = 0; auto_B4 = 0; auto_B5 = 0; auto_B6 = 0;
+        auto_B1 = 0; auto_B2 = 0; auto_B3 = 0; auto_B4 = 0; auto_B5 = 0; auto_B6 = 0;   int auto_B7 = 0;
         auto_Ps1 = 0; auto_Ps2 = 0; auto_Ps3 = 0;
-        climbH0 = 0; climbH1 = 0; climbH2 = 0; climbH3 = 0;
+        climbH0 = 0; climbH1 = 0; climbH2 = 0; climbH3 = 0;  int climbH4 = 0;
         auto_Comments = "";
         tele_Comments = "";
         final_Comments = "";
