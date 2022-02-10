@@ -1005,9 +1005,9 @@ public class Visualizer_Activity extends AppCompatActivity {
                     A_misslowNum = A_misslowNum + match_inst.getAuto_MissedLow();
                     A_misshighNum = A_misshighNum + match_inst.getAuto_MissedHigh();
                     Float BatAvg;
-                    DecimalFormat df = new DecimalFormat("#.##");
+                    Log.e(TAG, "AutoLow   Score" + A_lowNum  +"  Miss" +A_misslowNum);
                     if ((A_lowNum + A_misslowNum) > 0) {
-                        BatAvg = Float.valueOf(A_lowNum / (A_lowNum + A_misslowNum));  // Made ÷ Attempts
+                        BatAvg = (float)A_lowNum / (A_lowNum + A_misslowNum);  // Made ÷ Attempts
                         Log.e(TAG, "Low%= " + BatAvg);
                         if (BatAvg == 1.0f) {
                             A_LowPercent = "1.0";
@@ -1019,7 +1019,7 @@ public class Visualizer_Activity extends AppCompatActivity {
                         A_LowPercent = ".00";
                     }
                     if ((A_highNum + A_misshighNum) > 0) {
-                        BatAvg = Float.valueOf(A_highNum / (A_highNum + A_misshighNum));  // Made ÷ Attempts
+                        BatAvg = (float)A_highNum / (A_highNum + A_misshighNum);  // Made ÷ Attempts
                         if (BatAvg == 1.0f) {
                             A_HiPercent = "1.0";
                         } else {
@@ -1034,21 +1034,27 @@ public class Visualizer_Activity extends AppCompatActivity {
                     T_highNum = T_highNum + match_inst.getTele_High();
                     T_misslowNum = T_misslowNum + match_inst.getTele_MissedLow();
                     T_misshighNum = T_misshighNum + match_inst.getTele_MissedHigh();
-                    if ((T_lowNum + T_misslowNum) > 0) {
-                        BatAvg = Float.valueOf(T_lowNum / (T_lowNum + T_misslowNum));  // Made ÷ Attempts
-                        Log.e(TAG, "TeleLow%= " + BatAvg);
-                        if (BatAvg == 1.0f) {
+                    Log.e(TAG, "TeleLow   Score" + T_lowNum  +"  Miss" +T_misslowNum);
+                    if ((T_lowNum + T_misslowNum) > 0) {        // avoid divide by 0
+                        BatAvg = (float)T_lowNum / (T_lowNum + T_misslowNum);  // Made ÷ Attempts
+                        if (BatAvg == 1.0f) {       // all this to get 3 digits!!
                             T_LowPercent = "1.0";
                         } else {
+                            Log.e(TAG, "TeleLow%= " + BatAvg +" L" + T_lowNum  +"  M" +T_misslowNum);
                             T_LowPercent = String.format("%.2f", BatAvg);
                         }
                     } else {
-                        Log.e(TAG, "TeleLowAvg=.000");
+                        Log.e(TAG, "Default TeleLow = .000");
                         T_LowPercent = ".00";
                     }
                     if ((T_highNum + T_misshighNum) > 0) {
-                        BatAvg = Float.valueOf(A_highNum / (T_highNum + T_misshighNum));  // Made ÷ Attempts
-                        T_HiPercent = String.format("%.2f", BatAvg);
+                        BatAvg = (float)T_highNum / (T_highNum + T_misshighNum);    // Made ÷ Attempts
+                        if (BatAvg == 1.0f) {
+                            T_HiPercent = "1.0";
+                        } else {
+                            Log.e(TAG, "TeleHigh%= " + BatAvg+" L" + T_highNum  +"  M" +T_misshighNum);
+                            T_HiPercent = String.format("%.2f", BatAvg);
+                        }
                     } else {
                         T_HiPercent = ".00";
                     }
@@ -1057,6 +1063,9 @@ public class Visualizer_Activity extends AppCompatActivity {
                         climbed++;
                     }
                     switch (match_inst.getTele_HangarLevel()) {
+                        case "None":
+                            Hang0++;
+                            break;
                         case "Low":
                             Hang1++;
                             break;
@@ -1142,7 +1151,7 @@ public class Visualizer_Activity extends AppCompatActivity {
             case 0:
                 txt_MatchesR1.setText(String.valueOf(numMDs));
                 tbl_event1R1.setText("Auto" + " \n" + "Tele");
-                tbl_rate1R1.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent );
+                tbl_rate1R1.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2R1.setText("Hang" + "\n" + "Final");
                 tbl_rate2R1.setText(" ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
                 break;
@@ -1151,21 +1160,21 @@ public class Visualizer_Activity extends AppCompatActivity {
                 tbl_event1R2.setText("Auto" + " \n" + "Tele");
                 tbl_rate1R2.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2R2.setText("Hang" + "\n" + "Final");
-                tbl_rate2R2.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4  );
+                tbl_rate2R2.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
                 break;
             case 2:
                 txt_MatchesR3.setText(String.valueOf(numMDs));
                 tbl_event1R3.setText("Auto" + " \n" + "Tele");
                 tbl_rate1R3.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2R3.setText("Hang" + "\n" + "Final");
-                tbl_rate2R3.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4 );
+                tbl_rate2R3.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
                 break;
             case 3:
                 txt_MatchesB1.setText(String.valueOf(numMDs));
                 tbl_event1B1.setText("Auto" + " \n" + "Tele");
                 tbl_rate1B1.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2B1.setText("Hang" + "\n" + "Final");
-                tbl_rate2B1.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4 );
+                tbl_rate2B1.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
                 break;
             case 4:
                 txt_MatchesB2.setText(String.valueOf(numMDs));
@@ -1179,7 +1188,7 @@ public class Visualizer_Activity extends AppCompatActivity {
                 tbl_event1B3.setText("Auto" + " \n" + "Tele");
                 tbl_rate1B3.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2B3.setText("Hang" + "\n" + "Final");
-                tbl_rate2B3.setText(" ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4  );
+                tbl_rate2B3.setText(" ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
                 break;
             default:                // ????
                 Log.e(TAG, "*** Error - bad NDX  ***");
