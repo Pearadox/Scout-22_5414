@@ -41,12 +41,12 @@ public class VisMatch_Activity extends AppCompatActivity {
     String underScore = new String(new char[60]).replace("\0", "_");  // string of 'x' underscores
     String matches = "";  String match_id = "";
     TextView txt_team, txt_teamName, txt_NumMatches, txt_Matches;
-    TextView txt_auto_leftSectorLine, txt_StartingBalls, txt_noAuton;
+    TextView txt_auto_left, txt_StartingBalls, txt_noAuton;
     TextView txt_Auto_CargoScored, txt_Auto_CargoMissed;
     TextView txt_Tele_CargoScored, txt_Tele_CargoMissed;
     TextView txt_HangLevel;
-    TextView txt_AutonFloor, txt_AutonTerminal;
-    TextView txt_TeleFloor, txt_TeleTerminal;
+    TextView txt_AutonFloor, txt_AutonTerminal, txt_AutonAcquired;
+    TextView txt_TeleFloor, txt_TeleTerminal, txt_TeleAcquired;
     TextView txt_TeleClimb;
     /* Comment Boxes */     TextView txt_AutoComments, txt_TeleComments, txt_FinalComments;
     TextView txt_StartPositions;
@@ -59,22 +59,20 @@ public class VisMatch_Activity extends AppCompatActivity {
     int auto_B1 = 0; int auto_B2 = 0; int auto_B3 = 0; int auto_B4 = 0; int auto_B5 = 0; int auto_B6 = 0;  int auto_B7 = 0;
     // NOTE: _ALL_ external mentions of Playere Sta. (PS) were changed to Loading Sta. (LS) so as to NOT be confused with Player Control Sta. (Driver)
     int auto_Ps1 = 0; int auto_Ps2 = 0; int auto_Ps3 = 0;
-    int auton_Floor= 0; int auton_Terminal = 0; int auton_ControlP = 0; int auton_Boundary = 0; int auton_Robot = 0;
-    int tele_PowerCellFloor = 0; int tele_PowerCellPlasta = 0; int tele_PowerCellTrench = 0; int tele_PowerCellCP = 0; int tele_PowerCellBoundary = 0; int tele_PowerCellRobot = 0;
-    int tele_CPSpin = 0; int tele_CPColor = 0;
-    int tele_Climb = 0; int tele_Park = 0; int tele_Balance = 0;
+    int auton_Floor= 0; int auton_Terminal = 0; int auton_Acquire =0;
+    int tele_CargoFloor = 0; int tele_CargoTerminal = 0; int tele_Acquire =0;
+    int tele_Climb = 0;
     int climbH0= 0; int climbH1 = 0; int climbH2 = 0; int climbH3 = 0;  int climbH4 = 0;
-    int auto_Low = 0; int auto_HighClose = 0; int auto_HighLine = 0; int auto_HighFrontCP =0;
-    int Tele_Low = 0; int Tele_HighClose = 0; int Tele_HighLine = 0; int Tele_HighFrontCP = 0;  int Tele_HighBackCP = 0;
-    int TpanL1 = 0; int TpanL2 = 0; int TpanL3 = 0;
-    int numMatches = 0; int panL1 = 0; int panL2 = 0; int panL3 = 0;
+    int auto_Low = 0; int auto_High = 0; int auto_LowMiss = 0; int Auto_HighMiss = 0;
+    int Tele_Low = 0; int Tele_High = 0; int Tele_LowMiss = 0; int Tele_HighMiss = 0;
+    int numMatches = 0;
     String auto_Comments = "";
     //----------------------------------
-    int numTeleClimbSuccess = 0; int LiftNm = 0; int WasLifted = 0;
+    int numTeleClimbSuccess = 0;
     String tele_Comments = "";
     //----------------------------------
-    int final_LostComm = 0; int final_LostParts = 0; int final_DefGood = 0; int final_TrenchInt = 0;  int final_DefDump = 0; int final_NumPen = 0;
-    TextView txt_final_LostComm, txt_final_LostParts, txt_final_DefGood, txt_final_TrenchInt, txt_final_DefDump, txt_final_NumPen;
+    int final_LostComm = 0; int final_LostParts = 0; int final_DefBad = 0;  int final_DefAvg = 0; int final_DefGood = 0; int final_DefNA = 0; int final_NumPen = 0;
+    TextView txt_final_LostComm, txt_final_LostParts, txt_final_Defenses, txt_final_NumPen;
     String final_Comments = "";
     //----------------------------------
 
@@ -105,8 +103,7 @@ public class VisMatch_Activity extends AppCompatActivity {
         spinner_numMatches.setSelection(0, false);
         spinner_numMatches.setOnItemSelectedListener(new numMatches_OnItemSelectedListener());
         /*  Auto  */
-        txt_auto_leftSectorLine = (TextView) findViewById(R.id.txt_auto_leftSectorLine);
-//        txt_Ss_leftSectorLine2 = (TextView) findViewById(R.id.txt_Ss_leftSectorLine2);
+        txt_auto_left = (TextView) findViewById(R.id.txt_auto_left);
         txt_HangLevel = (TextView) findViewById(R.id.txt_HangLevel);
         txt_noAuton = (TextView) findViewById(R.id.txt_noAuton);
         txt_StartingBalls = (TextView) findViewById(R.id.txt_StartingBalls);
@@ -114,19 +111,21 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_Auto_CargoMissed = (TextView) findViewById(R.id.txt_Auto_CargoMissed);
         txt_AutonFloor = (TextView) findViewById(R.id.txt_AutonFloor);
         txt_AutonTerminal = (TextView) findViewById(R.id.txt_AutonTerminal);
-        txt_TeleFloor = (TextView) findViewById(R.id.txt_TeleFloor);
+        txt_AutonAcquired = (TextView) findViewById(R.id.txt_AutonAcquired);
 
-        txt_TeleClimb = (TextView) findViewById(R.id.txt_TeleClimb);
         txt_StartPositions = (TextView) findViewById(R.id.txt_StartPositions);
         txt_Pos = (TextView) findViewById(R.id.txt_Pos);
+        autonBarChart = (StackedBarChart) findViewById(R.id.autonBarChart);
         txt_AutoComments = (TextView) findViewById(R.id.txt_AutoComments);
         txt_AutoComments.setTextSize(12);       // normal
         txt_AutoComments.setMovementMethod(new ScrollingMovementMethod());
         /*  Tele  */
         txt_Tele_CargoScored = (TextView) findViewById(R.id.txt_Tele_CargoScored);
         txt_Tele_CargoMissed = (TextView) findViewById(R.id.txt_Tele_CargoMissed);
+        txt_TeleFloor = (TextView) findViewById(R.id.txt_TeleFloor);
+        txt_TeleClimb = (TextView) findViewById(R.id.txt_TeleClimb);
+        txt_TeleAcquired = (TextView) findViewById(R.id.txt_TeleAcquired);
         teleBarChart = (StackedBarChart) findViewById(R.id.teleBarChart);
-        autonBarChart = (StackedBarChart) findViewById(R.id.autonBarChart);
         txt_TeleComments = (TextView) findViewById(R.id.txt_TeleComments);
         txt_TeleComments.setMovementMethod(new ScrollingMovementMethod());
 
@@ -136,9 +135,7 @@ public class VisMatch_Activity extends AppCompatActivity {
 
         txt_final_LostComm = (TextView) findViewById(R.id.txt_final_LostComm);
         txt_final_LostParts = (TextView) findViewById(R.id.txt_final_LostParts);
-        txt_final_DefGood = (TextView) findViewById(R.id.txt_final_DefGood);
-        txt_final_TrenchInt = (TextView) findViewById(R.id.txt_final_TrenchInt);
-        txt_final_DefDump = (TextView) findViewById(R.id.txt_final_DefDump);
+        txt_final_Defenses = (TextView) findViewById(R.id.txt_final_Defenses);
         txt_final_NumPen = (TextView) findViewById(R.id.txt_final_NumPen);
 
         txt_team.setText(tnum);
@@ -234,21 +231,30 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isAuto_CollectFloor()) {
                 auton_Floor++;
             }
-
-
+            if (match_inst.isAuto_CollectTerm()) {
+                auton_Terminal++;
+            }
+            if (match_inst.isAuto_aquCargo()) {
+                auton_Acquire++;
+            }
 
             auto_Low = auto_Low + match_inst.getAuto_Low();
-
-            AutoStackBar(i+1, match_id, (float)auto_Low , (float)auto_HighClose, (float)auto_HighLine, (float)auto_HighFrontCP);
+            auto_High = auto_High + match_inst.getAuto_High();
+            AutoStackBar(i+1, match_id, (float)auto_Low , (float)auto_High);
+            auto_LowMiss = auto_LowMiss + match_inst.getAuto_MissedLow();
+            Auto_HighMiss = Auto_HighMiss + match_inst.getTele_MissedHigh();
 
             // *************************************************
             // ******************** TeleOps ********************
             // *************************************************
             if (match_inst.isTele_Cargo_floor()){
-                tele_PowerCellFloor++;
+                tele_CargoFloor++;
             }
             if (match_inst.isTele_Cargo_term()) {
-                tele_PowerCellPlasta++;
+                tele_CargoTerminal++;
+            }
+            if (match_inst.isTele_aquCargo()) {
+                tele_Acquire++;
             }
 
             if (match_inst.isTele_Climbed()) {
@@ -275,11 +281,12 @@ public class VisMatch_Activity extends AppCompatActivity {
                     Log.e(TAG, "***  Invalid Hangar Level!!!  ***" );
             }
 
-
             Tele_Low = Tele_Low + match_inst.getTele_Low();
-            Tele_HighClose = Tele_HighClose + match_inst.getTele_High();
+            Tele_High = Tele_High + match_inst.getTele_High();
+            Tele_LowMiss = Tele_LowMiss + match_inst.getAuto_MissedLow();
+            Tele_HighMiss = Tele_HighMiss + match_inst.getTele_MissedHigh();
 
-            TeleStackBar(i+1, match_id, (float)Tele_Low , (float)Tele_HighClose);
+            TeleStackBar(i+1, match_id, (float)Tele_Low , (float)Tele_High);
 
             if (match_inst.getTele_comment().length() > 1) {
                 tele_Comments = tele_Comments + match_inst.getMatch() + "-" + match_inst.getTele_comment() + "\n" + underScore  + "\n" ;
@@ -293,16 +300,24 @@ public class VisMatch_Activity extends AppCompatActivity {
             if (match_inst.isFinal_lostParts()) {
                 final_LostParts++;
             }
-//            if (match_inst.isFinal_defense_good()) {
-//                final_DefGood++;
-//            }
-            // Todo Rocket Int.
-//            if (match_inst.isFinal_def_TrenchInt()) {
-//                final_TrenchInt++;
-//            }
-//            if (match_inst.isFinal_def_Block()) {
-//                final_DefDump++;
-//            }
+            String defend = (match_inst.getFinal_defense());
+            switch (defend) {
+                case "Bad":
+                    final_DefBad++;
+                    break;
+                case "Avg":
+                    final_DefAvg++;
+                    break;
+                case "Good":
+                    final_DefGood++;
+                    break;
+                case "Not Observed (None)":
+                    final_DefNA++;
+                    break;
+                default:                //
+                    Log.e(TAG, "***  Invalid Defense!!!  ***" );
+            }
+
             if (match_inst.getTele_num_Penalties() > 0) {
                 final_NumPen = final_NumPen + match_inst.getTele_num_Penalties();
             }
@@ -317,7 +332,7 @@ public class VisMatch_Activity extends AppCompatActivity {
 // ================================================================
 // ======  Now start displaying all the data we collected  ========
 // ================================================================
-        txt_auto_leftSectorLine = (TextView) findViewById(R.id.txt_auto_leftSectorLine);
+        txt_auto_left = (TextView) findViewById(R.id.txt_auto_left);
         txt_HangLevel = (TextView) findViewById(R.id.txt_HangLevel);
         txt_noAuton = (TextView) findViewById(R.id.txt_noAuton);
         txt_StartingBalls = (TextView) findViewById(R.id.txt_StartingBalls);
@@ -325,32 +340,25 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_Tele_CargoScored = (TextView) findViewById(R.id.txt_Tele_CargoScored);
         txt_AutonFloor = (TextView) findViewById(R.id.txt_AutonFloor);
         txt_AutonTerminal = (TextView) findViewById(R.id.txt_AutonTerminal);
+        txt_AutonAcquired = (TextView) findViewById(R.id.txt_AutonAcquired);
         txt_TeleFloor = (TextView) findViewById(R.id.txt_TeleFloor);
         txt_TeleTerminal = (TextView) findViewById(R.id.txt_TeleTerminal);
         txt_TeleClimb = (TextView) findViewById(R.id.txt_TeleClimb);
         txt_StartPositions = (TextView) findViewById(R.id.txt_StartPositions);
         txt_Pos = (TextView) findViewById(R.id.txt_Pos);
         txt_Matches.setText(matches);
-        txt_auto_leftSectorLine.setText(String.valueOf(numleftSectorLine));
+        txt_auto_left.setText(String.valueOf(numleftSectorLine));
         txt_noAuton.setText(String.valueOf(noAuton));
 
-        String carScored = "⚪L" + String.format("%-3s", auto_Low) + " U" + String.format("%-3s", auto_HighClose) ;
+        String carScored = "⚪L" + String.format("%-3s", auto_Low) + " U" + String.format("%-3s", auto_High) ;
         txt_Auto_CargoScored.setText(carScored);
-        String Amiss = "⊗"+ "L00 U00";
-        txt_Auto_CargoMissed.setText(Amiss);
-        String startingBalls = "Load: ⁰" + String.format("%-3s", precell_0) + " ¹" + String.format("%-3s", precell_1);
+        txt_Auto_CargoMissed.setText("⊗"+ "L" + auto_LowMiss + " U" + Auto_HighMiss);
+        String startingBalls = "⁰" + String.format("%-3s", precell_0) + " ¹" + String.format("%-3s", precell_1);
         txt_StartingBalls.setText(startingBalls);
-        String telePowerCell = "⚪L" + String.format("%-3s", Tele_Low) + " U" + String.format("%-3s", Tele_HighClose);
-        txt_Tele_CargoScored.setText(telePowerCell);
-        String Tmiss = "⊗"+ "L00 U00";
-        String HabEnd = "⁰"+ String.valueOf(climbH0) + " ¹" + String.valueOf(climbH1) + " ²" + String.valueOf(climbH2) + " ³" + String.valueOf(climbH3)+ " ⁴" + String.valueOf(climbH4);
-        txt_HangLevel.setText(HabEnd);
         txt_AutonFloor.setText(String.valueOf(auton_Floor));
         txt_AutonTerminal.setText(String.valueOf(auton_Terminal));
-        txt_TeleFloor.setText(String.valueOf(tele_PowerCellFloor));
-        txt_TeleTerminal.setText(String.valueOf(tele_PowerCellPlasta));
-        txt_TeleClimb.setText(String.valueOf(tele_Climb));
-        String StartPositions = String.format("%-3s", Integer.toString(auto_B1)) + "  " + String.format("%-3s", Integer.toString(auto_B2)) + "  " + String.format("%-3s", Integer.toString(auto_B3)) + "   " + String.format("%-3s", Integer.toString(auto_B4)) + "   " + String.format("%-3s", Integer.toString(auto_B5)) + "  " + String.format("%-3s", Integer.toString(auto_B6)) + "  " + String.format("%-3s", Integer.toString(auto_B7));
+        txt_AutonAcquired.setText(String.valueOf(auton_Acquire));
+        String StartPositions = String.format("%-2s", Integer.toString(auto_B1)) + "  " + String.format("%-2s", Integer.toString(auto_B2)) + "  " + String.format("%-2s", Integer.toString(auto_B3)) + "   " + String.format("%-2s", Integer.toString(auto_B4)) + "   " + String.format("%-2s", Integer.toString(auto_B5)) + "  " + String.format("%-2s", Integer.toString(auto_B6)) + "  " + String.format("%-2s", Integer.toString(auto_B7));
         txt_StartPositions.setText(String.valueOf(StartPositions));
         txt_Pos.setText(String.format("%-3s", Integer.toString(auto_Ps1)) + "  " + String.format("%-3s", Integer.toString(auto_Ps2)) + "  " + String.format("%-3s", Integer.toString(auto_Ps3)));
 
@@ -358,20 +366,24 @@ public class VisMatch_Activity extends AppCompatActivity {
 
         // ==============================================
         // Display Tele elements
-
+        String telePowerCell = "⚪L" + String.format("%-3s", Tele_Low) + " U" + String.format("%-3s", Tele_High);
+        txt_Tele_CargoScored.setText(telePowerCell);
+        txt_Tele_CargoMissed.setText("⊗L"+ Tele_LowMiss + " U" + Tele_HighMiss);
+        String HabEnd = "⁰"+ String.valueOf(climbH0) + " ¹" + String.valueOf(climbH1) + " ²" + String.valueOf(climbH2) + " ³" + String.valueOf(climbH3)+ " ⁴" + String.valueOf(climbH4);
+        txt_HangLevel.setText(HabEnd);
+        txt_TeleFloor.setText(String.valueOf(tele_CargoFloor));
+        txt_TeleAcquired.setText(String.valueOf(tele_Acquire));
+        txt_TeleTerminal.setText(String.valueOf(tele_CargoTerminal));
+        txt_TeleClimb.setText(String.valueOf(tele_Climb));
         txt_TeleComments.setText(tele_Comments);
 
         // ==============================================
         // Display Final elements
         txt_final_LostComm.setText(String.valueOf(final_LostComm));
         txt_final_LostParts.setText(String.valueOf(final_LostParts));
-        txt_final_DefGood.setText(String.valueOf(final_DefGood));
-        txt_final_DefDump.setText(String.valueOf(final_DefDump));
-        txt_final_TrenchInt.setText(String.valueOf(final_TrenchInt));
+        txt_final_Defenses.setText("B=" + String.valueOf(final_DefBad) + " A=" + String.valueOf(final_DefAvg) + " G=" + String.valueOf(final_DefGood) + " NO=" + String.valueOf(final_DefNA) );
         txt_final_NumPen.setText(String.valueOf(final_NumPen));
-
         txt_FinalComments.setText(final_Comments);
-
 
         autonBarChart.startAnimation();
         teleBarChart.startAnimation();
@@ -386,13 +398,11 @@ public class VisMatch_Activity extends AppCompatActivity {
         auto_Ps1 = 0;
         auto_Ps2 = 0;
         auto_Ps3 = 0;
-        auto_Low = 0; auto_HighClose = 0;
-        Tele_Low = 0; Tele_HighClose = 0;
-        panL1 = 0; panL2 = 0; panL3 = 0; TpanL1 = 0; TpanL2 = 0; TpanL3 = 0;
-        auton_Floor= 0; auton_Terminal = 0; auton_ControlP = 0; auton_Boundary = 0; auton_Robot = 0;
-        tele_PowerCellFloor = 0; tele_PowerCellPlasta = 0; tele_PowerCellTrench = 0; tele_PowerCellCP = 0; tele_PowerCellBoundary = 0; tele_PowerCellRobot = 0;
-        tele_CPSpin = 0; tele_CPColor = 0;
-        tele_Climb = 0; tele_Park = 0; tele_Balance = 0;
+        auto_Low = 0; auto_High = 0;
+        Tele_Low = 0; Tele_High = 0;
+        auton_Floor= 0; auton_Terminal = 0; int auton_Acquire =0;
+        tele_CargoFloor = 0; tele_CargoTerminal = 0; int tele_Acquire = 0;
+        tele_Climb = 0;
         numTeleClimbSuccess = 0;
         auto_B1 = 0; auto_B2 = 0; auto_B3 = 0; auto_B4 = 0; auto_B5 = 0; auto_B6 = 0;   int auto_B7 = 0;
         auto_Ps1 = 0; auto_Ps2 = 0; auto_Ps3 = 0;
@@ -404,8 +414,6 @@ public class VisMatch_Activity extends AppCompatActivity {
         final_LostComm = 0;
         final_LostParts = 0;
         final_DefGood = 0;
-        final_TrenchInt = 0;
-        final_DefDump = 0;
         final_NumPen = 0;
         autonBarChart.clearChart();
         teleBarChart.clearChart();
@@ -545,140 +553,109 @@ public class VisMatch_Activity extends AppCompatActivity {
     }
 
 
-    private void AutoStackBar(int num, String match, float low, float under, float line, float front) {
-        Log.d(TAG, "@@@  AutoStackBar  @@@ " + num + " " + match + " " + low + " " + under + " " + front);
+    private void AutoStackBar(int num, String match, float low, float upper) {
+        Log.d(TAG, "@@@  AutoStackBar  @@@ " + num + " " + match + " " + low + " " + upper );
         StackedBarChart autonBarChart = (StackedBarChart) findViewById(R.id.autonBarChart);
 
         switch (num) {
             case 1:
                 StackedBarModel s1 = new StackedBarModel(match);
                 s1.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s1.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s1.addBar(new BarModel(line, 0xFF006400));    // Line
-                s1.addBar(new BarModel(front, 0xFF800080));    // Front
+                s1.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s1);
                 break;
             case 2:
                 StackedBarModel s2 = new StackedBarModel(match);
                 s2.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s2.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s2.addBar(new BarModel(line, 0xFF006400));   // Line
-                s2.addBar(new BarModel(front, 0xFF800080));    // Front
+                s2.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s2);
                 break;
             case 3:
                 StackedBarModel s3 = new StackedBarModel(match);
                 s3.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s3.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s3.addBar(new BarModel(line, 0xFF006400));    // Line
-                s3.addBar(new BarModel(front, 0xFF800080));    // Front
-
+                s3.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s3);
                 break;
             case 4:
                 StackedBarModel s4 = new StackedBarModel(match);
                 s4.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s4.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s4.addBar(new BarModel(line, 0xFF006400));    // Line
-                s4.addBar(new BarModel(front, 0xFF800080));    // Front
+                s4.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s4);
                 break;
             case 5:
                 StackedBarModel s5 = new StackedBarModel(match);
                 s5.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s5.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s5.addBar(new BarModel(line, 0xFF006400));    // Line
-                s5.addBar(new BarModel(front, 0xFF800080));    // Front
+                s5.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s5);
                 break;
 
             case 6:
                 StackedBarModel s6 = new StackedBarModel(match);
                 s6.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s6.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s6.addBar(new BarModel(line, 0xFF006400));    // Line
-                s6.addBar(new BarModel(front, 0xFF800080));    // Front
+                s6.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s6);
                 break;
 
             case 7:
                 StackedBarModel s7 = new StackedBarModel(match);
                 s7.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s7.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s7.addBar(new BarModel(line, 0xFF006400));    // Line
-                s7.addBar(new BarModel(front, 0xFF800080));    // Front
+                s7.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s7);
                 break;
 
             case 8:
                 StackedBarModel s8 = new StackedBarModel(match);
                 s8.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s8.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s8.addBar(new BarModel(line, 0xFF006400));    // Line
-                s8.addBar(new BarModel(front, 0xFF800080));    // Front
-                autonBarChart.addBar(s8);
+                s8.addBar(new BarModel(upper, 0xFF0000ff));    // upper
+               autonBarChart.addBar(s8);
                 break;
 
             case 9:
                 StackedBarModel s9 = new StackedBarModel(match);
                 s9.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s9.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s9.addBar(new BarModel(line, 0xFF006400));    // Line
-                s9.addBar(new BarModel(front, 0xFF800080));    // Front
+                s9.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s9);
                 break;
 
             case 10:
                 StackedBarModel s10 = new StackedBarModel(match);
                 s10.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s10.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s10.addBar(new BarModel(line, 0xFF006400));    // Line
-                s10.addBar(new BarModel(front, 0xFF800080));    // Front
+                s10.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s10);
                 break;
 
             case 11:
                 StackedBarModel s11 = new StackedBarModel(match);
                 s11.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s11.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s11.addBar(new BarModel(line, 0xFF006400));    // Line
-                s11.addBar(new BarModel(front, 0xFF800080));    // Front
+                s11.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s11);
                 break;
 
             case 12:
                 StackedBarModel s12 = new StackedBarModel(match);
                 s12.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s12.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s12.addBar(new BarModel(line, 0xFF006400));    // Line
-                s12.addBar(new BarModel(front, 0xFF800080));    // Front
-                autonBarChart.addBar(s12);
+                s12.addBar(new BarModel(upper, 0xFF0000ff));    // upper
+               autonBarChart.addBar(s12);
                 break;
 
             case 13:
                 StackedBarModel s13 = new StackedBarModel(match);
                 s13.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s13.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s13.addBar(new BarModel(line, 0xFF006400));    // Line
-                s13.addBar(new BarModel(front, 0xFF800080));    // Front
+                s13.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s13);
                 break;
 
             case 14:
                 StackedBarModel s14 = new StackedBarModel(match);
                 s14.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s14.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s14.addBar(new BarModel(line, 0xFF006400));    // Line
-                s14.addBar(new BarModel(front, 0xFF800080));    // Front
+                s14.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s14);
                 break;
 
             case 15:
                 StackedBarModel s15 = new StackedBarModel(match);
                 s15.addBar(new BarModel(low, 0xFFff0000));    // Low
-                s15.addBar(new BarModel(under, 0xFF0000ff));    // Under
-                s15.addBar(new BarModel(line, 0xFF006400));    // Line
-                s15.addBar(new BarModel(front, 0xFF800080));    // Front
+                s15.addBar(new BarModel(upper, 0xFF0000ff));    // upper
                 autonBarChart.addBar(s15);
                 break;
 

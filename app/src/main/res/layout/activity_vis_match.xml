@@ -54,6 +54,31 @@
         android:text="Very Long Team Name goes here"
         android:textColor="@color/orange" />
 
+    <TextView
+        android:id="@+id/txt_NumMatches"
+        android:layout_width="30sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@+id/lbl_Matches"
+        android:text="00"
+        android:textColor="@color/orange" />
+
+    <TextView
+        android:id="@+id/txt_Matches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_team"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="-2dp"
+        android:text="Q001 Q002 Q003 Q004 Q005 Q006 Q007 Q008 Q009 Q010 Q011 Q012 Q013 Q014 Q015 Q016"
+        android:textColor="@color/orange"
+        android:textSize="14dp"
+        android:textStyle="bold" />
+
+
     <Spinner
         android:id="@+id/spinner_numMatches"
         android:layout_width="90sp"
@@ -92,7 +117,7 @@
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/txt_auto_leftSectorLine"
+            android:id="@+id/txt_auto_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -135,12 +160,11 @@
 
 
     // ==============================================================================
-    // PowerCell
 
     <ImageView
         android:id="@+id/img_Cargo"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_below="@+id/lin_SsStart"
         android:layout_alignParentStart="true"
         android:layout_marginTop="11dp"
@@ -150,37 +174,46 @@
     <LinearLayout
         android:id="@+id/lbl_Line2"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="45dp"
+        android:layout_height="24dp"
         android:layout_below="@+id/lin_SsStart"
+        android:layout_marginStart="45dp"
         android:layout_marginTop="4sp"
         android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lbl_Load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="0dp"
+            android:text="Load:"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/txt_StartingBalls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="0dp"
             android:textColor="@color/red"
-            tools:text="Load: ⁰00  ¹00" />
+            tools:text="⁰00  ¹00" />
 
         <TextView
             android:id="@+id/lbl_Start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
+            android:layout_marginStart="110dp"
             android:layout_marginTop="0dp"
-            android:text=" 1   2   3   4   5   6   NS"
+            android:text="  1   2   3    4   5   6   NS"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/lbl_Pos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
+            android:layout_marginStart="65dp"
             android:layout_marginTop="0dp"
-            android:text=" 1    2    3"
+            android:text="1    2    3"
             android:textColor="@color/white" />
 
     </LinearLayout>
@@ -189,12 +222,42 @@
     //
 
     <LinearLayout
-        android:id="@+id/lbl_Line3"
+        android:id="@+id/lbl_Scores"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_below="@+id/lbl_Line2"
+        android:layout_marginStart="45dp"
         android:layout_marginTop="1sp"
-        android:layout_alignStart="@id/lbl_Line2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_StartPositions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="184dp"
+            android:layout_marginTop="-5dp"
+            android:text="11  22   33   44   55  66  NS"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:id="@+id/txt_Pos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="-5dp"
+            android:text="11  22  33"
+            android:textColor="@color/red" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lbl_Line3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/lbl_Scores"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0sp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -202,10 +265,10 @@
             android:id="@+id/txt_Auto_CargoScored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="-5dp"
+            android:layout_marginStart="-140dp"
+            android:layout_marginTop="0dp"
             android:textColor="@color/red"
-            tools:text="⚪00   U00  " />
+            tools:text="⚪00 U00" />
 
         <TextView
             android:id="@+id/txt_Auto_CargoMissed"
@@ -214,25 +277,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/red"
-            tools:text="⚪L00  U00 " />
-
-        <TextView
-            android:id="@+id/txt_StartPositions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="-5dp"
-            android:text="11  22   33   44   55  66"
-            android:textColor="@color/red" />
-
-        <TextView
-            android:id="@+id/txt_Pos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="-5dp"
-            android:text="11  22  33"
-            android:textColor="@color/red" />
+            tools:text="⚪L00 U00" />
 
     </LinearLayout>
 
@@ -252,14 +297,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="00dp"
             android:text="P/U From:"
-            android:textColor="@color/cyan" />
+            android:textColor="@color/white" />
         <TextView
             android:id="@+id/lbl_AutonFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="⚪F="
-            android:textColor="@color/cyan" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/txt_AutonFloor"
@@ -275,10 +320,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="T="
-            android:textColor="@color/cyan" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/txt_AutonTerminal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="0"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:id="@+id/lbl_auton_acq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Acquired ⚪"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/txt_AutonAcquired"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -424,7 +484,7 @@
     <LinearLayout
         android:id="@+id/lin_TeleLine2"
         android:layout_width="match_parent"
-        android:layout_height="30sp"
+        android:layout_height="24sp"
         android:layout_below="@+id/lin_TeleLine1"
         android:layout_marginTop="4sp"
         android:orientation="horizontal">
@@ -461,6 +521,21 @@
             android:text="0"
             android:textColor="@color/yellow" />
 
+        <TextView
+            android:id="@+id/lbl_Tele_acq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Acquired ⚪"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/txt_TeleAcquired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="0"
+            android:textColor="@color/yellow" />
 
 
     </LinearLayout>
@@ -574,7 +649,7 @@
         android:id="@+id/lbl_final_LostComm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/lbl_final_DefGood"
+        android:layout_above="@+id/lbl_final_NumPen"
         android:layout_alignEnd="@+id/txt_teamName"
         android:layout_marginEnd="12dp"
         android:text="Lost Comms"
@@ -588,7 +663,7 @@
         android:layout_alignBottom="@+id/lbl_final_LostComm"
         android:layout_marginStart="22dp"
         android:layout_toEndOf="@+id/lbl_final_LostComm"
-        android:text="2"
+        android:text="0"
         android:textColor="@color/green" />
 
     <TextView
@@ -606,75 +681,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/lbl_final_LostComm"
-        android:layout_alignStart="@+id/txt_final_DefGood"
+        android:layout_alignStart="@+id/txt_final_Defenses"
         android:layout_alignBottom="@+id/lbl_final_LostComm"
-        android:text="1"
-        android:textColor="@color/green" />
-
-    <TextView
-        android:id="@+id/lbl_final_DefGood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lbl_final_LostParts"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="2dp"
-        android:text="#'Good' Defenses"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/txt_final_DefGood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lbl_final_LostParts"
-        android:layout_marginStart="120dp"
-        android:text="5"
-        android:textColor="@color/green" />
-
-    <TextView
-        android:id="@+id/lbl_final_TrenchInt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/lbl_final_LostComm"
-        android:layout_alignTop="@+id/lbl_final_DefGood"
-        android:text="Blocked Trench"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/txt_final_TrenchInt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/lbl_final_TrenchInt"
-        android:layout_alignStart="@+id/txt_final_LostComm"
-        android:layout_alignBottom="@+id/lbl_final_TrenchInt"
-        android:text="4"
-        android:textColor="@color/green" />
-
-    <TextView
-        android:id="@+id/lbl_final_DefDump"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/lbl_final_TrenchInt"
-        android:layout_alignStart="@+id/lbl_final_LostComm"
-        android:layout_marginBottom="-42dp"
-        android:text="Blocked SG"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/txt_final_DefDump"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txt_final_TrenchInt"
-        android:layout_alignStart="@+id/txt_final_TrenchInt"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="-41dp"
-        android:text="8"
+        android:text="0"
         android:textColor="@color/green" />
 
     <TextView
         android:id="@+id/lbl_final_NumPen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_final_DefGood"
+        android:layout_below="@+id/lbl_final_LostParts"
         android:layout_marginTop="2dp"
         android:text="# Penalties"
         android:textColor="@color/white" />
@@ -684,10 +700,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/lbl_final_NumPen"
-        android:layout_alignStart="@+id/txt_final_DefGood"
+        android:layout_alignStart="@+id/txt_final_Defenses"
         android:layout_alignBottom="@+id/lbl_final_NumPen"
         android:text="9"
         android:textColor="@color/green" />
+
+    <TextView
+        android:id="@+id/lbl_final_DefGood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_final_NumPen"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="2dp"
+        android:text="Defenses"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/txt_final_Defenses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_final_NumPen"
+        android:layout_marginStart="120dp"
+        android:text="5"
+        android:textColor="@color/green" />
+
 
     //=============================================================
 
@@ -695,7 +731,7 @@
         android:id="@+id/txt_FinalComments"
         android:layout_width="500dp"
         android:layout_height="80dp"
-        android:layout_below="@+id/lbl_final_NumPen"
+        android:layout_below="@+id/lbl_final_DefGood"
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp"
         android:background="@drawable/border"
@@ -705,31 +741,6 @@
         android:text="Comments \n Line 2\n Line 3\n Line 4\n Line 5"
         android:textColor="@color/green"
         android:textSize="12dp" />
-
-    <TextView
-        android:id="@+id/txt_NumMatches"
-        android:layout_width="30sp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-
-        android:layout_marginStart="6dp"
-        android:layout_toEndOf="@+id/lbl_Matches"
-        android:text="00"
-        android:textColor="@color/orange" />
-
-    <TextView
-        android:id="@+id/txt_Matches"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lbl_team"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="-2dp"
-        android:text="Q001 Q002 Q003 Q004 Q005 Q006 Q007 Q008 Q009 Q010 Q011 Q012 Q013 Q014 Q015 Q016"
-        android:textColor="@color/orange"
-        android:textSize="14dp"
-        android:textStyle="bold" />
-
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
