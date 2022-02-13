@@ -48,6 +48,7 @@ public class VisMatch_Activity extends AppCompatActivity {
     TextView txt_AutonFloor, txt_AutonTerminal, txt_AutonAcquired;
     TextView txt_TeleFloor, txt_TeleTerminal, txt_TeleAcquired;
     TextView txt_TeleClimb;
+    TextView txt_final_Tipped;
     /* Comment Boxes */     TextView txt_AutoComments, txt_TeleComments, txt_FinalComments;
     TextView txt_StartPositions;
     TextView txt_Pos;
@@ -137,6 +138,7 @@ public class VisMatch_Activity extends AppCompatActivity {
 
         txt_final_LostComm = (TextView) findViewById(R.id.txt_final_LostComm);
         txt_final_LostParts = (TextView) findViewById(R.id.txt_final_LostParts);
+        txt_final_Tipped = (TextView) findViewById(R.id.txt_final_Tipped);
         txt_final_Defenses = (TextView) findViewById(R.id.txt_final_Defenses);
         txt_final_NumPen = (TextView) findViewById(R.id.txt_final_NumPen);
 
@@ -379,7 +381,7 @@ public class VisMatch_Activity extends AppCompatActivity {
         String StartPositions = String.format("%-2s", Integer.toString(auto_B1)) + "  " + String.format("%-2s", Integer.toString(auto_B2)) + "  " + String.format("%-2s", Integer.toString(auto_B3)) + "   " + String.format("%-2s", Integer.toString(auto_B4)) + "   " + String.format("%-2s", Integer.toString(auto_B5)) + "  " + String.format("%-2s", Integer.toString(auto_B6)) + "  " + String.format("%-2s", Integer.toString(auto_B7));
         txt_StartPositions.setText(String.valueOf(StartPositions));
         txt_Pos.setText(String.format("%-3s", Integer.toString(auto_Ps1)) + "  " + String.format("%-3s", Integer.toString(auto_Ps2)) + "  " + String.format("%-3s", Integer.toString(auto_Ps3)));
-// ToDo - add Tipped
+        txt_final_Tipped.setText(String.valueOf(final_Tipped));
         txt_AutoComments.setText(auto_Comments);
 
         // ==============================================
