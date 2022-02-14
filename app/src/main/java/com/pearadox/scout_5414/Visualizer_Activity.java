@@ -997,7 +997,7 @@ public class Visualizer_Activity extends AppCompatActivity {
                 if (mdt.matches(team)) {        // is this match data for the team we are working on?
                 Log.w(TAG, "GMFT TEAM  " + mdt);
                     numMDs++;       // increment # of MDs
-                    if (match_inst.isAuto_leftTarmac()) {      // Left SL (crossed baseline)
+                    if (match_inst.isAuto_leftTarmac()) {      // Left Tarmac
                         base++;
                     }
                     A_lowNum = A_lowNum + match_inst.getAuto_Low();
@@ -1015,7 +1015,6 @@ public class Visualizer_Activity extends AppCompatActivity {
                             A_LowPercent = String.format("%.2f", BatAvg);
                         }
                     } else {
-                        Log.e(TAG, "BatAvg=.000");
                         A_LowPercent = ".00";
                     }
                     if ((A_highNum + A_misshighNum) > 0) {
@@ -1151,44 +1150,44 @@ public class Visualizer_Activity extends AppCompatActivity {
             case 0:
                 txt_MatchesR1.setText(String.valueOf(numMDs));
                 tbl_event1R1.setText("Auto" + " \n" + "Tele");
-                tbl_rate1R1.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
+                tbl_rate1R1.setText( "◯L" + A_lowNum + " U" + A_highNum + "\uD83D\uDEAB" + "L" + A_misslowNum + " U" + A_misshighNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + "\uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2R1.setText("Hang" + "\n" + "Final");
-                tbl_rate2R1.setText(" ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
+                tbl_rate2R1.setText(" ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " b" + Def1  + " a" +Def2 + " g" + Def3 + " N" + Def4);
                 break;
             case 1:
                 txt_MatchesR2.setText(String.valueOf(numMDs));
                 tbl_event1R2.setText("Auto" + " \n" + "Tele");
-                tbl_rate1R2.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
+                tbl_rate1R2.setText( "◯L" + A_lowNum + " U" + A_highNum + "\uD83D\uDEAB" + "L" + A_misslowNum + " U" + A_misshighNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + "\uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2R2.setText("Hang" + "\n" + "Final");
-                tbl_rate2R2.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
+                tbl_rate2R2.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " b" + Def1  + " a" +Def2 + " g" + Def3 + " N" + Def4);
                 break;
             case 2:
                 txt_MatchesR3.setText(String.valueOf(numMDs));
                 tbl_event1R3.setText("Auto" + " \n" + "Tele");
-                tbl_rate1R3.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
+                tbl_rate1R3.setText( "◯L" + A_lowNum + " U" + A_highNum + "\uD83D\uDEAB" + "L" + A_misslowNum + " U" + A_misshighNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + "\uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2R3.setText("Hang" + "\n" + "Final");
-                tbl_rate2R3.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
+                tbl_rate2R3.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " b" + Def1  + " a" +Def2 + " g" + Def3 + " N" + Def4);
                 break;
             case 3:
                 txt_MatchesB1.setText(String.valueOf(numMDs));
                 tbl_event1B1.setText("Auto" + " \n" + "Tele");
-                tbl_rate1B1.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
+                tbl_rate1B1.setText( "◯L" + A_lowNum + " U" + A_highNum + "\uD83D\uDEAB" + "L" + A_misslowNum + " U" + A_misshighNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + "\uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2B1.setText("Hang" + "\n" + "Final");
-                tbl_rate2B1.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
+                tbl_rate2B1.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " b" + Def1  + " a" +Def2 + " g" + Def3 + " N" + Def4);
                 break;
             case 4:
                 txt_MatchesB2.setText(String.valueOf(numMDs));
                 tbl_event1B2.setText("Auto" + " \n" + "Tele");
-                tbl_rate1B2.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
+                tbl_rate1B2.setText( "◯L" + A_lowNum + " U" + A_highNum + "\uD83D\uDEAB" + "L" + A_misslowNum + " U" + A_misshighNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + "\uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2B2.setText("Hang" + "\n" + "Final");
-                tbl_rate2B2.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
+                tbl_rate2B2.setText( " ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " b" + Def1  + " a" +Def2 + " g" + Def3 + " N" + Def4);
                 break;
             case 5:
                 txt_MatchesB3.setText(String.valueOf(numMDs));
                 tbl_event1B3.setText("Auto" + " \n" + "Tele");
-                tbl_rate1B3.setText( "◯L" + A_lowNum + " U" + A_highNum + " \uD83D\uDEAB" + "L" + A_misslowNum + " U" + T_misslowNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + " \uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
+                tbl_rate1B3.setText( "◯L" + A_lowNum + " U" + A_highNum + "\uD83D\uDEAB" + "L" + A_misslowNum + " U" + A_misshighNum + " L%" + A_LowPercent  + " U%"+ A_HiPercent + "\n" + "◯L" + T_lowNum + " U" + T_highNum  + "\uD83D\uDEAB" + "L"+ T_misslowNum + " U" + T_misshighNum + " L%" + T_LowPercent  + " U%"+ T_HiPercent);
                 tbl_event2B3.setText("Hang" + "\n" + "Final");
-                tbl_rate2B3.setText(" ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " ¹" + Def1  + " ²" +Def2 + " ³" + Def3 + " ⁴" + Def4);
+                tbl_rate2B3.setText(" ╪" + climbed + "   ⁰" + Hang0 + " ¹" + Hang1  + " ²" +Hang2 + " ³" + Hang3 + " ⁴" + Hang4 +  "\n" +  "  ⚑" + pen + "⚡" + LostComs+ "  Def" + " b" + Def1  + " a" +Def2 + " g" + Def3 + " N" + Def4);
                 break;
             default:                // ????
                 Log.e(TAG, "*** Error - bad NDX  ***");

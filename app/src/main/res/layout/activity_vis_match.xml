@@ -261,10 +261,27 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/lbl_Human"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:text="Human"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/txt_Auto_Human"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/red"
+            tools:text="0" />
+
+        <TextView
             android:id="@+id/txt_Auto_CargoScored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="0dp"
             android:textColor="@color/red"
             tools:text="⚪00 U00" />
@@ -277,23 +294,39 @@
             android:layout_marginTop="0dp"
             android:textColor="@color/red"
             tools:text="⚪L00 U00" />
+
         <TextView
-            android:id="@+id/lbl_Human"
+            android:id="@+id/lbl_Auto_LowerPercnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="0dp"
-            android:text="Human"
+            android:text="Lower%"
             android:textColor="@color/white" />
-
         <TextView
-            android:id="@+id/txt_Auto_Human"
+            android:id="@+id/txt_Auto_LowerPercnt"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="0dp"
             android:textColor="@color/red"
-            tools:text="0" />
+            tools:text=".000" />
+        <TextView
+            android:id="@+id/lbl_Auto_UpperPercnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="0dp"
+            android:text="Upper%"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/txt_Auto_UpperPercnt"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/red"
+            tools:text=".000" />
 
     </LinearLayout>
 
@@ -388,7 +421,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/lbl_Low"
+            android:id="@+id/lbl_Lower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="█ = Lower"
@@ -396,7 +429,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/lbl_Under"
+            android:id="@+id/lbl_Upper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -457,8 +490,7 @@
         android:layout_marginTop="4dp"
         android:text="________________________________TeleOps______________________________"
         android:textColor="@color/yellow" />
-    // ==============================================================================
-    // Switch
+    // =============================================================================
 
 
     <LinearLayout
@@ -493,6 +525,39 @@
             android:textColor="@color/yellow"
             tools:text="⊗L00  U00 " />
 
+        <TextView
+            android:id="@+id/lbl_Tele_LowerPercnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="0dp"
+            android:text="Lower%"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/txt_Tele_LowerPercnt"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/yellow"
+            tools:text=".000" />
+        <TextView
+            android:id="@+id/lbl_Tele_UpperPercnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="0dp"
+            android:text="Upper%"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/txt_Tele_UpperPercnt"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/yellow"
+            tools:text=".000" />
+
     </LinearLayout>
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -509,7 +574,7 @@
             android:id="@+id/lbl_TeleFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="00dp"
             android:text="P/U⚪ F="
             android:textColor="@color/white" />
 

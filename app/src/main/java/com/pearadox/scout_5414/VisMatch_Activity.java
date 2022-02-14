@@ -44,6 +44,8 @@ public class VisMatch_Activity extends AppCompatActivity {
     TextView txt_auto_left, txt_StartingBalls, txt_noAuton;
     TextView txt_Auto_CargoScored, txt_Auto_CargoMissed, txt_Auto_Human;
     TextView txt_Tele_CargoScored, txt_Tele_CargoMissed;
+    TextView txt_Auto_LowerPercnt, txt_Auto_UpperPercnt, txt_Tele_LowerPercnt, txt_Tele_UpperPercnt;
+    String A_LowPercent = ""; String A_HiPercent = ""; String T_LowPercent = ""; String T_HiPercent = "";
     TextView txt_HangLevel;
     TextView txt_AutonFloor, txt_AutonTerminal, txt_AutonAcquired;
     TextView txt_TeleFloor, txt_TeleTerminal, txt_TeleAcquired;
@@ -111,6 +113,8 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_StartingBalls = (TextView) findViewById(R.id.txt_StartingBalls);
         txt_Auto_CargoScored = (TextView) findViewById(R.id.txt_Auto_CargoScored);
         txt_Auto_CargoMissed = (TextView) findViewById(R.id.txt_Auto_CargoMissed);
+        txt_Auto_LowerPercnt = (TextView) findViewById(R.id.txt_Auto_LowerPercnt);
+        txt_Auto_UpperPercnt = (TextView) findViewById(R.id.txt_Auto_UpperPercnt);
         txt_Auto_Human = (TextView) findViewById(R.id.txt_Auto_Human);
         txt_AutonFloor = (TextView) findViewById(R.id.txt_AutonFloor);
         txt_AutonTerminal = (TextView) findViewById(R.id.txt_AutonTerminal);
@@ -125,6 +129,8 @@ public class VisMatch_Activity extends AppCompatActivity {
         /*  Tele  */
         txt_Tele_CargoScored = (TextView) findViewById(R.id.txt_Tele_CargoScored);
         txt_Tele_CargoMissed = (TextView) findViewById(R.id.txt_Tele_CargoMissed);
+        txt_Tele_LowerPercnt = (TextView) findViewById(R.id.txt_Tele_LowerPercnt);
+        txt_Tele_UpperPercnt = (TextView) findViewById(R.id.txt_Tele_UpperPercnt);
         txt_TeleFloor = (TextView) findViewById(R.id.txt_TeleFloor);
         txt_TeleClimb = (TextView) findViewById(R.id.txt_TeleClimb);
         txt_TeleAcquired = (TextView) findViewById(R.id.txt_TeleAcquired);
@@ -249,8 +255,31 @@ public class VisMatch_Activity extends AppCompatActivity {
             int thisMatchAutoHigh = match_inst.getAuto_High();
             AutoStackBar(i+1, match_id, (float)thisMatchAutoLow , (float)thisMatchAutoHigh);
             auto_LowMiss = auto_LowMiss + match_inst.getAuto_MissedLow();
-            Auto_HighMiss = Auto_HighMiss + match_inst.getTele_MissedHigh();
-            //ToDo - add Auto shooting %
+            Auto_HighMiss = Auto_HighMiss + match_inst.getAuto_MissedHigh();
+            Float BatAvg;
+            Log.e(TAG, "AutoLow   Score" + auto_Low  +"  Miss" +auto_LowMiss);
+            if ((auto_Low + auto_LowMiss) > 0) {
+                BatAvg = (float)auto_Low / (auto_Low + auto_LowMiss);  // Made ÷ Attempts
+                Log.e(TAG, "Low%= " + BatAvg);
+                if (BatAvg == 1.0f) {
+                    A_LowPercent = "1.000";
+                } else {
+                    A_LowPercent = String.format("%.3f", BatAvg);
+                }
+            } else {
+                Log.e(TAG, "BatAvg=.000");
+                A_LowPercent = "0.000";
+            }
+            if ((auto_High + Auto_HighMiss) > 0) {
+                BatAvg = (float)auto_High / (auto_High + Auto_HighMiss);  // Made ÷ Attempts
+                if (BatAvg == 1.0f) {
+                    A_HiPercent = "1.000";
+                } else {
+                    A_HiPercent =String.format("%.3f", BatAvg);
+                }
+            } else {
+                A_HiPercent = "0.000";
+            }
 
             if (match_inst.getAuto_comment().length() > 1) {
                 auto_Comments = auto_Comments + match_inst.getMatch() + "-" + match_inst.getAuto_comment() + "\n" + underScore  + "\n" ;
@@ -297,9 +326,31 @@ public class VisMatch_Activity extends AppCompatActivity {
             int thisMatchTeleLow = match_inst.getTele_Low();
             Tele_High = Tele_High + match_inst.getTele_High();
             int thisMatchTeleHigh = match_inst.getTele_High();
-            Tele_LowMiss = Tele_LowMiss + match_inst.getAuto_MissedLow();
+            Tele_LowMiss = Tele_LowMiss + match_inst.getTele_MissedLow();
             Tele_HighMiss = Tele_HighMiss + match_inst.getTele_MissedHigh();
-            //ToDo - add Tele shooting %
+            if ((Tele_Low + Tele_LowMiss) > 0) {        // avoid divide by 0
+                BatAvg = (float)Tele_Low / (Tele_Low + Tele_LowMiss);  // Made ÷ Attempts
+                if (BatAvg == 1.0f) {       // all this to get 3 digits!!
+                    T_LowPercent = "1.00";
+                } else {
+                    Log.e(TAG, "TeleLow%= " + BatAvg +" L" + Tele_Low  +"  M" +Tele_LowMiss);
+                    T_LowPercent = String.format("%.3f", BatAvg);
+                }
+            } else {
+                Log.e(TAG, "Default TeleLow = .000");
+                T_LowPercent = "0.000";
+            }
+            if ((Tele_High + Tele_HighMiss) > 0) {
+                BatAvg = (float)Tele_High / (Tele_High + Tele_HighMiss);    // Made ÷ Attempts
+                if (BatAvg == 1.0f) {
+                    T_HiPercent = "1.000";
+                } else {
+                    Log.e(TAG, "TeleHigh%= " + BatAvg+" L" + Tele_High  +"  M" +Tele_HighMiss);
+                    T_HiPercent = String.format("%.3f", BatAvg);
+                }
+            } else {
+                T_HiPercent = "0.000";
+            }
 
             TeleStackBar(i+1, match_id, (float)thisMatchTeleLow , (float)thisMatchTeleHigh);
 
@@ -368,10 +419,11 @@ public class VisMatch_Activity extends AppCompatActivity {
         txt_Matches.setText(matches);
         txt_auto_left.setText(String.valueOf(numleftSectorLine));
         txt_noAuton.setText(String.valueOf(noAuton));
-
         String carScored = "⚪L" + String.format("%-3s", auto_Low) + " U" + String.format("%-3s", auto_High) ;
         txt_Auto_CargoScored.setText(carScored);
         txt_Auto_CargoMissed.setText("⊗"+ "L" + auto_LowMiss + " U" + Auto_HighMiss);
+        txt_Auto_LowerPercnt.setText(A_LowPercent);
+        txt_Auto_UpperPercnt.setText(A_HiPercent);
         String startingBalls = "⁰" + String.format("%-3s", precell_0) + " ¹" + String.format("%-3s", precell_1);
         txt_StartingBalls.setText(startingBalls);
         txt_AutonFloor.setText(String.valueOf(auton_Floor));
@@ -381,7 +433,6 @@ public class VisMatch_Activity extends AppCompatActivity {
         String StartPositions = String.format("%-2s", Integer.toString(auto_B1)) + "  " + String.format("%-2s", Integer.toString(auto_B2)) + "  " + String.format("%-2s", Integer.toString(auto_B3)) + "   " + String.format("%-2s", Integer.toString(auto_B4)) + "   " + String.format("%-2s", Integer.toString(auto_B5)) + "  " + String.format("%-2s", Integer.toString(auto_B6)) + "  " + String.format("%-2s", Integer.toString(auto_B7));
         txt_StartPositions.setText(String.valueOf(StartPositions));
         txt_Pos.setText(String.format("%-3s", Integer.toString(auto_Ps1)) + "  " + String.format("%-3s", Integer.toString(auto_Ps2)) + "  " + String.format("%-3s", Integer.toString(auto_Ps3)));
-        txt_final_Tipped.setText(String.valueOf(final_Tipped));
         txt_AutoComments.setText(auto_Comments);
 
         // ==============================================
@@ -389,6 +440,8 @@ public class VisMatch_Activity extends AppCompatActivity {
         String telePowerCell = "⚪L" + String.format("%-3s", Tele_Low) + " U" + String.format("%-3s", Tele_High);
         txt_Tele_CargoScored.setText(telePowerCell);
         txt_Tele_CargoMissed.setText("⊗L"+ Tele_LowMiss + " U" + Tele_HighMiss);
+        txt_Tele_LowerPercnt.setText(T_LowPercent);
+        txt_Tele_UpperPercnt.setText(T_HiPercent);
         String HabEnd = "⁰"+ String.valueOf(climbH0) + " ¹" + String.valueOf(climbH1) + " ²" + String.valueOf(climbH2) + " ³" + String.valueOf(climbH3)+ " ⁴" + String.valueOf(climbH4);
         txt_HangLevel.setText(HabEnd);
         txt_TeleFloor.setText(String.valueOf(tele_CargoFloor));
@@ -401,6 +454,7 @@ public class VisMatch_Activity extends AppCompatActivity {
         // Display Final elements
         txt_final_LostComm.setText(String.valueOf(final_LostComm));
         txt_final_LostParts.setText(String.valueOf(final_LostParts));
+        txt_final_Tipped.setText(String.valueOf(final_Tipped));
         txt_final_Defenses.setText("B=" + String.valueOf(final_DefBad) + " A=" + String.valueOf(final_DefAvg) + " G=" + String.valueOf(final_DefGood) + " NO=" + String.valueOf(final_DefNA) );
         txt_final_NumPen.setText(String.valueOf(final_NumPen));
         txt_FinalComments.setText(final_Comments);
@@ -418,10 +472,10 @@ public class VisMatch_Activity extends AppCompatActivity {
         auto_Ps1 = 0;
         auto_Ps2 = 0;
         auto_Ps3 = 0;
-        auto_Low = 0; auto_High = 0;
-        Tele_Low = 0; Tele_High = 0;
-        auton_Floor= 0; auton_Terminal = 0; int auton_Acquire =0; int auton_Human = 0;
-        tele_CargoFloor = 0; tele_CargoTerminal = 0; int tele_Acquire = 0;
+        auto_Low = 0; auto_High = 0; auto_LowMiss = 0; Auto_HighMiss = 0;
+        Tele_Low = 0; Tele_High = 0; Tele_LowMiss = 0; Tele_HighMiss = 0;
+        auton_Floor= 0; auton_Terminal = 0; auton_Acquire =0; auton_Human = 0;
+        tele_CargoFloor = 0; tele_CargoTerminal = 0; tele_Acquire = 0;
         tele_Climb = 0;
         numTeleClimbSuccess = 0;
         auto_B1 = 0; auto_B2 = 0; auto_B3 = 0; auto_B4 = 0; auto_B5 = 0; auto_B6 = 0;   int auto_B7 = 0;
