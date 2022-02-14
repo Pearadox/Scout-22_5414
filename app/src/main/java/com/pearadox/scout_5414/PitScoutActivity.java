@@ -1,6 +1,7 @@
 package com.pearadox.scout_5414;
 
 //import android.app.BuildConfig;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,9 +12,9 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,17 +23,14 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,30 +61,25 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
-import static android.app.PendingIntent.getActivity;
-import static android.view.View.VISIBLE;
-
 public class PitScoutActivity extends AppCompatActivity {
 
     String TAG = "PitScout_Activity";      // This CLASS name
     TextView txt_EventName, txt_dev, txt_stud, txt_TeamName, txt_NumWheels;
-    EditText editTxt_Team, txtEd_Weight, editText_Comments;
-    ImageView imgScoutLogo, img_Photo, imageView_numEnt;
+    EditText editTxt_Team, txtEd_Weight, txtEd_Height, editText_Comments;
     Spinner spinner_Team, spinner_Traction, spinner_Omni, spinner_Mecanum, spinner_Pneumatic;
-    Spinner spinner_numRobots, spinner_Motor, spinner_Lang, spinner_autoMode;
+    Spinner spinner_Motor, spinner_Lang, spinner_autoMode;
     ArrayAdapter<String> adapter;
     ArrayAdapter<String> adapter_Trac, adapter_Omni, adapter_Mac, adapter_Pneu ;
     ArrayAdapter<String> adapter_driveMotor, adapter_progLang,adapter_autoMode;
-    CheckBox chkBox_Ramp, chkBox_CanLift, chkBox_Hook, chkBox_Vision, chkBox_Pneumatics, chkBox_Climb;
-    CheckBox chkBox_OffFloor, chkBox_LoadSta, checkbox_CPspin, checkbox_CPcolor, chkBox_Trench, chkBox_Dump;
+    CheckBox chkBox_Vision, chkBox_Pneumatics, chkBox_Climb, chkBox_EveryBot;
+    CheckBox chkBox_OffFloor, chkBox_Terminal;
     CheckBox chkBox_ClimberL1, chkBox_ClimberL2, chkBox_ClimberL3, chkBox_ClimberM1, chkBox_ClimberM2, chkBox_ClimberM3,chkBox_ClimberR1, chkBox_ClimberR2, chkBox_ClimberR3;
-    CheckBox chkBox_ShootLow, chkBox_ShootUnder, chkBox_ShootLine, chkBox_ShootFront, chkBox_ShootBack;
+    CheckBox chkBox_ShootLow, chkBox_LaunchPad, chkBox_Tarmac, chkBox_ShootRing, chkBox_ShootAny;
 
     Button btn_Save;
     Boolean OnOff= false;
@@ -123,7 +116,9 @@ public class PitScoutActivity extends AppCompatActivity {
 
     // ===================  Data Elements for Pit Scout object ===================
     public String teamSelected = " ";           // Team #
-    public int weight = 0;                      // Height (inches)
+    public boolean everyBot = false;            // EveryBot
+    public int weight = 0;                      // Weight (lbs)
+    public int height = 0;                      // Height (inches)
     public int totalWheels = 0;                 // Total # of wheels
     public int numTraction = 0;                 // Num. of Traction wheels
     public int numOmni = 0;                     // Num. of Omni wheels
@@ -132,33 +127,16 @@ public class PitScoutActivity extends AppCompatActivity {
     public boolean vision = false;              // presence of Vision Camera
     public boolean pneumatics = false;          // presence of Pneumatics
     public boolean climb = false;               // presence of a Climbing mechanism
-    public boolean spin = false;                // Ability to Spin # turns on Control Panel
-    public boolean cpcolor = false;             // Ability to Stop Wheel on color
-    public boolean PowerCellFloor = false;      // presence of a way to pick up PowerCell from floor
-    public boolean PowerCellLoad = false;       // presence of a way to pick up PowerCell from Loading Sta.
-    public boolean undTrench = false;           // Ability to Drive under Control Panel (in Trench)
-    public boolean canLift = false;             // Ability to lift other robots
-    public int numLifted = 0;                   // Num. of robots can lift (1-2)
-    public boolean liftRamp = false;            // lift type Ramp
-    public boolean liftHook = false;            // lift type Hook
+    public boolean CargoFloor = false;          // presence of a way to pick up Cargo from floor
+    public boolean CargoTerminal = false;       // presence of a way to pick up Cargo from Terminal
     public String motor;                        // Type of Motor
     public String lang;                         // Programming  Language
     public String autoMode;                     // Autonomous Operatong Mode
-    public boolean dump = false;                // Can dump cells to partner
-    public boolean climberL1 = false;           //   L1--M1--R1
-    public boolean climberL2 = false;           //   |    |   |
-    public boolean climberL3 = false;           //   |    |   |
-    public boolean climberM1 = false;           //   L2--M2--R2
-    public boolean climberM2 = false;           //   |    |   |
-    public boolean climberM3 = false;           //   |    |   |
-    public boolean climberR1 = false;           //   L3--M3--R3
-    public boolean climberR2 = false;           //
-    public boolean climberR3 = false;           //
-    public boolean shootLow = false;            // Can Shoot into Bottom Port
-    public boolean shootUnder = false;          // Can Shoot into Port from Under
-    public boolean shootLine = false;           // Can Shoot into Port from Sector Line
-    public boolean shootFront= false;           // Can Shoot into IPort from Control Panel Front
-    public boolean shootBack= false;            // Can Shoot into IPort from Control Panel Back
+    public boolean shootLow = false;            // Can Shoot into Lower Hub
+    public boolean shootLP = false;             // Can Shoot from Launch Pad
+    public boolean shootTarmac = false;         // Can Shoot from Tarmac
+    public boolean shootRing= false;            // Can Shoot from Cargo Ring
+    public boolean shootAnywhere= false;        // Can Shoot from Anywhere
     /* */
     public String comments;                     // Comment(s)
     public String scout = " ";                  // Student who collected the data
@@ -196,6 +174,7 @@ pitData Pit_Data = new pitData();
         txt_stud.setText(param2);
         txt_TeamName.setText(" ");
         txtEd_Weight = (EditText) findViewById(R.id.txtEd_Weight);
+        txtEd_Height = (EditText) findViewById(R.id.txtEd_Height);
         Spinner spinner_Team = (Spinner) findViewById(R.id.spinner_Team);
         editTxt_Team = (EditText) findViewById(R.id.editTxt_Team);
         if (Pearadox.is_Network && Pearadox.numTeams > 0) {      // is Internet available & Teams present?
@@ -237,13 +216,7 @@ pitData Pit_Data = new pitData();
             });
         }
 
-        final Spinner spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
-        ArrayAdapter adapter_Robs = new ArrayAdapter<String>(this, R.layout.robonum_list_layout, carry);
-        adapter_Robs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_numRobots.setAdapter(adapter_Robs);
-        spinner_numRobots.setSelection(0, false);
-        spinner_numRobots.setOnItemSelectedListener(new numRobots_OnItemSelectedListener());
-        spinner_numRobots.setVisibility(View.GONE);
+        chkBox_EveryBot = (CheckBox) findViewById(R.id.chkBox_EveryBot);
         Spinner spinner_Traction = (Spinner) findViewById(R.id.spinner_Traction);
         ArrayAdapter adapter_Trac = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, wheels);
         adapter_Trac.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -290,24 +263,15 @@ pitData Pit_Data = new pitData();
         spinner_autoMode.setAdapter(adapter_autoMode);
         spinner_autoMode.setSelection(0, false);
         spinner_autoMode.setOnItemSelectedListener(new autoModeOnClickListener());
-        chkBox_Ramp = (CheckBox) findViewById(R.id.chkBox_Ramp);
-        chkBox_Hook = (CheckBox) findViewById(R.id.chkBox_Hook);
-        chkBox_Ramp.setVisibility(View.GONE);
-        chkBox_Hook.setVisibility(View.GONE);
         chkBox_Vision = (CheckBox) findViewById(R.id.chkBox_Vision);
         chkBox_Pneumatics = (CheckBox) findViewById(R.id.chkBox_Pneumatics);
-        chkBox_CanLift = (CheckBox) findViewById(R.id.chkBox_CanLift);
         chkBox_OffFloor = (CheckBox) findViewById(R.id.chkBox_OffFloor);
-        checkbox_CPspin = (CheckBox) findViewById(R.id.checkbox_CPspin);
-        checkbox_CPcolor = (CheckBox) findViewById(R.id.checkbox_CPcolor);
-        chkBox_LoadSta = (CheckBox) findViewById(R.id.chkBox_LoadSta);
-        chkBox_Trench = (CheckBox) findViewById(R.id.chkBox_Trench);
-        chkBox_Dump = (CheckBox) findViewById(R.id.chkBox_Dump);
+        chkBox_Terminal = (CheckBox) findViewById(R.id.chkBox_Terminal);
         chkBox_ShootLow = (CheckBox) findViewById(R.id.chkBox_ShootLow);
-        chkBox_ShootUnder = (CheckBox) findViewById(R.id.chkBox_ShootUnder);
-        chkBox_ShootLine = (CheckBox) findViewById(R.id.chkBox_ShootLine);
-        chkBox_ShootFront = (CheckBox) findViewById(R.id.chkBox_ShootFront);
-        chkBox_ShootBack = (CheckBox) findViewById(R.id.chkBox_ShootBack);
+        chkBox_LaunchPad = (CheckBox) findViewById(R.id.chkBox_LaunchPad);
+        chkBox_Tarmac = (CheckBox) findViewById(R.id.chkBox_Tarmac);
+        chkBox_ShootRing = (CheckBox) findViewById(R.id.chkBox_ShootRing);
+        chkBox_ShootAny = (CheckBox) findViewById(R.id.chkBox_ShootAny);
         chkBox_Climb = (CheckBox) findViewById(R.id.chkBox_Climb);
         chkBox_ClimberL1 = (CheckBox) findViewById(R.id.chkBox_ClimberL1);
         chkBox_ClimberL2 = (CheckBox) findViewById(R.id.chkBox_ClimberL2);
@@ -345,51 +309,6 @@ pitData Pit_Data = new pitData();
         timeStamp = new SimpleDateFormat("yyyy.MM.dd  hh:mm:ss a").format(new Date());
 
 //===============================================================================================================
-        chkBox_Ramp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chkBox_Ramp Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"Ramp is checked.");
-                    liftRamp = true;
-                } else {
-                    Log.w(TAG,"Ramp is unchecked.");
-                    liftRamp = false;
-                }
-            }
-        });
-        chkBox_CanLift.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-               Log.w(TAG, "chkBox_CanLift Listener");
-               if (buttonView.isChecked()) {
-                   Log.w(TAG,"Lift is checked.");
-                   canLift = true;
-                   chkBox_Ramp.setVisibility(VISIBLE);
-                   chkBox_Hook.setVisibility(VISIBLE);
-                   spinner_numRobots.setVisibility(VISIBLE);
-               } else {
-                   Log.w(TAG,"Lift is unchecked.");
-                   canLift = false;
-                   chkBox_Ramp.setVisibility(View.GONE);
-                   chkBox_Hook.setVisibility(View.GONE);
-                   spinner_numRobots.setVisibility(View.GONE);
-               }
-           }
-        });
-        chkBox_Hook.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-               Log.w(TAG, "chkBox_CanLift Listener");
-               if (buttonView.isChecked()) {
-                   Log.w(TAG,"Hook is checked.");
-                   liftHook = true;
-               } else {
-                   Log.w(TAG,"Hook is unchecked.");
-                   liftHook = false;
-               }
-           }
-        });
         chkBox_Vision.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
            @Override
            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
@@ -424,52 +343,60 @@ pitData Pit_Data = new pitData();
                 Log.w(TAG, "chkBox_OffFloor Listener");
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"Off-floor is checked.");
-                    PowerCellFloor = true;
+                    CargoFloor = true;
                 } else {
                     Log.w(TAG,"Off-floor is unchecked.");
-                    PowerCellFloor = false;
+                    CargoFloor = false;
             }
         }
         });
 
-        chkBox_LoadSta.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkBox_Terminal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "chkBox_LoadSta Listener");
+                Log.w(TAG, "chkBox_Terminal Listener");
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"LoadSta is checked.");
-                    PowerCellLoad = true;
+                    CargoTerminal = true;
                 } else {
                     Log.w(TAG,"LoadSta is unchecked.");
-                    PowerCellLoad = false;
+                    CargoTerminal = false;
                 }
             }
         });
 
-        checkbox_CPspin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkBox_EveryBot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "checkbox_CPspin Listener");
+                Log.w(TAG, "chkBox_EveryBot Listener");
                 if (buttonView.isChecked()) {
-                    Log.w(TAG,"spin is checked.");
-                    spin = true;
-                } else {
-                    Log.w(TAG,"spin is unchecked.");
-                    spin = false;
-                }
-            }
-        });
+                    Log.w(TAG,"everyBot is checked.");
+                    everyBot = true;
+                    // ToDo - set all known values
+                    spinner_Motor.setSelection(1);              // CIM
+                    txtEd_Weight.setText("100");                // weight
+                    weight = 100;                               // Weight
+                    txtEd_Height.setText("56");                 // height
+                    height = 56;                                // Height
+                    spinner_Traction.setSelection(4);           // # Trac
+                    numTraction = 4;                            //
+                    txt_NumWheels.setText(String.valueOf(4));   // Total # of wheels
+                    totalWheels = 4;                            //
+                    chkBox_Climb.setChecked(true);              // Can Climb
+                    chkBox_OffFloor.setChecked(true);           // P/U from Floor
+                    //ToDo - Climb level Mid
+                    spinner_Lang.setSelection(1);               // JAVA
+                    //ToDo - Shoot Lower
+                    //ToDo - Oper.Mode =Pgm
+                    editText_Comments.setText("Everybot");      // Comments
+                    comments = "Everybot";                      // Comments
+//                    txtEd_Weight.setEnabled(false);
+//                    txtEd_Height.setEnabled(false);
 
-        checkbox_CPcolor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                Log.w(TAG, "checkbox_CPcolor Listener");
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"Color is checked.");
-                    cpcolor = true;
                 } else {
-                    Log.w(TAG,"Color is unchecked.");
-                    cpcolor = false;
+                    Log.w(TAG,"everyBot is unchecked.");
+                    everyBot = false;
+                    // ToDo - turn them off
                 }
             }
         });
@@ -490,31 +417,6 @@ pitData Pit_Data = new pitData();
             }
         });
 
-        chkBox_Trench.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"Trench is checked.");
-                    undTrench = true;
-                } else {
-                    Log.w(TAG,"Trench is unchecked.");
-                    undTrench = false;
-                }
-            }
-        });
-
-        chkBox_Dump.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"Dump is checked.");
-                    dump = true;
-                } else {
-                    Log.w(TAG,"Dump is unchecked.");
-                    dump = false;
-                }
-            }
-        });
 
         chkBox_ShootLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -529,186 +431,59 @@ pitData Pit_Data = new pitData();
             }
         });
 
-        chkBox_ShootUnder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkBox_LaunchPad.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (buttonView.isChecked()) {
-                    Log.w(TAG,"Shoot Under is checked.");
-                    shootUnder = true;
+                    Log.w(TAG,"Shoot LaunchPad is checked.");
+                    shootLP = true;
                 } else {
-                    Log.w(TAG,"Shoot Under is unchecked.");
-                    shootUnder = false;
+                    Log.w(TAG,"Shoot LaunchPad is unchecked.");
+                    shootLP = false;
                 }
             }
         });
 
-        chkBox_ShootLine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkBox_Tarmac.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (buttonView.isChecked()) {
-                    Log.w(TAG,"Shoot Line is checked.");
-                    shootLine = true;
+                    Log.w(TAG,"Shoot Tarmac is checked.");
+                    shootTarmac = true;
                 } else {
-                    Log.w(TAG,"Shoot Line is unchecked.");
-                    shootLine = false;
+                    Log.w(TAG,"Shoot Tarmac is unchecked.");
+                    shootTarmac = false;
                 }
             }
         });
 
-        chkBox_ShootFront.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkBox_ShootRing.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (buttonView.isChecked()) {
-                    Log.w(TAG,"Shoot Front is checked.");
-                    shootFront = true;
+                    Log.w(TAG,"ShootRing is checked.");
+                    shootRing = true;
                 } else {
-                    Log.w(TAG,"Shoot Front is unchecked.");
-                    shootFront = false;
+                    Log.w(TAG,"ShootRing is unchecked.");
+                    shootRing = false;
                 }
             }
         });
 
-        chkBox_ShootBack.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkBox_ShootAny.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (buttonView.isChecked()) {
-                    Log.w(TAG,"Shoot Back is checked.");
-                    shootBack = true;
+                    Log.w(TAG,"shootAnywhere is checked.");
+                    shootAnywhere = true;
                 } else {
-                    Log.w(TAG,"Shoot Back is unchecked.");
-                    shootBack = false;
+                    Log.w(TAG,"shootAnywhere is unchecked.");
+                    shootAnywhere = false;
                 }
             }
         });
 
 
-        // ++++++++++++++++++++=   G R I D    +++++++++++++++++++++++++
-        chkBox_ClimberL1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"ClimberL1 is checked.");
-                    climberL1 = true;
-                    CG = true;
-                } else {
-                    Log.w(TAG,"ClimberL1 is unchecked.");
-                    climberL1 = false;
-                    CG = false;
-                }
-            }
-        });
-        chkBox_ClimberL2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"ClimberL2 is checked.");
-                    climberL2 = true;
-                    CG = true;
-                } else {
-                    Log.w(TAG,"ClimberL2 is unchecked.");
-                    climberL2 = false;
-                    CG = false;
-                }
-            }
-        });
-        chkBox_ClimberL3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"ClimberL3 is checked.");
-                    climberL3 = true;
-                    CG = true;
-                } else {
-                    Log.w(TAG,"ClimberL3 is unchecked.");
-                    climberL3 = false;
-                    CG = false;
-                }
-            }
-        });
-        chkBox_ClimberM1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"ClimberM1 is checked.");
-                    climberM1 = true;
-                    CG = true;
-                } else {
-                    Log.w(TAG,"ClimberM1 is unchecked.");
-                    climberM1 = false;
-                    CG = false;
-                }
-            }
-        });
-        chkBox_ClimberM2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"ClimberM2 is checked.");
-                    climberM2 = true;
-                    CG = true;
-                } else {
-                    Log.w(TAG,"ClimberM2 is unchecked.");
-                    climberM2 = false;
-                    CG = false;
-                }
-            }
-        });
-        chkBox_ClimberM3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"ClimberM3 is checked.");
-                    climberM3 = true;
-                    CG = true;
-                } else {
-                    Log.w(TAG,"ClimberM3 is unchecked.");
-                    climberM3 = false;
-                    CG = false;
-                }
-            }
-        });
-        chkBox_ClimberR1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"ClimberR1 is checked.");
-                    climberR1 = true;
-                    CG = true;
-                } else {
-                    Log.w(TAG,"ClimberR1 is unchecked.");
-                    climberR1 = false;
-                    CG = false;
-                }
-            }
-        });
-        chkBox_ClimberR2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"ClimberR2 is checked.");
-                    climberR2 = true;
-                    CG = true;
-                } else {
-                    Log.w(TAG,"ClimberR2 is unchecked.");
-                    climberR2 = false;
-                    CG = false;
-                }
-            }
-        });
-        chkBox_ClimberR3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    Log.w(TAG,"ClimberR3 is checked.");
-                    climberR3 = true;
-                    CG = true;
-                } else {
-                    Log.w(TAG,"ClimberR3 is unchecked.");
-                    climberR3 = false;
-                    CG = false;
-                }
-            }
-        });
 
 
 
@@ -796,7 +571,7 @@ pitData Pit_Data = new pitData();
                 // Check for required fields
                 if ((txtEd_Weight.length() > 0) &&                               // weight field length >0
                         ((weight > 0) &&(weight <= MAX_ROBOT_WEIGHT)) &&        // weight >0 & <_ Max
-                        ((!chkBox_Climb.isChecked()) |(chkBox_Climb.isChecked() && (CG))) &&   // at least one CG checkbox ☑ if Climb is True
+                        ((!chkBox_Climb.isChecked()) |(chkBox_Climb.isChecked())) &&   // at least one CG checkbox ☑ if Climb is True
                         (totalWheels >= 4) &&                                   // at least 4 wheels
                         (spinner_autoMode.getSelectedItemPosition() > 0) &&     // Autonomous mode specified
                         (spinner_Lang.getSelectedItemPosition() > 0)) {        // Robot Prog. Language set
@@ -812,7 +587,7 @@ pitData Pit_Data = new pitData();
                 } else {
                     final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
                     tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
-                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels, CG, Lang. & Auto Mode) before saving *** \n Wt=" + weight+ "  ☸=" + totalWheels + " ↑" + chkBox_Climb.isChecked() + " " + CG +"  Lang='"+ lang+ "'   Mode=" + autoMode, Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels, CG, Lang. & Auto Mode) before saving *** \n Wt=" + weight+ "  ☸=" + totalWheels + " ↑" + chkBox_Climb.isChecked()  +"  Lang='"+ lang+ "'   Mode=" + autoMode, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     toast.show();
                 }
@@ -1112,7 +887,6 @@ pitData Pit_Data = new pitData();
                         Spinner spinner_Omni = (Spinner) findViewById(R.id.spinner_Omni);
                         Spinner spinner_Mecanum = (Spinner) findViewById(R.id.spinner_Mecanum);
                         Spinner spinner_Pneumatic = (Spinner) findViewById(R.id.spinner_Pneumatic);
-                        Spinner spinner_numRobots = (Spinner) findViewById(R.id.spinner_numRobots);
 
                         if (pitFB) {
                             // Already loaded data from Firebase into Pit_Load during 'getTeam_Pit'
@@ -1146,44 +920,19 @@ pitData Pit_Data = new pitData();
                         spinner_Omni.setSelection((Pit_Load.getPit_numOmni()));
                         spinner_Mecanum.setSelection((Pit_Load.getPit_numMecanum()));
                         spinner_Pneumatic.setSelection((Pit_Load.getPit_numPneumatic()));
-                        chkBox_ClimberL1.setChecked(Pit_Load.isPit_climberL1());
-                        chkBox_ClimberL2.setChecked(Pit_Load.isPit_climberL2());
-                        chkBox_ClimberL3.setChecked(Pit_Load.isPit_climberL3());
-                        chkBox_ClimberM1.setChecked(Pit_Load.isPit_climberM1());
-                        chkBox_ClimberM2.setChecked(Pit_Load.isPit_climberM2());
-                        chkBox_ClimberM3.setChecked(Pit_Load.isPit_climberM3());
-                        chkBox_ClimberR1.setChecked(Pit_Load.isPit_climberR1());
-                        chkBox_ClimberR2.setChecked(Pit_Load.isPit_climberR2());
-                        chkBox_ClimberR3.setChecked(Pit_Load.isPit_climberR3());
 
                         chkBox_Climb.setChecked(Pit_Load.isPit_climber());
                         chkBox_Vision.setChecked(Pit_Load.isPit_vision());
                         chkBox_Pneumatics.setChecked(Pit_Load.isPit_pneumatics());
-                        checkbox_CPspin.setChecked(Pit_Load.isPit_spin());
-                        checkbox_CPcolor.setChecked(Pit_Load.isPit_color());
-                        chkBox_Trench.setChecked(Pit_Load.isPit_undTrench());
-                        chkBox_OffFloor.setChecked(Pit_Load.isPit_PowerCellFloor());
-                        chkBox_LoadSta.setChecked(Pit_Load.isPit_PowerCellLoad());
-
-                        chkBox_CanLift.setChecked(Pit_Load.isPit_canLift());
-                        if (Pit_Load.isPit_canLift()) {
-                            spinner_numRobots.setVisibility(View.VISIBLE);
-                            spinner_numRobots.setSelection((Pit_Load.getPit_numLifted()));
-                            chkBox_Hook.setVisibility(View.VISIBLE);
-                            chkBox_Hook.setChecked(Pit_Load.isPit_liftHook());
-                            chkBox_Ramp.setVisibility(View.VISIBLE);
-                            chkBox_Ramp.setChecked(Pit_Load.isPit_liftRamp());
-                        } else {
-                            spinner_numRobots.setVisibility(View.INVISIBLE);
-                            chkBox_Ramp.setVisibility(View.INVISIBLE);
-                            chkBox_Hook.setVisibility(View.INVISIBLE);
-                        }
-
+                        chkBox_EveryBot.setChecked(Pit_Load.isPit_everyBot());
+                        chkBox_OffFloor.setChecked(Pit_Load.isPit_CargoFloor());
+                        chkBox_Terminal.setChecked(Pit_Load.isPit_CargoTerm());
+                        
                         chkBox_ShootLow.setChecked(Pit_Load.isPit_shootLow());
-                        chkBox_ShootUnder.setChecked(Pit_Load.isPit_shootLow());
-                        chkBox_ShootLine.setChecked(Pit_Load.isPit_shootLine());
-                        chkBox_ShootFront.setChecked(Pit_Load.isPit_shootFront());
-                        chkBox_ShootBack.setChecked(Pit_Load.isPit_shootBack());
+                        chkBox_LaunchPad.setChecked(Pit_Load.isPit_shootLP());
+                        chkBox_Tarmac.setChecked(Pit_Load.isPit_shootTarmac());
+                        chkBox_ShootRing.setChecked(Pit_Load.isPit_shootRing());
+                        chkBox_ShootAny.setChecked(Pit_Load.isPit_shootAnywhere());
 
                         String motr = Pit_Load.getPit_motor();
                         Log.w(TAG, "Motor = '" + motr + "'");
@@ -1242,7 +991,6 @@ pitData Pit_Data = new pitData();
                                 Log.w(TAG, "►►►►►  E R R O R  ◄◄◄◄◄");
                                 break;
                         }
-                        chkBox_Dump.setChecked(Pit_Load.isPit_dump());
 
                         // Finally ...
                         scout = scout + " & " + Pit_Load.getPit_scout();    // Append original scout name
@@ -1407,26 +1155,7 @@ pitData Pit_Data = new pitData();
             Toast.makeText(getBaseContext(), "Robot should have at least 4 wheels", Toast.LENGTH_LONG).show();
         }
     }
-    public class numRobots_OnItemSelectedListener implements OnItemSelectedListener {
-        public void onItemSelected(AdapterView<?> parent,
-                                   View view, int pos, long id) {
-            String num = " ";
-            num = parent.getItemAtPosition(pos).toString();
-            if (pos > 0) {
-                numLifted = Integer.parseInt(num);
-            } else {
-                Toast toast = Toast.makeText(getBaseContext(), "Must specify # robots lifted!", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.show();
-                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                tg.startTone(ToneGenerator.TONE_PROP_BEEP);
-            }
-            Log.w(TAG, ">>>>> NumRobots '" + numLifted + "'");
-        }
-        public void onNothingSelected(AdapterView<?> parent) {
-            // Do nothing.
-        }
-    }
+
 
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
     private void findTeam(String tnum) {
@@ -1468,7 +1197,9 @@ pitData Pit_Data = new pitData();
         Log.w(TAG, ">>>>  storePitData  <<<< " + teamSelected );
 
         Pit_Data.setPit_team(teamSelected);
+        Pit_Data.setPit_everyBot(everyBot);
         Pit_Data.setPit_weight(weight);
+        Pit_Data.setPit_height(height);
         Pit_Data.setPit_totWheels(totalWheels);
         Pit_Data.setPit_numTrac(numTraction);
         Pit_Data.setPit_numOmni(numOmni);
@@ -1477,33 +1208,25 @@ pitData Pit_Data = new pitData();
         Pit_Data.setPit_vision(vision);
         Pit_Data.setPit_pneumatics(pneumatics);
         Pit_Data.setPit_climber(climb);
-        Pit_Data.setPit_PowerCellFloor(PowerCellFloor);
-        Pit_Data.setPit_PowerCellLoad(PowerCellLoad);
-        Pit_Data.setPit_undTrench(undTrench);
-        Pit_Data.setPit_spin(spin);
-        Pit_Data.setPit_color(cpcolor);
-        Pit_Data.setPit_canLift(canLift);
-        Pit_Data.setPit_numLifted (numLifted );
-        Pit_Data.setPit_liftRamp(liftRamp);
-        Pit_Data.setPit_liftHook(liftHook);
+        Pit_Data.setPit_CargoFloor(CargoFloor);
+        Pit_Data.setPit_CargoTerm(CargoTerminal);
         Pit_Data.setPit_motor(motor);
         Pit_Data.setPit_lang(lang);
         Pit_Data.setPit_autoMode(autoMode);
-        Pit_Data.setPit_dump(dump);
-        Pit_Data.setPit_climberL1(climberL1);
-        Pit_Data.setPit_climberL2(climberL2);
-        Pit_Data.setPit_climberL3(climberL3);
-        Pit_Data.setPit_climberM1(climberM1);
-        Pit_Data.setPit_climberM2(climberM2);
-        Pit_Data.setPit_climberM3(climberM3);
-        Pit_Data.setPit_climberR1(climberR1);
-        Pit_Data.setPit_climberR2(climberR2);  
-        Pit_Data.setPit_climberR3(climberR3);
+//        Pit_Data.setPit_climberL1(climberL1);
+//        Pit_Data.setPit_climberL2(climberL2);
+//        Pit_Data.setPit_climberL3(climberL3);
+//        Pit_Data.setPit_climberM1(climberM1);
+//        Pit_Data.setPit_climberM2(climberM2);
+//        Pit_Data.setPit_climberM3(climberM3);
+//        Pit_Data.setPit_climberR1(climberR1);
+//        Pit_Data.setPit_climberR2(climberR2);
+//        Pit_Data.setPit_climberR3(climberR3);
         Pit_Data.setPit_shootLow(shootLow);
-        Pit_Data.setPit_shootUnder(shootUnder);
-        Pit_Data.setPit_shootLine(shootLine);
-        Pit_Data.setPit_shootFront(shootFront);
-        Pit_Data.setPit_shootBack(shootBack);
+        Pit_Data.setPit_shootLP(shootLP);
+        Pit_Data.setPit_shootTarmac(shootTarmac);
+        Pit_Data.setPit_shootRing(shootRing);
+        Pit_Data.setPit_shootAnywhere(shootAnywhere);
 
          /* */
         Pit_Data.setPit_comment(comments);

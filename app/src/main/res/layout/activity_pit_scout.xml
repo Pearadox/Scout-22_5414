@@ -138,10 +138,10 @@
         android:id="@+id/lbl_Divider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView_PS"
-        android:layout_marginTop="-5dp"
+        android:layout_alignParentStart="true"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-5dp"
         android:text="_________________________  Robot Characteristics  _________________________"
         android:textColor="@color/white"
         android:textSize="16sp" />
@@ -155,25 +155,27 @@
         android:layout_marginTop="5sp"
         android:orientation="horizontal">
 
+        <CheckBox
+            android:id="@+id/chkBox_EveryBot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="EveryBot" />
+
         <TextView
-            android:id="@+id/lbl_RoboHeight"
-            android:layout_width="170sp"
-            android:layout_height="20dp"
-            android:layout_below="@+id/lbl_Divider"
-            android:layout_alignStart="@+id/lbl_Divider"
-            android:text="Robot Weight (lbs)"
+            android:id="@+id/lbl_RoboWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Weight (lbs)"
             android:textColor="@color/grey"
             android:textSize="16sp"
-            android:textStyle="bold">
-
-        </TextView>
+            android:textStyle="bold"></TextView>
 
         <EditText
             android:id="@+id/txtEd_Weight"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_below="@+id/lbl_Divider"
-            android:layout_alignStart="@+id/lin_Wheels"
             android:ems="12"
             android:inputType="number"
             android:textColor="@color/limegreen"
@@ -188,12 +190,32 @@
             android:contentDescription="Numeric Enter Key"
             android:src="@drawable/num_enter" />
         <ImageView
-            android:id="@+id/imageView_notExitt"
+            android:id="@+id/imageView_notExit"
             android:layout_width="35sp"
             android:layout_height="35sp"
             android:layout_marginStart="5dp"
             android:contentDescription="NOT Exit Key"
             android:src="@drawable/not_exit" />
+
+        <TextView
+            android:id="@+id/lbl_RoboHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Height (inches)"
+            android:textColor="@color/grey"
+            android:textSize="16sp"
+            android:textStyle="bold"></TextView>
+
+        <EditText
+            android:id="@+id/txtEd_Height"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:ems="12"
+            android:inputType="number"
+            android:textColor="@color/limegreen"
+            android:visibility="visible"
+            tools:focusable="false" />
 
     </LinearLayout>
 //**********************************************************
@@ -216,9 +238,9 @@
 
         <TextView
             android:id="@+id/txt_NumWheels"
-            android:layout_width="30sp"
+            android:layout_width="24sp"
             android:layout_height="30sp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="6dp"
             android:layout_marginTop="5dp"
             android:text="00"
             android:textColor="@color/yellow"
@@ -243,7 +265,7 @@
 
         <Spinner
             android:id="@+id/spinner_Traction"
-            android:layout_width="50sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp" />
 
@@ -251,14 +273,14 @@
             android:id="@+id/imgView_Omni"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="5sp"
+            android:layout_marginStart="2sp"
             app:srcCompat="@drawable/wheel_omni" />
 
         <TextView
             android:id="@+id/lbl_Omni"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="-29dp"
+            android:layout_marginStart="-27dp"
             android:layout_marginTop="30dp"
             android:text="Omni"
             android:textColor="@color/darkgreen"
@@ -266,15 +288,16 @@
 
         <Spinner
             android:id="@+id/spinner_Omni"
-            android:layout_width="50sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="3sp"
             android:layout_marginTop="10dp" />
 
         <ImageView
             android:id="@+id/imgView_Mecanum"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="5sp"
+            android:layout_marginStart="2sp"
             app:srcCompat="@drawable/wheel_mecanum" />
 
         <TextView
@@ -289,8 +312,9 @@
 
         <Spinner
             android:id="@+id/spinner_Mecanum"
-            android:layout_width="50sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="3sp"
             android:layout_marginTop="10dp" />
 
         <ImageView
@@ -312,8 +336,9 @@
 
         <Spinner
             android:id="@+id/spinner_Pneumatic"
-            android:layout_width="50sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
             android:layout_marginTop="10dp" />
     </LinearLayout>
 
@@ -448,41 +473,7 @@
                 android:layout_below="@+id/lin_Checks"
                 android:layout_weight="0.70"
                 android:orientation="horizontal">
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/imageView_CP"-->
-<!--                    android:layout_width="40dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:contentDescription="Control Panel"-->
-<!--                    android:src="@drawable/control_panel" />-->
-
-                <CheckBox
-                    android:id="@+id/checkbox_CPspin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Spin?"
-                    android:textColor="@color/green" />
-
-                <CheckBox
-                    android:id="@+id/checkbox_CPcolor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Stop on Color?"
-                    android:textColor="@color/green" />
-
-                <CheckBox
-                    android:id="@+id/chkBox_Trench"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Drive Under CP"
-                    android:textColor="@color/green" />
-            </LinearLayout>
+           </LinearLayout>
 
             <CheckBox
                 android:id="@+id/chkBox_ClimberL2"
@@ -545,12 +536,12 @@
                     android:textColor="@color/magenta" />
 
                 <CheckBox
-                    android:id="@+id/chkBox_LoadSta"
+                    android:id="@+id/chkBox_Terminal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:buttonTint="@color/magenta"
-                    android:text="Loading Sta."
+                    android:text="Terminal"
                     android:textColor="@color/magenta" />
             </LinearLayout>
 
@@ -579,48 +570,16 @@
     </TableLayout>
 
 
-    //**************************************************************************
-    <LinearLayout
-        android:id="@+id/lin_lift"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tbl_Table"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+<!--    //**************************************************************************-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/lin_lift"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/tbl_Table"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:orientation="horizontal">-->
 
-        <CheckBox
-            android:id="@+id/chkBox_CanLift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Can Lift robot(s)   #"
-            android:textColor="@color/red" />
-
-        <Spinner
-            android:id="@+id/spinner_numRobots"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="-4dp"
-            android:textColor="@color/orange" />
-
-        <CheckBox
-            android:id="@+id/chkBox_Ramp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Ramp"
-            android:textColor="@color/orange" />
-
-        <CheckBox
-            android:id="@+id/chkBox_Hook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Fork/Hook"
-            android:textColor="@color/orange" />
-
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -628,8 +587,8 @@
         android:id="@+id/robot_char"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lin_lift"
-        android:layout_marginTop="-4dp"
+        android:layout_below="@+id/tbl_Table"
+        android:layout_marginTop="0dp"
         android:orientation="horizontal">
 
         <TextView
@@ -692,40 +651,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="Low Goal"
+            android:text="LowerHub"
             android:buttonTint="@color/brightblue"
             android:textColor="@color/brightblue" />
 
         <CheckBox
-            android:id="@+id/chkBox_ShootUnder"
+            android:id="@+id/chkBox_LaunchPad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="Under PP"
+            android:text="LaunchPad"
             android:buttonTint="@color/brightblue"
             android:textColor="@color/brightblue" />
         <CheckBox
-            android:id="@+id/chkBox_ShootLine"
+            android:id="@+id/chkBox_Tarmac"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="Sect. Line"
+            android:text="Tarmac"
             android:buttonTint="@color/blue"
             android:textColor="@color/blue" />
         <CheckBox
-            android:id="@+id/chkBox_ShootFront"
+            android:id="@+id/chkBox_ShootRing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="Front CP"
+            android:text="Cargo Ring"
             android:buttonTint="@color/blue"
             android:textColor="@color/blue" />
         <CheckBox
-            android:id="@+id/chkBox_ShootBack"
+            android:id="@+id/chkBox_ShootAny"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="Back CP"
+            android:text="Anywhere"
             android:buttonTint="@color/blue"
             android:textColor="@color/blue" />
 
@@ -737,10 +696,11 @@
         android:layout_height="40dp"
         android:layout_below="@+id/Shoot_Data"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/lbl_Mode"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="Auto Oper. Mode"
             android:textColor="@color/orange"
@@ -752,15 +712,8 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
+            android:background="@color/orange"
             android:layout_marginStart="10dp"
-            android:textColor="@color/orange" />
-        <CheckBox
-            android:id="@+id/chkBox_Dump"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Dump to Robot"
-            android:buttonTint="@color/orange"
             android:textColor="@color/orange" />
 
     </LinearLayout>

@@ -190,69 +190,25 @@ public class VisPit_Activity extends AppCompatActivity {
 
 
                 chkBox_Low.setChecked(Pit_Data.isPit_shootLow());
-                chkBox_Under.setChecked(Pit_Data.isPit_shootUnder());
-                chkBox_Line.setChecked(Pit_Data.isPit_shootLine());
-                chkBox_Front.setChecked(Pit_Data.isPit_shootFront());
-                chkBox_Back.setChecked(Pit_Data.isPit_shootBack());
-                chkBox_Dump.setChecked(Pit_Data.pit_dump);
-                chkBox_Spin.setChecked(Pit_Data.pit_spin);
-                chkBox_Color.setChecked(Pit_Data.pit_color);
-                chkBox_CP_under.setChecked(Pit_Data.pit_undTrench);
+                // ToDo
+//                chkBox_Under.setChecked(Pit_Data.isPit_shootUnder());
+//                chkBox_Line.setChecked(Pit_Data.isPit_shootLine());
+//                chkBox_Front.setChecked(Pit_Data.isPit_shootFront());
+//                chkBox_Back.setChecked(Pit_Data.isPit_shootBack());
 
                 txt_autoMode.setText(String.valueOf(Pit_Data.getPit_autoMode()));
                 txt_ProgLang.setText(String.valueOf(Pit_Data.getPit_lang()));
                 txt_DriveMotor.setText(String.valueOf(Pit_Data.getPit_motor()));
 
-                String CG ="";
-                if (Pit_Data.isPit_climberL1()) {
-                    CG=CG+"L1 ";
-                }
-                if (Pit_Data.isPit_climberL2()) {
-                    CG=CG+"L2 ";
-                }
-                if (Pit_Data.isPit_climberL3()) {
-                    CG=CG+"L3 ";
-                }
-                if (Pit_Data.isPit_climberM1()) {
-                    CG=CG+"M1 ";
-                }
-                if (Pit_Data.isPit_climberM2()) {
-                    CG=CG+"M2 ";
-                }
-                if (Pit_Data.isPit_climberM3()) {
-                    CG=CG+"M3 ";
-                }
-                if (Pit_Data.isPit_climberR1()) {
-                    CG=CG+"R1 ";
-                }
-                if (Pit_Data.isPit_climberR2()) {
-                    CG=CG+"R2 ";
-                }
-                if (Pit_Data.isPit_climberR3()) {
-                    CG=CG+"R3 ";
-                }
-                txt_CG.setText(CG);
 
                 chkBox_Climb.setChecked(Pit_Data.isPit_climber());
                 chkBox_Vision.setChecked(Pit_Data.isPit_vision());
                 chkBox_Pneumatics.setChecked(Pit_Data.isPit_pneumatics());
-                chkBox_Lift.setChecked(Pit_Data.isPit_canLift());
-                chkBox_OffFloor.setChecked(Pit_Data.isPit_PowerCellFloor());
-                chkBox_Load.setChecked(Pit_Data.isPit_PowerCellLoad());
+                // ToDo
+//                chkBox_OffFloor.setChecked(Pit_Data.isPit_PowerCellFloor());
+//                chkBox_Load.setChecked(Pit_Data.isPit_PowerCellLoad());
 
 
-                if (Pit_Data.isPit_canLift()) {
-                    txt_LiftCap.setVisibility(View.VISIBLE);
-                    txt_LiftCap.setText(String.valueOf(Pit_Data.getPit_numLifted()));
-                    chkBox_Hook.setVisibility(View.VISIBLE);
-                    chkBox_Hook.setChecked(Pit_Data.isPit_liftHook());
-                    chkBox_Ramp.setVisibility(View.VISIBLE);
-                    chkBox_Ramp.setChecked(Pit_Data.isPit_liftRamp());
-                } else {
-                    txt_LiftCap.setVisibility(View.INVISIBLE);
-                    chkBox_Ramp.setVisibility(View.INVISIBLE);
-                    chkBox_Hook.setVisibility(View.INVISIBLE);
-                }
 
                 // Finally ...
                 txt_Scout.setText(Pit_Data.getPit_scout());
