@@ -344,15 +344,6 @@
 
     // ======================================================
 
-    <TextView
-        android:id="@+id/lbl_Climber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lin_Wheels"
-        android:layout_marginStart="400dp"
-        android:text="_____Climber Position_____"
-        android:textColor="@color/red"
-        android:textStyle="bold" />
 
     <TableLayout
         android:id="@+id/tbl_Table"
@@ -440,26 +431,6 @@
                     android:text="Has Climber" />
             </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/chkBox_ClimberL1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.10"
-                android:text="L1" />
-
-            <CheckBox
-                android:id="@+id/chkBox_ClimberM1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.10"
-                android:text="M1" />
-
-            <CheckBox
-                android:id="@+id/chkBox_ClimberR1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.10"
-                android:text="R1" />
         </TableRow>
 
         // ==============================================================================
@@ -473,28 +444,66 @@
                 android:layout_below="@+id/lin_Checks"
                 android:layout_weight="0.70"
                 android:orientation="horizontal">
-           </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/chkBox_ClimberL2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.10"
-                android:text="L2" />
+                <TextView
+                    android:id="@+id/lbl_END"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Max Hanger Climb Level"
+                    android:textColor="@color/cyan"
+                    android:textSize="16sp" />
 
-            <CheckBox
-                android:id="@+id/chkBox_ClimberM2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.10"
-                android:text="M2" />
+                <RadioGroup
+                    android:id="@+id/radgrp_END"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/chkBox_ClimberR2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.10"
-                android:text="R2" />
+                    <RadioButton
+                        android:id="@+id/radio_Zero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="RadioClick_Hanging"
+                        android:text="None"
+                        android:textColor="@color/cyan" />
+
+                    <RadioButton
+                        android:id="@+id/radio_One"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="RadioClick_Hanging"
+                        android:text="Low"
+                        android:textColor="@color/cyan" />
+
+                    <RadioButton
+                        android:id="@+id/radio_Two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="RadioClick_Hanging"
+                        android:text="Mid"
+                        android:textColor="@color/cyan" />
+
+                    <RadioButton
+                        android:id="@+id/radio_Three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="RadioClick_Hanging"
+                        android:text="High"
+                        android:textColor="@color/cyan" />
+
+                    <RadioButton
+                        android:id="@+id/radio_Four"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="RadioClick_Hanging"
+                        android:text="Traversal"
+                        android:textColor="@color/cyan" />
+                </RadioGroup>
+            </LinearLayout>
+
         </TableRow>
 
         // ======================================================
@@ -545,26 +554,6 @@
                     android:textColor="@color/magenta" />
             </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/chkBox_ClimberL3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.10"
-                android:text="L3" />
-
-            <CheckBox
-                android:id="@+id/chkBox_ClimberM3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.10"
-                android:text="M3" />
-
-            <CheckBox
-                android:id="@+id/chkBox_ClimberR3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.10"
-                android:text="R3" />
         </TableRow>
 
     </TableLayout>
@@ -627,6 +616,15 @@
             android:layout_marginTop="-8dp"
             android:textColor="@color/magenta" />
 
+        <CheckBox
+            android:id="@+id/chkBox_CanShoot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Can Shoot Upper?"
+            android:buttonTint="@color/brightblue"
+            android:textColor="@color/brightblue" />
+
     </LinearLayout>
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -641,7 +639,7 @@
             android:id="@+id/lbl_Shoot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shoot From"
+            android:text="Score From"
             android:textColor="@color/blue"
             android:textStyle="bold"
             android:textSize="16sp">
@@ -714,6 +712,7 @@
             android:layout_gravity="top"
             android:background="@color/orange"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="-5dp"
             android:textColor="@color/orange" />
 
     </LinearLayout>

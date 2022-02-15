@@ -17,12 +17,13 @@ public class pitData implements Serializable {
     public boolean pit_vision = false;              // presence of Vision Camera
     public boolean pit_pneumatics = false;          // presence of Pneumatics
     public boolean pit_climber = false;             // presence of a Climbing mechanism
-    public boolean pit_CargoFloor = false;          // presence of a way to pick up Cargo from floor
-    public boolean pit_CargoTerm = false;           // presence of a way to pick up Cargo from Terminal
-    public String pit_HangarLevel;                  // Highest Hangar Climb
+    public boolean pit_cargoFloor = false;          // presence of a way to pick up Cargo from floor
+    public boolean pit_cargoTerm = false;           // presence of a way to pick up Cargo from Terminal
+    public String pit_hangarLevel;                  // Highest Hangar Climb
     public String pit_motor;                        // Type of Motor
     public String pit_lang;                         // Programming  Language
     public String pit_autoMode;                     // Autonomous Operating Mode
+    public boolean pit_canshoot = false;            // Has Shooter for Upper Hub
     public boolean pit_shootLow = false;            // Can Shoot into Lower Hub
     public boolean pit_shootLP = false;             // Can Shoot from Launch Pad
     public boolean pit_shootTarmac = false;         // Can Shoot from Tarmac
@@ -38,7 +39,7 @@ public class pitData implements Serializable {
     //  Constructor
 
 
-    public pitData(String pit_team, boolean pit_everyBot, int pit_weight, int pit_height, int pit_totWheels, int pit_numTrac, int pit_numOmni, int pit_numMecanum, int pit_numPneumatic, boolean pit_vision, boolean pit_pneumatics, boolean pit_climber, boolean pit_CargoFloor, boolean pit_CargoTerm, String pit_HangarLevel, String pit_motor, String pit_lang, String pit_autoMode, boolean pit_shootLow, boolean pit_shootLP, boolean pit_shootTarmac, boolean pit_shootRing, boolean pit_shootAnywhere, String pit_comment, String pit_scout, String pit_dateTime, String pit_photoURL) {
+    public pitData(String pit_team, boolean pit_everyBot, int pit_weight, int pit_height, int pit_totWheels, int pit_numTrac, int pit_numOmni, int pit_numMecanum, int pit_numPneumatic, boolean pit_vision, boolean pit_pneumatics, boolean pit_climber, boolean pit_cargoFloor, boolean pit_cargoTerm, String pit_hangarLevel, String pit_motor, String pit_lang, String pit_autoMode, boolean pit_canshoot, boolean pit_shootLow, boolean pit_shootLP, boolean pit_shootTarmac, boolean pit_shootRing, boolean pit_shootAnywhere, String pit_comment, String pit_scout, String pit_dateTime, String pit_photoURL) {
         this.pit_team = pit_team;
         this.pit_everyBot = pit_everyBot;
         this.pit_weight = pit_weight;
@@ -51,12 +52,13 @@ public class pitData implements Serializable {
         this.pit_vision = pit_vision;
         this.pit_pneumatics = pit_pneumatics;
         this.pit_climber = pit_climber;
-        this.pit_CargoFloor = pit_CargoFloor;
-        this.pit_CargoTerm = pit_CargoTerm;
-        this.pit_HangarLevel = pit_HangarLevel;
+        this.pit_cargoFloor = pit_cargoFloor;
+        this.pit_cargoTerm = pit_cargoTerm;
+        this.pit_hangarLevel = pit_hangarLevel;
         this.pit_motor = pit_motor;
         this.pit_lang = pit_lang;
         this.pit_autoMode = pit_autoMode;
+        this.pit_canshoot = pit_canshoot;
         this.pit_shootLow = pit_shootLow;
         this.pit_shootLP = pit_shootLP;
         this.pit_shootTarmac = pit_shootTarmac;
@@ -177,28 +179,28 @@ public pitData() {
         this.pit_climber = pit_climber;
     }
 
-    public boolean isPit_CargoFloor() {
-        return pit_CargoFloor;
+    public boolean isPit_cargoFloor() {
+        return pit_cargoFloor;
     }
 
-    public void setPit_CargoFloor(boolean pit_CargoFloor) {
-        this.pit_CargoFloor = pit_CargoFloor;
+    public void setPit_cargoFloor(boolean pit_cargoFloor) {
+        this.pit_cargoFloor = pit_cargoFloor;
     }
 
-    public boolean isPit_CargoTerm() {
-        return pit_CargoTerm;
+    public boolean isPit_cargoTerm() {
+        return pit_cargoTerm;
     }
 
-    public void setPit_CargoTerm(boolean pit_CargoTerm) {
-        this.pit_CargoTerm = pit_CargoTerm;
+    public void setPit_cargoTerm(boolean pit_cargoTerm) {
+        this.pit_cargoTerm = pit_cargoTerm;
     }
 
-    public String getPit_HangarLevel() {
-        return pit_HangarLevel;
+    public String getPit_hangarLevel() {
+        return pit_hangarLevel;
     }
 
-    public void setPit_HangarLevel(String pit_HangarLevel) {
-        this.pit_HangarLevel = pit_HangarLevel;
+    public void setPit_hangarLevel(String pit_hangarLevel) {
+        this.pit_hangarLevel = pit_hangarLevel;
     }
 
     public String getPit_motor() {
@@ -223,6 +225,14 @@ public pitData() {
 
     public void setPit_autoMode(String pit_autoMode) {
         this.pit_autoMode = pit_autoMode;
+    }
+
+    public boolean isPit_canshoot() {
+        return pit_canshoot;
+    }
+
+    public void setPit_canshoot(boolean pit_canshoot) {
+        this.pit_canshoot = pit_canshoot;
     }
 
     public boolean isPit_shootLow() {

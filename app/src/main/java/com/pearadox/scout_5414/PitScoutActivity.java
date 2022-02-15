@@ -31,6 +31,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,9 +79,9 @@ public class PitScoutActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter_Trac, adapter_Omni, adapter_Mac, adapter_Pneu ;
     ArrayAdapter<String> adapter_driveMotor, adapter_progLang,adapter_autoMode;
     CheckBox chkBox_Vision, chkBox_Pneumatics, chkBox_Climb, chkBox_EveryBot;
-    CheckBox chkBox_OffFloor, chkBox_Terminal;
-    CheckBox chkBox_ClimberL1, chkBox_ClimberL2, chkBox_ClimberL3, chkBox_ClimberM1, chkBox_ClimberM2, chkBox_ClimberM3,chkBox_ClimberR1, chkBox_ClimberR2, chkBox_ClimberR3;
+    CheckBox chkBox_OffFloor, chkBox_Terminal, chkBox_CanShoot;
     CheckBox chkBox_ShootLow, chkBox_LaunchPad, chkBox_Tarmac, chkBox_ShootRing, chkBox_ShootAny;
+    RadioGroup  radgrp_END;      RadioButton  radio_Lift, radio_Zero, radio_One, radio_Two, radio_Three, radio_Four;
 
     Button btn_Save;
     Boolean OnOff= false;
@@ -109,11 +111,12 @@ public class PitScoutActivity extends AppCompatActivity {
     String pitPlace = "";  Boolean pitSD = false;   Boolean pitFB = false;
     String URL = "";
     public static String timeStamp = " ";
-    boolean CG = false;             // Has CG been specified
     Boolean imageOnFB = false;      // Does image already exist in Firebase
     boolean dataSaved = false;      // Make sure they save before exiting
     public Boolean Wt_entered = false;      // Weight entered
+    public Boolean Ht_entered = false;      // Height entered
 
+    // ===========================================================================
     // ===================  Data Elements for Pit Scout object ===================
     public String teamSelected = " ";           // Team #
     public boolean everyBot = false;            // EveryBot
@@ -130,8 +133,10 @@ public class PitScoutActivity extends AppCompatActivity {
     public boolean CargoFloor = false;          // presence of a way to pick up Cargo from floor
     public boolean CargoTerminal = false;       // presence of a way to pick up Cargo from Terminal
     public String motor;                        // Type of Motor
+    public String  HangarLev = "";              // What Level Climb
     public String lang;                         // Programming  Language
     public String autoMode;                     // Autonomous Operatong Mode
+    public boolean canShoot = false;            // Has Shooter
     public boolean shootLow = false;            // Can Shoot into Lower Hub
     public boolean shootLP = false;             // Can Shoot from Launch Pad
     public boolean shootTarmac = false;         // Can Shoot from Tarmac
@@ -267,23 +272,16 @@ pitData Pit_Data = new pitData();
         chkBox_Pneumatics = (CheckBox) findViewById(R.id.chkBox_Pneumatics);
         chkBox_OffFloor = (CheckBox) findViewById(R.id.chkBox_OffFloor);
         chkBox_Terminal = (CheckBox) findViewById(R.id.chkBox_Terminal);
+        chkBox_CanShoot = (CheckBox) findViewById(R.id.chkBox_CanShoot);
         chkBox_ShootLow = (CheckBox) findViewById(R.id.chkBox_ShootLow);
         chkBox_LaunchPad = (CheckBox) findViewById(R.id.chkBox_LaunchPad);
         chkBox_Tarmac = (CheckBox) findViewById(R.id.chkBox_Tarmac);
         chkBox_ShootRing = (CheckBox) findViewById(R.id.chkBox_ShootRing);
         chkBox_ShootAny = (CheckBox) findViewById(R.id.chkBox_ShootAny);
         chkBox_Climb = (CheckBox) findViewById(R.id.chkBox_Climb);
-        chkBox_ClimberL1 = (CheckBox) findViewById(R.id.chkBox_ClimberL1);
-        chkBox_ClimberL2 = (CheckBox) findViewById(R.id.chkBox_ClimberL2);
-        chkBox_ClimberL3 = (CheckBox) findViewById(R.id.chkBox_ClimberL3);
-        chkBox_ClimberM1 = (CheckBox) findViewById(R.id.chkBox_ClimberM1);
-        chkBox_ClimberM2 = (CheckBox) findViewById(R.id.chkBox_ClimberM2);
-        chkBox_ClimberM3 = (CheckBox) findViewById(R.id.chkBox_ClimberM3);
-        chkBox_ClimberR1 = (CheckBox) findViewById(R.id.chkBox_ClimberR1);
-        chkBox_ClimberR2 = (CheckBox) findViewById(R.id.chkBox_ClimberR2);
-        chkBox_ClimberR3 = (CheckBox) findViewById(R.id.chkBox_ClimberR3);
         editText_Comments = (EditText) findViewById(R.id.editText_Comments);
-        setClimbers(false);     // Turn off CG ☑
+        radgrp_END = (RadioGroup) findViewById(R.id.radgrp_END);
+
 
 //        editText_Comments.setFocusable(true);
 //        editText_Comments.setClickable(true);
@@ -365,38 +363,61 @@ pitData Pit_Data = new pitData();
             }
         });
 
+        chkBox_CanShoot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                Log.w(TAG, "chkBox_CanShoot Listener");
+                if (buttonView.isChecked()) {
+                    Log.w(TAG,"CanShoot is checked.");
+                    canShoot = true;
+                } else {
+                    Log.w(TAG,"CanShoot is unchecked.");
+                    canShoot = false;
+                }
+            }
+        });
+
         chkBox_EveryBot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 Log.w(TAG, "chkBox_EveryBot Listener");
+                radgrp_END = (RadioGroup) findViewById(R.id.radgrp_END);
+                RadioButton radio_Two = (RadioButton) findViewById(R.id.radio_Two);
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"everyBot is checked.");
                     everyBot = true;
-                    // ToDo - set all known values
                     spinner_Motor.setSelection(1);              // CIM
-                    txtEd_Weight.setText("100");                // weight
-                    weight = 100;                               // Weight
-                    txtEd_Height.setText("56");                 // height
-                    height = 56;                                // Height
                     spinner_Traction.setSelection(4);           // # Trac
-                    numTraction = 4;                            //
                     txt_NumWheels.setText(String.valueOf(4));   // Total # of wheels
-                    totalWheels = 4;                            //
                     chkBox_Climb.setChecked(true);              // Can Climb
                     chkBox_OffFloor.setChecked(true);           // P/U from Floor
-                    //ToDo - Climb level Mid
+                    radio_Two.setChecked(true);                 // Mid climb
+                    radgrp_END.check(R.id.radio_Two);           //
+                    HangarLev = "Mid";                          //
                     spinner_Lang.setSelection(1);               // JAVA
-                    //ToDo - Shoot Lower
-                    //ToDo - Oper.Mode =Pgm
+                    chkBox_CanShoot.setChecked(false);          // Can't shoot upper
+                    chkBox_ShootLow.setChecked(true);           // Shoot Lower Hub
+                    spinner_autoMode.setSelection(1);           // Pgm Only
                     editText_Comments.setText("Everybot");      // Comments
                     comments = "Everybot";                      // Comments
-//                    txtEd_Weight.setEnabled(false);
-//                    txtEd_Height.setEnabled(false);
 
                 } else {
                     Log.w(TAG,"everyBot is unchecked.");
                     everyBot = false;
-                    // ToDo - turn them off
+                    spinner_Motor.setSelection(0);              // CIM
+                    spinner_Traction.setSelection(0);           // # Trac
+                    txt_NumWheels.setText(String.valueOf(0));   // Total # of wheels
+                    chkBox_Climb.setChecked(false);             // Can Climb
+                    chkBox_OffFloor.setChecked(false);          // P/U from Floor
+                    radio_Two.setChecked(false);                // No climb
+                    radgrp_END.check(radgrp_END.getChildAt(0).getId());
+                    HangarLev = "None";                         //
+                    spinner_Lang.setSelection(0);               //
+                    chkBox_CanShoot.setChecked(false);          // Can't shoot upper
+                    chkBox_ShootLow.setChecked(false);          // Shoot Lower Hub
+                    spinner_autoMode.setSelection(0);           // Auto Mode
+                    editText_Comments.setText("");              // Comments
+                    comments = "";                              // Comments
                 }
             }
         });
@@ -408,11 +429,9 @@ pitData Pit_Data = new pitData();
                 if (buttonView.isChecked()) {
                     Log.w(TAG,"Climb is checked.");
                     climb = true;
-                    setClimbers(true);     // Turn off CG ☑
                 } else {
                     Log.w(TAG,"Climb is unchecked.");
                     climb = false;
-                    setClimbers(false);     // Turn off CG ☑
                 }
             }
         });
@@ -561,17 +580,57 @@ pitData Pit_Data = new pitData();
         });
 
 
+        txtEd_Height.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.w(TAG, "******  txtEd_Height listener  ******  " + keyCode + "  " + event.getAction());
+
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    Log.w(TAG, " txtEd_Height = "  + txtEd_Height.getText());
+
+                    if (txtEd_Height.getText().length() > 0) {
+                        height = Integer.valueOf(String.valueOf(txtEd_Height.getText()));
+                        Ht_entered = true;
+                    } else {
+                        final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                        tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
+                        Toast toast = Toast.makeText(getBaseContext(), " \n*****  Enter a valid Height!  *****\n ", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        toast.show();
+                    }
+                }
+                return false;
+            }
+        });
+
+
+        txtEd_Height.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Log.w(TAG, "@@@ Height - Lost Focus Listener @@@  '" + txtEd_Height.getText() +"' " + height +"  " + Ht_entered);
+                if (!hasFocus) {
+                    // code to execute when EditText loses focus
+                    if (!Ht_entered) {
+                        final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                        tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
+                        Toast toast = Toast.makeText(getBaseContext(), "\n*** Please use the ➺| key and NOT the ▽ key ***\n                Please re-enter Height", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        toast.show();
+                    }
+                }
+            }
+        });
+
 
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
         btn_Save = (Button) findViewById(R.id.btn_Save);
         btn_Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.w(TAG, "Save Button Listener");
-                Log.e(TAG, "REQ'D  >>>>>   Wt=" + weight+ "  ☸=" + totalWheels + " ↑" + chkBox_Climb.isChecked() + " " + CG +"  Lang='"+ lang+ "'   Mode=" + autoMode);
+                Log.e(TAG, "REQ'D  >>>>>   Wt=" + weight+ "  ☸=" + totalWheels + " ↑" + chkBox_Climb.isChecked() +"  Lang='"+ lang+ "'   Mode=" + autoMode);
                 // Check for required fields
                 if ((txtEd_Weight.length() > 0) &&                               // weight field length >0
                         ((weight > 0) &&(weight <= MAX_ROBOT_WEIGHT)) &&        // weight >0 & <_ Max
-                        ((!chkBox_Climb.isChecked()) |(chkBox_Climb.isChecked())) &&   // at least one CG checkbox ☑ if Climb is True
                         (totalWheels >= 4) &&                                   // at least 4 wheels
                         (spinner_autoMode.getSelectedItemPosition() > 0) &&     // Autonomous mode specified
                         (spinner_Lang.getSelectedItemPosition() > 0)) {        // Robot Prog. Language set
@@ -587,40 +646,12 @@ pitData Pit_Data = new pitData();
                 } else {
                     final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
                     tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
-                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels, CG, Lang. & Auto Mode) before saving *** \n Wt=" + weight+ "  ☸=" + totalWheels + " ↑" + chkBox_Climb.isChecked()  +"  Lang='"+ lang+ "'   Mode=" + autoMode, Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels, Lang. & Auto Mode) before saving *** \n Wt=" + weight+ "  ☸=" + totalWheels + " ↑" + chkBox_Climb.isChecked()  +"  Lang='"+ lang+ "'   Mode=" + autoMode, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     toast.show();
                 }
             }
         });
-    }
-
-    private void setClimbers(Boolean onOff) {       // pass in T/F
-        Log.w(TAG, "@@@ setClimbers  " + onOff + "  CG=" + CG);
-        chkBox_ClimberL1.setEnabled(onOff);
-        chkBox_ClimberL2.setEnabled(onOff);
-        chkBox_ClimberL3.setEnabled(onOff);
-        chkBox_ClimberM1.setEnabled(onOff);
-        chkBox_ClimberM2.setEnabled(onOff);
-        chkBox_ClimberM3.setEnabled(onOff);
-        chkBox_ClimberR1.setEnabled(onOff);
-        chkBox_ClimberR2.setEnabled(onOff);
-        chkBox_ClimberR3.setEnabled(onOff);
-        if (!onOff) {                           // turn them all off
-            Log.w(TAG, "@@@ setClimbers UN-checked B4 " + onOff + "  CG=" + CG);
-            chkBox_ClimberL1.setChecked(false);
-            chkBox_ClimberL2.setChecked(false);
-            chkBox_ClimberL3.setChecked(false);
-            chkBox_ClimberM1.setChecked(false);
-            chkBox_ClimberM2.setChecked(false);
-            chkBox_ClimberM3.setChecked(false);
-            chkBox_ClimberR1.setChecked(false);
-            chkBox_ClimberR2.setChecked(false);
-            chkBox_ClimberR3.setChecked(false);
-            CG = false;
-            Log.w(TAG, "@@@ setClimbers UN-checked After " + onOff + "  CG=" + CG);
-        }
-
     }
 
 
@@ -925,8 +956,8 @@ pitData Pit_Data = new pitData();
                         chkBox_Vision.setChecked(Pit_Load.isPit_vision());
                         chkBox_Pneumatics.setChecked(Pit_Load.isPit_pneumatics());
                         chkBox_EveryBot.setChecked(Pit_Load.isPit_everyBot());
-                        chkBox_OffFloor.setChecked(Pit_Load.isPit_CargoFloor());
-                        chkBox_Terminal.setChecked(Pit_Load.isPit_CargoTerm());
+                        chkBox_OffFloor.setChecked(Pit_Load.isPit_cargoFloor());
+                        chkBox_Terminal.setChecked(Pit_Load.isPit_cargoTerm());
                         
                         chkBox_ShootLow.setChecked(Pit_Load.isPit_shootLow());
                         chkBox_LaunchPad.setChecked(Pit_Load.isPit_shootLP());
@@ -1156,8 +1187,38 @@ pitData Pit_Data = new pitData();
         }
     }
 
+    /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+    /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+    /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+    public void RadioClick_Hanging(View view) {
+        Log.w(TAG, "@@ RadioClick_Hanging @@" );
+        radgrp_END = (RadioGroup) findViewById(R.id.radgrp_END);
+        int selectedId = radgrp_END.getCheckedRadioButtonId();
+        Log.d(TAG, "*** Selected=" + selectedId);
+        radio_Lift = (RadioButton) findViewById(selectedId);
+        String value = radio_Lift.getText().toString();
+        if (value.equals("None")) {             // Zero?
+            Log.w(TAG, "None");
+            HangarLev = "None";
+        } else if (value.equals("Low")){        // One?
+            Log.w(TAG, "Low");
+            HangarLev = "Low";
+        } else if (value.equals("Mid")){         // Two
+            Log.w(TAG, "Mid");
+            HangarLev = "Mid";
+        } else if (value.equals("High")){       // Three
+            Log.w(TAG, "High");
+            HangarLev = "High";
+        } else if (value.equals("Traversal")){  // Four
+            Log.w(TAG, "Traversal");
+            HangarLev = "Traversal";
+        } else {                                // Invalid
+            Log.e(TAG, "****  Invalid Hangar Level ****");
+        }
+    }
 
-/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+    /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
     private void findTeam(String tnum) {
         Log.w(TAG, "$$$$$  findTeam " + tnum);
         boolean found = false;
@@ -1208,20 +1269,13 @@ pitData Pit_Data = new pitData();
         Pit_Data.setPit_vision(vision);
         Pit_Data.setPit_pneumatics(pneumatics);
         Pit_Data.setPit_climber(climb);
-        Pit_Data.setPit_CargoFloor(CargoFloor);
-        Pit_Data.setPit_CargoTerm(CargoTerminal);
+        Pit_Data.setPit_cargoFloor(CargoFloor);
+        Pit_Data.setPit_cargoTerm(CargoTerminal);
         Pit_Data.setPit_motor(motor);
+        Pit_Data.setPit_hangarLevel(HangarLev);
+        Pit_Data.setPit_canshoot(canShoot);
         Pit_Data.setPit_lang(lang);
         Pit_Data.setPit_autoMode(autoMode);
-//        Pit_Data.setPit_climberL1(climberL1);
-//        Pit_Data.setPit_climberL2(climberL2);
-//        Pit_Data.setPit_climberL3(climberL3);
-//        Pit_Data.setPit_climberM1(climberM1);
-//        Pit_Data.setPit_climberM2(climberM2);
-//        Pit_Data.setPit_climberM3(climberM3);
-//        Pit_Data.setPit_climberR1(climberR1);
-//        Pit_Data.setPit_climberR2(climberR2);
-//        Pit_Data.setPit_climberR3(climberR3);
         Pit_Data.setPit_shootLow(shootLow);
         Pit_Data.setPit_shootLP(shootLP);
         Pit_Data.setPit_shootTarmac(shootTarmac);
