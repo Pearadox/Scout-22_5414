@@ -119,42 +119,27 @@ public class DraftScout_Activity extends AppCompatActivity {
     p_Firebase.teamsObj team_inst = new p_Firebase.teamsObj();
 
     String Tarmac = "";
-    String Dumped = "";
-    String autoCellLow = "";
-    String autoCellUnder = "";
-    String autoCellLine = "";
-    String autoCellFrontCP = "";
-    String AconUnderNum = "";
-    String AconLineNum = "";
-    String AconFrontNum = "";
-    String telePowerCellL0 = "";
-    String telePowerCellL1 = "";
-    String telePowerCellL2 = "";
-    String telePowerCellL3 = "";
-    String telePowerCellL4 = "";
+    String autoLow = "";
+    String autoUpper = "";
+    String aLowMiss = "";
+    String aHighMiss = "";
+    String teleCargoL0 = "";
+    String teleCargoL1 = "";
+    String tLowMiss = "";
+    String tHighMiss = "";
     String autoCollectFloor = "";
-    String autoCollectRobot = "";
-    String autoCollectCP = "";
-    String autoCollectTrench = "";
-    String autoCollectBoundary = "";
+    String autoCollectTerm = "";
     String teleCollectFloor = "";
-    String teleCollectRobot = "";
-    String teleCollectCP = "";
-    String teleCollectTrench = "";
-    String teleCollectBoundary = "";
-    String teleCollectLoadSta = "";
-    String TconUnderNum = "";
-    String TconLineNum = "";
-    String TconFrontNum = "";
-    String TconBackNum = "";
-    String CPspinNum = "";
-    String CPcolorNum = "";
+    String teleCollectTerm = "";
     String climb = "";
     String climb_Hang0 = "";
     String climb_Hang1 = "";
     String climb_Hang2 = "";
     String climb_Hang3 = "";
     String climb_Hang4 = "";
+    String Penalties = "";
+    String LostComms = "";
+    String Tipped = "";
     String mdNumMatches = "";
 
     private FirebaseDatabase pfDatabase;
@@ -403,30 +388,17 @@ public class DraftScout_Activity extends AppCompatActivity {
                         showFormula(sortType);              // update the formula
                         loadTeams();
                         break;
-                    case "Cell":
-                        sortType = "Cell";
-//                      Log.w(TAG, "Cube sort");
+                    case "Cargo":
+                        sortType = "Cargo";
+//                      Log.w(TAG, "Cargo sort");
                         Collections.sort(team_Scores, new Comparator<Scores>() {
                             @Override
                             public int compare(Scores c1, Scores c2) {
                                 return Float.compare(c1.getSCORE_PowerCellScore(), c2.getSCORE_PowerCellScore());
                             }
                         });
-                        Collections.reverse(team_Scores);   // Descending
-                        showFormula("Cell");              // update the formula
-                        loadTeams();
-                        break;
-                    case "C.P.":
-                        sortType = "C.P.";
-//                        Log.w(TAG, "C.P. sort");
-                        Collections.sort(team_Scores, new Comparator<Scores>() {
-                            @Override
-                            public int compare(Scores c1, Scores c2) {
-                                return Float.compare(c1.getSCORE_panelsScore(), c2.getSCORE_panelsScore());
-                            }
-                        });
-                        Collections.reverse(team_Scores);   // Descending
-                        showFormula(sortType);              // update the formula
+                        Collections.reverse(team_Scores);       // Descending
+                        showFormula("Cargo");               // update the formula
                         loadTeams();
                         break;
                     case "Combined":
@@ -489,8 +461,8 @@ public class DraftScout_Activity extends AppCompatActivity {
         Cargo_C0 = sharedPref.getString("prefCargo_C0", "1.5");             // Floor
         Cargo_C1 = sharedPref.getString("prefCargo_C1", "1.0");             // Terminal
 
-        climbClimb = sharedPref.getString("prefClimb_climb", "2.5");        // Climbed
-        climbHang1 = sharedPref.getString("prefClimb_Hang0", "-2.0");       //** None
+        climbClimb = sharedPref.getString("prefClimb_climb", "1.0");        // Climbed
+        climbHang0 = sharedPref.getString("prefClimb_Hang0", "-2.0");       //** None
         climbHang1 = sharedPref.getString("prefClimb_Hang1", "1.0");        //** Low
         climbHang2 = sharedPref.getString("prefClimb_Hang2", "2.5");        //** Mid
         climbHang3 = sharedPref.getString("prefClimb_Hang3", "5.0");        //** High
@@ -510,18 +482,18 @@ public class DraftScout_Activity extends AppCompatActivity {
         getprefs();         // make sure Prefs are up to date
         switch (typ) {
             case "Climb":
-                form = "((" + climbClimb + " * Climbed)  ✚  ((" + climbHang1 + "*Hang1) + (" + climbHang2 + " * Hang2) + (" + climbHang3 + " * Hang3) + (" + climbHang4 + " * Hang4))) / # matches";
+                form = "((" + climbClimb + " * Climbs)  ✚  ((" + climbHang0 + "*Hang0)(" + climbHang1 + "*Hang1) + (" + climbHang2 + " * Hang2) + (" + climbHang3 + " * Hang3) + (" + climbHang4 + " * Hang4))) / #Matches";
                 lbl_Formula.setTextColor(Color.parseColor("#4169e1"));      // blue
                 txt_Formula.setText(form);
                 break;
             case "Cargo":
                 form = "( (" + Cargo_L0 + "* (aLow + tLow)) + (" + Cargo_L1 + "* (aUpper + tUpper)}   ✚  ";
-                form = form + " ( " + Cargo_C0 + "*(aFloor + tFloor)" + Cargo_C1 +"*(aTerm + tTerm)" + " ) /#M matches";
+                form = form + " ( " + Cargo_C0 + "*(aFloor + tFloor) +" + Cargo_C1 +"*(aTerm + tTerm)" + " ) /#Matches";
                 lbl_Formula.setTextColor(Color.parseColor("#ee00ee"));      // magenta
                 txt_Formula.setText(form);
                 break;
             case "Combined":
-                form = "((" + wtClimb + " * climbScore) + (" + wtCargo + " * CargoScore)) / #matches";
+                form = "((" + wtClimb + " * climbScore) + (" + wtCargo + " * CargoScore)) / #Matches";
                 lbl_Formula.setTextColor(Color.parseColor("#ff0000"));      // red
                 txt_Formula.setText(form);
                 break;
@@ -785,7 +757,7 @@ public class DraftScout_Activity extends AppCompatActivity {
                 case "Climb":
                     totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_climbScore()) + "]";
                     break;
-                case "Cell":
+                case "Cargo":
                     totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_PowerCellScore()) + "]";
                     break;
                 case "Combined":
@@ -798,9 +770,10 @@ public class DraftScout_Activity extends AppCompatActivity {
                     Log.e(TAG, "Invalid Sort - " + sortType);
             }
 
-            temp.put("Stats3", "Climb ♺" + climb  + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + " ₃" + climb_Hang4 );
-            temp.put("Stats2", "Tele ◯◉ " + telePowerCellL0 + " U" + telePowerCellL1 + " L" + telePowerCellL2 + "  F" + telePowerCellL3 + "  B" + telePowerCellL4 + " ✿ U" + TconUnderNum + " L" + TconLineNum + " F" + TconFrontNum + " B" + TconBackNum + "   ◯↑ F" + teleCollectFloor + " R" + teleCollectRobot + " C" + teleCollectCP + " T" + teleCollectTrench + " B" + teleCollectBoundary + " L" + teleCollectLoadSta);
-            temp.put("Stats", "Auto ≠" + Tarmac + " ▼" + Dumped + "   ◯◉ " + autoCellLow + " U" + autoCellUnder + " L" + autoCellLine + " F" + autoCellFrontCP + " ✿ U" + AconUnderNum + " L" + AconLineNum + " F" + AconFrontNum + "   ◯↑ F" + autoCollectFloor + " R" + autoCollectRobot + " C" + autoCollectCP + " T" + autoCollectTrench + " B" + autoCollectBoundary);
+            // Todo - add Missed & shooting %
+            temp.put("Stats3", "Climb ╪" + climb  + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + " ₃" + climb_Hang4 + "    ⚑" + Penalties + " ⚡" + LostComms + "  ◥ " + Tipped);
+            temp.put("Stats2", "Tele ◯L" + teleCargoL0 + " U" + teleCargoL1 + "  ⊗L" + tLowMiss + " U" + tHighMiss  + "   ◯↑ F" + teleCollectFloor + " T" + teleCollectTerm );
+            temp.put("Stats", "Auto ≠" + Tarmac + "   ◯L" + autoLow + " U" + autoUpper + "  ⊗L" + aLowMiss + " U" + aHighMiss + "   ◯↑ F" + autoCollectFloor + " T" + autoCollectTerm );
             temp.put("team", tn + "-" + score_inst.getTeamName() + "  (" + mdNumMatches + ")  " + totalScore);
             temp.put("BA", "Rank=" + tmRank + "   Score=" + tmRScore + "   WLT=" + tmWLT + "   OPR=" + tmOPR);
             draftList.add(temp);
@@ -950,7 +923,7 @@ public class DraftScout_Activity extends AppCompatActivity {
             bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName + "\n");
             bW.write(underScore + "  CELLS  " + underScore + "\n \n");
             //  Switch sort
-            sortType = "Cell";
+            sortType = "Cargo";
             Collections.sort(team_Scores, new Comparator<Scores>() {
                 @Override
                 public int compare(Scores c1, Scores c2) {
@@ -967,7 +940,7 @@ public class DraftScout_Activity extends AppCompatActivity {
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_PowerCellScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
                 bW.write(String.format("%2d", i + 1) + ") " + tNumb + "-" + tName + "\t (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ") " + totalScore + "\t");
-                bW.write("Auto◯" + autoCellLow + " ₁" + autoCellUnder + " ₂" + autoCellLine + " ₃" + autoCellFrontCP + "  Tele" + "◯" + telePowerCellL0 + " ₁" + telePowerCellL1 + " ₂" + telePowerCellL2 + " ₃" + telePowerCellL3 + " ₄" + telePowerCellL4 + "\n" + DS);
+                bW.write("Auto◯" + autoLow + " ₁" + autoUpper  + "  Tele" + "◯" + teleCargoL0 + " ₁" + teleCargoL1  + "\n" + DS);
             } // end For # teams
             bW.write(" \n" + "\n" + (char) 12);        // NL & FF
             //=====================================================================
@@ -992,7 +965,7 @@ public class DraftScout_Activity extends AppCompatActivity {
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_panelsScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
                 bW.write(String.format("%2d", i + 1) + ") " + tNumb + "-" + tName + "\t  (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ")  " + totalScore);
-                bW.write("  ☢  ₁" + CPspinNum + " ₂" + CPcolorNum + "\n" + DS);
+//                bW.write("  ☢  ₁" + CPspinNum + " ₂" + CPcolorNum + "\n" + DS);
             } // end For # teams
             bW.write(" \n" + "\n" + (char) 12);        // NL & FF
             //=====================================================================
@@ -1009,6 +982,7 @@ public class DraftScout_Activity extends AppCompatActivity {
             });
             Collections.reverse(team_Scores);   // Descending
             loadTeams();
+            // ToDo - check format & add misses & %
             for (int i = 0; i < numPicks; i++) {    // load by sorted scores
                 score_inst = team_Scores.get(i);
                 tNumb = score_inst.getTeamNum();
@@ -1092,8 +1066,12 @@ public class DraftScout_Activity extends AppCompatActivity {
         int TcolTerminal = 0;
         int aLow = 0;
         int aUpper = 0;
+        int aMissedLow = 0;
+        int aMissedUpper = 0;
         int tLow = 0;
         int tUpper = 0;
+        int tMissedLow = 0;
+        int tMissedUpper = 0;
         int climbed = 0;
         int climbH0 = 0;
         int climbH1 = 0;
@@ -1101,7 +1079,9 @@ public class DraftScout_Activity extends AppCompatActivity {
         int climbH3 = 0;
         int climbH4 = 0;
         int pen = 0;
-       int numMatches = 0;
+        int lightning = 0;
+        int tipOver = 0;
+        int numMatches = 0;
 
 //        Log.d(TAG, ">>>>>>> All_Matches " + All_Matches.size());
         for (int i = 0; i < All_Matches.size(); i++) {
@@ -1124,12 +1104,18 @@ public class DraftScout_Activity extends AppCompatActivity {
                 }                                               //**
                 aLow = aLow + match_inst.getAuto_Low();
                 aUpper = aUpper + match_inst.getAuto_High();
+                aMissedLow = aMissedLow + match_inst.getAuto_MissedLow();
+                aMissedUpper = aMissedUpper + match_inst.getAuto_MissedHigh();
+                // ToDo - percentage
 
                 // *************************************************
                 // ******************** TeleOps ********************
                 // *************************************************
                 tLow = tLow + match_inst.getTele_Low();
                 tUpper = tUpper + match_inst.getTele_High();
+                tMissedLow = tMissedLow + match_inst.getTele_MissedLow();
+                tMissedUpper = tMissedUpper + match_inst.getTele_MissedHigh();
+                // ToDo - percentage
 
                 if (match_inst.isTele_Cargo_floor()) {          //**  Collect Tele
                     TcolFloor++;                                //**
@@ -1160,9 +1146,13 @@ public class DraftScout_Activity extends AppCompatActivity {
                     default:                // ????
                         Log.e(TAG, "*** Error - bad Hangar Level  ***");
                 } // end Switch
-                pen = pen + match_inst.getTele_num_Penalties(); ;
-
-
+                pen = pen + match_inst.getTele_num_Penalties();
+                if (match_inst.isFinal_lostComms()) {
+                    lightning++;
+                }
+                if (match_inst.isFinal_tipped()) {
+                    tipOver++;
+                }
 //                Log.w(TAG, "Accum. matches = " + numMatches);
             } //End if teams equal
         } // End For _ALL_ matches
@@ -1175,52 +1165,51 @@ public class DraftScout_Activity extends AppCompatActivity {
         }
         if (numMatches > 0) {
             Tarmac = String.valueOf(base);
-            telePowerCellL0 = String.valueOf(tLow);
-            telePowerCellL1 = String.valueOf(tUpper);
+            autoLow = String.valueOf(aLow);
+            autoUpper = String.valueOf(aUpper);
+            aLowMiss = String.valueOf(aMissedLow);
+            aHighMiss = String.valueOf(aMissedUpper);
+            teleCargoL0 = String.valueOf(tLow);
+            teleCargoL1 = String.valueOf(tUpper);
+            tLowMiss = String.valueOf(tMissedLow);
+            tHighMiss = String.valueOf(tMissedUpper);
             autoCollectFloor = String.valueOf(colFloor);
             teleCollectFloor = String.valueOf(TcolFloor);
+            autoCollectTerm = String.valueOf(colTerminal);
+            teleCollectTerm = String.valueOf(TcolTerminal);
             climb = String.valueOf(climbed);
             climb_Hang0 = String.valueOf(climbH0);
             climb_Hang1 = String.valueOf(climbH1);
             climb_Hang2 = String.valueOf(climbH2);
             climb_Hang3 = String.valueOf(climbH3);
             climb_Hang4 = String.valueOf(climbH4);
+            Penalties = String.valueOf(pen);
+            LostComms = String.valueOf(lightning);
+            Tipped = String.valueOf(tipOver);
         } else {
             Tarmac = "0";
-            autoCellLow = "0";
-            autoCellUnder = "0";
-            autoCellLine = "0";
-            autoCellFrontCP = "0";
-            AconUnderNum = "0";
-            AconLineNum = "0";
-            AconFrontNum = "0";
-            TconUnderNum = "0";
-            TconLineNum = "0";
-            TconFrontNum = "0";
-            TconBackNum = "0";
-            telePowerCellL0 = "0";
-            telePowerCellL1 = "0";
-            telePowerCellL2 = "0";
-            telePowerCellL3 = "0";
-            telePowerCellL4 = "0";
+            autoLow = "0";
+            autoUpper = "0";
+            aLowMiss = "0";
+            aHighMiss = "0";
+            teleCargoL0 = "0";
+            teleCargoL1 = "0";
+            tLowMiss = "0";
+            tHighMiss = "0";
             autoCollectFloor = "0";
-            autoCollectRobot = "0";
-            autoCollectCP = "0";
-            autoCollectTrench = "0";
-            autoCollectBoundary = "0";
+            autoCollectTerm = "0";
             teleCollectFloor = "0";
-            teleCollectRobot = "0";
-            teleCollectCP = "0";
-            teleCollectTrench = "0";
-            teleCollectBoundary = "0";
-            teleCollectLoadSta = "0";
+            teleCollectTerm = "0";
             climb = "0";
             climb_Hang0 = "0";
             climb_Hang1 = "0";
             climb_Hang2 = "0";
             climb_Hang3 = "0";
             climb_Hang4 = "0";
-         }
+            Penalties = "0";
+            LostComms = "0";
+            Tipped = "0";
+        }
         //============================
         float climbScore = 0;
         float cellScored = 0;
@@ -1229,7 +1218,7 @@ public class DraftScout_Activity extends AppCompatActivity {
         float combinedScore = 0;
         float ControlPanelScore = 0;
         if (numMatches > 0) {
-            climbScore = ( (climbed * Float.parseFloat(climbClimb))  + (climbH1 * Float.parseFloat(climbHang1)) + (climbH2 * Float.parseFloat(climbHang2)) + (climbH3 * Float.parseFloat(climbHang3)) + ((climbH4 * Float.parseFloat(climbHang4))) ) / (float)numMatches;
+            climbScore = ( (climbed * Float.parseFloat(climbClimb)) + (climbH0 * Float.parseFloat(climbHang0))+ (climbH1 * Float.parseFloat(climbHang1)) + (climbH2 * Float.parseFloat(climbHang2)) + (climbH3 * Float.parseFloat(climbHang3)) + ((climbH4 * Float.parseFloat(climbHang4))) ) / (float)numMatches;
 //            Log.e(TAG, team + " Climb ♺=" + (climbed*Float.parseFloat(climbClimb)) + " 円=" + (parked*Float.parseFloat(parkSG)) + " ⚖=" + (bal*Float.parseFloat(Balanced)) + " ✚" + " ₀=" + (climbH0*Float.parseFloat(climbHang0)) + " ₁=" + (climbH1*Float.parseFloat(climbHang1)) + " ₂=" + (climbH2*Float.parseFloat(climbHang2)) + " ₃=" + (climbH3*Float.parseFloat(climbHang3)) + " ✚ ↨₁=" + (lift1Num*Float.parseFloat(climbLift1))+ " ↨₂=" + (lift2Num*Float.parseFloat(climbLift2))+ " ↑=" + (gotLiftedNum*Float.parseFloat(climbLifted)) + "  / " + numMatches + " ==[ " + climbScore + "]");
 
             cellScored = ( ((aLow + tLow) * Float.parseFloat(Cargo_L0)) + ((aUpper + tUpper) * Float.parseFloat(Cargo_L1)) ) / (float)numMatches;
@@ -1324,7 +1313,7 @@ public class DraftScout_Activity extends AppCompatActivity {
             curScrTeam.setScrOPR(team_inst.getTeam_OPR());
 //            Log.w(TAG, curScrTeam.getTeamNum() + "  " + curScrTeam.getTeamName());
             curScrTeam.setSCORE_climbScore((float) 0);        //Climb
-            curScrTeam.setSCORE_PowerCellScore((float) 0);    // Cell
+            curScrTeam.setSCORE_PowerCellScore((float) 0);    // Cargo
             curScrTeam.setSCORE_combinedScore((float) 0);     // Combined
             curScrTeam.setSCORE_panelsScore((float) 0);       // C.P.
             team_Scores.add(i, curScrTeam);
