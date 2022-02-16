@@ -68,38 +68,27 @@ public class DraftScout_Activity extends AppCompatActivity {
     String TAG = "DraftScout_Activity";        // This CLASS name
     Boolean is_Resumed = false;
     Boolean restart = false;
-    int start = 0;          // Start Position for matches (0=ALL)
+    int start = 0;                  // Start Position for matches (0=ALL)
     int numObjects = 0;
     int numProcessed = 0;
-    int minMatches = 99;         // minimum # of matches collected
+    int minMatches = 99;            // minimum # of matches collected
     int numPicks = 24;              // # of picks to show for Alliance Picks (actually get from Preferences)
-    /*Shared Prefs-Scored Power-Cell*/ public String Cell_Dump = "";
-    public String PowerCell_L0 = "";
-    public String PowerCell_L1 = "";
-    public String PowerCell_L2 = "";
-    public String PowerCell_L3 = "";
-    public String PowerCell_L4 = "";
-    public String PowerCell_C0 = "";
-    public String PowerCell_C1 = "";
-    public String PowerCell_C2 = "";
-    public String PowerCell_C3 = "";
-    public String PowerCell_C4 = "";
-    public String PowerCell_C5 = "";
-    /*Shared Prefs-C.P.*/ public String panel_L1 = "";
-    public String panel_L2 = "";
-    /*Shared Prefs-Climbing*/  public String climbSG = "";
-    public String parkSG = "";
-    public String Balanced = "";
-    public String climbLift1 = "";
-    public String climbLift2 = "";
-    public String climbLifted = "";
+    /*Shared Prefs-Scored Cargo*/ 
+    public String Cargo_L0 = "";    // Lower
+    public String Cargo_L1 = "";    // Upper
+    public String Cargo_C0 = "";    // Floor
+    public String Cargo_C1 = "";    // Terminal
+    /*Shared Prefs-Climbing*/
+    public String climbClimb = "";
     public String climbHang0 = "";
     public String climbHang1 = "";
     public String climbHang2 = "";
     public String climbHang3 = "";
-    /*Weight factors*/ public String wtClimb = "";
-    public String wtPowerCell = "";
-    public String wtCP = "";
+    public String climbHang4 = "";
+    /*Weight factors*/ 
+    public String wtClimb = "";
+    public String wtCargo = "";
+
     ImageView imgStat_Load;
     TextView txt_EventName, txt_NumTeams, txt_Formula, lbl_Formula, txt_LoadStatus, txt_SelNum;
     Spinner spinner_numMatches;
@@ -108,7 +97,7 @@ public class DraftScout_Activity extends AppCompatActivity {
     Button btn_Match, btn_Pit, btn_Default;
     ProgressBar pbSpinner;
     RadioGroup radgrp_Sort;
-    RadioButton radio_Climb, radio_PowerCell, radio_Weight, radio_Team, radio_pGt1, radio_cGt1, radio_ControlPanel;
+    RadioButton radio_Climb, radio_Cargo, radio_Weight, radio_Team, radio_pGt1, radio_cGt1, radio_ControlPanel;
     //    Button btn_Up, btn_Down, btn_Delete;
     public ArrayAdapter<String> adaptTeams;
     public static String[] numMatch = new String[]             // Num. of Matches to process
@@ -129,7 +118,7 @@ public class DraftScout_Activity extends AppCompatActivity {
     String tmOPR = "";
     p_Firebase.teamsObj team_inst = new p_Firebase.teamsObj();
 
-    String SectLin = "";
+    String Tarmac = "";
     String Dumped = "";
     String autoCellLow = "";
     String autoCellUnder = "";
@@ -161,15 +150,11 @@ public class DraftScout_Activity extends AppCompatActivity {
     String CPspinNum = "";
     String CPcolorNum = "";
     String climb = "";
-    String park = "";
-    String level = "";
     String climb_Hang0 = "";
     String climb_Hang1 = "";
     String climb_Hang2 = "";
     String climb_Hang3 = "";
-    String liftOne = "";
-    String liftTwo = "";
-    String gotLifted = "";
+    String climb_Hang4 = "";
     String mdNumMatches = "";
 
     private FirebaseDatabase pfDatabase;
@@ -499,36 +484,20 @@ public class DraftScout_Activity extends AppCompatActivity {
         SharedPreferences sharedPref =
                 PreferenceManager.getDefaultSharedPreferences(this);
 
-        Cell_Dump = sharedPref.getString("prefPowerCell_Dump", "0.5");      // Dump
-        PowerCell_L0 = sharedPref.getString("prefPowerCell_L0", "1.0");     // Low
-        PowerCell_L1 = sharedPref.getString("prefPowerCell_L1", "2.0");     // Under
-        PowerCell_L2 = sharedPref.getString("prefPowerCell_L2", "3.0");     // Line
-        PowerCell_L3 = sharedPref.getString("prefPowerCell_L3", "3.0");     // CP Front
-        PowerCell_L4 = sharedPref.getString("prefPowerCell_L4", "3.0");     // CP Back
-        PowerCell_C0 = sharedPref.getString("prefPowerCell_C0", "1.0");     // Floor
-        PowerCell_C1 = sharedPref.getString("prefPowerCell_C1", "2.0");     // Robot
-        PowerCell_C2 = sharedPref.getString("prefPowerCell_C2", "1.5");     // C.P.
-        PowerCell_C3 = sharedPref.getString("prefPowerCell_C3", "1.5");     // Trench
-        PowerCell_C4 = sharedPref.getString("prefPowerCell_C4", "1.5");     // Boundary
-        PowerCell_C5 = sharedPref.getString("prefPowerCell_C5", "1.0");     // LoadSta
+        Cargo_L0 = sharedPref.getString("prefCargo_L0", "1.0");             // Low
+        Cargo_L1 = sharedPref.getString("prefCargo_L1", "3.0");             // Upper
+        Cargo_C0 = sharedPref.getString("prefCargo_C0", "1.5");             // Floor
+        Cargo_C1 = sharedPref.getString("prefCargo_C1", "1.0");             // Terminal
 
-        panel_L1 = sharedPref.getString("prefPanel_L1", "1.0");             // C.P. Spin
-        panel_L2 = sharedPref.getString("prefPanel_L2", "2.0");             // C.P. Color
+        climbClimb = sharedPref.getString("prefClimb_climb", "2.5");        // Climbed
+        climbHang1 = sharedPref.getString("prefClimb_Hang0", "-2.0");       //** None
+        climbHang1 = sharedPref.getString("prefClimb_Hang1", "1.0");        //** Low
+        climbHang2 = sharedPref.getString("prefClimb_Hang2", "2.5");        //** Mid
+        climbHang3 = sharedPref.getString("prefClimb_Hang3", "5.0");        //** High
+        climbHang4 = sharedPref.getString("prefClimb_Hang4", "7.0");        //** Traversal
 
-        climbSG = sharedPref.getString("prefClimb_climb", "2.5");           // Climbed
-        parkSG = sharedPref.getString("prefClimb_park", "0.5");             // Parked
-        Balanced = sharedPref.getString("prefClimb_Balanced", "1.5");       // Balanced
-        climbLift1 = sharedPref.getString("prefClimb_lift1", "1.5");
-        climbLift2 = sharedPref.getString("prefClimb_lift2", "2.5");
-        climbLifted = sharedPref.getString("prefClimb_lifted", "0.3");
-        climbHang0 = sharedPref.getString("prefClimb_Hang0", "-1.5");       //** Alliance Climb = 0
-        climbHang1 = sharedPref.getString("prefClimb_Hang1", "1.0");        //** 1
-        climbHang2 = sharedPref.getString("prefClimb_Hang2", "2.5");        //** 2
-        climbHang3 = sharedPref.getString("prefClimb_Hang3", "5.0");        //** 3
-
-        wtClimb = sharedPref.getString("prefWeight_climb", "3.0");
-        wtPowerCell = sharedPref.getString("prefWeight_PowerCell", "2.0");
-        wtCP = sharedPref.getString("prefWeight_panel", "1.0");
+        wtClimb    = sharedPref.getString("prefWeight_climb", "3.0");
+        wtCargo    = sharedPref.getString("prefWeight_Cargo", "2.0");
 
         numPicks = Integer.parseInt(sharedPref.getString("prefAlliance_num", "24"));
 
@@ -541,28 +510,23 @@ public class DraftScout_Activity extends AppCompatActivity {
         getprefs();         // make sure Prefs are up to date
         switch (typ) {
             case "Climb":
-                form = "((" + climbSG + " * Climbed) + (" + parkSG + " * Parked + (" + Balanced + "*Balanced))  ✚  ((" + climbHang0 + " * Hang0) + (" + climbHang1 + "*Hang1) + (" + climbHang2 + " * Hang2) + \n(" + climbHang3 + " * Hang3))  ✚  " + "((Lift1 * " + climbLift1 + ") + " + "(Lift2 * " + climbLift2 + ") + (WasLifted * " + climbLifted + ")) / # matches";
+                form = "((" + climbClimb + " * Climbed)  ✚  ((" + climbHang1 + "*Hang1) + (" + climbHang2 + " * Hang2) + (" + climbHang3 + " * Hang3) + (" + climbHang4 + " * Hang4))) / # matches";
                 lbl_Formula.setTextColor(Color.parseColor("#4169e1"));      // blue
                 txt_Formula.setText(form);
                 break;
-            case "Cell":
-                form = "( (" + Cell_Dump + "* Dump) + (" + PowerCell_L0 + "* (aLow + tLow)) + (" + PowerCell_L1 + "* (AcellUnder + TcellUnder)} + (" + PowerCell_L2 + "* (AcellLine+ TcellLine)} + (" + PowerCell_L3 + "* (AcellFrontCP + TcellFrontCP)) + (" + PowerCell_L4 + "* TcellBackCP))  ✚  ";
-                form = form + " ( " + PowerCell_C0 + "*(aFloor + tFloor) + " + PowerCell_C1 + "*(aCP + tCP) + " + PowerCell_C2 + "*(aTrench + tTrench) + " + PowerCell_C3 + "*(aBoundary + tBoundary) + " + PowerCell_C4 + "*(aRobot + tRobot) + " + PowerCell_C5 + "*(tLoadSta) ) /#M matches";
+            case "Cargo":
+                form = "( (" + Cargo_L0 + "* (aLow + tLow)) + (" + Cargo_L1 + "* (aUpper + tUpper)}   ✚  ";
+                form = form + " ( " + Cargo_C0 + "*(aFloor + tFloor)" + Cargo_C1 +"*(aTerm + tTerm)" + " ) /#M matches";
                 lbl_Formula.setTextColor(Color.parseColor("#ee00ee"));      // magenta
                 txt_Formula.setText(form);
                 break;
-            case "C.P.":
-                form = "((" + panel_L1 + "* spinCP) + (" + panel_L2 + "* colorCP)) " + "/# matches";
-                lbl_Formula.setTextColor(Color.parseColor("#00ff00"));      /// green
-                txt_Formula.setText(form);
-                break;
             case "Combined":
-                form = "((" + wtClimb + " * climbScore) + (" + wtPowerCell + " * PowerCellScore) + (" + wtCP + " * CPScore)) / #matches";
+                form = "((" + wtClimb + " * climbScore) + (" + wtCargo + " * CargoScore)) / #matches";
                 lbl_Formula.setTextColor(Color.parseColor("#ff0000"));      // red
                 txt_Formula.setText(form);
                 break;
             default:                //
-                Log.e(TAG, "*** Invalid Type " + typ);
+                Log.e(TAG, "*** Invalid Button Type " + typ);
         }
         return typ;
     }
@@ -827,9 +791,6 @@ public class DraftScout_Activity extends AppCompatActivity {
                 case "Combined":
                     totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_combinedScore()) + "]";
                     break;
-                case "C.P.":
-                    totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_panelsScore()) + "]";
-                    break;
                 case "Team#":
                     totalScore = " ";
                     break;
@@ -837,9 +798,9 @@ public class DraftScout_Activity extends AppCompatActivity {
                     Log.e(TAG, "Invalid Sort - " + sortType);
             }
 
-            temp.put("Stats3", "☢ ¹" + CPspinNum + " ²" + CPcolorNum + "  Climb ♺" + climb + " 円" + park + " ⚖" + level + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + "    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted);
+            temp.put("Stats3", "Climb ♺" + climb  + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + " ₃" + climb_Hang4 );
             temp.put("Stats2", "Tele ◯◉ " + telePowerCellL0 + " U" + telePowerCellL1 + " L" + telePowerCellL2 + "  F" + telePowerCellL3 + "  B" + telePowerCellL4 + " ✿ U" + TconUnderNum + " L" + TconLineNum + " F" + TconFrontNum + " B" + TconBackNum + "   ◯↑ F" + teleCollectFloor + " R" + teleCollectRobot + " C" + teleCollectCP + " T" + teleCollectTrench + " B" + teleCollectBoundary + " L" + teleCollectLoadSta);
-            temp.put("Stats", "Auto ≠" + SectLin + " ▼" + Dumped + "   ◯◉ " + autoCellLow + " U" + autoCellUnder + " L" + autoCellLine + " F" + autoCellFrontCP + " ✿ U" + AconUnderNum + " L" + AconLineNum + " F" + AconFrontNum + "   ◯↑ F" + autoCollectFloor + " R" + autoCollectRobot + " C" + autoCollectCP + " T" + autoCollectTrench + " B" + autoCollectBoundary);
+            temp.put("Stats", "Auto ≠" + Tarmac + " ▼" + Dumped + "   ◯◉ " + autoCellLow + " U" + autoCellUnder + " L" + autoCellLine + " F" + autoCellFrontCP + " ✿ U" + AconUnderNum + " L" + AconLineNum + " F" + AconFrontNum + "   ◯↑ F" + autoCollectFloor + " R" + autoCollectRobot + " C" + autoCollectCP + " T" + autoCollectTrench + " B" + autoCollectBoundary);
             temp.put("team", tn + "-" + score_inst.getTeamName() + "  (" + mdNumMatches + ")  " + totalScore);
             temp.put("BA", "Rank=" + tmRank + "   Score=" + tmRScore + "   WLT=" + tmWLT + "   OPR=" + tmOPR);
             draftList.add(temp);
@@ -1056,9 +1017,9 @@ public class DraftScout_Activity extends AppCompatActivity {
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_climbScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
                 bW.write(String.format("%2d", i + 1) + ") " + tNumb + " - " + tName + "\t  (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ") " + totalScore + " \t");
-                bW.write("♺" + climb + " 円" + park + " ⚖" + level);
-                bW.write("  Hang ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3);
-                bW.write("    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted + "\n" + DS);
+                bW.write("♺" + climb  );
+                bW.write("  Hang ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃"  + " ₄" + climb_Hang4);
+//                bW.write("    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted + "\n" + DS);
             } // end For # teams
 //            bW.write(" \n" + "\n" + (char)12);        // NL & FF
             //=====================================================================
@@ -1125,47 +1086,22 @@ public class DraftScout_Activity extends AppCompatActivity {
     private void teamData(String team) {
 //        Log.i(TAG, "$$$$  teamData  $$$$ " + team);
         int base = 0;
-        int dump = 0;
-        int spinCP = 0;
-        int colorCP = 0;
         int colFloor = 0;
-        int colRobot = 0;
-        int colCP = 0;
-        int colTrench = 0;
-        int colBoundary = 0;
+        int colTerminal = 0;
         int TcolFloor = 0;
-        int TcolRobot = 0;
-        int TcolCP = 0;
-        int TcolTrench = 0;
-        int TcolBoundary = 0;
-        int TcolLoadSta = 0;
-        int cellL0 = 0;
-        int cellUnder = 0;
-        int cellLine = 0;
-        int cellFrontCP = 0;
-        int TcellL0 = 0;
-        int TcellUnder = 0;
-        int TcellLine = 0;
-        int TcellFrontCP = 0;
-        int TcellBackCP = 0;
-        int TpanL1 = 0;
-        int TpanL2 = 0;
-        int TpanL3 = 0;
-        int climbed = 0, parked = 0, bal = 0, climbH0 = 0;
+        int TcolTerminal = 0;
+        int aLow = 0;
+        int aUpper = 0;
+        int tLow = 0;
+        int tUpper = 0;
+        int climbed = 0;
+        int climbH0 = 0;
         int climbH1 = 0;
         int climbH2 = 0;
         int climbH3 = 0;
-        int lift1Num = 0;
-        int lift2Num = 0;
-        int gotLiftedNum = 0;
-        int conUnder = 0;
-        int conLine = 0;
-        int conFront = 0;
-        int TconUnder = 0;
-        int TconLine = 0;
-        int TconFront = 0;
-        int TconBack = 0;
-        int numMatches = 0;
+        int climbH4 = 0;
+        int pen = 0;
+       int numMatches = 0;
 
 //        Log.d(TAG, ">>>>>>> All_Matches " + All_Matches.size());
         for (int i = 0; i < All_Matches.size(); i++) {
@@ -1179,29 +1115,52 @@ public class DraftScout_Activity extends AppCompatActivity {
                 if (match_inst.isAuto_leftTarmac()) {
                     base++;
                 }
-                cellL0 = cellL0 + match_inst.getAuto_Low();
 
                 if (match_inst.isAuto_CollectFloor()) {         //**  Collect Auto
                     colFloor++;                                 //**
                 }                                               //**
+                if (match_inst.isAuto_CollectTerm()) {          //**
+                    colTerminal++;                              //**
+                }                                               //**
+                aLow = aLow + match_inst.getAuto_Low();
+                aUpper = aUpper + match_inst.getAuto_High();
 
                 // *************************************************
                 // ******************** TeleOps ********************
                 // *************************************************
-                TcellL0 = TcellL0 + match_inst.getTele_Low();
-                TcellUnder = TcellUnder + match_inst.getTele_High();
+                tLow = tLow + match_inst.getTele_Low();
+                tUpper = tUpper + match_inst.getTele_High();
 
                 if (match_inst.isTele_Cargo_floor()) {          //**  Collect Tele
                     TcolFloor++;                                //**
                 }                                               //**
                  if (match_inst.isTele_Cargo_term()) {          //**
-                    TcolLoadSta++;                              //**
+                    TcolTerminal++;                             //**
                 }                                               //*********
-
 
                 if (match_inst.isTele_Climbed()) {
                     climbed++;
                 }
+                switch (match_inst.getTele_HangarLevel()) {
+                    case "None":
+                        climbH0++;
+                        break;
+                    case "Low":
+                        climbH1++;
+                        break;
+                    case "Mid":
+                        climbH2++;
+                        break;
+                    case "High":
+                        climbH3++;
+                        break;
+                    case "Traversal":
+                        climbH4++;
+                        break;
+                    default:                // ????
+                        Log.e(TAG, "*** Error - bad Hangar Level  ***");
+                } // end Switch
+                pen = pen + match_inst.getTele_num_Penalties(); ;
 
 
 //                Log.w(TAG, "Accum. matches = " + numMatches);
@@ -1215,50 +1174,19 @@ public class DraftScout_Activity extends AppCompatActivity {
 //            Log.e(TAG, team + " >>>>>>>>>>  Min. matches changed = " + minMatches);
         }
         if (numMatches > 0) {
-            SectLin = String.valueOf(base);
-            Dumped = String.valueOf(dump);
-            autoCellLow = String.valueOf(cellL0);
-            autoCellUnder = String.valueOf(cellUnder);
-            autoCellLine = String.valueOf(cellLine);
-            autoCellFrontCP = String.valueOf(cellFrontCP);
-            AconUnderNum = String.valueOf(conUnder);
-            AconLineNum = String.valueOf(conLine);
-            AconFrontNum = String.valueOf(conFront);
-            TconUnderNum = String.valueOf(TconUnder);
-            TconLineNum = String.valueOf(TconLine);
-            TconFrontNum = String.valueOf(TconFront);
-            TconBackNum = String.valueOf(TconBack);
-            telePowerCellL0 = String.valueOf(TcellL0);
-            telePowerCellL1 = String.valueOf(TcellUnder);
-            telePowerCellL2 = String.valueOf(TcellLine);
-            telePowerCellL3 = String.valueOf(TcellFrontCP);
-            telePowerCellL4 = String.valueOf(TcellBackCP);
+            Tarmac = String.valueOf(base);
+            telePowerCellL0 = String.valueOf(tLow);
+            telePowerCellL1 = String.valueOf(tUpper);
             autoCollectFloor = String.valueOf(colFloor);
-            autoCollectRobot = String.valueOf(colRobot);
-            autoCollectCP = String.valueOf(colCP);
-            autoCollectTrench = String.valueOf(colTrench);
-            autoCollectBoundary = String.valueOf(colBoundary);
             teleCollectFloor = String.valueOf(TcolFloor);
-            teleCollectRobot = String.valueOf(TcolRobot);
-            teleCollectCP = String.valueOf(TcolCP);
-            teleCollectTrench = String.valueOf(TcolTrench);
-            teleCollectBoundary = String.valueOf(TcolBoundary);
-            teleCollectLoadSta = String.valueOf(TcolLoadSta);
-            CPspinNum = String.valueOf(spinCP);
-            CPcolorNum = String.valueOf(colorCP);
             climb = String.valueOf(climbed);
-            park = String.valueOf(parked);
-            level = String.valueOf(bal);
             climb_Hang0 = String.valueOf(climbH0);
             climb_Hang1 = String.valueOf(climbH1);
             climb_Hang2 = String.valueOf(climbH2);
             climb_Hang3 = String.valueOf(climbH3);
-            liftOne = String.valueOf(lift1Num);
-            liftTwo = String.valueOf(lift2Num);
-            gotLifted = String.valueOf(gotLiftedNum);
+            climb_Hang4 = String.valueOf(climbH4);
         } else {
-            SectLin = "0";
-            Dumped = "0";
+            Tarmac = "0";
             autoCellLow = "0";
             autoCellUnder = "0";
             autoCellLine = "0";
@@ -1286,19 +1214,13 @@ public class DraftScout_Activity extends AppCompatActivity {
             teleCollectTrench = "0";
             teleCollectBoundary = "0";
             teleCollectLoadSta = "0";
-            CPspinNum = "0";
-            CPcolorNum = "0";
             climb = "0";
-            park = "0";
-            level = "0";
             climb_Hang0 = "0";
             climb_Hang1 = "0";
             climb_Hang2 = "0";
             climb_Hang3 = "0";
-            liftOne = "0";
-            liftTwo = "0";
-            gotLifted = "0";
-        }
+            climb_Hang4 = "0";
+         }
         //============================
         float climbScore = 0;
         float cellScored = 0;
@@ -1307,19 +1229,15 @@ public class DraftScout_Activity extends AppCompatActivity {
         float combinedScore = 0;
         float ControlPanelScore = 0;
         if (numMatches > 0) {
-            climbScore = ( (climbed * Float.parseFloat(climbSG) + (parked * Float.parseFloat(parkSG)) + (bal * Float.parseFloat(Balanced))) + ((climbH0 * Float.parseFloat(climbHang0)) + (climbH1 * Float.parseFloat(climbHang1)) + (climbH2 * Float.parseFloat(climbHang2)) + (climbH3 * Float.parseFloat(climbHang3))) + (lift1Num * Float.parseFloat(climbLift1)) + (lift2Num * Float.parseFloat(climbLift2)) + (gotLiftedNum * Float.parseFloat(climbLifted))) / (float)numMatches;
-//            Log.e(TAG, team + " Climb ♺=" + (climbed*Float.parseFloat(climbSG)) + " 円=" + (parked*Float.parseFloat(parkSG)) + " ⚖=" + (bal*Float.parseFloat(Balanced)) + " ✚" + " ₀=" + (climbH0*Float.parseFloat(climbHang0)) + " ₁=" + (climbH1*Float.parseFloat(climbHang1)) + " ₂=" + (climbH2*Float.parseFloat(climbHang2)) + " ₃=" + (climbH3*Float.parseFloat(climbHang3)) + " ✚ ↨₁=" + (lift1Num*Float.parseFloat(climbLift1))+ " ↨₂=" + (lift2Num*Float.parseFloat(climbLift2))+ " ↑=" + (gotLiftedNum*Float.parseFloat(climbLifted)) + "  / " + numMatches + " ==[ " + climbScore + "]");
+            climbScore = ( (climbed * Float.parseFloat(climbClimb))  + (climbH1 * Float.parseFloat(climbHang1)) + (climbH2 * Float.parseFloat(climbHang2)) + (climbH3 * Float.parseFloat(climbHang3)) + ((climbH4 * Float.parseFloat(climbHang4))) ) / (float)numMatches;
+//            Log.e(TAG, team + " Climb ♺=" + (climbed*Float.parseFloat(climbClimb)) + " 円=" + (parked*Float.parseFloat(parkSG)) + " ⚖=" + (bal*Float.parseFloat(Balanced)) + " ✚" + " ₀=" + (climbH0*Float.parseFloat(climbHang0)) + " ₁=" + (climbH1*Float.parseFloat(climbHang1)) + " ₂=" + (climbH2*Float.parseFloat(climbHang2)) + " ₃=" + (climbH3*Float.parseFloat(climbHang3)) + " ✚ ↨₁=" + (lift1Num*Float.parseFloat(climbLift1))+ " ↨₂=" + (lift2Num*Float.parseFloat(climbLift2))+ " ↑=" + (gotLiftedNum*Float.parseFloat(climbLifted)) + "  / " + numMatches + " ==[ " + climbScore + "]");
 
-            cellScored = ( (dump * Float.parseFloat(Cell_Dump)) + ((cellL0 + TcellL0) * Float.parseFloat(PowerCell_L0)) + ((cellUnder + TcellUnder) * Float.parseFloat(PowerCell_L1)) + ((cellLine + TcellLine) * Float.parseFloat(PowerCell_L2)) + ((cellFrontCP + TcellFrontCP) * Float.parseFloat(PowerCell_L3)) + ((TcellBackCP) * Float.parseFloat(PowerCell_L4))) / (float)numMatches;
-            cellCollect = ( ((colFloor+ TcolFloor) * Float.parseFloat(PowerCell_C0)) + ((colRobot+TcolRobot) * Float.parseFloat(PowerCell_C1)) + ((colCP+TcolCP) * Float.parseFloat(PowerCell_C2)) + ((colTrench+TcolTrench) * Float.parseFloat(PowerCell_C3)) + ((colBoundary+TcolBoundary) * Float.parseFloat(PowerCell_C4)) + (TcolLoadSta * Float.parseFloat(PowerCell_C5))) / (float)numMatches;
+            cellScored = ( ((aLow + tLow) * Float.parseFloat(Cargo_L0)) + ((aUpper + tUpper) * Float.parseFloat(Cargo_L1)) ) / (float)numMatches;
+            cellCollect = ( ((colFloor+ TcolFloor) * Float.parseFloat(Cargo_C0)) + ((colTerminal+ TcolTerminal) * Float.parseFloat(Cargo_C0))) / (float)numMatches;
             PowerCellScore = cellScored + cellCollect;
 //            Log.e(TAG, team + " Cells " + cellScored +  " ✚ " + cellCollect + "  / " + numMatches + " ==[ " + PowerCellScore + "]");
 
-            ControlPanelScore = ( (spinCP * Float.parseFloat(panel_L1)) + (colorCP * Float.parseFloat(panel_L2))) / (float)numMatches;
-//            Log.e(TAG, team + " C.P. " + spinCP + " *" + panel_L1 + " ✚ " + colorCP + " *" + panel_L2 + "  / " + numMatches + " ==[ " + ControlPanelScore + "]");
-//            Log.e(TAG, team + " Math " + ( (spinCP * Float.parseFloat(panel_L1)) +  (colorCP * Float.parseFloat(panel_L2)) / (float)numMatches) );
-
-            combinedScore = (((climbScore * Float.parseFloat(wtClimb) + (PowerCellScore * Float.parseFloat(wtPowerCell)) + (ControlPanelScore * Float.parseFloat(wtCP)))) / (float)numMatches);
+            combinedScore = (((climbScore * Float.parseFloat(wtClimb) + (PowerCellScore * Float.parseFloat(wtCargo))) / (float)numMatches));
         } else {
             PowerCellScore = 0;
             ControlPanelScore = 0;
@@ -1425,17 +1343,13 @@ public class DraftScout_Activity extends AppCompatActivity {
                     radio_Climb = findViewById(R.id.radio_Climb);
                     radio_Climb.performClick();         // "force" radio button click
                     break;
-                case "Cell":
-                    radio_PowerCell = findViewById(R.id.radio_PowerCell);
-                    radio_PowerCell.performClick();         // "force" radio button click
+                case "Cargo":
+                    radio_Cargo = findViewById(R.id.radio_Cargo);
+                    radio_Cargo.performClick();         // "force" radio button click
                     break;
                 case "Combined":
                     radio_Weight = findViewById(R.id.radio_Weight);
                     radio_Weight.performClick();         // "force" radio button click
-                    break;
-                case "C.P.":
-                    radio_ControlPanel = findViewById(R.id.radio_ControlPanel);
-                    radio_ControlPanel.performClick();         // "force" radio button click
                     break;
                 case "Team#":
                     radio_Team = findViewById(R.id.radio_Team);

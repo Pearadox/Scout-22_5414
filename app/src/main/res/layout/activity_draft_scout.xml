@@ -240,22 +240,13 @@
             android:textColor="@color/white" />
 
         <RadioButton
-            android:id="@+id/radio_PowerCell"
+            android:id="@+id/radio_Cargo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:buttonTint="@color/magenta"
-            android:text="Cell"
+            android:text="Cargo"
             android:textColor="@color/magenta" />
-
-        <RadioButton
-            android:id="@+id/radio_ControlPanel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:buttonTint="@color/green"
-            android:text="C.P."
-            android:textColor="@color/green" />
 
         //-----------------------------------
 
@@ -263,7 +254,7 @@
             android:id="@+id/radio_Climb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="-190dp"
+            android:layout_marginStart="-130dp"
             android:layout_marginTop="30dp"
             android:buttonTint="@color/blue"
             android:text="Climb"
@@ -274,7 +265,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_Pit"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="30dp"
             android:buttonTint="@color/red"
             android:text="Combined"
