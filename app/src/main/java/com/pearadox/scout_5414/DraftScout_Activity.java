@@ -123,10 +123,14 @@ public class DraftScout_Activity extends AppCompatActivity {
     String autoUpper = "";
     String aLowMiss = "";
     String aHighMiss = "";
+    String lowPercentA ="";
+    String upPercentA ="";
     String teleCargoL0 = "";
     String teleCargoL1 = "";
     String tLowMiss = "";
     String tHighMiss = "";
+    String lowPercentT ="";
+    String upPercentT ="";
     String autoCollectFloor = "";
     String autoCollectTerm = "";
     String teleCollectFloor = "";
@@ -772,8 +776,8 @@ public class DraftScout_Activity extends AppCompatActivity {
 
             // Todo - add Missed & shooting %
             temp.put("Stats3", "Climb ╪" + climb  + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + " ₃" + climb_Hang4 + "    ⚑" + Penalties + " ⚡" + LostComms + "  ◥ " + Tipped);
-            temp.put("Stats2", "Tele ◯L" + teleCargoL0 + " U" + teleCargoL1 + "  ⊗L" + tLowMiss + " U" + tHighMiss  + "   ◯↑ F" + teleCollectFloor + " T" + teleCollectTerm );
-            temp.put("Stats", "Auto ≠" + Tarmac + "   ◯L" + autoLow + " U" + autoUpper + "  ⊗L" + aLowMiss + " U" + aHighMiss + "   ◯↑ F" + autoCollectFloor + " T" + autoCollectTerm );
+            temp.put("Stats2", "Tele ◯L" + teleCargoL0 + " U" + teleCargoL1 + "  ⊗L" + tLowMiss + " U" + tHighMiss  + "   L%=" + lowPercentT + "  U%=" + upPercentT + "   ◯↑ F" + teleCollectFloor + " T" + teleCollectTerm );
+            temp.put("Stats", "Auto ≠" + Tarmac + "   ◯L" + autoLow + " U" + autoUpper + "  ⊗L" + aLowMiss + " U" + aHighMiss + "   L%=" + lowPercentA + "  U%=" + upPercentA + "   ◯↑ F" + autoCollectFloor + " T" + autoCollectTerm );
             temp.put("team", tn + "-" + score_inst.getTeamName() + "  (" + mdNumMatches + ")  " + totalScore);
             temp.put("BA", "Rank=" + tmRank + "   Score=" + tmRScore + "   WLT=" + tmWLT + "   OPR=" + tmOPR);
             draftList.add(temp);
@@ -848,7 +852,7 @@ public class DraftScout_Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private void alliance_Picks() {
@@ -991,7 +995,7 @@ public class DraftScout_Activity extends AppCompatActivity {
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_climbScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
                 bW.write(String.format("%2d", i + 1) + ") " + tNumb + " - " + tName + "\t  (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ") " + totalScore + " \t");
-                bW.write("♺" + climb  );
+                bW.write("╪" + climb  );
                 bW.write("  Hang ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃"  + " ₄" + climb_Hang4);
 //                bW.write("    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted + "\n" + DS);
             } // end For # teams
@@ -1072,6 +1076,8 @@ public class DraftScout_Activity extends AppCompatActivity {
         int tUpper = 0;
         int tMissedLow = 0;
         int tMissedUpper = 0;
+        int pctLower = 0;
+        int pctUpper = 0;
         int climbed = 0;
         int climbH0 = 0;
         int climbH1 = 0;
@@ -1106,7 +1112,29 @@ public class DraftScout_Activity extends AppCompatActivity {
                 aUpper = aUpper + match_inst.getAuto_High();
                 aMissedLow = aMissedLow + match_inst.getAuto_MissedLow();
                 aMissedUpper = aMissedUpper + match_inst.getAuto_MissedHigh();
-                // ToDo - percentage
+                Float BatAvg;
+                Log.e(TAG, "AutoLow   Score" + aLow  +"  Miss" +aMissedLow);
+                if ((aLow + aMissedLow) > 0) {
+                    BatAvg = (float)aLow / (aLow + aMissedLow);  // Made ÷ Attempts
+                    Log.e(TAG, "Low%= " + BatAvg);
+                    if (BatAvg == 1.0f) {
+                        lowPercentA = "1.00";
+                    } else {
+                        lowPercentA = String.format("%.3f", BatAvg);
+                    }
+                } else {
+                    lowPercentA = "0.00";
+                }
+                if ((aUpper + aMissedUpper) > 0) {
+                    BatAvg = (float)aUpper / (aUpper + aMissedUpper);  // Made ÷ Attempts
+                    if (BatAvg == 1.0f) {
+                        upPercentA = "1.00";
+                    } else {
+                        upPercentA =String.format("%.3f", BatAvg);
+                    }
+                } else {
+                    upPercentA = "0.00";
+                }
 
                 // *************************************************
                 // ******************** TeleOps ********************
@@ -1116,6 +1144,29 @@ public class DraftScout_Activity extends AppCompatActivity {
                 tMissedLow = tMissedLow + match_inst.getTele_MissedLow();
                 tMissedUpper = tMissedUpper + match_inst.getTele_MissedHigh();
                 // ToDo - percentage
+                if ((tLow + tMissedLow) > 0) {        // avoid divide by 0
+                    BatAvg = (float)tLow / (tLow + tMissedLow);  // Made ÷ Attempts
+                    if (BatAvg == 1.0f) {       // all this to get 3 digits!!
+                        lowPercentT = "1.00";
+                    } else {
+                        Log.e(TAG, "TeleLow%= " + BatAvg +" L" + tLow  +"  M" +tMissedLow);
+                        lowPercentT = String.format("%.3f", BatAvg);
+                    }
+                } else {
+                    Log.e(TAG, "Default TeleLow = .000");
+                    lowPercentT = "0.00";
+                }
+                if ((tUpper + tMissedUpper) > 0) {
+                    BatAvg = (float)tUpper / (tUpper + tMissedUpper);    // Made ÷ Attempts
+                    if (BatAvg == 1.0f) {
+                        upPercentT = "1.00";
+                    } else {
+                        Log.e(TAG, "TeleHigh%= " + BatAvg+" L" + tUpper  +"  M" +tMissedUpper);
+                        upPercentT = String.format("%.3f", BatAvg);
+                    }
+                } else {
+                    upPercentT = "0.00";
+                }
 
                 if (match_inst.isTele_Cargo_floor()) {          //**  Collect Tele
                     TcolFloor++;                                //**
@@ -1173,6 +1224,8 @@ public class DraftScout_Activity extends AppCompatActivity {
             teleCargoL1 = String.valueOf(tUpper);
             tLowMiss = String.valueOf(tMissedLow);
             tHighMiss = String.valueOf(tMissedUpper);
+//            lowPercentA = String.valueOf(pctLower);
+//            upPercentA = String.valueOf(pctUpper);
             autoCollectFloor = String.valueOf(colFloor);
             teleCollectFloor = String.valueOf(TcolFloor);
             autoCollectTerm = String.valueOf(colTerminal);
@@ -1196,6 +1249,8 @@ public class DraftScout_Activity extends AppCompatActivity {
             teleCargoL1 = "0";
             tLowMiss = "0";
             tHighMiss = "0";
+            lowPercentA = "0.00";
+            upPercentA = "0.00";
             autoCollectFloor = "0";
             autoCollectTerm = "0";
             teleCollectFloor = "0";
