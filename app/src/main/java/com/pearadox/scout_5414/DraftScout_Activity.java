@@ -49,9 +49,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -869,6 +871,8 @@ public class DraftScout_Activity extends AppCompatActivity {
         String underScore = new String(new char[30]).replace("\0", "_");    // string of 'x' underscores
         String blanks = new String(new char[50]).replace("\0", " ");        // string of 'x' blanks
         String pound = new String(new char[50]).replace("\0", "#");        // string of 'x' Pound
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd  hh:mm:ss a").format(new Date());
+
 // ======================================================================================
         sortType = "Combined";          // Attempt to "force" correct sort 1st time
         Collections.sort(team_Scores, new Comparator<Scores>() {
@@ -899,7 +903,7 @@ public class DraftScout_Activity extends AppCompatActivity {
             BufferedWriter bW = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(prt), "UTF-8"
             ));
-            bW.write(Pearadox.FRC_ChampDiv + "-" + Pearadox.FRC_EventName + "\n");
+            bW.write(Pearadox.FRC_ChampDiv + "-" + Pearadox.FRC_EventName +  "   (" + timeStamp +")\n");
             bW.write(underScore + "  COMBINED  " + underScore + "\n" + DS);
             //  Combined sort
             Collections.sort(team_Scores, new Comparator<Scores>() {
@@ -924,8 +928,8 @@ public class DraftScout_Activity extends AppCompatActivity {
             bW.write(" \n" + "\n" + (char) 12);        // NL & FF
             //=====================================================================
 
-            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName + "\n");
-            bW.write(underScore + "  CELLS  " + underScore + "\n \n");
+            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName +  "   (" + timeStamp +")\n");
+            bW.write(underScore + "  CARGO  " + underScore + "\n \n");
             //  Switch sort
             sortType = "Cargo";
             Collections.sort(team_Scores, new Comparator<Scores>() {
@@ -943,38 +947,15 @@ public class DraftScout_Activity extends AppCompatActivity {
                 tName = tName + blanks.substring(0, (36 - tName.length()));
                 totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_PowerCellScore()) + "]";
                 teamData(tNumb);   // Get Team's Match Data
+                // ToDo - check format & add misses & %
                 bW.write(String.format("%2d", i + 1) + ") " + tNumb + "-" + tName + "\t (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ") " + totalScore + "\t");
-                bW.write("Auto◯" + autoLow + " ₁" + autoUpper  + "  Tele" + "◯" + teleCargoL0 + " ₁" + teleCargoL1  + "\n" + DS);
-            } // end For # teams
+                bW.write("Auto◯L" + autoLow + " U" + autoUpper + " ⊗L" + aLowMiss + " U" + aHighMiss + " L%=" + lowPercentA.substring(0,4) + " U%=" + upPercentA.substring(0,4) + "  Tele◯L" + teleCargoL0 + " U" + teleCargoL1 + " ⊗L" + tLowMiss + " U" + tHighMiss + "  L%=" + lowPercentT.substring(0,4) + "  U%=" + upPercentT.substring(0,4) );
+                bW.write("\n" + DS);
+            } // end For #
             bW.write(" \n" + "\n" + (char) 12);        // NL & FF
             //=====================================================================
 
-            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName + "\n");
-            bW.write(underScore + "  CONTROL PANEL  " + underScore + "\n" + DS);
-            //  C.P. sort
-            sortType = "C.P.";
-            Collections.sort(team_Scores, new Comparator<Scores>() {
-                @Override
-                public int compare(Scores c1, Scores c2) {
-                    return Float.compare(c1.getSCORE_panelsScore(), c2.getSCORE_panelsScore());
-                }
-            });
-            Collections.reverse(team_Scores);   // Descending
-            loadTeams();
-            for (int i = 0; i < numPicks; i++) {    // load by sorted scores
-                score_inst = team_Scores.get(i);
-                tNumb = score_inst.getTeamNum();
-                tName = score_inst.getTeamName();
-                tName = tName + blanks.substring(0, (36 - tName.length()));
-                totalScore = "[" + String.format("%3.2f", score_inst.getSCORE_panelsScore()) + "]";
-                teamData(tNumb);   // Get Team's Match Data
-                bW.write(String.format("%2d", i + 1) + ") " + tNumb + "-" + tName + "\t  (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ")  " + totalScore);
-//                bW.write("  ☢  ₁" + CPspinNum + " ₂" + CPcolorNum + "\n" + DS);
-            } // end For # teams
-            bW.write(" \n" + "\n" + (char) 12);        // NL & FF
-            //=====================================================================
-
-            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName + "\n");
+            bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName +  "   (" + timeStamp +")\n");
             bW.write(underScore + "  CLIMB  " + underScore + "\n \n");
             //  Scale sort
             sortType = "Climb";
@@ -986,7 +967,7 @@ public class DraftScout_Activity extends AppCompatActivity {
             });
             Collections.reverse(team_Scores);   // Descending
             loadTeams();
-            // ToDo - check format & add misses & %
+            // ToDo - check format
             for (int i = 0; i < numPicks; i++) {    // load by sorted scores
                 score_inst = team_Scores.get(i);
                 tNumb = score_inst.getTeamNum();
@@ -996,8 +977,8 @@ public class DraftScout_Activity extends AppCompatActivity {
                 teamData(tNumb);   // Get Team's Match Data
                 bW.write(String.format("%2d", i + 1) + ") " + tNumb + " - " + tName + "\t  (" + String.format("%2d", (Integer.parseInt(mdNumMatches))) + ") " + totalScore + " \t");
                 bW.write("╪" + climb  );
-                bW.write("  Hang ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃"  + " ₄" + climb_Hang4);
-//                bW.write("    ↕One " + liftOne + "  ↕Two " + liftTwo + "    Was↑ " + gotLifted + "\n" + DS);
+                bW.write("  Hang ⊗" + climb_Hang0 + " ➊" + climb_Hang1 + " ➋" + climb_Hang2 + " ➌" + climb_Hang3  + " ➍" + climb_Hang4);
+                bW.write("\n" + DS);
             } // end For # teams
 //            bW.write(" \n" + "\n" + (char)12);        // NL & FF
             //=====================================================================
@@ -1019,10 +1000,10 @@ public class DraftScout_Activity extends AppCompatActivity {
         pickList();     // generate Picklist for PickList app
     }
 
+    // ======================================================================================
     private void pickList() {
         Log.w(TAG, "$$$$  pickList  $$$$ ");
-// ======================================================================================
-        sortType = "Combined";          //
+       sortType = "Combined";          //
         Collections.sort(team_Scores, new Comparator<Scores>() {
             @Override
             public int compare(Scores c1, Scores c2) {
