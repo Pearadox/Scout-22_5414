@@ -930,7 +930,7 @@ public class DraftScout_Activity extends AppCompatActivity {
 
             bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName +  "   (" + timeStamp +")\n");
             bW.write(underScore + "  CARGO  " + underScore + "\n \n");
-            //  Switch sort
+            //  Cargo sort
             sortType = "Cargo";
             Collections.sort(team_Scores, new Comparator<Scores>() {
                 @Override
@@ -957,7 +957,7 @@ public class DraftScout_Activity extends AppCompatActivity {
 
             bW.write(Pearadox.FRC_ChampDiv + " - " + Pearadox.FRC_EventName +  "   (" + timeStamp +")\n");
             bW.write(underScore + "  CLIMB  " + underScore + "\n \n");
-            //  Scale sort
+            //  Climb sort
             sortType = "Climb";
             Collections.sort(team_Scores, new Comparator<Scores>() {
                 @Override
