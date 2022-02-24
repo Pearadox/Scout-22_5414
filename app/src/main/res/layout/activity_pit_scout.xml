@@ -591,7 +591,7 @@
 
         <Spinner
             android:id="@+id/spinner_Motor"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
@@ -622,8 +622,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Can Shoot Upper?"
-            android:buttonTint="@color/brightblue"
-            android:textColor="@color/brightblue" />
+            android:buttonTint="@color/cyan"
+            android:textColor="@color/cyan" />
 
     </LinearLayout>
 
@@ -667,24 +667,24 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="Tarmac"
-            android:buttonTint="@color/blue"
-            android:textColor="@color/blue" />
+            android:buttonTint="@color/brightblue"
+            android:textColor="@color/brightblue" />
         <CheckBox
             android:id="@+id/chkBox_ShootRing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="Cargo Ring"
-            android:buttonTint="@color/blue"
-            android:textColor="@color/blue" />
+            android:buttonTint="@color/brightblue"
+            android:textColor="@color/brightblue" />
         <CheckBox
             android:id="@+id/chkBox_ShootAny"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="Anywhere"
-            android:buttonTint="@color/blue"
-            android:textColor="@color/blue" />
+            android:buttonTint="@color/brightblue"
+            android:textColor="@color/brightblue" />
 
     </LinearLayout>
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -918,6 +918,7 @@ pitData Pit_Data = new pitData();
                         Spinner spinner_Omni = (Spinner) findViewById(R.id.spinner_Omni);
                         Spinner spinner_Mecanum = (Spinner) findViewById(R.id.spinner_Mecanum);
                         Spinner spinner_Pneumatic = (Spinner) findViewById(R.id.spinner_Pneumatic);
+                        radgrp_END = (RadioGroup) findViewById(R.id.radgrp_END);
 
                         if (pitFB) {
                             // Already loaded data from Firebase into Pit_Load during 'getTeam_Pit'
@@ -945,6 +946,8 @@ pitData Pit_Data = new pitData();
                         //  Height _NOT_ coming back?  Scouters _MUST_ use > keyboard key and NOT Exit
                         txtEd_Weight.setText(String.valueOf(Pit_Load.getPit_weight()));
                         weight = Integer.valueOf(String.valueOf(txtEd_Weight.getText()));
+                        txtEd_Height.setText(String.valueOf(Pit_Load.getPit_height()));
+                        height = Integer.valueOf(String.valueOf(txtEd_Height.getText()));
                         txt_NumWheels.setText(String.valueOf(Pit_Load.getPit_totWheels()));
                         totalWheels = Pit_Load.getPit_totWheels();
                         spinner_Traction.setSelection((Pit_Load.getPit_numTrac()));
@@ -952,18 +955,48 @@ pitData Pit_Data = new pitData();
                         spinner_Mecanum.setSelection((Pit_Load.getPit_numMecanum()));
                         spinner_Pneumatic.setSelection((Pit_Load.getPit_numPneumatic()));
 
+                        chkBox_EveryBot.setChecked(Pit_Load.isPit_everyBot());
                         chkBox_Climb.setChecked(Pit_Load.isPit_climber());
                         chkBox_Vision.setChecked(Pit_Load.isPit_vision());
                         chkBox_Pneumatics.setChecked(Pit_Load.isPit_pneumatics());
                         chkBox_EveryBot.setChecked(Pit_Load.isPit_everyBot());
                         chkBox_OffFloor.setChecked(Pit_Load.isPit_cargoFloor());
                         chkBox_Terminal.setChecked(Pit_Load.isPit_cargoTerm());
+                        chkBox_CanShoot.setChecked(Pit_Load.isPit_canshoot());
                         
                         chkBox_ShootLow.setChecked(Pit_Load.isPit_shootLow());
                         chkBox_LaunchPad.setChecked(Pit_Load.isPit_shootLP());
                         chkBox_Tarmac.setChecked(Pit_Load.isPit_shootTarmac());
                         chkBox_ShootRing.setChecked(Pit_Load.isPit_shootRing());
                         chkBox_ShootAny.setChecked(Pit_Load.isPit_shootAnywhere());
+
+                        String hangar = Pit_Load.getPit_hangarLevel();
+                        Log.w(TAG, "Hangar Climb = '" + hangar + "'");
+                        switch (hangar) {
+                            case ("None"):
+                                radgrp_END.check(radgrp_END.getChildAt(0).getId());
+                                HangarLev = "None";                         //
+                                break;
+                            case ("Low"):
+                                radgrp_END.check(radgrp_END.getChildAt(1).getId());
+                                HangarLev = "Low";                         //
+                                break;
+                            case ("Mid"):
+                                radgrp_END.check(radgrp_END.getChildAt(2).getId());
+                                HangarLev = "Mid";                         //
+                                break;
+                            case ("High"):
+                                radgrp_END.check(radgrp_END.getChildAt(3).getId());
+                                HangarLev = "High";                         //
+                                break;
+                            case ("Traversal"):
+                                radgrp_END.check(radgrp_END.getChildAt(4).getId());
+                                HangarLev = "Traversal";                         //
+                                break;
+                            default:
+                                Log.w(TAG, "►►►►►  E R R O R - Bad Hangar  ◄◄◄◄◄");
+                                break;
+                        }
 
                         String motr = Pit_Load.getPit_motor();
                         Log.w(TAG, "Motor = '" + motr + "'");
@@ -984,7 +1017,7 @@ pitData Pit_Data = new pitData();
                                 spinner_Motor.setSelection(5);
                                 break;
                             default:
-                                Log.w(TAG, "►►►►►  E R R O R  ◄◄◄◄◄");
+                                Log.w(TAG, "►►►►►  E R R O R - Bad Motor ◄◄◄◄◄");
                                 break;
                         }
                         String pLang = Pit_Load.getPit_lang();
@@ -1003,7 +1036,7 @@ pitData Pit_Data = new pitData();
                                 spinner_Lang.setSelection(4);
                                 break;
                             default:
-                                Log.w(TAG, "►►►►►  E R R O R  ◄◄◄◄◄");
+                                Log.w(TAG, "►►►►►  E R R O R - Bad Language ◄◄◄◄◄");
                                 break;
                         }
                         String mode = Pit_Load.getPit_autoMode();
@@ -1019,7 +1052,7 @@ pitData Pit_Data = new pitData();
                                 spinner_autoMode.setSelection(3);
                                 break;
                             default:
-                                Log.w(TAG, "►►►►►  E R R O R  ◄◄◄◄◄");
+                                Log.w(TAG, "►►►►►  E R R O R - Bad Auto ◄◄◄◄◄");
                                 break;
                         }
 
