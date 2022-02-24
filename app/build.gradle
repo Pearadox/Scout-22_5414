@@ -5,16 +5,16 @@ android {
 //    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.pearadox.scout_5414"
-        minSdkVersion 23
+        minSdkVersion 22
         targetSdkVersion 31
-        versionCode 05
-        versionName "4.05"
+        versionCode 44
+        versionName "4.44"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             project.ext.set("archivesBaseName", "Scout-5414_" + defaultConfig.versionName)
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
