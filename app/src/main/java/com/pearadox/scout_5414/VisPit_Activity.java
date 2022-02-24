@@ -35,20 +35,22 @@ public class VisPit_Activity extends AppCompatActivity {
     String TAG = "VisPit_Activity";        // This CLASS name
     String tnum = "", tname = "", imgURL = "";
     TextView txt_team, txt_teamName;
-    TextView txt_Ht, txt_TotWheels, txt_NumTrac, txt_NumOmni, txt_NumMecanum, txt_NumPneumatic, txt_LiftCap, txt_Scout, txt_Comments;
-    TextView txt_DriveMotor, txt_ProgLang;
-    TextView txt_autoMode, txt_CG;
+    TextView txt_Wt, txt_Ht, txt_TotWheels, txt_NumTrac, txt_NumOmni, txt_NumMecanum, txt_NumPneumatic, txt_Scout, txt_Comments;
+    TextView txt_DriveMotor, txt_ProgLang, txt_HangarClimb;
+    TextView txt_autoMode;
     ImageView imgView_Robot, imgView_LARGE;                // Robot image
-    CheckBox chkBox_Vision, chkBox_Pneumatics, chkBox_Climb, chkBox_Lift, chkBox_Hook, chkBox_Ramp;
-    CheckBox chkBox_Low, chkBox_Under, chkBox_Line, chkBox_Front, chkBox_Back, chkBox_Spin, chkBox_Color, chkBox_CP_under;
-    CheckBox chkBox_OffFloor, chkBox_Load, chkBox_Dump;
+    CheckBox chkBox_Vision, chkBox_Pneumatics, chkBox_Climb;
+    CheckBox chkBox_Low, chkBox_LaunchPad, chkBox_Tarmac, chkBox_CargoRing, chkBox_Anywhere, chkBox_Spin, chkBox_Color, chkBox_CP_under;
+    CheckBox chkBox_OffFloor, chkBox_Terminal, chkBox_ShootUpper;
     private FirebaseDatabase pfDatabase;
     private DatabaseReference pfPitData_DBReference;
 
 
     // ===================  Data Elements for Pit Scout object ===================
     public String teamSelected = " ";           // Team #
-    public int weight = 0;                        // Height (lbs)
+    public boolean everyBot = false;            // Everybot design
+    public int weight = 0;                      // Weight (lbs)
+    public int height = 0;                      // Height (ins)
     public int totalWheels = 0;                 // Total # of wheels
     public int numTraction = 0;                 // Num. of Traction wheels
     public int numOmnis = 0;                    // Num. of Omni wheels
@@ -57,20 +59,18 @@ public class VisPit_Activity extends AppCompatActivity {
     public boolean vision = false;              // presence of Vision Camera
     public boolean pneumatics = false;          // presence of Pneumatics
     public boolean climb = false;               // presence of a Climbing mechanism
-    public boolean PowerCellManip = false;          // presence of a way to pick up PowerCell from floor
-    public boolean floorPanel = false;          // can get Hatch Panel from floor
-    public boolean floorPowerCell = false;          // can get PowerCell from floor
-    public boolean canLift = false;             // Ability to lift other robots
-    public int numLifted = 0;                   // Num. of robots can lift (1-2)
-    public boolean liftRamp = false;            // lift type Ramp
-    public boolean liftHook = false;            // lift type Hook
-    public boolean leaveHAB2 = false;           // Can leave from HAB level 2
-    public boolean endHAB2 = false;             // Can climb to HAB level 2
-    public boolean endHAB3 = false;             // Can climb to HAB level 3
-    public int speed = 0;                       // Speed (Ft. per Sec)
+    public boolean CargoTerminal = false;       // presence of a way to pick up Cargo from floor
+    public boolean Cargofloor = false;          // can get Cargo from floor
+    public boolean canShootUpper = false;       // presence of a shooter
+    public boolean shootLower = false;          // ** Shoot From:
+    public boolean shootLaunch = false;         // **
+    public boolean shootTarmac = false;         // **
+    public boolean shootRing = false;           // **
+    public boolean shootAny = false;            // **
+    public String maxClimb;                     // Max Climb Level
     public String motor;                        // Type of Motor
     public String lang;                         // Programming  Language
-    public String autoMode;                       // Autonomous Operatong Mode
+    public String autoMode;                     // Autonomous Operatong Mode
     /* */
     /* */
     public String comments = "";                // Comment(s)
@@ -104,10 +104,10 @@ public class VisPit_Activity extends AppCompatActivity {
         } else {
             imgView_Robot.setImageDrawable(getResources().getDrawable(R.drawable.photo_missing));
         }
-        txt_Ht = (TextView) findViewById(R.id.txt_Ht);
+        txt_Wt = (TextView) findViewById(R.id.txt_Wt);
         txt_Scout = (TextView) findViewById(R.id.txt_Scout);
         txt_Comments = (TextView) findViewById(R.id.txt_Comments);
-        txt_Ht.setText(" ");
+        txt_Wt.setText(" ");
         txt_Scout.setText(" ");
         txt_Comments.setText("***   No Pit data for this team   ***");
 
@@ -149,6 +149,7 @@ public class VisPit_Activity extends AppCompatActivity {
 //                    System.out.println("Team: " + Pit_Data.getPit_team());
 //                    System.out.println("Comment: " + Pit_Data.getPit_comment());
 //                    System.out.println("\n \n ");
+                txt_Wt = (TextView) findViewById(R.id.txt_Wt);
                 txt_Ht = (TextView) findViewById(R.id.txt_Ht);
                 txt_TotWheels = (TextView) findViewById(R.id.txt_TotWheels);
                 txt_NumTrac = (TextView) findViewById(R.id.txt_NumTrac);
@@ -158,56 +159,47 @@ public class VisPit_Activity extends AppCompatActivity {
                 chkBox_Climb = (CheckBox) findViewById(R.id.chkBox_Climb);
                 chkBox_Vision = (CheckBox) findViewById(R.id.chkBox_Vision);
                 chkBox_Pneumatics = (CheckBox) findViewById(R.id.chkBox_Pneumatics);
-                chkBox_Lift = (CheckBox) findViewById(R.id.chkBox_Lift);
-                chkBox_Dump = (CheckBox) findViewById(R.id.chkBox_Dump);
-                txt_LiftCap = (TextView) findViewById(R.id.txt_LiftCap);
-                chkBox_Ramp = (CheckBox) findViewById(R.id.chkBox_Ramp);
-                chkBox_Hook = (CheckBox) findViewById(R.id.chkBox_Hook);
+                chkBox_ShootUpper = (CheckBox) findViewById(R.id.chkBox_ShootUpper);
                 chkBox_OffFloor = (CheckBox) findViewById(R.id.chkBox_OffFloor);
-                chkBox_Load = (CheckBox) findViewById(R.id.chkBox_Load);
+                chkBox_Terminal = (CheckBox) findViewById(R.id.chkBox_Terminal);
                 txt_DriveMotor = (TextView) findViewById(R.id.txt_DriveMotor);
                 txt_ProgLang = (TextView) findViewById(R.id.txt_ProgLang);
+                txt_HangarClimb = (TextView) findViewById(R.id.txt_HangarClimb);
                 txt_autoMode = (TextView) findViewById(R.id.txt_Mode);
                 chkBox_Low = (CheckBox) findViewById(R.id.chkBox_Low);
-                chkBox_Under = (CheckBox) findViewById(R.id.chkBox_Under);
-                chkBox_Line = (CheckBox) findViewById(R.id.chkBox_Line);
-                chkBox_Front = (CheckBox) findViewById(R.id.chkBox_Front);
-                chkBox_Back = (CheckBox) findViewById(R.id.chkBox_Back);
-                chkBox_Spin = (CheckBox) findViewById(R.id.chkBox_Spin);
-                chkBox_Color = (CheckBox) findViewById(R.id.chkBox_Color);
-                chkBox_CP_under = (CheckBox) findViewById(R.id.chkBox_CP_under);
-                txt_CG = (TextView) findViewById(R.id.txt_CG);
+                chkBox_LaunchPad = (CheckBox) findViewById(R.id.chkBox_LaunchPad);
+                chkBox_Tarmac = (CheckBox) findViewById(R.id.chkBox_Tarmac);
+                chkBox_CargoRing = (CheckBox) findViewById(R.id.chkBox_CargoRing);
+                chkBox_Anywhere = (CheckBox) findViewById(R.id.chkBox_Anywhere);
                 txt_Scout = (TextView) findViewById(R.id.txt_Scout);
                 txt_Comments = (TextView) findViewById(R.id.txt_Comments);
 
                 // ****  Start loading data  ****
-                txt_Ht.setText(String.valueOf(Pit_Data.getPit_weight()));
+                txt_Wt.setText(String.valueOf(Pit_Data.getPit_weight()));
+                txt_Ht.setText(String.valueOf(Pit_Data.getPit_height()));
                 txt_TotWheels.setText(String.valueOf(Pit_Data.getPit_totWheels()));
                 txt_NumTrac.setText(String.valueOf(Pit_Data.getPit_numTrac()));
                 txt_NumOmni.setText(String.valueOf(Pit_Data.getPit_numOmni()));
                 txt_NumMecanum.setText(String.valueOf(Pit_Data.getPit_numMecanum()));
                 txt_NumPneumatic.setText(String.valueOf(Pit_Data.getPit_numPneumatic()));
 
-
                 chkBox_Low.setChecked(Pit_Data.isPit_shootLow());
-                // ToDo
-//                chkBox_Under.setChecked(Pit_Data.isPit_shootUnder());
-//                chkBox_Line.setChecked(Pit_Data.isPit_shootLine());
-//                chkBox_Front.setChecked(Pit_Data.isPit_shootFront());
-//                chkBox_Back.setChecked(Pit_Data.isPit_shootBack());
+                chkBox_LaunchPad.setChecked(Pit_Data.isPit_shootLP());
+                chkBox_Tarmac.setChecked(Pit_Data.isPit_shootTarmac());
+                chkBox_CargoRing.setChecked(Pit_Data.isPit_shootRing());
+                chkBox_Anywhere.setChecked(Pit_Data.isPit_shootAnywhere());
 
                 txt_autoMode.setText(String.valueOf(Pit_Data.getPit_autoMode()));
                 txt_ProgLang.setText(String.valueOf(Pit_Data.getPit_lang()));
                 txt_DriveMotor.setText(String.valueOf(Pit_Data.getPit_motor()));
-
+                txt_HangarClimb.setText(Pit_Data.getPit_hangarLevel());
 
                 chkBox_Climb.setChecked(Pit_Data.isPit_climber());
                 chkBox_Vision.setChecked(Pit_Data.isPit_vision());
                 chkBox_Pneumatics.setChecked(Pit_Data.isPit_pneumatics());
-                // ToDo
-//                chkBox_OffFloor.setChecked(Pit_Data.isPit_PowerCellFloor());
-//                chkBox_Load.setChecked(Pit_Data.isPit_PowerCellLoad());
-
+                chkBox_OffFloor.setChecked(Pit_Data.isPit_cargoFloor());
+                chkBox_Terminal.setChecked(Pit_Data.isPit_cargoTerm());
+                chkBox_ShootUpper.setChecked(Pit_Data.pit_canshoot);
 
 
                 // Finally ...
