@@ -291,7 +291,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
-            android:text="Hanger Climb Level"
+            android:text="hangar Climb Level"
             android:textColor="@color/cyan"
             android:textSize="16sp" />
 

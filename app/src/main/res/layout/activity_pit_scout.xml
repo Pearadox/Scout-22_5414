@@ -451,7 +451,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="4dp"
-                    android:text="Max Hanger Climb Level"
+                    android:text="Max hangar Climb Level"
                     android:textColor="@color/cyan"
                     android:textSize="16sp" />
 
