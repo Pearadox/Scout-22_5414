@@ -90,6 +90,8 @@ public class DraftScout_Activity extends AppCompatActivity {
     /*Weight factors*/ 
     public String wtClimb = "";
     public String wtCargo = "";
+    public String wtPenalty = "";
+    public String wtLostComm = "";
 
     ImageView imgStat_Load;
     TextView txt_EventName, txt_NumTeams, txt_Formula, lbl_Formula, txt_LoadStatus, txt_SelNum;
@@ -476,6 +478,8 @@ public class DraftScout_Activity extends AppCompatActivity {
 
         wtClimb    = sharedPref.getString("prefWeight_climb", "3.0");
         wtCargo    = sharedPref.getString("prefWeight_Cargo", "2.0");
+        wtPenalty  = sharedPref.getString("prefWeight_Penalty", "-1.5");    // Penalties
+        wtLostComm = sharedPref.getString("prefWeight_Comms", "-2.5");      // Lost Comms
 
         numPicks = Integer.parseInt(sharedPref.getString("prefAlliance_num", "24"));
 
@@ -499,7 +503,7 @@ public class DraftScout_Activity extends AppCompatActivity {
                 txt_Formula.setText(form);
                 break;
             case "Combined":
-                form = "((" + wtClimb + " * climbScore) + (" + wtCargo + " * CargoScore)) / #Matches";
+                form = "((" + wtClimb + " * climbScore) ✚ (" + wtCargo + " * CargoScore) ✚ (" + wtPenalty + " * #Penalties) ✚ (" + wtLostComm + " * #LostComms)) / #Matches";
                 lbl_Formula.setTextColor(Color.parseColor("#ff0000"));      // red
                 txt_Formula.setText(form);
                 break;
@@ -1262,7 +1266,7 @@ public class DraftScout_Activity extends AppCompatActivity {
             PowerCellScore = cellScored + cellCollect;
 //            Log.e(TAG, team + " Cells " + cellScored +  " ✚ " + cellCollect + "  / " + numMatches + " ==[ " + PowerCellScore + "]");
 
-            combinedScore = (((climbScore * Float.parseFloat(wtClimb) + (PowerCellScore * Float.parseFloat(wtCargo))) / (float)numMatches));
+            combinedScore = (((climbScore * Float.parseFloat(wtClimb) + (PowerCellScore * Float.parseFloat(wtCargo)) + (pen * Float.parseFloat(wtPenalty)) + (lightning * Float.parseFloat(wtLostComm))  ) / (float)numMatches));
         } else {
             PowerCellScore = 0;
             ControlPanelScore = 0;

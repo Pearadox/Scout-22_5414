@@ -22,8 +22,10 @@ public class DraftSettingsActivity extends AppCompatActivity {
     public static final String  CLIMB_PREF_HANG3 =  "prefClimb_Hang3";      // High
     public static final String  CLIMB_PREF_HANG4 =  "prefClimb_Hang4";      // Traversal
 
-    public static final String  WEIGHT_PREF_CLIMB =       "prefWeight_climb";
-    public static final String  WEIGHT_PREF_CUBESSWITCH = "prefWeight_Cargo";
+    public static final String  WEIGHT_PREF_CLIMB =  "prefWeight_climb";    // Combined - Climb
+    public static final String  WEIGHT_PREF_CARGO = "prefWeight_Cargo";     // Combined - Cargo
+    public static final String  WEIGHT_PREF_PEN   = "prefWeight_Penalty";   // Combined - Penalties
+    public static final String  WEIGHT_PREF_COMM  = "prefWeight_Comms";     // Combined - Lost Comms
 
     public static final String  ALLIANCE_PICKS_NUM =   "prefAlliance_num";
 

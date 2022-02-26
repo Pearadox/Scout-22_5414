@@ -99,6 +99,20 @@
             android:key="prefWeight_Cargo"
             android:summary="Multiplier for Cargo Score"
             android:title="Cargo Weight" />
+        <EditTextPreference
+            android:id="@+id/txt_Penalty"
+            android:inputType="number"
+            android:defaultValue="-1.5"
+            android:key="prefWeight_Penalty"
+            android:summary="Multiplier for Penalties"
+            android:title="Penalty Weight" />
+        <EditTextPreference
+            android:id="@+id/txt_Lost"
+            android:inputType="number"
+            android:defaultValue="-2.5"
+            android:key="prefWeight_Comms"
+            android:summary="Multiplier for Lost Comms"
+            android:title="Lost Comms Weight" />
 
     </PreferenceCategory>
 
