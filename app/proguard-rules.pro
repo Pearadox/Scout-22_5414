@@ -17,3 +17,4 @@
 #}
 -keepattributes Signature
 -keepattributes *Annotation*
+-keepattributes LineNumberTable,SourceFile
