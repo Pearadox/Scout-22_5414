@@ -1,5 +1,7 @@
 package com.pearadox.scout_5414;
 
+import android.os.Parcelable;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
@@ -90,8 +92,11 @@ public class p_Firebase {
     private String team_rScore;
     private String team_WLT;
 
+    // Default constructor
     public teamsObj() {
     }
+
+    //  Constructor
 
     public teamsObj(String team_num, String team_name, String team_loc, String team_OPR, String team_rank, String team_rScore, String team_WLT) {
         this.team_num = team_num;
@@ -103,6 +108,7 @@ public class p_Firebase {
         this.team_WLT = team_WLT;
     }
 
+    // Getters & Setters
     public String getTeam_num() {
         return team_num;
     }
@@ -174,17 +180,17 @@ public class p_Firebase {
         public devicesObj() {
         }
 
-    public devicesObj(String dev_name, String dev_desc, String dev_id, String stud_id, String phase, String batt_stat, String btUUID) {
-        this.dev_name = dev_name;
-        this.dev_desc = dev_desc;
-        this.dev_id = dev_id;
-        this.stud_id = stud_id;
-        this.phase = phase;
-        this.batt_stat = batt_stat;
-        this.btUUID = btUUID;
-    }
+        public devicesObj(String dev_name, String dev_desc, String dev_id, String stud_id, String phase, String batt_stat, String btUUID) {
+            this.dev_name = dev_name;
+            this.dev_desc = dev_desc;
+            this.dev_id = dev_id;
+            this.stud_id = stud_id;
+            this.phase = phase;
+            this.batt_stat = batt_stat;
+            this.btUUID = btUUID;
+        }
 
-    public String getDev_name() {
+        public String getDev_name() {
             return dev_name;
         }
 
@@ -231,42 +237,48 @@ public class p_Firebase {
         public void setBtUUID(String btUUID) {
             this.btUUID = btUUID;
         }
+
         public String getBatt_stat() {
             return batt_stat;
         }
+
         public void setBatt_stat(String batt_stat) {
             this.batt_stat = batt_stat;
         }
     }
 
-    // ==========================================================
+// ==========================================================
 // ==========================================================
     public static class students {
         private String name;
         private String status;
 
+        // Default constructor required for calls to
+        // DataSnapshot.getValue(students.class)
         public students() {
         }
 
+        //  Constructor
         public students(String name, String status) {
             this.name = name;
             this.status = status;
         }
 
+        // Getters & Setters
         public String getName() {
             return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public String getStatus() {
             return status;
         }
 
-        public void setName(String sName) {
-            this.name = sName;
-        }
-
-        public void setStatus(String Stat) {
-            this.status = Stat;
+        public void setStatus(String status) {
+            this.status = status;
         }
     }
 
@@ -385,7 +397,7 @@ public class p_Firebase {
 
     }
 
-    // ==========================================================
+// ==========================================================
 // ==========================================================
     public static class curMatch {
         private String cur_match;
@@ -475,8 +487,8 @@ public class p_Firebase {
             this.our_matches = our_matches;
         }
     }
-
-// ==========================================================
-// ==========================================================
-
 }
+// ==========================================================
+// ==========================================================
+
+

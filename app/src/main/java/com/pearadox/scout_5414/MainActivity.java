@@ -1114,9 +1114,9 @@ private void preReqs() {
                                 Log.e(TAG, "signInWithEmail:failure", task.getException());
 //                                final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
 //                                tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
-                                Toast toast = Toast.makeText(getBaseContext(), "Firebase authentication failed.", Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                                toast.show();
+//                                Toast toast = Toast.makeText(getBaseContext(), "Firebase authentication failed.", Toast.LENGTH_LONG);
+//                                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+//                                toast.show();
                                 try {
                                     Thread.currentThread().sleep(3000);
                                 } catch (InterruptedException e) {
