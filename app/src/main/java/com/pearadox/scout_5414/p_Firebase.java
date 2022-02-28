@@ -1,16 +1,14 @@
 package com.pearadox.scout_5414;
 
-import android.os.Parcelable;
-
+import java.io.Serializable;
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.io.Serializable;
-
 public class p_Firebase {
+    private static final long serialVersionUID = -54145414541400L;
 
     @IgnoreExtraProperties
 
-    public static class eventObj {
+    public static class eventObj implements Serializable {
         private String comp_code;
         private String comp_name;
         private String comp_div;
@@ -30,6 +28,10 @@ public class p_Firebase {
             this.comp_date = comp_date;
             this.comp_city = comp_city;
             this.comp_place = comp_place;
+        }
+
+        public static long getSerialVersionUID() {
+            return serialVersionUID;
         }
 
         public String getComp_code() {
@@ -83,7 +85,7 @@ public class p_Firebase {
 
 // ==========================================================
 // ==========================================================
-    public static class teamsObj {
+    public static class teamsObj implements Serializable {
     private String team_num;
     private String team_name;
     private String team_loc;
@@ -109,6 +111,10 @@ public class p_Firebase {
     }
 
     // Getters & Setters
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public String getTeam_num() {
         return team_num;
     }
@@ -168,7 +174,7 @@ public class p_Firebase {
 
 // ==========================================================
 // ==========================================================
-    public static class devicesObj {
+    public static class devicesObj implements Serializable {
         private String dev_name;
         private String dev_desc;
         private String dev_id;
@@ -190,9 +196,13 @@ public class p_Firebase {
             this.btUUID = btUUID;
         }
 
-        public String getDev_name() {
-            return dev_name;
+        public static long getSerialVersionUID() {
+            return serialVersionUID;
         }
+
+        public String getDev_name() {
+                return dev_name;
+            }
 
         public void setDev_name(String dev_name) {
             this.dev_name = dev_name;
@@ -249,7 +259,7 @@ public class p_Firebase {
 
 // ==========================================================
 // ==========================================================
-    public static class students {
+    public static class students implements Serializable {
         private String name;
         private String status;
 
@@ -265,6 +275,10 @@ public class p_Firebase {
         }
 
         // Getters & Setters
+        public static long getSerialVersionUID() {
+            return serialVersionUID;
+        }
+
         public String getName() {
             return name;
         }
@@ -285,7 +299,7 @@ public class p_Firebase {
 // ==========================================================
 // ==========================================================
 
-    public static class matchObj {
+    public static class matchObj implements Serializable {
         private String date;
         private String time;
         private String mtype;
@@ -313,6 +327,10 @@ public class p_Firebase {
             this.b1 = r1;
             this.b2 = b2;
             this.b3 = b3;
+        }
+
+        public static long getSerialVersionUID() {
+            return serialVersionUID;
         }
 
         public String getDate() {
@@ -399,7 +417,7 @@ public class p_Firebase {
 
 // ==========================================================
 // ==========================================================
-    public static class curMatch {
+    public static class curMatch implements Serializable {
         private String cur_match;
         private String r1;
         private String r2;
@@ -423,9 +441,13 @@ public class p_Firebase {
             this.our_matches = our_matches;
         }
 
-        public String getCur_match() {
-            return cur_match;
+        public static long getSerialVersionUID() {
+            return serialVersionUID;
         }
+
+        public String getCur_match() {
+                return cur_match;
+            }
 
         public void setCur_match(String cur_match) {
             this.cur_match = cur_match;
