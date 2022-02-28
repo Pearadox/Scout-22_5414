@@ -891,9 +891,9 @@ private void preReqs() {
                 p_Firebase.eventObj event_inst = new p_Firebase.eventObj();
                 for (int i = 0; i < Pearadox.eventList.size(); i++) {
                     event_inst = Pearadox.eventList.get(i);
-                    if (event_inst.getcomp_name().equals(ev)) {
+                    if (event_inst.getComp_name().equals(ev)) {
                         Pearadox.FRC_Event = event_inst.getComp_code();
-                        Pearadox.FRC_ChampDiv = event_inst.getcomp_div();
+                        Pearadox.FRC_ChampDiv = event_inst.getComp_div();
                     }
                 }
 
@@ -1040,7 +1040,7 @@ private void preReqs() {
                 Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
                 while (iterator.hasNext()) {
                     event_inst = iterator.next().getValue(p_Firebase.eventObj.class);
-                    Log.w(TAG,"      " + event_inst.getcomp_name() + " - " + event_inst.getComp_code());
+                    Log.w(TAG,"      " + event_inst.getComp_name() + " - " + event_inst.getComp_code());
                     Pearadox.eventList.add(event_inst);
                 }
                 Log.w(TAG,"### Events ###  : " + Pearadox.eventList.size());
@@ -1051,7 +1051,7 @@ private void preReqs() {
                 for(int i=0 ; i < Pearadox.eventList.size() ; i++)      // create event list with ONLY name
                 {
                     event_inst = Pearadox.eventList.get(i);
-                    Pearadox.comp_List[i + 1] = event_inst.getcomp_name();
+                    Pearadox.comp_List[i + 1] = event_inst.getComp_name();
                 }
                 Spinner spinner_Event = (Spinner) findViewById(R.id.spinner_Event);
                 adapter_Event = new ArrayAdapter<String>(MainActivity.this, R.layout.match_list_layout, Pearadox.comp_List);

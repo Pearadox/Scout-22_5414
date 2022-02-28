@@ -497,7 +497,7 @@ public class DraftScout_Activity extends AppCompatActivity {
                 txt_Formula.setText(form);
                 break;
             case "Cargo":
-                form = "( (" + Cargo_L0 + "* (aLow + tLow)) + (" + Cargo_L1 + "* (aUpper + tUpper)}   ✚  ";
+                form = "( (" + Cargo_L0 + "* (aLow + tLow)) + (" + Cargo_L1 + "* (aUpper + tUpper))   ✚  ";
                 form = form + " ( " + Cargo_C0 + "*(aFloor + tFloor) +" + Cargo_C1 +"*(aTerm + tTerm)" + " ) /#Matches";
                 lbl_Formula.setTextColor(Color.parseColor("#ee00ee"));      // magenta
                 txt_Formula.setText(form);

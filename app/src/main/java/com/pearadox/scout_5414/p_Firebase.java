@@ -9,17 +9,19 @@ public class p_Firebase {
     @IgnoreExtraProperties
 
     public static class eventObj implements Serializable {
-        private String comp_code;
-        private String comp_name;
-        private String comp_div;
-        private String comp_date;
-        private String comp_city;
-        private String comp_place;
+        public String comp_code;
+        public String comp_name;
+        public String comp_div;
+        public String comp_date;
+        public String comp_city;
+        public String comp_place;
 
         // Default constructor required for calls to
         // DataSnapshot.getValue(eventObj.class)
         public eventObj() {
         }
+
+        //  Constructor
 
         public eventObj(String comp_code, String comp_name, String comp_div, String comp_date, String comp_city, String comp_place) {
             this.comp_code = comp_code;
@@ -30,6 +32,7 @@ public class p_Firebase {
             this.comp_place = comp_place;
         }
 
+        // Getters & Setters
         public static long getSerialVersionUID() {
             return serialVersionUID;
         }
@@ -42,43 +45,43 @@ public class p_Firebase {
             this.comp_code = comp_code;
         }
 
-        public String getcomp_name() {
+        public String getComp_name() {
             return comp_name;
         }
 
-        public void setcomp_name(String comp_name) {
+        public void setComp_name(String comp_name) {
             this.comp_name = comp_name;
         }
 
-        public String getcomp_div() {
+        public String getComp_div() {
             return comp_div;
         }
 
-        public void setcomp_div(String comp_div) {
+        public void setComp_div(String comp_div) {
             this.comp_div = comp_div;
         }
 
-        public String getcomp_date() {
+        public String getComp_date() {
             return comp_date;
         }
 
-        public void setcomp_date(String comp_date) {
+        public void setComp_date(String comp_date) {
             this.comp_date = comp_date;
         }
 
-        public String getcomp_city() {
+        public String getComp_city() {
             return comp_city;
         }
 
-        public void setcomp_city(String comp_city) {
+        public void setComp_city(String comp_city) {
             this.comp_city = comp_city;
         }
 
-        public String getcomp_place() {
+        public String getComp_place() {
             return comp_place;
         }
 
-        public void setcomp_place(String comp_place) {
+        public void setComp_place(String comp_place) {
             this.comp_place = comp_place;
         }
     }
@@ -99,7 +102,6 @@ public class p_Firebase {
     }
 
     //  Constructor
-
     public teamsObj(String team_num, String team_name, String team_loc, String team_OPR, String team_rank, String team_rScore, String team_WLT) {
         this.team_num = team_num;
         this.team_name = team_name;
