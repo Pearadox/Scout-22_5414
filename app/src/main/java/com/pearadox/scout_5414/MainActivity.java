@@ -45,6 +45,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import java.io.Serializable;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -71,14 +72,12 @@ import androidx.core.content.ContextCompat;
 
 import static android.view.View.VISIBLE;
 
-// Debug & Messaging
-
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements Serializable {
 
     String TAG = "MainActivity";        // This CLASS name
     String Pearadox_Version = " ";      // initialize
     private String deviceId;            // Android Device ID
+    private static final long serialVersionUID = -54145414541400L;
     TextView txt_messageLine;
     Boolean is_resumed = false;         // indicator if 'Resumed'
     Boolean FB_logon = false;           // indicator for Firebase logon success

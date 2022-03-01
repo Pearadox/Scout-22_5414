@@ -18,6 +18,4 @@
 -keepattributes Signature
 -keepattributes *Annotation*
 -keepattributes LineNumberTable,SourceFile
--keepclassmembers class com.com.pearadox.models.** {
-      *;
-    }
+-keepclassmembers class com.com.pearadox.models.** {  *; }
