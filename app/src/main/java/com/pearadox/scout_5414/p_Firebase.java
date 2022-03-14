@@ -89,19 +89,20 @@ public class p_Firebase {
 // ==========================================================
 // ==========================================================
     public static class teamsObj implements Serializable {
-    private String team_num;
-    private String team_name;
-    private String team_loc;
-    private String team_OPR;
-    private String team_rank;
-    private String team_rScore;
-    private String team_WLT;
+    public String team_num;
+    public String team_name;
+    public String team_loc;
+    public String team_OPR;
+    public String team_rank;
+    public String team_rScore;
+    public String team_WLT;
 
     // Default constructor
     public teamsObj() {
     }
 
     //  Constructor
+
     public teamsObj(String team_num, String team_name, String team_loc, String team_OPR, String team_rank, String team_rScore, String team_WLT) {
         this.team_num = team_num;
         this.team_name = team_name;
@@ -173,17 +174,16 @@ public class p_Firebase {
         this.team_WLT = team_WLT;
     }
 }
-
-// ==========================================================
+    // ==========================================================
 // ==========================================================
     public static class devicesObj implements Serializable {
-        private String dev_name;
-        private String dev_desc;
-        private String dev_id;
-        private String stud_id;
-        private String phase;
-        private String batt_stat;
-        private String btUUID;
+        public String dev_name;
+        public String dev_desc;
+        public String dev_id;
+        public String stud_id;
+        public String phase;
+        public String batt_stat;
+        public String btUUID;
 
         public devicesObj() {
         }
@@ -262,8 +262,8 @@ public class p_Firebase {
 // ==========================================================
 // ==========================================================
     public static class students implements Serializable {
-        private String name;
-        private String status;
+        public String name;
+        public String status;
 
         // Default constructor required for calls to
         // DataSnapshot.getValue(students.class)
@@ -302,19 +302,19 @@ public class p_Firebase {
 // ==========================================================
 
     public static class matchObj implements Serializable {
-        private String date;
-        private String time;
-        private String mtype;
-        private String match;
-        private String r1;
-        private String r2;
-        private String r3;
-        private String b1;
-        private String b2;
-        private String b3;
+        public String date;
+        public String time;
+        public String mtype;
+        public String match;
+        public String r1;
+        public String r2;
+        public String r3;
+        public String b1;
+        public String b2;
+        public String b3;
 
         // Default constructor required for calls to
-        // DataSnapshot.getValue(teams.class)
+        // DataSnapshot.getValue(matchObj.class)
         public matchObj() {
         }
 
@@ -420,14 +420,14 @@ public class p_Firebase {
 // ==========================================================
 // ==========================================================
     public static class curMatch implements Serializable {
-        private String cur_match;
-        private String r1;
-        private String r2;
-        private String r3;
-        private String b1;
-        private String b2;
-        private String b3;
-        private String our_matches;
+        public String cur_match;
+        public String r1;
+        public String r2;
+        public String r3;
+        public String b1;
+        public String b2;
+        public String b3;
+        public String our_matches;
 
         public curMatch() {
         }

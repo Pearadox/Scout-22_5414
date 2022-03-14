@@ -781,7 +781,7 @@ public class DraftScout_Activity extends AppCompatActivity {
             }
 
             // Todo - add Missed & shooting %
-            temp.put("Stats3", "Climb ╪" + climb  + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + " ₃" + climb_Hang4 + "    ⚑" + Penalties + " ⚡" + LostComms + "  ◥ " + Tipped);
+            temp.put("Stats3", "Climb ╪" + climb  + "   Hangs ₀" + climb_Hang0 + " ₁" + climb_Hang1 + " ₂" + climb_Hang2 + " ₃" + climb_Hang3 + " ₄" + climb_Hang4 + "    ⚑" + Penalties + " ⚡" + LostComms + "  ◥ " + Tipped);
             temp.put("Stats2", "Tele ◯L" + teleCargoL0 + " U" + teleCargoL1 + "  ⊗L" + tLowMiss + " U" + tHighMiss  + "   L%=" + lowPercentT + "  U%=" + upPercentT + "   ◯↑ F" + teleCollectFloor + " T" + teleCollectTerm );
             temp.put("Stats", "Auto ≠" + Tarmac + "   ◯L" + autoLow + " U" + autoUpper + "  ⊗L" + aLowMiss + " U" + aHighMiss + "   L%=" + lowPercentA + "  U%=" + upPercentA + "   ◯↑ F" + autoCollectFloor + " T" + autoCollectTerm );
             temp.put("team", tn + "-" + score_inst.getTeamName() + "  (" + mdNumMatches + ")  " + totalScore);

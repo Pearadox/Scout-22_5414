@@ -17,10 +17,10 @@
     <string-array name="event_array">
         <item> </item>
         <item>Test Competition</item>
-        <item>FIT District Plano Event</item>
+        <item>FIT District Channelview Event</item>
         <item>FIT District Pasadena Event</item>
         // ...
-        <!--<item>FIRST In Texas District Championship 2020</item>-->
+        <item>FIRST In Texas District Championship 2022</item>
         <!--<item>FIRST Championship (Houston)</item>-->
     </string-array>
 

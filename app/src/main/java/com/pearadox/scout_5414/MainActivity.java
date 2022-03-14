@@ -909,13 +909,13 @@ private void preReqs() {
                         Pearadox.FRC_Event = "txcha";
                         Pearadox.FRC_ChampDiv = "txcha";
                         break;
-                    case "FIT District Greenville Event":
-                        Pearadox.FRC_Event = "txgre";
-                        Pearadox.FRC_ChampDiv = "txgre";
+                    case "FIT District Pasadena Event":
+                        Pearadox.FRC_Event = "txpas";
+                        Pearadox.FRC_ChampDiv = "txpas";
                         break;
-//                    case "District Championship (Austin)":     // txsc
-//                        Pearadox.FRC_Event = "txsc";
-//                        Pearadox.FRC_ChampDiv = "txsc";
+                    case "District Championship (Austin)":     // txsc
+                        Pearadox.FRC_Event = "txsc";
+                        Pearadox.FRC_ChampDiv = "txsc";
 //                        break;
 //                    case "FIRST Championship (Houston)":        // cmptx
 //                        Pearadox.FRC_Event = "cmptx";

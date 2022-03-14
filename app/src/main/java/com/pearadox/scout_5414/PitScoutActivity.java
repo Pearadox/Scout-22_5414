@@ -644,8 +644,8 @@ pitData Pit_Data = new pitData();
 //                    }
                     finish();       // Exit  <<<<<<<<
                 } else {
-                    final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                    tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
+//                    final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+//                    tg.startTone(ToneGenerator.TONE_PROP_BEEP2);
                     Toast toast = Toast.makeText(getBaseContext(), "*** Enter _ALL_ data (valid Weight, Wheels, Lang. & Auto Mode) before saving *** \n Wt=" + weight+ "  ☸=" + totalWheels + " ↑" + chkBox_Climb.isChecked()  +"  Lang='"+ lang+ "'   Mode=" + autoMode, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     toast.show();
