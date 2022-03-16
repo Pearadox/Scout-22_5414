@@ -592,9 +592,16 @@ public class MainActivity extends AppCompatActivity  implements Serializable {
                     Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();   /*get the data children*/
                     Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
                     while (iterator.hasNext()) {
-                        tmobj = iterator.next().getValue(p_Firebase.teamsObj.class);
-                        Pearadox.team_List.add(tmobj);
-                        Pearadox.numTeams++;
+                        try {
+                            tmobj = iterator.next().getValue(p_Firebase.teamsObj.class);
+                            Pearadox.team_List.add(tmobj);
+                            Pearadox.numTeams++;
+                        } catch (Exception e) {
+                            Log.e(TAG, "<<<< Firebase Database Exception >>>>" + e);
+                            Toast toast = Toast.makeText(getBaseContext(), "*** DatabaseException - There are _NO_ teams loaded for '" + Pearadox.FRC_Event + "' ***", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                            toast.show();
+                        }
                     }
                     if (Pearadox.numTeams == 0) {
                         final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);

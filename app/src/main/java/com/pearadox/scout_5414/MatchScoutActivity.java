@@ -576,7 +576,7 @@ public class MatchScoutActivity extends AppCompatActivity {
 
         // --------------
         Pearadox.Match_Data.setAuto_comment(autoComment);
-        Pearadox.Match_Data.setFinal_studID(studID);
+        Pearadox.Match_Data.setFinal_studID(device.substring(0,1) + device.substring(device.length()-1,device.length()) + "-"  + studID);
         Log.w(TAG, "*******  All done with AUTO setters!!");
     }
 
